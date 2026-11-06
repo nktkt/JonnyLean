@@ -1,11 +1,11 @@
-import JonnyLean
+import JonnyLean.NumberTheory.Parity
 
 /-
 This contract states the expected proposition without using JonnyLean.Even.
 Assigning the named theorem to this exact type checks its arguments,
 assumptions, conclusion, and the definitional meaning of Even.
 -/
-example :
+theorem JL001Contract.target :
     ∀ (a b : Nat),
       (∃ ka : Nat, a = 2 * ka) →
       (∃ kb : Nat, b = 2 * kb) →
@@ -26,3 +26,4 @@ example : ∃ k : Nat, 2 + 4 = 2 * k :=
 
 -- Print the dependencies of the theorem as part of the contract report.
 #print axioms JonnyLean.even_add
+#print axioms JL001Contract.target

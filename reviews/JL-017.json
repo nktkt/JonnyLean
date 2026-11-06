@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "task": "JL-017",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex independent reviewer /root/v2_graphs (JL-001–025; not the author)",
+    "authenticated": false,
+    "evidence_kind": "AI self-report",
+    "independent_scope": "Authored JL-046–060 only; independently read JL-001–025 specifications, contracts, mathematics, and verifier changes."
+  },
+  "decision": "approve",
+  "findings": [],
+  "checks": [
+    {
+      "criterion": "definition",
+      "result": "pass",
+      "evidence": "有限和は0からn-1。後半の列は f(m+i) であり、f(m+1+i)ではない。独立sumSpecとの一般的一致を契約で固定する。"
+    },
+    {
+      "criterion": "quantifiers",
+      "result": "pass",
+      "evidence": "f,m,n は任意で m=0、n=0 の両境界を含む。"
+    },
+    {
+      "criterion": "assumptions",
+      "result": "pass",
+      "evidence": "分割に非空性や単調性などの仮定は不要。"
+    },
+    {
+      "criterion": "conclusion",
+      "result": "pass",
+      "evidence": "最初のm+n項を最初のm項と続くn項に分割する等式。三分割と中央項の抽出も添字が整合する。"
+    },
+    {
+      "criterion": "proof",
+      "result": "pass",
+      "evidence": "nについて帰納し最後のf(m+n)を両辺へ追加する。区間差の系は分割等式から自然数減算を正しく取消す。"
+    },
+    {
+      "criterion": "coverage",
+      "result": "pass",
+      "evidence": "現在の Lean 環境監査は root を含む 61 モジュールと 932 宣言を記録し、source module集合および compiled import graph と一致する。JonnyLean.range_sum_split は指定モジュール JonnyLean.Algebra.SumIntervals の theorem として一意に存在する。仕様・契約と対象数学ソースの内容を独立に精読した。"
+    },
+    {
+      "criterion": "audit",
+      "result": "pass",
+      "evidence": "artifacts/JL-017/report.json の実機械結果を読み、mechanical=pass、findings=[]、原契約の warningAsError=true 成功を確認した。数学全宣言と契約内 15 個のローカル宣言の公理依存は propext / Quot.sound の許可範囲内で、新規axiomはない。主要定理の依存は [\"Quot.sound\", \"propext\"]。現在の capture_inputs と capture_verification_inputs の双方が記録と完全一致することを再照合した。"
+    }
+  ],
+  "inputs": {
+    ".github/workflows/ci.yml": "09f950ebfa583b254cc3064bcb764cf48f844a5e9a737fe5a1b99816543afae5",
+    "JonnyLean/Algebra/FiniteSum.lean": "9314c2f98d27b19b97a5a3d8ca3e53a59074d3f571f6af39d5f668930e628d1d",
+    "JonnyLean/Algebra/SumIntervals.lean": "bcf785d6044718497872b711381a7a605638dbb63230515cdd0992bfebc869ef",
+    "contracts/JL017.lean": "a4a4cc77f779f092d1a1aae0746138d8aad13292b81cee44e3f87ab0181ad595",
+    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
+    "lakefile.toml": "7a6078c6d00c9d12f06199fb53ebffd9d41c1cb361467010fbfc1d7f3d9306d9",
+    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
+    "specs/JL-015.md": "44421f4b4ed86acdc4438d413984daa4edfe84af71f3e94a9abfde32ef27c436",
+    "specs/JL-017.md": "6efa8b23844ae63f25350f961984f5920dc139fc445c38e50cccb9a141c28406",
+    "tests/__init__.py": "0de4bc12a3f83b2ad1089fdc469aa03124e37a4deae5c4e783c8ae11b28f9536",
+    "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
+    "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
+    "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
+    "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
+    "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
+    "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
+    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
+    "tools/catalog.py": "6eba2d30c2226a167d3ec394a4e91d3ac65217b90da4ab61be619134e5e676e1",
+    "tools/jonnylean.py": "027db003dfaf59405b14d564fd16a268920932e7864506df3960b640a68a8350",
+    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
+    "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
+    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
+    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
+    "worker/cli.py": "0205a4943c7f854970a2b8f82a728f6a1f82bb3dd81edfa9f62b106f4fe3ce07",
+    "worker/engine.py": "4c1cea218a6fb7825eb11b5cf8e980640e3a08421545c4c14ade70069f72c3e9",
+    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
+    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
+    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6",
+    "@task-context": "99eb0348d3b661e7b776e2bbc92a5fc05137c691fd98999ab1308e0651eda02d"
+  },
+  "human_approval": "not_recorded",
+  "reviewed_at": "2026-11-06T14:14:21.521788+00:00"
+}

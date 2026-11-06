@@ -1,0 +1,100 @@
+[
+  {
+    "id": "JL-001",
+    "title": "偶数どうしの和は偶数",
+    "spec": "specs/JL-001.md",
+    "module": "JonnyLean.NumberTheory.Parity",
+    "declaration": "JonnyLean.even_add",
+    "contract": "contracts/JL001.lean",
+    "review": "reviews/JL-001.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Parity.lean"
+    ],
+    "depends_on": [],
+    "domain": "number-theory",
+    "description": "偶数どうしの和は偶数の形式化と仕様対応の検証",
+    "tags": [
+      "natural-numbers"
+    ]
+  },
+  {
+    "id": "JL-002",
+    "title": "連続する自然数の積は偶数",
+    "spec": "specs/JL-002.md",
+    "module": "JonnyLean.NumberTheory.Consecutive",
+    "declaration": "JonnyLean.even_consecutive_product",
+    "contract": "contracts/JL002.lean",
+    "review": "reviews/JL-002.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Consecutive.lean"
+    ],
+    "depends_on": [
+      "JL-001"
+    ],
+    "domain": "number-theory",
+    "description": "連続する自然数の積は偶数の形式化と仕様対応の検証",
+    "tags": [
+      "natural-numbers"
+    ]
+  },
+  {
+    "id": "JL-003",
+    "title": "三角数の和の公式",
+    "spec": "specs/JL-003.md",
+    "module": "JonnyLean.NumberTheory.Triangular",
+    "declaration": "JonnyLean.triangular_formula",
+    "contract": "contracts/JL003.lean",
+    "review": "reviews/JL-003.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Triangular.lean"
+    ],
+    "depends_on": [
+      "JL-002"
+    ],
+    "domain": "number-theory",
+    "description": "三角数の和の公式の形式化と仕様対応の検証",
+    "tags": [
+      "natural-numbers"
+    ]
+  },
+  {
+    "id": "JL-004",
+    "title": "交わらない有限集合の和集合の要素数",
+    "spec": "specs/JL-004.md",
+    "module": "JonnyLean.FiniteSet.Basic",
+    "declaration": "JonnyLean.FiniteSet.card_union_of_disjoint",
+    "contract": "contracts/JL004.lean",
+    "review": "reviews/JL-004.json",
+    "editable": [
+      "JonnyLean/FiniteSet/Basic.lean"
+    ],
+    "depends_on": [],
+    "domain": "finite-sets",
+    "description": "交わらない有限集合の和集合の要素数の形式化と仕様対応の検証",
+    "tags": [
+      "finite-sets",
+      "cardinality"
+    ]
+  },
+  {
+    "id": "JL-005",
+    "title": "冪集合の要素数",
+    "spec": "specs/JL-005.md",
+    "module": "JonnyLean.FiniteSet.Powerset",
+    "declaration": "JonnyLean.FiniteSet.card_powerset",
+    "contract": "contracts/JL005.lean",
+    "review": "reviews/JL-005.json",
+    "editable": [
+      "JonnyLean/FiniteSet/Powerset.lean"
+    ],
+    "depends_on": [
+      "JL-004"
+    ],
+    "domain": "finite-sets",
+    "description": "冪集合の要素数の形式化と仕様対応の検証",
+    "tags": [
+      "finite-sets",
+      "cardinality"
+    ]
+  }
+]

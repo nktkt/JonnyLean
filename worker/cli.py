@@ -17,6 +17,8 @@ def main(root: Path, argv: list[str]) -> int:
     parser.add_argument('job', nargs='?')
     parser.add_argument('--project', type=Path, default=root)
     parser.add_argument('--task')
+    parser.add_argument('--domain', help='select a mathematical domain; dependencies must already be adopted')
+    parser.add_argument('--tag', help='select tasks with a catalog tag')
     parser.add_argument('--loop', nargs='?', type=int, const=100, default=1, metavar='MAX_JOBS')
     parser.add_argument('--jobs', type=int, default=1)
     parser.add_argument('--adopt', action='store_true', help='integrate locally after both gates pass; no publication')
@@ -43,7 +45,7 @@ def main(root: Path, argv: list[str]) -> int:
         if args.command == 'status':
             value = engine.store.get(args.job) if args.job else engine.store.list()
         elif args.command == 'work':
-            value = engine.work(args.task, args.jobs, args.loop, args.adopt)
+            value = engine.work(args.task, args.jobs, args.loop, args.adopt, domain=args.domain, tag=args.tag)
             if not value:
                 print('No eligible tasks: queue is completed, claimed, or waiting for adopted dependencies. Use status, resume JOB, or an explicit --task.')
                 return 0

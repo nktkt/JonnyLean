@@ -1,7 +1,8 @@
 # JonnyLean
 
 人間が数学の目標を決め、AIが証明を作成し、Leanと別のAIで検証する数学ライブラリです。
-初等整数論・組合せ論の5課題と、継続作業のためのローカルワーカーを備えています。
+初等整数論・組合せ論を起点とする **60課題・60数学モジュール・357個の明示的な名前付き定理** と、継続作業のためのローカルワーカーを備えています。
+数論、代数、論理、写像、関係、集合、アルゴリズム、グラフ、数え上げ、有限確率を扱います。
 以前の別プロジェクトやTau Cetiのコード・監査ツールは流用していません。
 
 ## すぐに検証する
@@ -21,17 +22,35 @@ python3 -m unittest discover -s tests -v
 [elan公式](https://github.com/leanprover/elan)を参照してください。
 
 結果は `artifacts/index.html`、課題ごとの `artifacts/JL-00N/report.json` と `report.md` に保存します。
-HTMLはブラウザでそのまま開ける、外部通信のないレポートです。
+HTMLはブラウザでそのまま開ける、外部通信のないレポートです。分野・状態・語句で絞り込めます。
 
 ## 数学ライブラリ
 
-| 課題 | 公開定理 | 仕様 |
-| --- | --- | --- |
-| JL-001 偶数どうしの和 | `JonnyLean.even_add` | [仕様](specs/JL-001.md) |
-| JL-002 連続する自然数の積 | `JonnyLean.even_consecutive_product` | [仕様](specs/JL-002.md) |
-| JL-003 三角数の公式 | `JonnyLean.triangular_formula` | [仕様](specs/JL-003.md) |
-| JL-004 交わらない有限集合の和集合の濃度 | `JonnyLean.FiniteSet.card_union_of_disjoint` | [仕様](specs/JL-004.md) |
-| JL-005 冪集合の濃度 | `JonnyLean.FiniteSet.card_powerset` | [仕様](specs/JL-005.md) |
+| 課題 | 分野・内容 |
+| --- | --- |
+| JL-001〜005 | 偶数、連続積、三角数、有限集合、冪集合 |
+| JL-006〜025 | 整除、合同、冪、二次式、有限和、階乗、Fibonacci、アフィン写像 |
+| JL-026〜035 | 述語、像・逆像、写像合成・逆写像、関係合成・閉包、不変条件 |
+| JL-036〜045 | 分割、反転、有限集合演算、挿入ソート、状態走査、重複除去、探索 |
+| JL-046〜054 | 有向グラフ、歩道、到達可能性、準同型、反転、連結成分、閉歩道、部分グラフ |
+| JL-055〜060 | 語の列挙と濃度、部分列選択と二項係数、有限質量・離散分布 |
+
+```sh
+python3 tools/jonnylean.py catalog list
+python3 tools/jonnylean.py catalog search fibonacci
+python3 tools/jonnylean.py catalog show JL-042
+python3 tools/jonnylean.py catalog graph --format mermaid
+python3 tools/jonnylean.py catalog stats
+python3 tools/jonnylean.py run all --domain graph-theory
+python3 tools/jonnylean.py verify all --tag cardinality
+python3 tools/jonnylean.py run all --changed HEAD
+```
+
+[全課題一覧](roadmaps/elementary.md)から仕様・Lean証明・契約に移動できます。
+`catalog/fragments/` を原本として、`catalog sync` がレジストリと集約importを再生成します。
+`catalog check` は登録との不一致を検出します。課題の追加は [CONTRIBUTING](CONTRIBUTING.md) を参照。
+`--changed` はGit参照からの変更と未追跡ファイルを含み、影響する課題を選びます。
+選択にかかわらず、機械監査はライブラリ全体を対象にします。
 
 有限集合は重複なしリストで表現します。順序による表現の違いで濃度が変わらないこと、
 和集合のmembership、冪集合の部分集合性・網羅性・代表の一意性も証明しています。
@@ -39,8 +58,12 @@ JL-001〜003の主定理は公理依存なし。JL-004〜005はLean標準公理�
 `Quot.sound` に依存します。プロジェクトの許可リストはこの2つだけです。
 `sorryAx`、独自公理、`Classical.choice` は許可しません。
 
+閉歩道は頂点が重複しない単純サイクルとは区別します。有限確率は自然数の重みと正の総質量による
+未約分の分数表現です。実数の確率論・測度論は実装範囲に含めません。
+
 `contracts/` は仕様を独立した型で述べ、実際の定理をその型に代入して確認します。
 全数学モジュールを列挙して検査漏れを拒否し、私有・未使用の宣言も公理監査します。
+契約も原文をstrict検査し、Leanの監査コードを加えた一時コピーで私有・未使用を含むローカル宣言の公理を調べます。
 匿名の例は環境に保存されない場合があるため、全数学ソースと契約を警告がエラーになる
 設定でも再検査します。採用する成果は名前付き定理です。
 
@@ -63,11 +86,14 @@ python3 tools/jonnylean.py report JOB_ID
 # 検証とAIレビューを通った提案をローカルに取り込む
 python3 tools/jonnylean.py adopt JOB_ID
 
-# 最大5課題を順に処理し、合格したものを自動でローカルに取り込む
-python3 tools/jonnylean.py work --loop 5 --adopt
+# 最大60課題を順に処理し、合格したものを自動でローカルに取り込む
+python3 tools/jonnylean.py work --loop 60 --adopt
 
 # 独立した課題を最大2件同時に処理する（取り込みは別途）
 python3 tools/jonnylean.py work --loop 5 --jobs 2
+
+# 分野・タグを指定して処理（依存課題は先にadoptが必要）
+python3 tools/jonnylean.py work --domain number-theory --loop 10 --adopt
 
 # 中断・失敗したジョブを同じ履歴と予算で再開
 python3 tools/jonnylean.py resume JOB_ID
@@ -115,7 +141,9 @@ python3 tools/jonnylean.py dashboard       # 保存結果からHTMLを更新
 
 `run`や`review`はAIを新規に呼び出しません。新たな独立AIレビューには `work` を使います。
 レビューは [7項目の基準](reviews/rubric.md) に沿って定義・量化・仮定・結論・証明・対象範囲・監査を確認します。
-仕様、数学コード、契約、ツール、ワーカー、テスト、設定が変わると記録は失効します。
+課題自身と依存先の仕様・数学コード、課題の契約、関連メタデータが変わると、その範囲のレビューが失効します。
+検査ツール・ワーカー・テスト・公理方針などの共通基盤の変更は全レビューを失効させます。
+機械検証は別の全体ハッシュに結び付け、どこかの検証入力が変われば保存結果を古いものとして表示します。
 CIが入力ハッシュを更新するだけで自動承認する処理はありません。
 
 レビューはAIによる自己申告です。本人認証・電子署名・自然言語との同値性の機械証明ではありません。
@@ -152,6 +180,8 @@ python3 -m unittest discover -s tests -v
 Leanの正常系、意図的な証明の破損、公理・仮定・定義の変更、検査漏れ、古いレビュー、
 ワーカーの再試行・並列claim・予算・再開・取り込み競合・タイムアウトを検査します。
 テスト用の合成AI応答は一時コピーの中だけで使い、実際のレビュー記録とは明確に区別します。
+
+実行済みの検査・実AIワーカーの結果は [検証記録](docs/validation.md) にまとめています。
 
 詳細は [設計](docs/architecture.md)、[課題追加手順](CONTRIBUTING.md)、
 [数学ロードマップ](roadmaps/elementary.md) を参照してください。

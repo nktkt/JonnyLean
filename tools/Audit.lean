@@ -39,6 +39,13 @@ private def report : Lean.MetaM Lean.Json := do
   let env ← Lean.getEnv
   let moduleNames := env.header.moduleNames
   let modules := moduleNames.filter isProjectModule
+  let mut importGraph := #[]
+  for idx in [:moduleNames.size] do
+    let moduleName := moduleNames[idx]!
+    unless isProjectModule moduleName do continue
+    let imported := env.header.moduleData[idx]!.imports.map (·.module)
+    importGraph := importGraph.push <| Lean.Json.mkObj [
+      ("module", .str moduleName.toString), ("imports", namesJson imported)]
   let constants := env.checked.get.constants.toList.toArray.qsort fun a b =>
     a.1.toString < b.1.toString
   let mut declarations := #[]
@@ -57,6 +64,7 @@ private def report : Lean.MetaM Lean.Json := do
     ]
   return Lean.Json.mkObj [
     ("modules", namesJson modules),
+    ("imports", .arr importGraph),
     ("declarations", .arr declarations)
   ]
 

@@ -2,8 +2,10 @@
 
 1. `specs/JL-NNN.md` に対象、定義、量化、仮定、結論、証明方針を明記する。
 2. `contracts/` に独立した命題の型と必要な定義の性質を記述する。単なる定理名の型表示で済ませない。
-3. `JonnyLean/` にモジュールを用意し、`JonnyLean.lean` へimportを追加する。
-4. `jonnylean.toml` に一意なID・定理名・仕様・契約・review・editable・depends_onを登録する。
+3. `JonnyLean/` にモジュールを用意し、必要な依存importを記す。
+4. `catalog/fragments/` のJSONに一意なID・定理名・分野・説明・タグ・仕様・契約・review・editable・depends_onを登録する。
+   `python3 tools/jonnylean.py catalog sync` で `jonnylean.toml` と `JonnyLean.lean` を再生成する。
+   editableは数学Leanファイルのみ。仕様と契約はワーカーの編集対象にしない。
 5. 仕様と契約の内容を確認してから `work --task JL-NNN` を実行する。依存課題は先に取り込む。
 6. 合格した候補を `adopt JOB_ID` で取り込み、`run all` で他課題への影響も確認する。
 
@@ -17,6 +19,7 @@
 合成レビューの試験データに人間の確認者名や実レビューを装った記録を入れない。
 
 ```sh
+python3 tools/jonnylean.py catalog check
 python3 tools/jonnylean.py verify all
 python3 -m unittest discover -s tests -v
 ```

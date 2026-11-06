@@ -1,4 +1,4 @@
-import JonnyLean
+import JonnyLean.FiniteSet.Powerset
 
 namespace JL005Contract
 open JonnyLean

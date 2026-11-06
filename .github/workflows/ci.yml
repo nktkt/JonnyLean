@@ -22,6 +22,8 @@ jobs:
           auto-config: false
           use-github-cache: false
           use-mathlib-cache: false
+      - name: Check generated catalog and imports
+        run: python3 tools/jonnylean.py catalog check
       - name: Verify all tasks and their independent reviews
         run: python3 tools/jonnylean.py run all
       - name: Exercise successful and rejected changes

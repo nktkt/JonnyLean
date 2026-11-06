@@ -17,6 +17,8 @@ import unittest
 
 
 PROJECT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT))
+from tests.fixtures import core_only
 TASK = "JL-001"
 PARITY = Path("JonnyLean/NumberTheory/Parity.lean")
 FIXTURE_EVIDENCE = {
@@ -45,6 +47,7 @@ class PipelineIntegrationTests(unittest.TestCase):
                 ".lake", ".git", ".jonnylean", "artifacts", "__pycache__", ".jonnylean.lock"
             ),
         )
+        core_only(cls.seed)
         config = tomllib.loads((cls.seed / "jonnylean.toml").read_text())
         cls.tasks = config["tasks"]
         cls.task = next(task for task in config["tasks"] if task["id"] == TASK)
@@ -266,6 +269,21 @@ class PipelineIntegrationTests(unittest.TestCase):
         contract.write_text(contract.read_text() + "\nexample : False := by sorry\n")
         self.assert_contract_failure()
 
+    def test_unused_custom_axiom_in_contract_is_rejected(self) -> None:
+        contract = self.project / self.task['contract']
+        contract.write_text(contract.read_text() + '\naxiom ContractProbe.unused : False\n')
+        self.cli('verify', 1)
+        self.assert_forbidden('ContractProbe.unused', 'ContractProbe.unused')
+
+    def test_contract_theorem_cannot_hide_a_private_axiom_dependency(self) -> None:
+        contract = self.project / self.task['contract']
+        contract.write_text(contract.read_text() + '\nprivate axiom ContractProbe.hidden : False\n'
+                            'theorem ContractProbe.derived : 0 = 1 := False.elim ContractProbe.hidden\n')
+        self.cli('verify', 1)
+        rows = self.report()['contract_audit']['declarations']
+        target = next(r for r in rows if r['name'] == 'ContractProbe.derived')
+        self.assertTrue(any(a.endswith('ContractProbe.hidden') for a in target['axioms']))
+
     def test_review_lifecycle_missing_current_then_stale_spec(self) -> None:
         self.cli("run", 1)
         self.assertEqual(self.report()["mechanical"], "pass")
@@ -354,13 +372,16 @@ class PipelineIntegrationTests(unittest.TestCase):
                 self.assertEqual(list(external.iterdir()), [])
                 self.assertFalse((self.project.parent / "outside.json").exists())
 
-    def test_fingerprint_all_covers_every_task_with_the_same_source_snapshot(self) -> None:
+    def test_fingerprint_all_scopes_math_but_binds_common_verifier(self) -> None:
         records = json.loads(self.cli("fingerprint", 0, "all").stdout)
         self.assertEqual({record["task"] for record in records}, {task["id"] for task in self.tasks})
         for record in records:
-            self.assertEqual(record["inputs"], records[0]["inputs"])
             self.assertIn("worker.toml", record["inputs"])
             self.assertIn("tools/reporting.py", record["inputs"])
+            self.assertIn('@task-context', record['inputs'])
+        by_id = {r['task']: r['inputs'] for r in records}
+        self.assertNotIn('JonnyLean/FiniteSet/Basic.lean', by_id['JL-001'])
+        self.assertIn(str(PARITY), by_id['JL-003'])
 
     def test_verify_all_compiles_each_contract_and_audits_all_modules(self) -> None:
         self.cli("verify", 0, "all")
@@ -414,7 +435,7 @@ class PipelineIntegrationTests(unittest.TestCase):
         dashboard = self.project / "artifacts/index.html"
         rendered = dashboard.read_text()
         self.assertIn('&lt;script&gt;alert(&quot;synthetic fixture&quot;)&lt;/script&gt; &amp; review', rendered)
-        self.assertNotIn("<script>", rendered)
+        self.assertNotIn(title, rendered)
         self.assertIn('class="badge pass">PASS', rendered)
         spec = self.project / self.task["spec"]
         spec.write_text(spec.read_text() + "\nSynthetic fixture: a changed specification.\n")

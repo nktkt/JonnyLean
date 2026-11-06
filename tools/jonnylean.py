@@ -17,6 +17,7 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import time
 import tomllib
 
@@ -85,12 +86,17 @@ def load_task(root: Path, task_id: str) -> tuple[dict, dict]:
             parts = Path(path).parts if isinstance(path, str) else ()
             if (not parts or parts[0] != "JonnyLean" or ".." in parts or not path.endswith(".lean")):
                 raise OperationError("Editable paths must be Lean files inside JonnyLean/")
+    by_id = {t['id']: t for t in tasks}
+    visited = set()
     def visit(item: str, ancestors: set[str]) -> None:
         if item in ancestors:
             raise OperationError("Cyclic task dependencies")
-        entry = next(t for t in tasks if t["id"] == item)
+        if item in visited:
+            return
+        entry = by_id[item]
         for dependency in entry.get("depends_on", []):
             visit(dependency, ancestors | {item})
+        visited.add(item)
     for item in ids:
         visit(item, set())
     task = next((t for t in tasks if t["id"] == task_id), None)
@@ -104,14 +110,48 @@ def load_task(root: Path, task_id: str) -> tuple[dict, dict]:
     return data, task
 
 
-def capture_inputs(root: Path, task: dict) -> dict[str, str]:
+def capture_verification_inputs(root: Path) -> dict[str, str]:
     names = {"lean-toolchain", "lakefile.toml", "lake-manifest.json", "jonnylean.toml",
-             "JonnyLean.lean", "tools/Audit.lean", "reviews/rubric.md", task["spec"], task["contract"]}
-    for pattern in ("JonnyLean/**/*.lean", "contracts/**/*.lean", "specs/**/*.md", "tools/*.py",
+             "JonnyLean.lean", "tools/Audit.lean", "reviews/rubric.md"}
+    for pattern in ("JonnyLean/**/*.lean", "contracts/**/*.lean", "specs/**/*.md", "tools/*.lean", "tools/*.py",
                     "tests/**/*.py", "worker/**/*.py", "worker.toml", ".github/workflows/*"):
         names.update(str(p.relative_to(root)) for p in root.glob(pattern) if p.is_file())
     return {name: hashlib.sha256(local_file(root, name).read_bytes()).hexdigest()
             for name in sorted(names)}
+
+
+def capture_inputs(root: Path, task: dict) -> dict[str, str]:
+    """Bind semantic review to this task and its actual imported dependencies.
+
+    Global mechanical evidence is separately bound to the complete project.
+    The source import graph is checked against Lean's compiled graph by verify.
+    """
+    from tools.scopes import module_graph, task_scope
+    config = tomllib.loads(local_file(root, "jonnylean.toml").read_text())
+    graph = module_graph(root)
+    modules = task_scope(root, task, graph)
+    by_id = {t["id"]: t for t in config["tasks"]}
+    related = {task["id"]} | {t["id"] for t in config["tasks"] if t["module"] in modules}
+    pending = list(related)
+    while pending:
+        entry = by_id[pending.pop()]
+        modules.update(task_scope(root, entry, graph))
+        dependencies = set(entry.get("depends_on", [])) | {t['id'] for t in config['tasks'] if t['module'] in modules}
+        for dependency in dependencies:
+            if dependency not in related:
+                related.add(dependency)
+                pending.append(dependency)
+    names = {"lean-toolchain", "lakefile.toml", "lake-manifest.json", "tools/Audit.lean",
+             "reviews/rubric.md", task["contract"]}
+    names.update(module.replace(".", "/") + ".lean" for module in modules)
+    names.update(by_id[item]["spec"] for item in related)
+    for pattern in ("tools/*.lean", "tools/*.py", "tests/**/*.py", "worker/**/*.py", "worker.toml", ".github/workflows/*"):
+        names.update(str(p.relative_to(root)) for p in root.glob(pattern) if p.is_file())
+    result = {name: hashlib.sha256(local_file(root, name).read_bytes()).hexdigest() for name in sorted(names)}
+    policy = {key: config[key] for key in ("schema", "timeout_seconds", "allowed_axioms")}
+    context = {"policy": policy, "tasks": [by_id[item] for item in sorted(related)]}
+    result["@task-context"] = hashlib.sha256(json.dumps(context, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    return result
 
 
 def expected_modules(root: Path) -> set[str]:
@@ -149,10 +189,12 @@ def command_step(root: Path, command: list[str], timeout: int, report: dict) -> 
 
 def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | None = None) -> None:
     before = capture_inputs(root, task)
+    global_before = capture_verification_inputs(root)
     report["inputs"] = before
+    report["verification_inputs"] = global_before
     lake = lake_executable()
     timeout = config["timeout_seconds"]
-    reusable = shared is not None and shared.get("inputs") == before
+    reusable = shared is not None and shared.get("inputs") == global_before
     if reusable:
         report["lean_version"] = shared["lean_version"]
         report["steps"] = copy.deepcopy(shared["steps"])
@@ -160,6 +202,36 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
         report["lean_version"] = command_step(root, [lake, "env", "lean", "--version"], timeout, report).strip()
         command_step(root, [lake, "build"], timeout, report)
     command_step(root, [lake, "env", "lean", "-DwarningAsError=true", task["contract"]], timeout, report)
+    # Check original elaboration first, then inspect the local checked constants
+    # in a temporary instrumentation wrapper. Strict compilation alone does not
+    # reject an unused `axiom` in a contract.
+    with tempfile.TemporaryDirectory(prefix='jonnylean-contract-audit-') as directory:
+        wrapper = Path(directory) / 'ContractCheck.lean'
+        wrapper.write_text('import Lean\n' + local_file(root, task['contract']).read_text()
+                           + '\n' + local_file(root, 'tools/ContractAudit.lean').read_text())
+        output = command_step(root, [lake, 'env', 'lean', '-DwarningAsError=true', str(wrapper)], timeout, report)
+    marker = 'JONNYLEAN_CONTRACT_AUDIT='
+    lines = [line[len(marker):] for line in output.splitlines() if line.startswith(marker)]
+    if len(lines) != 1:
+        raise OperationError('Contract audit must emit exactly one result')
+    contract_audit = json.loads(lines[0])
+    rows = contract_audit.get('declarations') if isinstance(contract_audit, dict) else None
+    if not isinstance(rows, list) or not rows:
+        raise OperationError('Contract must contain named audited declarations')
+    report['contract_audit'] = contract_audit
+    for row in rows:
+        if (not isinstance(row, dict) or not isinstance(row.get('name'), str)
+            or not isinstance(row.get('axioms'), list) or any(not isinstance(a, str) for a in row['axioms'])):
+            raise OperationError('Invalid contract declaration audit')
+        forbidden = set(row['axioms']) - set(config['allowed_axioms'])
+        if row.get('kind') == 'axiom':
+            forbidden.add(row['name'])
+        if 'sorryAx' in row['axioms']:
+            forbidden.add('sorryAx')
+        if forbidden:
+            report['findings'].append({'declaration': row['name'], 'forbidden_axioms': sorted(forbidden)})
+    if report['findings']:
+        raise Rejected('Forbidden axioms found in contract declarations')
     if reusable:
         audit = copy.deepcopy(shared["audit"])
     else:
@@ -178,6 +250,8 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
     if set(modules) != expected:
         raise Rejected(f"Module coverage mismatch; uninspected={sorted(expected - set(modules))}, "
                        f"unexpected={sorted(set(modules) - expected)}")
+    from tools.scopes import check_compiled_graph
+    check_compiled_graph(root, audit)
     names = set()
     for declaration in declarations:
         if not isinstance(declaration, dict):
@@ -210,11 +284,11 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
         for module in sorted(expected):
             source = module.replace(".", "/") + ".lean"
             command_step(root, [lake, "env", "lean", "-DwarningAsError=true", source], timeout, report)
-    if capture_inputs(root, task) != before:
+    if capture_inputs(root, task) != before or capture_verification_inputs(root) != global_before:
         raise OperationError("Inputs changed during verification; retry with stable files")
     report["mechanical"] = "pass"
     if shared is not None and not reusable:
-        shared.update(inputs=before, lean_version=report["lean_version"], audit=copy.deepcopy(audit),
+        shared.update(inputs=global_before, lean_version=report["lean_version"], audit=copy.deepcopy(audit),
                       steps=copy.deepcopy(report["steps"]))
 
 
@@ -310,11 +384,17 @@ def main() -> int:
     if argv and argv[0] == "pr":
         from tools.publish import main as publish_main
         return publish_main(default_root, argv[1:])
+    if argv and argv[0] == "catalog":
+        from tools.catalog import main as catalog_main
+        return catalog_main(default_root, argv[1:])
     parser = argparse.ArgumentParser(description=__doc__, epilog=
         "Worker: doctor | status | work | resume | adopt | report. GitHub: pr. HTML: dashboard.")
     parser.add_argument("command", choices=("verify", "review", "run", "fingerprint", "dashboard"))
     parser.add_argument("task", nargs="?", default="all")
     parser.add_argument("--project", type=Path, default=default_root)
+    parser.add_argument("--domain", help="select one mathematical domain")
+    parser.add_argument("--tag", help="select tasks carrying this tag")
+    parser.add_argument("--changed", metavar="GIT_REF", help="select tasks affected since this commit")
     args = parser.parse_args()
     if args.task != "all" and not re.fullmatch(r"JL-\d{3}", args.task):
         parser.error("Task must be all or have the form JL-001")
@@ -325,8 +405,18 @@ def main() -> int:
         data = tomllib.loads(local_file(root, "jonnylean.toml").read_text())
         if not isinstance(data.get("tasks"), list) or any(not isinstance(t, dict) for t in data["tasks"]):
             raise OperationError("tasks must be an array of tables")
-        ids = [t["id"] for t in data["tasks"]] if args.task == "all" else [args.task]
+        from tools.catalog import select, affected, changed_paths
+        chosen = select(data['tasks'], domain=args.domain, tag=args.tag)
+        if args.changed:
+            chosen = affected(root, chosen, changed_paths(root, args.changed))
+        if args.task != 'all':
+            load_task(root, args.task)
+            chosen = [t for t in chosen if t['id'] == args.task]
+        ids = [t['id'] for t in chosen]
         if not ids:
+            if args.domain or args.tag or args.changed:
+                print('No matching tasks; no verification was performed.')
+                return 0
             raise OperationError("No tasks configured")
         for task_id in ids:
             if not isinstance(task_id, str) or not re.fullmatch(r"JL-\d{3}", task_id):

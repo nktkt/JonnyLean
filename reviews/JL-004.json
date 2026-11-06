@@ -3,88 +3,83 @@
   "task": "JL-004",
   "reviewer": {
     "kind": "ai",
-    "name": "Codex independent review agent /root/full_checks",
+    "name": "Codex independent reviewer /root/v2_graphs (JL-001–025; not the author)",
     "authenticated": false,
-    "evidence_kind": "Independent AI self-report; mathematical source reviewed in a context separate from proof authors"
+    "evidence_kind": "AI self-report",
+    "independent_scope": "Authored JL-046–060 only; independently read JL-001–025 specifications, contracts, mathematics, and verifier changes."
   },
   "decision": "approve",
   "findings": [],
-  "inputs": {
-    ".github/workflows/ci.yml": "e7f2fbe0717293c82398c58f85ce6122833be42c791ab0e0d98bab840b12f514",
-    "JonnyLean.lean": "a8ae1e02fb1035677a3f8d9cff0b18c91715e5834ce94aa3726558aff6766490",
-    "JonnyLean/FiniteSet/Basic.lean": "19e72a1cec50fd00676acac6b2f1cd2ee8fbdde35849ae2e566715d4c483497b",
-    "JonnyLean/FiniteSet/Powerset.lean": "3feb4de7804dcfa50ba68587545ea43918e11630e51673590598136070c64c7b",
-    "JonnyLean/NumberTheory/Consecutive.lean": "b0c37c3189fb49402984437d1ba08eaa1ce0c312d0f11b4da0b703cac55d8050",
-    "JonnyLean/NumberTheory/Parity.lean": "df83c3f42d71696891de2049289f9c50f1394600fb0586c1a814ec916f9d2694",
-    "JonnyLean/NumberTheory/Triangular.lean": "6df4974ed717bf7d1023593cd20a24776a1a56690032e63d26df812e2c647418",
-    "contracts/JL001.lean": "7fd1ebb395c9fbd485fabbacf13dede6c139044843d6646dda58fbd1ac5ebda5",
-    "contracts/JL002.lean": "4dc1f8f4333b706563870f38e0262392ea2ec5224023d0c624ebf3e6b35419e4",
-    "contracts/JL003.lean": "fcd8d4f67731aba41596890a82f1c0deebfac127547aaa386215c6bfb78be93c",
-    "contracts/JL004.lean": "a6f95def50d2ee608d28444a866a8d91e8b3733b9faf728cca5b2e6acccd467c",
-    "contracts/JL005.lean": "fc93a4996ab681078d5ce4dd5dea44bc9a45ad8fa11198b9db352213cfb02274",
-    "jonnylean.toml": "3f4603f789cb9b9030daa4ebd467c5ffd54333be289b1df0f4ccbfadc8575a60",
-    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
-    "lakefile.toml": "58c69906bcd95569e88539a2f53c3c41a5dbc8489386f9e9f70e20c3d2e23685",
-    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
-    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
-    "specs/JL-001.md": "f96913b34ae74392d4f92c5d43992c18633da81a433402254ff04bc21cedb1c9",
-    "specs/JL-002.md": "0dea72287cf3e03d3a73338d4859cebdb43e61bce45568cc339fde8f5e740f97",
-    "specs/JL-003.md": "e6a332d8e494b75ca7c03352bd9ac9bebe9a20c0952586d1a86e85b9629f857f",
-    "specs/JL-004.md": "6c500ec04e48775e02a29651fbb5312b93458c4ad410dcf218d2c6e6c9346785",
-    "specs/JL-005.md": "f3de315290677f14d6cdc27c1fc6682eaf0a466b40ebb279533082d089717e46",
-    "tests/test_pipeline.py": "21da57b2b2fa34bef55a9a9c078aac1757d97029c23ce531bee8eabcdd552881",
-    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
-    "tests/test_worker.py": "073c91c7517fd680873d2fdbe7375b3afa4d63297328c08873390bc1135b9423",
-    "tools/Audit.lean": "de56c0610d6d2b4c36b1336acd0c12a3783386d6c7ee955a56e423bdef56bd3a",
-    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
-    "tools/jonnylean.py": "70b9ed110226411f409cadd8b1dcbf3fdfc6b91c1364d18900cc9cb86ae2bf78",
-    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
-    "tools/reporting.py": "d22af1f9d9d22edd46e21251190e87e1db525c32e5b2ab2d333ac40a5b1d9a90",
-    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
-    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
-    "worker/cli.py": "7ff3d29171bdd5bc385ab6e8635f3c87c58cfe1121d9d5745061cdee2b3b4498",
-    "worker/engine.py": "73378a68630e54b4e3c5438a26c384a52ef841c7cec603dcd33359d3ee44fd82",
-    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
-    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
-    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6"
-  },
   "checks": [
     {
       "criterion": "definition",
       "result": "pass",
-      "evidence": "FiniteSet α は List α と Nodup の証明を持ち、membership はリスト membership、card は重複なし列挙の長さ。Disjoint は共通元がないことを全称量化する。union は右側から既存の元をフィルターして追加し、一般の重なる入力にも通常の和集合の意味を持つ。"
+      "evidence": "FiniteSet は elems と Nodup 証明を持ち、card はその列挙長。union は右の列挙から左に既存の要素を除くため集合の意味を保つ。Equivalent は列挙順を無視した membership 同値。"
     },
     {
       "criterion": "quantifiers",
       "result": "pass",
-      "evidence": "任意の宇宙の型 α と任意の A B : FiniteSet α を扱い、自然数の要素や非空集合に制限しない。和集合の計算に DecidableEq α を要求することは仕様で明示されている。濃度の表現不変性の定理と契約にはその追加仮定もない。"
+      "evidence": "任意の型 α:Type u、任意の有限集合 A,B を量化し、空集合も許す。契約は自然数集合に限定しない一般命題を持つ。"
     },
     {
       "criterion": "assumptions",
       "result": "pass",
-      "evidence": "主定理の数学的な仮定は Disjoint A B のみで、独立契約では ∀ x, x ∈ A.elems → x ∈ B.elems → False に展開される。重複なし性は集合型の構成条件であり、結論や空集合性を仮定に加えていない。"
+      "evidence": "和集合の計算には DecidableEq α、濃度の加法性には共通要素がないことだけを要求する。非空性は不要。"
     },
     {
       "criterion": "conclusion",
       "result": "pass",
-      "evidence": "card (union A B) = card A + card B を証明し、契約 target は card と Disjoint を使わず実際の列挙の長さと membership で同じ命題を要求する。unionMembership と unionNodup が演算の意味と重複除去を別に検査し、空集合・重なりの境界例もある。"
+      "evidence": "契約は Disjoint/card を展開して union の列挙長が両長さの和になると要求する。一般の unionMembership、Nodup、濃度の表現不変性も別に要求する。"
     },
     {
       "criterion": "proof",
       "result": "pass",
-      "evidence": "互いに交わらなければ B の全元がフィルターを通るので filter_eq_self を示し、List.length_append で濃度の加法性を得る。perm_of_members は membership の証人から元を先頭に移す帰納法で順列を作り、card_eq_of_equivalent はその長さ保存を使う。公理依存は許可された標準の propext と Quot.sound のみ。"
+      "evidence": "非交差性から右側全要素が filter を通ることを示して append の長さへ帰着する。同じ {0} 同士の和が1要素になる重なり境界も検査済み。"
     },
     {
       "criterion": "coverage",
       "result": "pass",
-      "evidence": "本担当の verify all で、root の JonnyLean と全5数学モジュールが一致し、全67宣言を監査した。対象 JonnyLean.FiniteSet.card_union_of_disjoint が JonnyLean.FiniteSet.Basic の名前付き theorem として存在することを確認した。私有・生成・未使用宣言も監査対象で、名前空間文字列だけによる選別ではない。"
+      "evidence": "現在の Lean 環境監査は root を含む 61 モジュールと 932 宣言を記録し、source module集合および compiled import graph と一致する。JonnyLean.FiniteSet.card_union_of_disjoint は指定モジュール JonnyLean.FiniteSet.Basic の theorem として一意に存在する。仕様・契約と対象数学ソースの内容を独立に精読した。"
     },
     {
       "criterion": "audit",
       "result": "pass",
-      "evidence": "本担当が固定した Lean 4.29.1 で python3 tools/jonnylean.py verify all を実行し全5課題が終了コード0で合格した。contracts/JL004.lean と全数学ソースの警告をエラーとする検査が成功し、禁止公理の指摘は0件。実行報告と現在の fingerprint の37入力ハッシュが一致することを記録前に再確認した。これは署名や人間の承認ではない。"
+      "evidence": "artifacts/JL-004/report.json の実機械結果を読み、mechanical=pass、findings=[]、原契約の warningAsError=true 成功を確認した。数学全宣言と契約内 6 個のローカル宣言の公理依存は propext / Quot.sound の許可範囲内で、新規axiomはない。主要定理の依存は [\"Quot.sound\", \"propext\"]。現在の capture_inputs と capture_verification_inputs の双方が記録と完全一致することを再照合した。"
     }
   ],
-  "recorded_at": "2026-11-06T13:47:52.418038+00:00",
-  "human_approval": "not_recorded"
+  "inputs": {
+    ".github/workflows/ci.yml": "09f950ebfa583b254cc3064bcb764cf48f844a5e9a737fe5a1b99816543afae5",
+    "JonnyLean/FiniteSet/Basic.lean": "19e72a1cec50fd00676acac6b2f1cd2ee8fbdde35849ae2e566715d4c483497b",
+    "contracts/JL004.lean": "b07f3384bdfd5c24a296189079aaa20bc5cb26c4d740f5c2be77341d0d0f989f",
+    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
+    "lakefile.toml": "7a6078c6d00c9d12f06199fb53ebffd9d41c1cb361467010fbfc1d7f3d9306d9",
+    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
+    "specs/JL-004.md": "6c500ec04e48775e02a29651fbb5312b93458c4ad410dcf218d2c6e6c9346785",
+    "tests/__init__.py": "0de4bc12a3f83b2ad1089fdc469aa03124e37a4deae5c4e783c8ae11b28f9536",
+    "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
+    "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
+    "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
+    "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
+    "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
+    "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
+    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
+    "tools/catalog.py": "6eba2d30c2226a167d3ec394a4e91d3ac65217b90da4ab61be619134e5e676e1",
+    "tools/jonnylean.py": "027db003dfaf59405b14d564fd16a268920932e7864506df3960b640a68a8350",
+    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
+    "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
+    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
+    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
+    "worker/cli.py": "0205a4943c7f854970a2b8f82a728f6a1f82bb3dd81edfa9f62b106f4fe3ce07",
+    "worker/engine.py": "4c1cea218a6fb7825eb11b5cf8e980640e3a08421545c4c14ade70069f72c3e9",
+    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
+    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
+    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6",
+    "@task-context": "75fe6b5a37262496bb399678265c670d055576b50e49241262817989effb1c36"
+  },
+  "human_approval": "not_recorded",
+  "reviewed_at": "2026-11-06T14:14:21.349635+00:00"
 }

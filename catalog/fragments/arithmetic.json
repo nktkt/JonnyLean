@@ -1,0 +1,436 @@
+[
+  {
+    "id": "JL-006",
+    "title": "自然数の偶奇分解",
+    "domain": "number-theory",
+    "description": "すべての自然数が偶数または奇数であることを具体的な証人で示す。混合和・奇数和と排他性も証明する。",
+    "tags": [
+      "parity",
+      "induction",
+      "witness"
+    ],
+    "spec": "specs/JL-006.md",
+    "module": "JonnyLean.NumberTheory.OddSums",
+    "declaration": "JonnyLean.even_or_odd",
+    "contract": "contracts/JL006.lean",
+    "review": "reviews/JL-006.json",
+    "editable": [
+      "JonnyLean/NumberTheory/OddSums.lean"
+    ],
+    "depends_on": [
+      "JL-001"
+    ]
+  },
+  {
+    "id": "JL-007",
+    "title": "平方の偶数性と元の偶数性",
+    "domain": "number-theory",
+    "description": "自然数の平方が偶数であることと、その自然数自身が偶数であることの同値を示す。積と累乗の偶奇保存を再利用する。",
+    "tags": [
+      "parity",
+      "multiplication",
+      "powers"
+    ],
+    "spec": "specs/JL-007.md",
+    "module": "JonnyLean.NumberTheory.ParityProducts",
+    "declaration": "JonnyLean.even_square_iff",
+    "contract": "contracts/JL007.lean",
+    "review": "reviews/JL-007.json",
+    "editable": [
+      "JonnyLean/NumberTheory/ParityProducts.lean"
+    ],
+    "depends_on": [
+      "JL-006"
+    ]
+  },
+  {
+    "id": "JL-008",
+    "title": "整除の積への保存",
+    "domain": "number-theory",
+    "description": "a が c を割り切り、b が d を割り切るなら、a*b が c*d を割り切ることを示す。整除の推移性も証人から構成する。",
+    "tags": [
+      "divisibility",
+      "witness",
+      "multiplication"
+    ],
+    "spec": "specs/JL-008.md",
+    "module": "JonnyLean.NumberTheory.Divisibility",
+    "declaration": "JonnyLean.divides_product",
+    "contract": "contracts/JL008.lean",
+    "review": "reviews/JL-008.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Divisibility.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-009",
+    "title": "整除の自然数線形結合",
+    "domain": "number-theory",
+    "description": "共通の約数は自然数係数による線形結合も割り切る。加法、切り捨て減算、加法からの取消しも補助定理として扱う。",
+    "tags": [
+      "divisibility",
+      "linear-combination",
+      "subtraction"
+    ],
+    "spec": "specs/JL-009.md",
+    "module": "JonnyLean.NumberTheory.DivisibilitySums",
+    "declaration": "JonnyLean.divides_linear_combination",
+    "contract": "contracts/JL009.lean",
+    "review": "reviews/JL-009.json",
+    "editable": [
+      "JonnyLean/NumberTheory/DivisibilitySums.lean"
+    ],
+    "depends_on": [
+      "JL-008"
+    ]
+  },
+  {
+    "id": "JL-010",
+    "title": "相互整除の反対称性",
+    "domain": "number-theory",
+    "description": "自然数が互いに整除するなら等しいことを示す。正の被除数に対する約数の上界と、大きい約数の一意性を含む。",
+    "tags": [
+      "divisibility",
+      "order",
+      "antisymmetry"
+    ],
+    "spec": "specs/JL-010.md",
+    "module": "JonnyLean.NumberTheory.DivisibilityOrder",
+    "declaration": "JonnyLean.divides_antisymm",
+    "contract": "contracts/JL010.lean",
+    "review": "reviews/JL-010.json",
+    "editable": [
+      "JonnyLean/NumberTheory/DivisibilityOrder.lean"
+    ],
+    "depends_on": [
+      "JL-008"
+    ]
+  },
+  {
+    "id": "JL-011",
+    "title": "合同類の標準剰余の一意性",
+    "domain": "number-theory",
+    "description": "m 未満の剰余候補 r が a と合同なら、r は a%m に一致する。合同を剰余の等式として定義し、法 0 の場合も明示する。",
+    "tags": [
+      "congruence",
+      "remainder",
+      "uniqueness"
+    ],
+    "spec": "specs/JL-011.md",
+    "module": "JonnyLean.NumberTheory.Congruence",
+    "declaration": "JonnyLean.congruent_unique_remainder",
+    "contract": "contracts/JL011.lean",
+    "review": "reviews/JL-011.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Congruence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-012",
+    "title": "二次多項式による合同の保存",
+    "domain": "number-theory",
+    "description": "合同な入力を同じ自然数係数の二次多項式へ代入すると、結果も合同になる。加法・乗法・任意自然数累乗・アフィン式の保存を積み上げる。",
+    "tags": [
+      "congruence",
+      "polynomials",
+      "powers"
+    ],
+    "spec": "specs/JL-012.md",
+    "module": "JonnyLean.NumberTheory.CongruenceOperations",
+    "declaration": "JonnyLean.congruent_quadratic",
+    "contract": "contracts/JL012.lean",
+    "review": "reviews/JL-012.json",
+    "editable": [
+      "JonnyLean/NumberTheory/CongruenceOperations.lean"
+    ],
+    "depends_on": [
+      "JL-011"
+    ]
+  },
+  {
+    "id": "JL-013",
+    "title": "累乗列の整除と順序",
+    "domain": "number-theory",
+    "description": "同じ底の自然数累乗について、小さい指数の累乗が大きい指数の累乗を割り切る。整除を累乗へ持ち上げる補助定理も含む。",
+    "tags": [
+      "powers",
+      "divisibility",
+      "order"
+    ],
+    "spec": "specs/JL-013.md",
+    "module": "JonnyLean.NumberTheory.Powers",
+    "declaration": "JonnyLean.power_divides_later",
+    "contract": "contracts/JL013.lean",
+    "review": "reviews/JL-013.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Powers.lean"
+    ],
+    "depends_on": [
+      "JL-008"
+    ]
+  },
+  {
+    "id": "JL-014",
+    "title": "自然数の平方展開",
+    "domain": "algebra",
+    "description": "自然数の和の平方を展開し、平方差・隣接平方・平方の単調性へつなぐ。",
+    "tags": [
+      "algebra",
+      "quadratic",
+      "identities"
+    ],
+    "spec": "specs/JL-014.md",
+    "module": "JonnyLean.Algebra.Quadratic",
+    "declaration": "JonnyLean.square_add",
+    "contract": "contracts/JL014.lean",
+    "review": "reviews/JL-014.json",
+    "editable": [
+      "JonnyLean/Algebra/Quadratic.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-015",
+    "title": "有限和がゼロとなる条件",
+    "domain": "algebra",
+    "description": "非負な自然数値の有限和が 0 であることと、範囲内の全項が 0 であることの同値を示す。外延性、単調性、定数和、上界も整備する。",
+    "tags": [
+      "finite-sum",
+      "induction",
+      "zero"
+    ],
+    "spec": "specs/JL-015.md",
+    "module": "JonnyLean.Algebra.FiniteSum",
+    "declaration": "JonnyLean.range_sum_eq_zero_iff",
+    "contract": "contracts/JL015.lean",
+    "review": "reviews/JL-015.json",
+    "editable": [
+      "JonnyLean/Algebra/FiniteSum.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-016",
+    "title": "有限和の線形性",
+    "domain": "algebra",
+    "description": "自然数係数による二つの列の線形結合と有限和が交換する。項ごとの差の和には必要な大小条件を明示する。",
+    "tags": [
+      "finite-sum",
+      "linearity",
+      "distributivity"
+    ],
+    "spec": "specs/JL-016.md",
+    "module": "JonnyLean.Algebra.SumLinearity",
+    "declaration": "JonnyLean.range_sum_linear_combination",
+    "contract": "contracts/JL016.lean",
+    "review": "reviews/JL-016.json",
+    "editable": [
+      "JonnyLean/Algebra/SumLinearity.lean"
+    ],
+    "depends_on": [
+      "JL-015"
+    ]
+  },
+  {
+    "id": "JL-017",
+    "title": "有限和の区間分割",
+    "domain": "algebra",
+    "description": "最初の m+n 項の和を、最初の m 項と、添字を m だけずらした n 項に分割する。三分割、中央項の抽出、先頭項の移動も扱う。",
+    "tags": [
+      "finite-sum",
+      "interval",
+      "index-shift"
+    ],
+    "spec": "specs/JL-017.md",
+    "module": "JonnyLean.Algebra.SumIntervals",
+    "declaration": "JonnyLean.range_sum_split",
+    "contract": "contracts/JL017.lean",
+    "review": "reviews/JL-017.json",
+    "editable": [
+      "JonnyLean/Algebra/SumIntervals.lean"
+    ],
+    "depends_on": [
+      "JL-015"
+    ]
+  },
+  {
+    "id": "JL-018",
+    "title": "連続する奇数の区間和",
+    "domain": "algebra",
+    "description": "2a+1 から始まる n 個の連続奇数の和が 2an+n² であることを示す。初めの n 奇数の和、添字和、等差列の二倍和も導く。",
+    "tags": [
+      "finite-sum",
+      "odd-numbers",
+      "arithmetic-progression"
+    ],
+    "spec": "specs/JL-018.md",
+    "module": "JonnyLean.Algebra.OddSum",
+    "declaration": "JonnyLean.sum_odd_interval",
+    "contract": "contracts/JL018.lean",
+    "review": "reviews/JL-018.json",
+    "editable": [
+      "JonnyLean/Algebra/OddSum.lean"
+    ],
+    "depends_on": [
+      "JL-014",
+      "JL-016"
+    ]
+  },
+  {
+    "id": "JL-019",
+    "title": "等比和の除算を使わない公式",
+    "domain": "algebra",
+    "description": "正の自然数を底とする有限等比和について (a-1)Σa^i=a^n-1 を証明する。法則を除算の部分性に依存させず、a=1 も扱う。",
+    "tags": [
+      "geometric-sum",
+      "powers",
+      "closed-form"
+    ],
+    "spec": "specs/JL-019.md",
+    "module": "JonnyLean.Algebra.GeometricSum",
+    "declaration": "JonnyLean.geometric_sum_sub_formula",
+    "contract": "contracts/JL019.lean",
+    "review": "reviews/JL-019.json",
+    "editable": [
+      "JonnyLean/Algebra/GeometricSum.lean"
+    ],
+    "depends_on": [
+      "JL-016",
+      "JL-017"
+    ]
+  },
+  {
+    "id": "JL-020",
+    "title": "階乗の単調性",
+    "domain": "number-theory",
+    "description": "階乗を 0!=1 として定義し、引数に関する単調性を証明する。正値性、入力以上の下界、n>0 での厳密な増加も扱う。",
+    "tags": [
+      "factorial",
+      "order",
+      "induction"
+    ],
+    "spec": "specs/JL-020.md",
+    "module": "JonnyLean.NumberTheory.Factorial",
+    "declaration": "JonnyLean.factorial_mono",
+    "contract": "contracts/JL020.lean",
+    "review": "reviews/JL-020.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Factorial.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-021",
+    "title": "階乗による小さい正整数の整除",
+    "domain": "number-theory",
+    "description": "1≤k≤n を満たす自然数 k は n! を割り切る。連続積による階乗の分割公式と、小さい階乗が大きい階乗を割り切ることを構成する。",
+    "tags": [
+      "factorial",
+      "divisibility",
+      "product"
+    ],
+    "spec": "specs/JL-021.md",
+    "module": "JonnyLean.NumberTheory.FactorialDivisibility",
+    "declaration": "JonnyLean.positive_le_divides_factorial",
+    "contract": "contracts/JL021.lean",
+    "review": "reviews/JL-021.json",
+    "editable": [
+      "JonnyLean/NumberTheory/FactorialDivisibility.lean"
+    ],
+    "depends_on": [
+      "JL-008",
+      "JL-020"
+    ]
+  },
+  {
+    "id": "JL-022",
+    "title": "Fibonacci 数列の前方和",
+    "domain": "number-theory",
+    "description": "F₀=0,F₁=1 の Fibonacci 数列について F₁+…+Fₙ+1=Fₙ₊₂ を示す。正値性、単調性、線形下界も証明する。",
+    "tags": [
+      "fibonacci",
+      "finite-sum",
+      "recurrence"
+    ],
+    "spec": "specs/JL-022.md",
+    "module": "JonnyLean.NumberTheory.Fibonacci",
+    "declaration": "JonnyLean.fibonacci_prefix_sum",
+    "contract": "contracts/JL022.lean",
+    "review": "reviews/JL-022.json",
+    "editable": [
+      "JonnyLean/NumberTheory/Fibonacci.lean"
+    ],
+    "depends_on": [
+      "JL-015"
+    ]
+  },
+  {
+    "id": "JL-023",
+    "title": "Fibonacci の加法公式と倍角公式",
+    "domain": "number-theory",
+    "description": "F(m+n+1)=F(m+1)F(n+1)+F(m)F(n) をすべての自然数添字で示し、奇数添字・偶数添字の倍角公式を得る。",
+    "tags": [
+      "fibonacci",
+      "addition-formula",
+      "doubling"
+    ],
+    "spec": "specs/JL-023.md",
+    "module": "JonnyLean.NumberTheory.FibonacciAddition",
+    "declaration": "JonnyLean.fibonacci_addition",
+    "contract": "contracts/JL023.lean",
+    "review": "reviews/JL-023.json",
+    "editable": [
+      "JonnyLean/NumberTheory/FibonacciAddition.lean"
+    ],
+    "depends_on": [
+      "JL-022"
+    ]
+  },
+  {
+    "id": "JL-024",
+    "title": "単調列の差分和",
+    "domain": "algebra",
+    "description": "範囲内で非減少な自然数列について、隣接差の総和に最初の値を足すと最後の値になることを示す。区間版と増分の上界も含む。",
+    "tags": [
+      "finite-sum",
+      "telescoping",
+      "difference"
+    ],
+    "spec": "specs/JL-024.md",
+    "module": "JonnyLean.Algebra.Telescoping",
+    "declaration": "JonnyLean.telescoping_sum",
+    "contract": "contracts/JL024.lean",
+    "review": "reviews/JL-024.json",
+    "editable": [
+      "JonnyLean/Algebra/Telescoping.lean"
+    ],
+    "depends_on": [
+      "JL-015"
+    ]
+  },
+  {
+    "id": "JL-025",
+    "title": "アフィン写像の反復の閉形式",
+    "domain": "algebra",
+    "description": "自然数上の写像 x↦ax+b を n 回反復した値を a^n x+bΣa^i で表す。写像の合成、結合則、恒等写像、反復の加法則も構成する。",
+    "tags": [
+      "affine-map",
+      "composition",
+      "iteration",
+      "closed-form"
+    ],
+    "spec": "specs/JL-025.md",
+    "module": "JonnyLean.Algebra.Affine",
+    "declaration": "JonnyLean.NatAffine.iterate_formula",
+    "contract": "contracts/JL025.lean",
+    "review": "reviews/JL-025.json",
+    "editable": [
+      "JonnyLean/Algebra/Affine.lean"
+    ],
+    "depends_on": [
+      "JL-019"
+    ]
+  }
+]

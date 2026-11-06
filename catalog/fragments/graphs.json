@@ -1,0 +1,320 @@
+[
+  {
+    "id": "JL-046",
+    "title": "有向グラフの構成と包含の反対称性",
+    "domain": "graph-theory",
+    "description": "任意の型 `V` 上の有向グラフを、頂点間の命題 `edge : V → V → Prop` を持つ構造体として定義する。有限性・辺の決定可能性・自己ループの禁止は仮定しない。",
+    "tags": [
+      "directed-graph",
+      "edge-relation",
+      "subgraph"
+    ],
+    "spec": "specs/JL-046.md",
+    "module": "JonnyLean.GraphTheory.Basic",
+    "declaration": "JonnyLean.GraphTheory.Graph.subgraph_antisymm",
+    "contract": "contracts/JL046.lean",
+    "review": "reviews/JL-046.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Basic.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-047",
+    "title": "端点付き歩道と頂点列の長さ",
+    "domain": "graph-theory",
+    "description": "`Walk G x y` は始点と終点を型に持つ有限歩道である。`nil x` は空歩道、`cons e p` は辺 `e : G.edge x y` を歩道 `p : Walk G y z` の前につなぐ。",
+    "tags": [
+      "walk",
+      "length",
+      "vertices"
+    ],
+    "spec": "specs/JL-047.md",
+    "module": "JonnyLean.GraphTheory.Walk",
+    "declaration": "JonnyLean.GraphTheory.Walk.vertices_length",
+    "contract": "contracts/JL047.lean",
+    "review": "reviews/JL-047.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Walk.lean"
+    ],
+    "depends_on": [
+      "JL-046"
+    ]
+  },
+  {
+    "id": "JL-048",
+    "title": "歩道の連結と結合則",
+    "domain": "graph-theory",
+    "description": "終点と始点が一致する歩道 `p : Walk G x y` と `q : Walk G y z` を連結する。端点の一致は型検査で要求される。",
+    "tags": [
+      "walk",
+      "concatenation",
+      "associativity"
+    ],
+    "spec": "specs/JL-048.md",
+    "module": "JonnyLean.GraphTheory.Append",
+    "declaration": "JonnyLean.GraphTheory.Walk.length_append",
+    "contract": "contracts/JL048.lean",
+    "review": "reviews/JL-048.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Append.lean"
+    ],
+    "depends_on": [
+      "JL-047"
+    ]
+  },
+  {
+    "id": "JL-049",
+    "title": "到達可能性と反射推移閉包の最小性",
+    "domain": "graph-theory",
+    "description": "`Reachable G x y` を `Nonempty (Walk G x y)` と定義する。存在する歩道を選択してデータとして取り出す選択公理は使わず、命題の証明内で歩道を消去する。",
+    "tags": [
+      "reachability",
+      "reflexive-transitive-closure"
+    ],
+    "spec": "specs/JL-049.md",
+    "module": "JonnyLean.GraphTheory.Reachability",
+    "declaration": "JonnyLean.GraphTheory.reachable_minimal",
+    "contract": "contracts/JL049.lean",
+    "review": "reviews/JL-049.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Reachability.lean"
+    ],
+    "depends_on": [
+      "JL-048"
+    ]
+  },
+  {
+    "id": "JL-050",
+    "title": "グラフ準同型による歩道の輸送",
+    "domain": "graph-theory",
+    "description": "`Hom G H` は頂点写像 `vertex : V → W` と、各辺を像の端点間の辺へ送る証明を持つ。頂点型の universe は独立でよい。",
+    "tags": [
+      "graph-homomorphism",
+      "walk-map"
+    ],
+    "spec": "specs/JL-050.md",
+    "module": "JonnyLean.GraphTheory.Morphism",
+    "declaration": "JonnyLean.GraphTheory.Hom.length_mapWalk",
+    "contract": "contracts/JL050.lean",
+    "review": "reviews/JL-050.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Morphism.lean"
+    ],
+    "depends_on": [
+      "JL-049"
+    ]
+  },
+  {
+    "id": "JL-051",
+    "title": "無向グラフの歩道反転",
+    "domain": "graph-theory",
+    "description": "`Undirected G` は全頂点対で辺関係が対称であるという命題である。有向グラフの型自体へ対称性を組み込まない。",
+    "tags": [
+      "undirected-graph",
+      "walk-reversal"
+    ],
+    "spec": "specs/JL-051.md",
+    "module": "JonnyLean.GraphTheory.Reverse",
+    "declaration": "JonnyLean.GraphTheory.Walk.reverse_reverse",
+    "contract": "contracts/JL051.lean",
+    "review": "reviews/JL-051.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Reverse.lean"
+    ],
+    "depends_on": [
+      "JL-050"
+    ]
+  },
+  {
+    "id": "JL-052",
+    "title": "相互到達可能性による強連結成分",
+    "domain": "graph-theory",
+    "description": "`SameComponent G x y` は `Reachable G x y ∧ Reachable G y x` と定義する。任意の有向グラフを対象とする。",
+    "tags": [
+      "strong-connectivity",
+      "equivalence-relation"
+    ],
+    "spec": "specs/JL-052.md",
+    "module": "JonnyLean.GraphTheory.Components",
+    "declaration": "JonnyLean.GraphTheory.component_equivalence",
+    "contract": "contracts/JL052.lean",
+    "review": "reviews/JL-052.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Components.lean"
+    ],
+    "depends_on": [
+      "JL-051"
+    ]
+  },
+  {
+    "id": "JL-053",
+    "title": "閉歩道の反復と始点の移動",
+    "domain": "graph-theory",
+    "description": "`ClosedWalk G x` は `Walk G x x` であり、単純サイクルではない。頂点・辺の反復および空歩道を許す。",
+    "tags": [
+      "closed-walk",
+      "iteration",
+      "rotation"
+    ],
+    "spec": "specs/JL-053.md",
+    "module": "JonnyLean.GraphTheory.ClosedWalk",
+    "declaration": "JonnyLean.GraphTheory.ClosedWalk.length_power",
+    "contract": "contracts/JL053.lean",
+    "review": "reviews/JL-053.json",
+    "editable": [
+      "JonnyLean/GraphTheory/ClosedWalk.lean"
+    ],
+    "depends_on": [
+      "JL-052"
+    ]
+  },
+  {
+    "id": "JL-054",
+    "title": "部分グラフでの到達可能性と空グラフ",
+    "domain": "graph-theory",
+    "description": "同じ頂点型上で辺集合を拡大する包含 `Graph.Subgraph G H` を扱う。包含から、頂点上では恒等写像である準同型 `inclusion` を作る。",
+    "tags": [
+      "subgraph",
+      "reachability",
+      "empty-graph"
+    ],
+    "spec": "specs/JL-054.md",
+    "module": "JonnyLean.GraphTheory.Subgraph",
+    "declaration": "JonnyLean.GraphTheory.reachable_empty_iff",
+    "contract": "contracts/JL054.lean",
+    "review": "reviews/JL-054.json",
+    "editable": [
+      "JonnyLean/GraphTheory/Subgraph.lean"
+    ],
+    "depends_on": [
+      "JL-053"
+    ]
+  },
+  {
+    "id": "JL-055",
+    "title": "有限アルファベット上の語の列挙",
+    "domain": "combinatorics",
+    "description": "任意の型 `α` のリストをアルファベットとし、`words alphabet n : List (List α)` で長さ `n` の語を列挙する。等値判定や重複除去は要求しない。",
+    "tags": [
+      "words",
+      "enumeration",
+      "membership"
+    ],
+    "spec": "specs/JL-055.md",
+    "module": "JonnyLean.Combinatorics.Words",
+    "declaration": "JonnyLean.Combinatorics.mem_words",
+    "contract": "contracts/JL055.lean",
+    "review": "reviews/JL-055.json",
+    "editable": [
+      "JonnyLean/Combinatorics/Words.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-056",
+    "title": "有限語の計数と積の法則",
+    "domain": "combinatorics",
+    "description": "JL-055 の語の列挙について、リスト長を個数とする。アルファベットの同じ値の重複は別の出現として数える。",
+    "tags": [
+      "counting",
+      "multiplication-principle",
+      "word-count"
+    ],
+    "spec": "specs/JL-056.md",
+    "module": "JonnyLean.Combinatorics.WordCount",
+    "declaration": "JonnyLean.Combinatorics.length_words",
+    "contract": "contracts/JL056.lean",
+    "review": "reviews/JL-056.json",
+    "editable": [
+      "JonnyLean/Combinatorics/WordCount.lean"
+    ],
+    "depends_on": [
+      "JL-055"
+    ]
+  },
+  {
+    "id": "JL-057",
+    "title": "順序を保つ位置の選択列挙",
+    "domain": "combinatorics",
+    "description": "`selections k xs` はリスト `xs` から `k` 個の位置を元の順序のまま選んだ値列を列挙する。値が同じ位置も異なる選択肢として扱う。",
+    "tags": [
+      "selections",
+      "positions",
+      "enumeration"
+    ],
+    "spec": "specs/JL-057.md",
+    "module": "JonnyLean.Combinatorics.Selections",
+    "declaration": "JonnyLean.Combinatorics.mem_selections_iff",
+    "contract": "contracts/JL057.lean",
+    "review": "reviews/JL-057.json",
+    "editable": [
+      "JonnyLean/Combinatorics/Selections.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-058",
+    "title": "二項係数と位置選択の個数",
+    "domain": "combinatorics",
+    "description": "自然数上の `binomial n k` を Pascal の漸化式で定義し、JL-057 の選択列挙の長さと接続する。",
+    "tags": [
+      "binomial-coefficients",
+      "pascal-recurrence",
+      "counting"
+    ],
+    "spec": "specs/JL-058.md",
+    "module": "JonnyLean.Combinatorics.Binomial",
+    "declaration": "JonnyLean.Combinatorics.length_selections",
+    "contract": "contracts/JL058.lean",
+    "review": "reviews/JL-058.json",
+    "editable": [
+      "JonnyLean/Combinatorics/Binomial.lean"
+    ],
+    "depends_on": [
+      "JL-057"
+    ]
+  },
+  {
+    "id": "JL-059",
+    "title": "自然数重み付き有限質量と事象の加法性",
+    "domain": "discrete-probability",
+    "description": "有限の結果リスト `xs`、自然数重み `w : α → Nat`、Boolean 事象 `p : α → Bool` を用いる。正の総質量はまだ要求しない。",
+    "tags": [
+      "finite-mass",
+      "events",
+      "finite-additivity"
+    ],
+    "spec": "specs/JL-059.md",
+    "module": "JonnyLean.DiscreteProbability.Mass",
+    "declaration": "JonnyLean.DiscreteProbability.eventMass_complement",
+    "contract": "contracts/JL059.lean",
+    "review": "reviews/JL-059.json",
+    "editable": [
+      "JonnyLean/DiscreteProbability/Mass.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-060",
+    "title": "有限計数分布の正規化と補事象",
+    "domain": "discrete-probability",
+    "description": "`Distribution α` は結果リスト、自然数重み、総質量が正である証明を持つ。`Probability` は分子・分母・分母正性・分子が分母以下である証明を持つ既約化しない分数の表現である。",
+    "tags": [
+      "finite-distribution",
+      "normalization",
+      "uniform-probability"
+    ],
+    "spec": "specs/JL-060.md",
+    "module": "JonnyLean.DiscreteProbability.Distribution",
+    "declaration": "JonnyLean.DiscreteProbability.Distribution.probability_complement",
+    "contract": "contracts/JL060.lean",
+    "review": "reviews/JL-060.json",
+    "editable": [
+      "JonnyLean/DiscreteProbability/Distribution.lean"
+    ],
+    "depends_on": [
+      "JL-059"
+    ]
+  }
+]

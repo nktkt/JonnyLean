@@ -24,6 +24,7 @@ sys.path.insert(0, str(PROJECT))
 from worker.engine import Engine, DEFAULTS, snapshot, source_files
 from worker.provider import CodexProvider
 from worker.state import BudgetExceeded, Store, WorkerError
+from tests.fixtures import core_only
 
 FAKE_PROVIDER = r'''
 import json
@@ -154,6 +155,7 @@ class WorkerIntegrationTests(unittest.TestCase):
             destination = cls.seed / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(path, destination)
+        core_only(cls.seed)
         cls.fake = cls.parent / 'fake_codex.py'
         cls.fake.write_text(FAKE_PROVIDER)
 

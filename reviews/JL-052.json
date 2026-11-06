@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "task": "JL-052",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex sub-agent /root/v2_structures — independent candidate reviewer of JL-047–054",
+    "authenticated": false,
+    "evidence_kind": "AI self-report",
+    "role": "Independent semantic reviewer of graph tasks and their Graph.ext candidate dependency; not implementation author."
+  },
+  "decision": "approve",
+  "findings": [],
+  "checks": [
+    {
+      "criterion": "definition",
+      "result": "pass",
+      "evidence": "SameComponent は両方向の Reachable の論理積。任意の有向グラフの強連結性を表し、商型、成分代表の選択、成分の列挙を定義していない。"
+    },
+    {
+      "criterion": "quantifiers",
+      "result": "pass",
+      "evidence": "contract_JL052 は任意の V,G に対し全頂点上の Equivalence を構成する。孤立点と空の頂点型を除外しない。"
+    },
+    {
+      "criterion": "assumptions",
+      "result": "pass",
+      "evidence": "主要定理に無向性や辺存在の追加仮定はない。片方向の到達可能性と同値にする補助定理 component_iff_reachable だけが Undirected を仮定する。"
+    },
+    {
+      "criterion": "conclusion",
+      "result": "pass",
+      "evidence": "契約は SameComponent を二つの Nonempty (Walk ...) の論理積へ展開して、その関係の反射・対称・推移性を一括した Equivalence を要求する。仕様通りの強連結関係である。"
+    },
+    {
+      "criterion": "proof",
+      "result": "pass",
+      "evidence": "反射性は nil、対称性は論理積の交換、推移性はそれぞれ正しい方向で歩道を連結して得る。同じ成分の到達先と所属が一致する補題、準同型による保存もこれらの連結で構成される。 今回の依存変更 Graph.ext は構造分解の明示ブロック化と局所等式の hEdge への命名だけで、二段 funext/propext と等式消去の推論は同一。対象課題の仕様・契約・数学ソースは原本とバイト単位で同一であることを確認した。"
+    },
+    {
+      "criterion": "coverage",
+      "result": "pass",
+      "evidence": "候補ワークスペースに対する実検証で JonnyLean.GraphTheory.Components の全 9 宣言（生成宣言を含む）を監査。主要名 JonnyLean.GraphTheory.component_equivalence は当該モジュールの theorem。ルートを含む全 61 モジュール・932 宣言が網羅され、ソース/コンパイル済み import グラフの一致を再確認した。"
+    },
+    {
+      "criterion": "audit",
+      "result": "pass",
+      "evidence": "隔離候補rootで tools.jonnylean.verify を共有監査キャッシュ付きで実行し、JL-052 は mechanical=pass・findings=[]。Lean 4.29.1、contracts/JL052.lean の warningAsError=true 検査と契約の全ローカル 1 宣言監査に合格。contract_JL052 は theorem、公理依存は なし、主要定理の依存は なし。全監査宣言に新規 axiom・sorryAx・Classical.choice・許可外依存なし。保存した inputs は候補 capture_inputs、verification_inputs は候補 capture_verification_inputs と完全一致。この候補の独立意味レビューであり、原本採用済みや人間承認とは扱わない。"
+    }
+  ],
+  "inputs": {
+    ".github/workflows/ci.yml": "09f950ebfa583b254cc3064bcb764cf48f844a5e9a737fe5a1b99816543afae5",
+    "JonnyLean/GraphTheory/Append.lean": "4f7911edf81f604962b608237662e4fe0229b3dd03d714f22bcae9bb7fd3d295",
+    "JonnyLean/GraphTheory/Basic.lean": "547dbc31f2e24c32c109c30b743980cacd2d675d16989cc994c7014da645278c",
+    "JonnyLean/GraphTheory/Components.lean": "5225cdacbb4722e91d97dce76c24d48a401eddd967b4a02bfa9703ad19da13cf",
+    "JonnyLean/GraphTheory/Morphism.lean": "b335401497ee1af2f2727c8f440673ff52246b0fcf8187531cc8ffc6eebffef2",
+    "JonnyLean/GraphTheory/Reachability.lean": "4c272ab3cad6b7304bac014d8c373ede4d9e37c1ef87699745ca963fb61f28ea",
+    "JonnyLean/GraphTheory/Reverse.lean": "d232c135f8b3bc84a4687d7f9d2996c6c390b5c4ea593e902f3417e4570d2e77",
+    "JonnyLean/GraphTheory/Walk.lean": "7378fd6cac3974034e8d293061408e34b94f3f10ccf32c23beea59b85a3c3fa6",
+    "contracts/JL052.lean": "43e799b56ce60811bbe379cd6584e2a55387903a83ec5a856cd0653bc8dfca9a",
+    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
+    "lakefile.toml": "7a6078c6d00c9d12f06199fb53ebffd9d41c1cb361467010fbfc1d7f3d9306d9",
+    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
+    "specs/JL-046.md": "0fe0243b1ebc88be01e8f0460dc9a4990a81bcff31aa70652f6265a23cee4fb5",
+    "specs/JL-047.md": "d6d6ee005f3240a57a2225f95d226226c64e83cfd07b1192cb997edce92b2338",
+    "specs/JL-048.md": "0832641997abe83c3d279531d20c8ca4e4db7f2b1f5f6b83684b31662d943bd0",
+    "specs/JL-049.md": "8e06f7f33b80ca11af05dfa7fb2aacebfd90119be4026c6b19270f081eb049ce",
+    "specs/JL-050.md": "cdaefba2cefbe976623e9aed257069560cdc97b5c50e17b2c5c0d0a134da3630",
+    "specs/JL-051.md": "0991edf152599edaf039a4f746025d08dde72160f6b69966917f1e15f005a352",
+    "specs/JL-052.md": "58ca0dc2d17cc47fbc05edf748e4e9849fea931cf37d4ea761eccdfd5dceab31",
+    "tests/__init__.py": "0de4bc12a3f83b2ad1089fdc469aa03124e37a4deae5c4e783c8ae11b28f9536",
+    "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
+    "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
+    "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
+    "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
+    "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
+    "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
+    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
+    "tools/catalog.py": "6eba2d30c2226a167d3ec394a4e91d3ac65217b90da4ab61be619134e5e676e1",
+    "tools/jonnylean.py": "027db003dfaf59405b14d564fd16a268920932e7864506df3960b640a68a8350",
+    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
+    "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
+    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
+    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
+    "worker/cli.py": "0205a4943c7f854970a2b8f82a728f6a1f82bb3dd81edfa9f62b106f4fe3ce07",
+    "worker/engine.py": "4c1cea218a6fb7825eb11b5cf8e980640e3a08421545c4c14ade70069f72c3e9",
+    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
+    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
+    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6",
+    "@task-context": "42be13af85c975b370392ab3d52d80804d79ee82cca69d79494095df896bce44"
+  },
+  "human_approval": "not_recorded"
+}

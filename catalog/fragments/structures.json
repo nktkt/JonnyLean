@@ -1,0 +1,425 @@
+[
+  {
+    "id": "JL-026",
+    "title": "述語の束と分配法則",
+    "domain": "logic",
+    "description": "共通部分は和集合へ分配される。包含関係の上下限性、補集合の反変性、和集合に対するド・モルガン則も構成的に示す。",
+    "tags": [
+      "predicates",
+      "lattice",
+      "constructive"
+    ],
+    "spec": "specs/JL-026.md",
+    "module": "JonnyLean.Logic.Predicates",
+    "declaration": "JonnyLean.Predicate.meet_join_distrib",
+    "contract": "contracts/JL026.lean",
+    "review": "reviews/JL-026.json",
+    "editable": [
+      "JonnyLean/Logic/Predicates.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-027",
+    "title": "像と逆像の随伴関係",
+    "domain": "logic",
+    "description": "像が目標述語に含まれることと、元の述語が逆像に含まれることの同値を示す。像の単調性、和集合保存、合成則を含む。",
+    "tags": [
+      "image",
+      "preimage",
+      "adjunction"
+    ],
+    "spec": "specs/JL-027.md",
+    "module": "JonnyLean.Logic.Images",
+    "declaration": "JonnyLean.Predicate.image_preimage_adjunction",
+    "contract": "contracts/JL027.lean",
+    "review": "reviews/JL-027.json",
+    "editable": [
+      "JonnyLean/Logic/Images.lean"
+    ],
+    "depends_on": [
+      "JL-026"
+    ]
+  },
+  {
+    "id": "JL-028",
+    "title": "単射写像の像と共通部分",
+    "domain": "logic",
+    "description": "単射写像は述語の共通部分を像へ移すとき等しさを保つ。逆像による復元と、像が包含を反映することも示す。",
+    "tags": [
+      "injective",
+      "image",
+      "intersection"
+    ],
+    "spec": "specs/JL-028.md",
+    "module": "JonnyLean.Logic.InjectiveImages",
+    "declaration": "JonnyLean.Predicate.image_meet_of_injective",
+    "contract": "contracts/JL028.lean",
+    "review": "reviews/JL-028.json",
+    "editable": [
+      "JonnyLean/Logic/InjectiveImages.lean"
+    ],
+    "depends_on": [
+      "JL-027"
+    ]
+  },
+  {
+    "id": "JL-029",
+    "title": "写像の合成と全単射",
+    "domain": "functions",
+    "description": "全単射の合成は全単射である。単射・全射の合成を個別に示し、合成から得られる片側の性質と全射による右消去も提供する。",
+    "tags": [
+      "composition",
+      "injective",
+      "surjective"
+    ],
+    "spec": "specs/JL-029.md",
+    "module": "JonnyLean.Functions.Composition",
+    "declaration": "JonnyLean.Functions.bijective_comp",
+    "contract": "contracts/JL029.lean",
+    "review": "reviews/JL-029.json",
+    "editable": [
+      "JonnyLean/Functions/Composition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-030",
+    "title": "左右の逆写像の一意性",
+    "domain": "functions",
+    "description": "同じ写像の左逆と右逆は各点で一致する。左逆からの単射性、右逆からの全射性、逆写像の合成を示す。",
+    "tags": [
+      "inverse",
+      "uniqueness",
+      "constructive"
+    ],
+    "spec": "specs/JL-030.md",
+    "module": "JonnyLean.Functions.Inverses",
+    "declaration": "JonnyLean.Functions.inverses_agree",
+    "contract": "contracts/JL030.lean",
+    "review": "reviews/JL-030.json",
+    "editable": [
+      "JonnyLean/Functions/Inverses.lean"
+    ],
+    "depends_on": [
+      "JL-029"
+    ]
+  },
+  {
+    "id": "JL-031",
+    "title": "レトラクションと冪等写像",
+    "domain": "functions",
+    "description": "可換な二つの冪等写像の合成は冪等である。レトラクションからの冪等性、固定点と像の同値、単射または全射な冪等写像の恒等性も示す。",
+    "tags": [
+      "idempotent",
+      "retraction",
+      "fixed-point"
+    ],
+    "spec": "specs/JL-031.md",
+    "module": "JonnyLean.Functions.Retractions",
+    "declaration": "JonnyLean.Functions.commuting_idempotents",
+    "contract": "contracts/JL031.lean",
+    "review": "reviews/JL-031.json",
+    "editable": [
+      "JonnyLean/Functions/Retractions.lean"
+    ],
+    "depends_on": [
+      "JL-030"
+    ]
+  },
+  {
+    "id": "JL-032",
+    "title": "反射推移閉包の最小性",
+    "domain": "relations",
+    "description": "辺を含む任意の反射的・推移的関係は、その辺の有限到達関係も含む。経路の連結、単調性、閉包の冪等性を示す。",
+    "tags": [
+      "closure",
+      "reachability",
+      "induction"
+    ],
+    "spec": "specs/JL-032.md",
+    "module": "JonnyLean.Relations.Closure",
+    "declaration": "JonnyLean.Relations.reach_least",
+    "contract": "contracts/JL032.lean",
+    "review": "reviews/JL-032.json",
+    "editable": [
+      "JonnyLean/Relations/Closure.lean"
+    ],
+    "depends_on": [
+      "JL-033"
+    ]
+  },
+  {
+    "id": "JL-033",
+    "title": "二項関係の合成代数",
+    "domain": "relations",
+    "description": "型をまたぐ二項関係の合成は結合的である。逆関係は合成の順序を反転し、包含は合成に関して単調になる。等号関係が左右の単位元になる。",
+    "tags": [
+      "relation",
+      "composition",
+      "associativity"
+    ],
+    "spec": "specs/JL-033.md",
+    "module": "JonnyLean.Relations.Composition",
+    "declaration": "JonnyLean.Relations.compose_assoc",
+    "contract": "contracts/JL033.lean",
+    "review": "reviews/JL-033.json",
+    "editable": [
+      "JonnyLean/Relations/Composition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-034",
+    "title": "核関係と明示的切断による因子分解",
+    "domain": "relations",
+    "description": "同じ f の値を持つ点で g が一定であり、f の切断 s が与えられれば g は g∘s を通して因子分解する。核関係の同値関係性と単射後合成による保存、一意性を示す。",
+    "tags": [
+      "kernel",
+      "equivalence",
+      "factorization"
+    ],
+    "spec": "specs/JL-034.md",
+    "module": "JonnyLean.Relations.Kernels",
+    "declaration": "JonnyLean.Relations.factor_with_section",
+    "contract": "contracts/JL034.lean",
+    "review": "reviews/JL-034.json",
+    "editable": [
+      "JonnyLean/Relations/Kernels.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-035",
+    "title": "到達関係による不変条件の保存",
+    "domain": "relations",
+    "description": "各遷移が保存する述語は有限回の遷移でも保存される。写像による経路輸送、複数辺によるシミュレーション、経路反転、到達不能性も示す。",
+    "tags": [
+      "invariant",
+      "simulation",
+      "reachability"
+    ],
+    "spec": "specs/JL-035.md",
+    "module": "JonnyLean.Relations.Invariants",
+    "declaration": "JonnyLean.Relations.reach_preserves",
+    "contract": "contracts/JL035.lean",
+    "review": "reviews/JL-035.json",
+    "editable": [
+      "JonnyLean/Relations/Invariants.lean"
+    ],
+    "depends_on": [
+      "JL-032"
+    ]
+  },
+  {
+    "id": "JL-036",
+    "title": "安定分割の保存性と分離",
+    "domain": "collections",
+    "description": "一回の再帰的走査で得られる受理側・拒否側の列を連結すると元の列の順列になる。両側は相補的フィルタに一致し、長さの和が保存され、共通要素を持たない。",
+    "tags": [
+      "partition",
+      "permutation",
+      "stable"
+    ],
+    "spec": "specs/JL-036.md",
+    "module": "JonnyLean.Collections.Partition",
+    "declaration": "JonnyLean.Collections.partition_perm",
+    "contract": "contracts/JL036.lean",
+    "review": "reviews/JL-036.json",
+    "editable": [
+      "JonnyLean/Collections/Partition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-037",
+    "title": "末尾再帰の反転と蓄積変数",
+    "domain": "collections",
+    "description": "蓄積変数を持つ末尾再帰の反転は、入力の反転と元の蓄積列の連結に等しい。入力連結の処理則、長さ保存、map との交換、反転の対合性も示す。",
+    "tags": [
+      "tail-recursion",
+      "accumulator",
+      "reverse"
+    ],
+    "spec": "specs/JL-037.md",
+    "module": "JonnyLean.Collections.ReverseAccumulator",
+    "declaration": "JonnyLean.Collections.reverseInto_spec",
+    "contract": "contracts/JL037.lean",
+    "review": "reviews/JL-037.json",
+    "editable": [
+      "JonnyLean/Collections/ReverseAccumulator.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-038",
+    "title": "有限集合の共通部分と分配則",
+    "domain": "finite-sets",
+    "description": "重複のない列で表現した有限集合について共通部分を構成し、和集合への分配法則を外延的同値として示す。包含の最大下界性、可換性、単調性を含む。",
+    "tags": [
+      "finite-set",
+      "intersection",
+      "distributivity"
+    ],
+    "spec": "specs/JL-038.md",
+    "module": "JonnyLean.Collections.Intersection",
+    "declaration": "JonnyLean.FiniteSet.intersection_union_distrib",
+    "contract": "contracts/JL038.lean",
+    "review": "reviews/JL-038.json",
+    "editable": [
+      "JonnyLean/Collections/Intersection.lean"
+    ],
+    "depends_on": [
+      "JL-004"
+    ]
+  },
+  {
+    "id": "JL-039",
+    "title": "有限集合の差による濃度分解",
+    "domain": "finite-sets",
+    "description": "任意の有限集合 A,B に対して、A∩B と A\\B の濃度の和は A の濃度に等しい。互いに素な被覆、差と和集合のド・モルガン型の関係も示す。",
+    "tags": [
+      "finite-set",
+      "difference",
+      "cardinality"
+    ],
+    "spec": "specs/JL-039.md",
+    "module": "JonnyLean.Collections.Difference",
+    "declaration": "JonnyLean.FiniteSet.card_intersection_add_difference",
+    "contract": "contracts/JL039.lean",
+    "review": "reviews/JL-039.json",
+    "editable": [
+      "JonnyLean/Collections/Difference.lean"
+    ],
+    "depends_on": [
+      "JL-038",
+      "JL-004"
+    ]
+  },
+  {
+    "id": "JL-040",
+    "title": "有限集合の単射像と包含反映",
+    "domain": "finite-sets",
+    "description": "単射写像で移した二つの有限集合の包含は、元の有限集合の包含と同値になる。像の所属、濃度保存、共通部分保存も示す。",
+    "tags": [
+      "finite-set",
+      "injective",
+      "image"
+    ],
+    "spec": "specs/JL-040.md",
+    "module": "JonnyLean.Collections.InjectiveImage",
+    "declaration": "JonnyLean.FiniteSet.mapInjective_reflects_subset",
+    "contract": "contracts/JL040.lean",
+    "review": "reviews/JL-040.json",
+    "editable": [
+      "JonnyLean/Collections/InjectiveImage.lean"
+    ],
+    "depends_on": [
+      "JL-038"
+    ]
+  },
+  {
+    "id": "JL-041",
+    "title": "挿入ソートの順列保存",
+    "domain": "algorithms",
+    "description": "任意の判定可能な比較関係を用いた挿入ソートは、入力列の順列を返す。従って要素と重複数、列の長さを保存する。",
+    "tags": [
+      "sorting",
+      "permutation",
+      "algorithm"
+    ],
+    "spec": "specs/JL-041.md",
+    "module": "JonnyLean.Algorithms.InsertionSort",
+    "declaration": "JonnyLean.Algorithms.insertionSort_perm",
+    "contract": "contracts/JL041.lean",
+    "review": "reviews/JL-041.json",
+    "editable": [
+      "JonnyLean/Algorithms/InsertionSort.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-042",
+    "title": "挿入ソートの整列性と冪等性",
+    "domain": "algorithms",
+    "description": "全域的・推移的な判定可能関係に対する挿入ソートは Pairwise 整列列を返す。整列済み入力を変えず、二度ソートしても結果は変わらない。",
+    "tags": [
+      "sorting",
+      "correctness",
+      "idempotence"
+    ],
+    "spec": "specs/JL-042.md",
+    "module": "JonnyLean.Algorithms.SortCorrectness",
+    "declaration": "JonnyLean.Algorithms.insertionSort_sorted",
+    "contract": "contracts/JL042.lean",
+    "review": "reviews/JL-042.json",
+    "editable": [
+      "JonnyLean/Algorithms/SortCorrectness.lean"
+    ],
+    "depends_on": [
+      "JL-041"
+    ]
+  },
+  {
+    "id": "JL-043",
+    "title": "状態付き走査の不変条件",
+    "domain": "algorithms",
+    "description": "各一歩が状態述語を保存し出力述語を満たすなら、列全体の状態付き走査も最終状態の述語と全出力の述語を満たす。長さ、最終 fold 状態、連結則も示す。",
+    "tags": [
+      "traversal",
+      "state",
+      "invariant"
+    ],
+    "spec": "specs/JL-043.md",
+    "module": "JonnyLean.Algorithms.StateTraversal",
+    "declaration": "JonnyLean.Algorithms.mapState_invariant",
+    "contract": "contracts/JL043.lean",
+    "review": "reviews/JL-043.json",
+    "editable": [
+      "JonnyLean/Algorithms/StateTraversal.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-044",
+    "title": "重複除去と有限集合の構成",
+    "domain": "algorithms",
+    "description": "重複除去の結果は Nodup であり、元の列と同じ要素を持つ。長さは増えず、重複なしの列を変えず、冪等である。結果から FiniteSet を構成する。",
+    "tags": [
+      "deduplication",
+      "nodup",
+      "finite-set"
+    ],
+    "spec": "specs/JL-044.md",
+    "module": "JonnyLean.Algorithms.Deduplicate",
+    "declaration": "JonnyLean.Algorithms.deduplicate_nodup",
+    "contract": "contracts/JL044.lean",
+    "review": "reviews/JL-044.json",
+    "editable": [
+      "JonnyLean/Algorithms/Deduplicate.lean"
+    ],
+    "depends_on": [
+      "JL-004"
+    ]
+  },
+  {
+    "id": "JL-045",
+    "title": "最初の一致の探索証明書",
+    "domain": "algorithms",
+    "description": "最初の一致の直前で列を分け、前置列と残りの再結合が元の列であること、前置列の全要素が拒否されること、残りが非空なら先頭が受理されることを同時に示す。残りが空である条件も完全に特徴付ける。",
+    "tags": [
+      "search",
+      "first-match",
+      "certificate"
+    ],
+    "spec": "specs/JL-045.md",
+    "module": "JonnyLean.Algorithms.FirstMatch",
+    "declaration": "JonnyLean.Algorithms.firstMatchSplit_certificate",
+    "contract": "contracts/JL045.lean",
+    "review": "reviews/JL-045.json",
+    "editable": [
+      "JonnyLean/Algorithms/FirstMatch.lean"
+    ],
+    "depends_on": []
+  }
+]

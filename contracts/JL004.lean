@@ -1,4 +1,4 @@
-import JonnyLean
+import JonnyLean.FiniteSet.Basic
 
 namespace JL004Contract
 open JonnyLean
