@@ -1,9 +1,10 @@
 # JonnyLean
 
 人間が数学の目標を決め、AIが証明を作成し、Leanと別のAIで検証する数学ライブラリです。
-初等整数論・組合せ論を起点とする **180課題・148数学モジュール・838個の明示的な名前付き定理** と、継続作業のためのローカルワーカーを備えています。
+初等整数論・組合せ論を起点とする **300課題・178数学モジュール・1121個の明示的な名前付き定理** と、継続作業のためのローカルワーカーを備えています。
 数論、代数、論理、写像、関係、集合、アルゴリズム、グラフ、数え上げ、有限確率を扱います。
-v3では多項式の形式微分、二分木と永続データ構造、式の最適化とスタック機械コンパイラ、形式言語・オートマトン・有限測度まで拡張しました。
+多項式の形式微分、二分木と永続データ構造、式の最適化とスタック機械コンパイラ、形式言語・オートマトン・有限測度を扱います。
+v4では自然数上の有限線形代数、正規表現・パーサー・符号化、命令型言語の操作的意味論とHoare論理、検証記録付き配布アーカイブを追加しました。
 以前の別プロジェクトやTau Cetiのコード・監査ツールは流用していません。
 
 ## すぐに検証する
@@ -41,6 +42,9 @@ HTMLはブラウザでそのまま開ける、外部通信のないレポート�
 | JL-121〜140 | 式の評価・置換・最適化、スタック機械、コンパイル意味保存、静的深さ検査、逆コンパイル |
 | JL-141〜160 | 構成的な言語代数、Kleene閉包、機械の走行・積・状態写像・不変量・有限carrier |
 | JL-161〜180 | 積・部分列・順列・shuffleの計数、有限測度の押し出し・期待値分子・核の合成 |
+| JL-181〜220 | 有限和・ベクトル・行列、積の結合則、転置、対角・ブロック行列、trace、行列冪・外積 |
+| JL-221〜260 | 正規表現の微分と照合の正しさ、パーサー合成、接頭辞解析、符号化と復号の往復 |
+| JL-261〜300 | 状態・式・命令、big-step意味論、燃料付き実行器、Hoare論理、不変条件、検証済みプログラム |
 
 ```sh
 python3 tools/jonnylean.py catalog list
@@ -57,6 +61,7 @@ python3 tools/jonnylean.py run all --changed HEAD
 ```
 
 [全課題一覧](roadmaps/elementary.md)から仕様・Lean証明・契約に移動できます。
+新分野の型・定理・実行例は [v4の数学を使う](docs/mathematics.md) を参照してください。
 `catalog/fragments/` を原本として、`catalog sync` がレジストリと集約importを再生成します。
 `catalog check` は登録との不一致を検出します。並列検証・CI分割・実際の定理型の検索は [大規模運用ガイド](docs/platform.md) を参照してください。課題の追加は [CONTRIBUTING](CONTRIBUTING.md) を参照。
 `--changed` はGit参照からの変更と未追跡ファイルを含み、影響する課題を選びます。
@@ -149,6 +154,9 @@ python3 tools/jonnylean.py run all --jobs 4    # 機械検査＋保存されたA
 python3 tools/jonnylean.py review JL-003    # 1課題の再検証
 python3 tools/jonnylean.py fingerprint all # レビュー対象の入力ハッシュ
 python3 tools/jonnylean.py dashboard       # 保存結果からHTMLを更新
+python3 tools/jonnylean.py release status  # 全課題の配布準備状態
+python3 tools/jonnylean.py release build artifacts/JonnyLean-v4.zip
+python3 tools/jonnylean.py release check artifacts/JonnyLean-v4.zip
 ```
 
 `run`や`review`はAIを新規に呼び出しません。新たな独立AIレビューには `work` を使います。

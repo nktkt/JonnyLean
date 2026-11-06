@@ -1,4 +1,72 @@
-# v3.0 検証記録
+# v4.0 検証記録
+
+検証日: 2026-11-07（Asia/Tokyo）。macOS、Python 3.14.4、Lean 4.29.1。
+
+## 実装と検査範囲
+
+- **300課題、178数学モジュール、1,121個の明示的な名前付き定理**。日本語仕様・独立契約・独立AIレビューも各300件。
+- 集約rootを含む179モジュール、Leanが生成した補助宣言を含む3,938宣言を監査。内訳は定理2,555個、定義1,252個、帰納型29個、構成子73個、再帰子29個。
+- 29分野、2,331依存辺、12層の依存計画。複数の主定理を一つの自然な実装モジュールで共有する構成。
+- JL-181〜220: 自然数上の有限和・ベクトル・矩形行列・行列積・作用・対角行列・trace・ブロック・行列冪・外積による射影。
+- JL-221〜260: 正規表現の意味と微分照合器、パーサー合成、固定回数・燃料付き反復、接頭辞符号化、自然数・リスト・木の復号と往復。
+- JL-261〜300: 命令型言語の状態・式・操作的意味論・燃料付き実行器、Hoare部分正当性、停止する例題、再帰的最適化の意味保存。
+
+`python3 -u tools/jonnylean.py verify all --jobs 4` は **300件すべてPASS**、終了コード0、182.431秒。
+全数学ソース・全原契約のstrict検査、コンパイル済みimportとの照合、私有・未使用・自動生成宣言と契約内宣言の公理監査を実施した。
+許可する公理依存は `propext` と `Quot.sound` のみ。禁止公理、`sorryAx`、独自公理、`Classical.choice` への依存は0件。
+
+作成担当を入れ替え、旧180課題も含む全300課題の仕様・実装・契約を再読した。
+最終レビューは読んだファイルのハッシュ、現在の全体検証と課題別入力、対象定理、契約監査を照合して保存している。
+機械検証後に保存されたレビューは `check_review` で現在性と7基準を確認し、同じ検証済み入力のレポートに反映した。
+これは新しいLeanコンパイルではなく、完了した機械検証に独立レビューを結び付ける段階である。
+
+## 修正して解消した指摘
+
+- 基礎パーサーの契約が上位モジュールをimportし、課題依存に循環を作っていた。契約を基礎モジュールだけで記述するよう修正。
+- 燃料単調性の不可能分岐と単進数復号の連言目標で、自動証明が `Classical.choice` を導入していた。Falseまたは各連言成分を先に構成して解消。
+- JL-258の「ヘッダーだけなら失敗する」という説明は、空符号を許す一般Codecには成立しない。実際の境界契約で使う `unaryCodec` に説明を限定。
+- 配布ZIP検査が全体digestと内容を別々に開いており、間のファイル差し替えで対象がずれる問題を独立レビューで再現。同一ファイル記述子での検査と終了時digest照合に修正。
+
+仕様修正中の最初の検証バッチは入力変更を検出して不合格になった。上記の182.431秒は、全入力を固定した後の成功バッチの値である。
+
+## テストと再現
+
+重複しない2スイートで **合計93件合格**。
+
+```sh
+python3 -W error::ResourceWarning -m unittest tests.test_release_v4 -v
+# 14件合格、19.742秒
+python3 -W error::ResourceWarning -m unittest tests.test_pipeline tests.test_worker tests.test_reporting_v2 tests.test_catalog tests.test_publish tests.test_platform_v3 -v
+# 79件合格、192.400秒
+```
+
+配布テストは実Leanで検証した隔離fixtureを使い、同一入力からのZIPのバイト一致、展開したソースの再検証、古い仕様・レビューの拒否、
+不足・不正レポート、変更されたZIP内容、重複・不正パス、既存出力・ロックの保護、収集中の変更、検査中のパス差し替えと同一ファイルの書き換えを検査した。
+独立担当も修正前12件と修正後の競合回帰2件を再実行し、修正をレビューした。
+
+[数学利用ガイド](mathematics.md) のLeanコード3例はstrictコンパイルし、正規表現の実行例の `true` / `false` も確認した。
+配布する実プロジェクトのZIPについても、バイト再現性と整合性を検査し、展開した `source/` で `run all --jobs 4` を実行する。
+その結果・対象ZIPのSHA-256・課題数は `artifacts/release-replay.json`、全実行ログは `artifacts/release-replay-output.txt` に保存する。
+
+このv4検証では、外部Codex CLIワーカープロバイダーの追加呼出、Linux上のCI実行、GitHubへのpush・PR公開は行っていない。
+AIレビューは本人認証された署名や人間の承認ではなく、人間の承認は未記録。
+
+## ローカル成果物
+
+- `artifacts/index.html`: 全300課題の現在の検証・レビュー状態。
+- `artifacts/declarations.json`, `linear-algebra-api.md`: 機械監査された実際のLeanの型。
+- `artifacts/catalog.json`, `catalog-stats.json`, `dependencies.mmd`, `plan.json`: 課題・統計・依存計画。
+- `artifacts/verification-output.txt`, `verification-batch-v4.json`: 全300課題の機械検証ログ。
+- `artifacts/test-release-v4.txt`, `test-regressions-v4.txt`, `test-output.txt`: 93件のテストログ。
+- `artifacts/release-review-v4.md`: 配布機能への独立レビューと修正確認。
+- `artifacts/JonnyLean-v4.zip`: ソースと重複を除いた監査証跡の再現可能な配布アーカイブ。
+- `reviews/JL-001.json`〜`JL-300.json`: 入力に結び付いた独立AIレビュー。
+
+以下は過去の版の検証時点の記録として保存する。
+
+---
+
+# v3.0 検証記録（保存）
 
 検証日: 2026-11-07（Asia/Tokyo）。macOS、Python 3.14.4、Lean 4.29.1。
 

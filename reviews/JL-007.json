@@ -3,10 +3,10 @@
   "task": "JL-007",
   "reviewer": {
     "kind": "ai",
-    "name": "Codex independent reviewer /root/v3_arithmetic (JL-001–020 and JL-101–140; not the author)",
+    "name": "Codex independent reviewer /root/v4_linear (JL-001–060 and JL-261–300; not the author)",
     "authenticated": false,
     "evidence_kind": "AI self-report",
-    "independent_scope": "Authored JL-061–100 only. Independently read the specifications, contracts, all related mathematical implementations and independent semantic models for JL-001–020 and JL-101–140; checked final machine audits and both input fingerprints."
+    "independent_scope": "Authored JL-181–220 only. Independently read source, Japanese specifications and contracts for JL-001–060 and JL-261–300, reviewed the shared v4 release implementation, and checked final machine evidence and both input fingerprints."
   },
   "decision": "approve",
   "findings": [],
@@ -34,27 +34,27 @@
     {
       "criterion": "proof",
       "result": "pass",
-      "evidence": "逆向きは偶数因子の積保存。順向きは偶奇分解し、奇数なら平方も奇数となって排他性に矛盾。"
+      "evidence": "逆向きは偶数因子の積保存。順向きは偶奇分解し、奇数なら平方も奇数となって排他性に矛盾。 Re-read independently for v4: A natural square is even iff its base is even. Forward proof excludes the odd-product case; witness elimination stays in Prop and requires no chosen witness."
     },
     {
       "criterion": "coverage",
       "result": "pass",
-      "evidence": "仕様・契約と実装/独立モデルを含む数学依存を精読した。最終監査はrootを含む149モジュール・2599宣言を記録し、実ファイル集合とcompiled import graphが一致する。JonnyLean.even_square_iffは指定JonnyLean.NumberTheory.ParityProductsのtheoremとして一意に存在し、全149ソースのwarnings-as-errors検査ログを確認した。"
+      "evidence": "Whole-library audit covers all 179 physical modules including JonnyLean root and 3938 declarations; independently compared the complete module set and compiled import graph to source. JonnyLean.even_square_iff is uniquely audited as a theorem in JonnyLean.NumberTheory.ParityProducts. Read the assigned mathematical source, specification and contract; exact read-version hashes remained unchanged."
     },
     {
       "criterion": "audit",
       "result": "pass",
-      "evidence": "artifacts/JL-007/report.jsonのstatus/mechanical=pass、findings=[]、原契約の-DwarningAsError=true成功を確認。全数学2599宣言と当該契約内6ローカル宣言（生成/privateを含む）の公理はpropext/Quot.soundの範囲内で、独自axiomはない。主定理の公理依存はQuot.sound, propext。現在のcapture_inputsおよびcapture_verification_inputsを両方再計算して機械記録と完全一致を確認した。"
+      "evidence": "Final artifacts/JL-007/report.json has status/mechanical=pass, findings=[], and successful original contract compilation with -DwarningAsError=true. Checked all 3938 library and 6 local contract declarations (including generated/private declarations): no custom axioms or dependencies outside propext/Quot.sound. Target axioms: ['Quot.sound', 'propext']. Recomputed both capture_inputs and capture_verification_inputs and matched the recorded maps. Independently reviewed v4 release infrastructure and its corrected descriptor race; focused 12+2 tests passed."
     }
   ],
   "inputs": {
-    ".github/workflows/ci.yml": "6d2e20d970d80eecb6266d87800440e1a5d13f0ab7b255948e106315f877afbe",
+    ".github/workflows/ci.yml": "e249d42dff37964e2a894ac37f318ed427eac478d4e827b1c3642f808481f502",
     "JonnyLean/NumberTheory/OddSums.lean": "2754011d3cd55d100acf92dfa31a911749b9aef0480b56c051158635b8d88899",
     "JonnyLean/NumberTheory/Parity.lean": "df83c3f42d71696891de2049289f9c50f1394600fb0586c1a814ec916f9d2694",
     "JonnyLean/NumberTheory/ParityProducts.lean": "2220c98c6dd7b860101db2981124de92acb263920bda143c6db598cb6832bf3c",
     "contracts/JL007.lean": "ef93ae28dfad047073b0852a6e38891e1f252e7886884258ac8c9e22daa9c53d",
     "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
-    "lakefile.toml": "c84968d52ce7bc3cd55eaec859d435a4e6608620a20eecf359dfa65e405e2d39",
+    "lakefile.toml": "cc9dbe62bf6a6426b4e79f85a3584e010f28c285c234fc842d069c6b2aef393c",
     "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
     "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
     "specs/JL-001.md": "f96913b34ae74392d4f92c5d43992c18633da81a433402254ff04bc21cedb1c9",
@@ -66,16 +66,18 @@
     "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
     "tests/test_platform_v3.py": "dcc9fd38c0ceb99b1f97ee0a2839191a1b4596833fb9f5c64213d50f0a8bb2c6",
     "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_release_v4.py": "51b58cfa0ea6f6a37733e443d976599050899d5cd4d64c4ed2954ddaa57a157a",
     "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
     "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
     "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
     "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
     "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
     "tools/catalog.py": "8a7cbe66c90ca7d372e43f0e7b63ee252121de4f92a3213642829e89a059caaf",
-    "tools/jonnylean.py": "68852e62cd00e8d7e8e7ae28565bddfaf3f5ba003537bf6dc28d518addd045a4",
+    "tools/jonnylean.py": "1652157d128deda874091a8f79aa7059c23b5c08e19fafa231628c4a87e30735",
     "tools/library.py": "1789e5705078300b011055df8da51fa4cdd1029e47cf5f6d38ab533839cb6494",
     "tools/planning.py": "c014517fdcc36e48ce4688fd4c7203bbda1aba3a0a7e823a28818a3ab283ea2b",
     "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/release.py": "16d34185a7c6cd24574aa46b32f00b8afd16a2a5db87a220df10db66465f5e32",
     "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
     "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
     "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
@@ -88,5 +90,6 @@
     "@task-context": "5e2ca3d11aa597de8e7d0e8aeb9ab8a2087721e455f62350c6e7b5665e251cce"
   },
   "human_approval": "not_recorded",
-  "reviewed_at": "2026-11-06T14:57:47.112387+00:00"
+  "reviewed_at": "2026-11-06T15:32:54.479622+00:00",
+  "source_review_note": "A natural square is even iff its base is even. Forward proof excludes the odd-product case; witness elimination stays in Prop and requires no chosen witness."
 }

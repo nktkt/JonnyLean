@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "task": "JL-246",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex independent reviewer /root/v4_semantics (JL-121–180 and JL-221–260; not the author)",
+    "authenticated": false,
+    "evidence_kind": "AI self-report",
+    "independent_scope": "Authored JL-261–300 only in v4. Independently read all 100 assigned specifications, explicit contracts, relevant implementations and existing independent semantic models; checked final global and contract audits and both current fingerprints."
+  },
+  "decision": "approve",
+  "findings": [],
+  "checks": [
+    {
+      "criterion": "definition",
+      "result": "pass",
+      "evidence": "Parser α βはList α→Option(β×List α)。Safeは成功時の接頭辞と末尾への入力分解、choiceは左優先、Chainは独立した固定回数の連続成功関係、manyは明示的fuel付きである。 JonnyLean.Parsing.Primitivesの対象実装、仕様specs/JL-246.md、契約の定義・境界確認（contract_JL246_boundary, contract_JL246_definition）を相互に照合した。"
+    },
+    {
+      "criterion": "quantifiers",
+      "result": "pass",
+      "evidence": "独立に明示型を書いた契約contract_JL246の全称変数、存在証人、自然数0を含む対象域、必要な型クラスを日本語仕様と比較した。確認した契約型は次の通り。\n∀ {α : Type u_1} (input rest : List α), JonnyLean.Parsing.eof input = Option.some ((), rest) ↔ input = [] ∧ rest = []"
+    },
+    {
+      "criterion": "assumptions",
+      "result": "pass",
+      "evidence": "任意の文字型で等値判定は不要、空入力だけを受け付ける。 実装の主定理と独立契約の仮定を照合し、結論を前提へ含めたり対象域を狭めたりしていないことを確認した。"
+    },
+    {
+      "criterion": "conclusion",
+      "result": "pass",
+      "evidence": "eof成功は入力と末尾の両方が空であることと同値である。 JonnyLean.Parsing.eof_iffから明示型のcontract_JL246を導く契約を読み、仕様の方向・等式か同値か・残余や既存状態の扱いと対応することを確認した。"
+    },
+    {
+      "criterion": "proof",
+      "result": "pass",
+      "evidence": "eofのsome(Unit,rest)はinput=[]かつrest=[]と同値。空/非空の場合分けであり等値判定不要。非空一文字の失敗例を確認。 関連する実装、独立モデルがある場合のモデル、定義・境界契約を実際に読んだ独立レビューであり、機械検査成功だけからの承認ではない。"
+    },
+    {
+      "criterion": "coverage",
+      "result": "pass",
+      "evidence": "独立再実行したtools/Audit.leanと最終機械記録が完全一致する。rootを含む179モジュール・3938宣言、実ファイル集合、sourceとcompiledのimport graphを照合した。JonnyLean.Parsing.eof_iffはJonnyLean.Parsing.Primitivesのtheoremとして一意に存在する。全179ソースのwarnings-as-errors成功ログも確認した。"
+    },
+    {
+      "criterion": "audit",
+      "result": "pass",
+      "evidence": "artifacts/JL-246/report.jsonのstatus/mechanical=pass、findings=[]、原契約の-DwarningAsError=true成功と全3ローカル宣言（生成/privateを含む）の監査成功を確認。全数学3938宣言と当該契約に独自axiomやpropext/Quot.sound以外への依存はない。主定理の公理依存はpropext。現在のcapture_inputsとcapture_verification_inputsを再計算し両方が最終機械記録と一致した。"
+    }
+  ],
+  "inputs": {
+    ".github/workflows/ci.yml": "e249d42dff37964e2a894ac37f318ed427eac478d4e827b1c3642f808481f502",
+    "JonnyLean/Parsing/Core.lean": "3ce21f329d440f36e8dde05f6fa60f026ea95b3928061d651ae98ec29b4a3ae1",
+    "JonnyLean/Parsing/Primitives.lean": "d2c53b9d6d5f90f3a42d41fbc46ec8af6efa619d6a8670727f8de35c544bb1fc",
+    "contracts/JL246.lean": "903f51df6e934f02cdc40cadd338d82ba59779d17da05391b0d966046c99c75b",
+    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
+    "lakefile.toml": "cc9dbe62bf6a6426b4e79f85a3584e010f28c285c234fc842d069c6b2aef393c",
+    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
+    "specs/JL-233.md": "79f4a5ba8c0219a6cf2152fba8d542c60a02a1093661aa9054656d726a15c1d9",
+    "specs/JL-234.md": "1824736e86935fbb3239b50a2c6107bd7075736451f698ca96919cd4ed9362c7",
+    "specs/JL-235.md": "6bfde5bb25729edb650f6c3426529310c9bb6a655bf53388a8bdd5b7376ae59b",
+    "specs/JL-236.md": "507ae610211aba5d8a607b1fc5de74ecc2d1cb62434681806f04ee3485141350",
+    "specs/JL-237.md": "c14dbd5992d379f55a5fdd6df3a953102d1be7f9335cbe4473df4d006c52b538",
+    "specs/JL-238.md": "def0da0fd87a3c56275f66427e75cf511dc0b36babc6d4b4a4e46b84b32d538e",
+    "specs/JL-239.md": "34133b9c228a2e381b0bc136d52fc5b087eb51c7d4d9486b3d334aeb0c758445",
+    "specs/JL-240.md": "58153217bd9c5dd2cf3db86dc6e792afdc2f08f573dff7820f17cdf854b3970b",
+    "specs/JL-245.md": "bf62acbea887fe7802f51756ca2f65c8f48f0d946e252522ff5e69f953bf6896",
+    "specs/JL-246.md": "668b3c64f26b0a7551cc1cb29d73f77a3dc537eca8217543d67af62f16d9e0ac",
+    "specs/JL-247.md": "654f8181adfa35e36d403d574d90f177a0898d91c776e8f6c0fa383757b8dd15",
+    "specs/JL-248.md": "fed44589931d9d4915513a2795d693487010f5c76e7e90a509ed1eb83aad7cd4",
+    "tests/__init__.py": "0de4bc12a3f83b2ad1089fdc469aa03124e37a4deae5c4e783c8ae11b28f9536",
+    "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
+    "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
+    "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_platform_v3.py": "dcc9fd38c0ceb99b1f97ee0a2839191a1b4596833fb9f5c64213d50f0a8bb2c6",
+    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_release_v4.py": "51b58cfa0ea6f6a37733e443d976599050899d5cd4d64c4ed2954ddaa57a157a",
+    "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
+    "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
+    "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
+    "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
+    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
+    "tools/catalog.py": "8a7cbe66c90ca7d372e43f0e7b63ee252121de4f92a3213642829e89a059caaf",
+    "tools/jonnylean.py": "1652157d128deda874091a8f79aa7059c23b5c08e19fafa231628c4a87e30735",
+    "tools/library.py": "1789e5705078300b011055df8da51fa4cdd1029e47cf5f6d38ab533839cb6494",
+    "tools/planning.py": "c014517fdcc36e48ce4688fd4c7203bbda1aba3a0a7e823a28818a3ab283ea2b",
+    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/release.py": "16d34185a7c6cd24574aa46b32f00b8afd16a2a5db87a220df10db66465f5e32",
+    "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
+    "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
+    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
+    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
+    "worker/cli.py": "0205a4943c7f854970a2b8f82a728f6a1f82bb3dd81edfa9f62b106f4fe3ce07",
+    "worker/engine.py": "4c1cea218a6fb7825eb11b5cf8e980640e3a08421545c4c14ade70069f72c3e9",
+    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
+    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
+    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6",
+    "@task-context": "31bbd111a86482342d6dc6ed30efbb81bff2b7c1f714a0d78b126a849ebdff92"
+  },
+  "human_approval": "not_recorded",
+  "reviewed_at": "2026-11-06T15:36:04.212172+00:00"
+}

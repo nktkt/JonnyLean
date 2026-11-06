@@ -73,3 +73,37 @@ python3 tools/jonnylean.py library export --module JonnyLean.Polynomials --forma
 共通の検査基盤を変えた場合は全課題のレビューが古くなります。
 ハッシュを書き換えて承認を維持するのではなく、担当以外のレビュアーが変更の意味を確認して新しい根拠を残します。
 仕様モデルを別のLeanモジュールに置く場合も、契約からimportし、ワーカーの `editable` に含めないことで保護します。
+
+## 検証記録付きの配布アーカイブ
+
+```sh
+python3 tools/jonnylean.py release status
+python3 tools/jonnylean.py run all --jobs 4
+python3 tools/jonnylean.py release build artifacts/JonnyLean-v4.zip
+python3 tools/jonnylean.py release check artifacts/JonnyLean-v4.zip
+# 別途受け取ったアーカイブ全体のSHA-256とも照合する場合
+python3 tools/jonnylean.py release check artifacts/JonnyLean-v4.zip --sha256 SHA256_HEX
+```
+
+`release status` は全課題の現在の機械検証・AIレビューとカタログ生成結果を読み、準備不足の課題と理由をJSONで返します。
+準備済みは終了コード0、準備不足は1、設定・実行エラーは2です。LeanやAIを新規に実行せず、ファイルを書き換えません。
+
+`release build` は全課題が現在の入力で合格している場合だけ、ソース・仕様・契約・レビュー・運用文書・CI設定をZIPにまとめます。
+`source/` は展開して `python3 tools/jonnylean.py run all --jobs 4` を実行できるプロジェクトです。
+固定版Leanのインストールは別途必要です。`.lake`、`.git`、`.jonnylean` とAI呼出履歴は含めません。
+
+`evidence/` には全ライブラリの宣言監査を1コピー、課題ごとの実際の型と契約監査、入力ハッシュを保存します。
+同じ依存範囲は内容のSHA-256で共有し、全体監査を課題数分複製しません。実行ログや経過時間は配布証跡に含めず、元の `artifacts/` に保持します。
+ファイル順・ZIP時刻・権限を固定するので、同じソースと証跡から同じPython/zlib環境で同じバイト列を作れます。
+プロジェクトロック、収集中の変更検査、既存出力を上書きしない原子的な保存を行います。
+プロジェクト内の出力先は `artifacts/` に限定し、シンボリックリンク経由のソースは拒否します。
+
+`release check` はファイル一覧・サイズ・SHA-256を照合します。展開・コード実行・Leanの再検証は行いません。
+全体digestとZIPの内容は同じファイル記述子で読み、検査後もdigestを照合します。
+検査中にパスの参照先が差し替わっても、最初に開いたファイルが検査対象です。
+重複名・相対パス逸脱・暗号化・リンク・対応上限を超えるZIPは拒否します。
+上限はファイル20,000個（manifestを除く）、1ファイル64 MiB、展開サイズ合計512 MiBです。
+内部manifestもアーカイブの一部なので、この検査だけでは作成者や数学的正しさを認証できません。
+`--sha256` は別経路で取得した全体digestとの一致を追加確認します。人間の承認や電子署名とは区別します。
+
+GitHub Actionsは全課題とテストが合格した後に同じアーカイブを作り、既存の検証成果物とともに保存します。

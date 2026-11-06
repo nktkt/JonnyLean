@@ -1,0 +1,802 @@
+[
+  {
+    "id": "JL-221",
+    "title": "正規表現の空語受理判定",
+    "domain": "regular-expressions",
+    "description": "空言語・空語・一文字・選択・連結・Kleene閉包からなる正規表現のnullable計算が、空語の言語意味と同値であることを示す。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "nullable_correct"
+    ],
+    "spec": "specs/JL-221.md",
+    "module": "JonnyLean.RegularExpressions.Syntax",
+    "declaration": "JonnyLean.RegularExpressions.nullable_correct",
+    "contract": "contracts/JL221.lean",
+    "review": "reviews/JL-221.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Syntax.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-222",
+    "title": "空言語除去を行う選択の意味保存",
+    "domain": "regular-expressions",
+    "description": "選択の左右に現れる空言語を除去するsmartAltについて、変換後の受理条件が元の二言語の論理和と一致する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "smartAlt_correct"
+    ],
+    "spec": "specs/JL-222.md",
+    "module": "JonnyLean.RegularExpressions.Smart",
+    "declaration": "JonnyLean.RegularExpressions.smartAlt_correct",
+    "contract": "contracts/JL222.lean",
+    "review": "reviews/JL-222.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Smart.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-223",
+    "title": "連結の空言語・空語簡約の意味保存",
+    "domain": "regular-expressions",
+    "description": "smartSeqは空言語との連結を空言語にし、空語との連結を相手へ簡約する。この処理が全体の連結言語を保存する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "smartSeq_correct"
+    ],
+    "spec": "specs/JL-223.md",
+    "module": "JonnyLean.RegularExpressions.Smart",
+    "declaration": "JonnyLean.RegularExpressions.smartSeq_correct",
+    "contract": "contracts/JL223.lean",
+    "review": "reviews/JL-223.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Smart.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-224",
+    "title": "閉包の簡約と冪等性",
+    "domain": "regular-expressions",
+    "description": "空言語・空語の閉包を空語へ、閉包の二重適用を一重へ簡約するsmartStarが言語を保存する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "smartStar_correct"
+    ],
+    "spec": "specs/JL-224.md",
+    "module": "JonnyLean.RegularExpressions.Smart",
+    "declaration": "JonnyLean.RegularExpressions.smartStar_correct",
+    "contract": "contracts/JL224.lean",
+    "review": "reviews/JL-224.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Smart.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-225",
+    "title": "Kleene閉包を含む正規表現微分の正しさ",
+    "domain": "regular-expressions",
+    "description": "一文字aに関するBrzozowski微分を計算し、微分後が語wを受理することと元の式がa::wを受理することの同値を示す。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "derivative_correct"
+    ],
+    "spec": "specs/JL-225.md",
+    "module": "JonnyLean.RegularExpressions.Derivative",
+    "declaration": "JonnyLean.RegularExpressions.derivative_correct",
+    "contract": "contracts/JL225.lean",
+    "review": "reviews/JL-225.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Derivative.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-226",
+    "title": "語全体による残余正規表現",
+    "domain": "regular-expressions",
+    "description": "入力語uの各文字で微分を繰り返すと、残余式がvを受理する条件は元の式がu++vを受理する条件になる。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "derivatives_correct"
+    ],
+    "spec": "specs/JL-226.md",
+    "module": "JonnyLean.RegularExpressions.Matcher",
+    "declaration": "JonnyLean.RegularExpressions.derivatives_correct",
+    "contract": "contracts/JL226.lean",
+    "review": "reviews/JL-226.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Matcher.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-227",
+    "title": "実行可能な正規表現照合器の完全性と健全性",
+    "domain": "regular-expressions",
+    "description": "全入力の微分後にnullableを呼ぶBoolean照合器が、正規表現の独立した言語意味と必要十分に一致する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "accepts_correct"
+    ],
+    "spec": "specs/JL-227.md",
+    "module": "JonnyLean.RegularExpressions.Matcher",
+    "declaration": "JonnyLean.RegularExpressions.accepts_correct",
+    "contract": "contracts/JL227.lean",
+    "review": "reviews/JL-227.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Matcher.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-228",
+    "title": "分割入力によるストリーミング照合",
+    "domain": "regular-expressions",
+    "description": "u++vを一括照合する結果と、uで残余式を計算してvを照合する結果がBoolean値そのものとして一致する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "accepts_append"
+    ],
+    "spec": "specs/JL-228.md",
+    "module": "JonnyLean.RegularExpressions.Matcher",
+    "declaration": "JonnyLean.RegularExpressions.accepts_append",
+    "contract": "contracts/JL228.lean",
+    "review": "reviews/JL-228.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Matcher.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-229",
+    "title": "言語同値な式の残余同値",
+    "domain": "regular-expressions",
+    "description": "元の正規表現二つが全語で同じ意味を持つなら、任意の共通入力を読んだ後の残余も全語で同値になる。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "derivatives_congr"
+    ],
+    "spec": "specs/JL-229.md",
+    "module": "JonnyLean.RegularExpressions.Matcher",
+    "declaration": "JonnyLean.RegularExpressions.derivatives_congr",
+    "contract": "contracts/JL229.lean",
+    "review": "reviews/JL-229.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Matcher.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-230",
+    "title": "正規表現反転の意味保存",
+    "domain": "regular-expressions",
+    "description": "連結順序を逆にし各部分式を再帰的に反転する変換が、入力語の反転と一致する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "reversed_correct"
+    ],
+    "spec": "specs/JL-230.md",
+    "module": "JonnyLean.RegularExpressions.Transformations",
+    "declaration": "JonnyLean.RegularExpressions.reversed_correct",
+    "contract": "contracts/JL230.lean",
+    "review": "reviews/JL-230.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Transformations.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-231",
+    "title": "固定語からの正規表現構築",
+    "domain": "regular-expressions",
+    "description": "語の各文字をatomとし連結するliteral構築器が、ちょうどその語だけを受理する。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "literal_correct"
+    ],
+    "spec": "specs/JL-231.md",
+    "module": "JonnyLean.RegularExpressions.Transformations",
+    "declaration": "JonnyLean.RegularExpressions.literal_correct",
+    "contract": "contracts/JL231.lean",
+    "review": "reviews/JL-231.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Transformations.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-232",
+    "title": "正規表現閉包の一段展開",
+    "domain": "regular-expressions",
+    "description": "閉包による受理は空語の場合か、基底言語の一語と閉包の一語を連結する場合のいずれかである。",
+    "tags": [
+      "regular-expressions",
+      "correctness",
+      "star_unfold"
+    ],
+    "spec": "specs/JL-232.md",
+    "module": "JonnyLean.RegularExpressions.Transformations",
+    "declaration": "JonnyLean.RegularExpressions.star_unfold",
+    "contract": "contracts/JL232.lean",
+    "review": "reviews/JL-232.json",
+    "editable": [
+      "JonnyLean/RegularExpressions/Transformations.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-233",
+    "title": "パーサー合成の未消費末尾保存",
+    "domain": "verified-parsers",
+    "description": "成功時に入力の末尾を返すパーサーと、その値に依存する同性質の後続パーサーをbindで合成しても末尾保存が成立する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "bind_safe"
+    ],
+    "spec": "specs/JL-233.md",
+    "module": "JonnyLean.Parsing.Core",
+    "declaration": "JonnyLean.Parsing.bind_safe",
+    "contract": "contracts/JL233.lean",
+    "review": "reviews/JL-233.json",
+    "editable": [
+      "JonnyLean/Parsing/Core.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-234",
+    "title": "依存パーサー合成の結合則",
+    "domain": "verified-parsers",
+    "description": "失敗を伝播するbindによる三段階のパーサー合成は括弧付けに依存せず同じ関数になる。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "bind_assoc"
+    ],
+    "spec": "specs/JL-234.md",
+    "module": "JonnyLean.Parsing.Core",
+    "declaration": "JonnyLean.Parsing.bind_assoc",
+    "contract": "contracts/JL234.lean",
+    "review": "reviews/JL-234.json",
+    "editable": [
+      "JonnyLean/Parsing/Core.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-235",
+    "title": "左優先選択パーサーの結合則",
+    "domain": "verified-parsers",
+    "description": "choiceは左が成功すればその結果を使い、失敗時にだけ同じ元入力で右を試す。この選択の結合則を示す。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "choice_assoc"
+    ],
+    "spec": "specs/JL-235.md",
+    "module": "JonnyLean.Parsing.Core",
+    "declaration": "JonnyLean.Parsing.choice_assoc",
+    "contract": "contracts/JL235.lean",
+    "review": "reviews/JL-235.json",
+    "editable": [
+      "JonnyLean/Parsing/Core.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-236",
+    "title": "一文字検査パーサーの正確な成功条件",
+    "domain": "verified-parsers",
+    "description": "Boolean述語を満たす先頭一文字だけを消費するsatisfyの成功を、入力のcons分解と述語成立で完全に特徴付ける。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "satisfy_iff"
+    ],
+    "spec": "specs/JL-236.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.satisfy_iff",
+    "contract": "contracts/JL236.lean",
+    "review": "reviews/JL-236.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-237",
+    "title": "固定語パーサーの接頭辞仕様",
+    "domain": "verified-parsers",
+    "description": "literalパーサーがUnitとrestを返すのは、入力が指定語wordにrestを連結したものの場合に限る。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "literal_iff"
+    ],
+    "spec": "specs/JL-237.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.literal_iff",
+    "contract": "contracts/JL237.lean",
+    "review": "reviews/JL-237.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-238",
+    "title": "固定語の連結とパーサーの逐次合成",
+    "domain": "verified-parsers",
+    "description": "uを解析してからvを解析するUnitパーサーが、u++vを一度に解析するパーサーと一致する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "literal_append"
+    ],
+    "spec": "specs/JL-238.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.literal_append",
+    "contract": "contracts/JL238.lean",
+    "review": "reviews/JL-238.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-239",
+    "title": "パーサー結果変換の合成則",
+    "domain": "verified-parsers",
+    "description": "入力の消費結果を変えず値だけを写すmapPについて、二つの変換を順に行うことが関数合成一回と一致する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "map_comp"
+    ],
+    "spec": "specs/JL-239.md",
+    "module": "JonnyLean.Parsing.Core",
+    "declaration": "JonnyLean.Parsing.map_comp",
+    "contract": "contracts/JL239.lean",
+    "review": "reviews/JL-239.json",
+    "editable": [
+      "JonnyLean/Parsing/Core.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-240",
+    "title": "二段階パーサーの中間末尾仕様",
+    "domain": "verified-parsers",
+    "description": "pairPが組(b,c)とrestを返す条件を、中間末尾middleが存在して両パーサーが順に成功することとして記述する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "pair_iff"
+    ],
+    "spec": "specs/JL-240.md",
+    "module": "JonnyLean.Parsing.Core",
+    "declaration": "JonnyLean.Parsing.pair_iff",
+    "contract": "contracts/JL240.lean",
+    "review": "reviews/JL-240.json",
+    "editable": [
+      "JonnyLean/Parsing/Core.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-241",
+    "title": "固定回数反復と独立した解析連鎖",
+    "domain": "verified-parsers",
+    "description": "n回の逐次解析を行うrepeatPの成功が、n段の帰納的関係Chainと同値である。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "repeat_iff"
+    ],
+    "spec": "specs/JL-241.md",
+    "module": "JonnyLean.Parsing.Repetition",
+    "declaration": "JonnyLean.Parsing.repeat_iff",
+    "contract": "contracts/JL241.lean",
+    "review": "reviews/JL-241.json",
+    "editable": [
+      "JonnyLean/Parsing/Repetition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-242",
+    "title": "固定回数パーサーの結果個数保証",
+    "domain": "verified-parsers",
+    "description": "n回反復が成功したとき、得られる値リストの長さは必ずnであり、入力消費量とは区別される。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "repeat_length"
+    ],
+    "spec": "specs/JL-242.md",
+    "module": "JonnyLean.Parsing.Repetition",
+    "declaration": "JonnyLean.Parsing.repeat_length",
+    "contract": "contracts/JL242.lean",
+    "review": "reviews/JL-242.json",
+    "editable": [
+      "JonnyLean/Parsing/Repetition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-243",
+    "title": "燃料付き貪欲反復の末尾保存",
+    "domain": "verified-parsers",
+    "description": "最大n回の成功を集め最初の失敗で停止するmanyは、基底パーサーが末尾保存なら元入力の末尾を返す。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "many_safe"
+    ],
+    "spec": "specs/JL-243.md",
+    "module": "JonnyLean.Parsing.Repetition",
+    "declaration": "JonnyLean.Parsing.many_safe",
+    "contract": "contracts/JL243.lean",
+    "review": "reviews/JL-243.json",
+    "editable": [
+      "JonnyLean/Parsing/Repetition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-244",
+    "title": "反復回数上限と早期停止の完全性",
+    "domain": "verified-parsers",
+    "description": "manyの結果個数は燃料以下であり、燃料未満で止まったなら返された末尾で基底パーサーは失敗する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "many_bounds"
+    ],
+    "spec": "specs/JL-244.md",
+    "module": "JonnyLean.Parsing.Repetition",
+    "declaration": "JonnyLean.Parsing.many_bounds",
+    "contract": "contracts/JL244.lean",
+    "review": "reviews/JL-244.json",
+    "editable": [
+      "JonnyLean/Parsing/Repetition.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-245",
+    "title": "先読みパーサーの入力非消費",
+    "domain": "verified-parsers",
+    "description": "lookAheadは元パーサーの値を保ちつつ、成功時の末尾を元入力へ戻す。その正確な成功条件を示す。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "lookAhead_iff"
+    ],
+    "spec": "specs/JL-245.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.lookAhead_iff",
+    "contract": "contracts/JL245.lean",
+    "review": "reviews/JL-245.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-246",
+    "title": "入力終端パーサーの空入力仕様",
+    "domain": "verified-parsers",
+    "description": "eofの成功を入力と残余の双方が空であることによって必要十分に特徴付ける。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "eof_iff"
+    ],
+    "spec": "specs/JL-246.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.eof_iff",
+    "contract": "contracts/JL246.lean",
+    "review": "reviews/JL-246.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-247",
+    "title": "完全消費を要求する解析の正しさ",
+    "domain": "verified-parsers",
+    "description": "completeはパーサーが入力をすべて消費した場合だけ値を返す。残余が空であることを独立した等式で検査する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "complete_iff"
+    ],
+    "spec": "specs/JL-247.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.complete_iff",
+    "contract": "contracts/JL247.lean",
+    "review": "reviews/JL-247.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-248",
+    "title": "解析値の追加条件によるフィルター",
+    "domain": "verified-parsers",
+    "description": "guardPの成功は元パーサーの同じ値・同じ末尾での成功と、解析値へのBoolean検査成立の両方を要求する。",
+    "tags": [
+      "verified-parsers",
+      "correctness",
+      "guard_iff"
+    ],
+    "spec": "specs/JL-248.md",
+    "module": "JonnyLean.Parsing.Primitives",
+    "declaration": "JonnyLean.Parsing.guard_iff",
+    "contract": "contracts/JL248.lean",
+    "review": "reviews/JL-248.json",
+    "editable": [
+      "JonnyLean/Parsing/Primitives.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-249",
+    "title": "区切り付き任意データ列の厳密な復号",
+    "domain": "verified-encoding",
+    "description": "各要素をsomeで包みnoneを終端とするブロックについて、復号成功と符号列＋未消費末尾という分解の同値を示す。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "decodeBlock_exact"
+    ],
+    "spec": "specs/JL-249.md",
+    "module": "JonnyLean.Encoding.Blocks",
+    "declaration": "JonnyLean.Encoding.decodeBlock_exact",
+    "contract": "contracts/JL249.lean",
+    "review": "reviews/JL-249.json",
+    "editable": [
+      "JonnyLean/Encoding/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-250",
+    "title": "ブロック符号の接頭辞一意性",
+    "domain": "verified-encoding",
+    "description": "任意の末尾を付けたブロック符号同士が等しいなら、ペイロードと末尾の双方が一致する。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "block_prefix_free"
+    ],
+    "spec": "specs/JL-250.md",
+    "module": "JonnyLean.Encoding.Blocks",
+    "declaration": "JonnyLean.Encoding.block_prefix_free",
+    "contract": "contracts/JL250.lean",
+    "review": "reviews/JL-250.json",
+    "editable": [
+      "JonnyLean/Encoding/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-251",
+    "title": "終端付き単進自然数の完全な復号仕様",
+    "domain": "verified-encoding",
+    "description": "自然数nをtrueをn個 followed by falseで符号化し、復号成功がその符号語と未消費末尾への分解に一致する。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "readUnary_exact"
+    ],
+    "spec": "specs/JL-251.md",
+    "module": "JonnyLean.Encoding.Unary",
+    "declaration": "JonnyLean.Encoding.readUnary_exact",
+    "contract": "contracts/JL251.lean",
+    "review": "reviews/JL-251.json",
+    "editable": [
+      "JonnyLean/Encoding/Unary.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-252",
+    "title": "自然数復号による厳密な消費量",
+    "domain": "verified-encoding",
+    "description": "単進復号がnを返す場合、入力長はn+1+残余長であり、残余は必ず元入力より短い。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "readUnary_consumption"
+    ],
+    "spec": "specs/JL-252.md",
+    "module": "JonnyLean.Encoding.Unary",
+    "declaration": "JonnyLean.Encoding.readUnary_consumption",
+    "contract": "contracts/JL252.lean",
+    "review": "reviews/JL-252.json",
+    "editable": [
+      "JonnyLean/Encoding/Unary.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-253",
+    "title": "二つの接頭辞符号器の積構成",
+    "domain": "verified-encoding",
+    "description": "任意の正しい二つのCodecを、符号語の連結と逐次復号により直積のCodecへ合成できる。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "pair_roundtrip"
+    ],
+    "spec": "specs/JL-253.md",
+    "module": "JonnyLean.Encoding.Combinators",
+    "declaration": "JonnyLean.Encoding.pair_roundtrip",
+    "contract": "contracts/JL253.lean",
+    "review": "reviews/JL-253.json",
+    "editable": [
+      "JonnyLean/Encoding/Combinators.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-254",
+    "title": "タグ付き直和符号器の構成",
+    "domain": "verified-encoding",
+    "description": "左値をfalse、右値をtrueでタグ付けし、対応するCodecを使う復号が任意の末尾とともに値を復元する。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "sum_roundtrip"
+    ],
+    "spec": "specs/JL-254.md",
+    "module": "JonnyLean.Encoding.Combinators",
+    "declaration": "JonnyLean.Encoding.sum_roundtrip",
+    "contract": "contracts/JL254.lean",
+    "review": "reviews/JL-254.json",
+    "editable": [
+      "JonnyLean/Encoding/Combinators.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-255",
+    "title": "値型の変換に沿った符号器の輸送",
+    "domain": "verified-encoding",
+    "description": "符号化前にgで元の値型へ戻し、復号後にfを適用することで、f∘g=idの値について往復を保つ。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "transport_roundtrip"
+    ],
+    "spec": "specs/JL-255.md",
+    "module": "JonnyLean.Encoding.Combinators",
+    "declaration": "JonnyLean.Encoding.transport_roundtrip",
+    "contract": "contracts/JL255.lean",
+    "review": "reviews/JL-255.json",
+    "editable": [
+      "JonnyLean/Encoding/Combinators.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-256",
+    "title": "指定個数の連続フィールド復号",
+    "domain": "verified-encoding",
+    "description": "任意のCodecで各値を符号化して連結した列は、要素数を指定したrepeatP復号によって元リストと末尾へ戻る。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "fields_roundtrip"
+    ],
+    "spec": "specs/JL-256.md",
+    "module": "JonnyLean.Encoding.FramedLists",
+    "declaration": "JonnyLean.Encoding.fields_roundtrip",
+    "contract": "contracts/JL256.lean",
+    "review": "reviews/JL-256.json",
+    "editable": [
+      "JonnyLean/Encoding/FramedLists.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-257",
+    "title": "長さヘッダー付きリスト符号の往復",
+    "domain": "verified-encoding",
+    "description": "リスト長を単進ヘッダーにし、各フィールド符号を続ける自己区切り形式を構築し、任意の末尾を保持して復号する。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "list_roundtrip"
+    ],
+    "spec": "specs/JL-257.md",
+    "module": "JonnyLean.Encoding.FramedLists",
+    "declaration": "JonnyLean.Encoding.list_roundtrip",
+    "contract": "contracts/JL257.lean",
+    "review": "reviews/JL-257.json",
+    "editable": [
+      "JonnyLean/Encoding/FramedLists.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-258",
+    "title": "長さ付きリスト復号の厳密性",
+    "domain": "verified-encoding",
+    "description": "リスト復号器の成功は、入力がそのリストの正規符号と残余の連結であることに限られる。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "list_exact"
+    ],
+    "spec": "specs/JL-258.md",
+    "module": "JonnyLean.Encoding.FramedLists",
+    "declaration": "JonnyLean.Encoding.list_exact",
+    "contract": "contracts/JL258.lean",
+    "review": "reviews/JL-258.json",
+    "editable": [
+      "JonnyLean/Encoding/FramedLists.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-259",
+    "title": "二分木形状の燃料付き復号",
+    "domain": "verified-encoding",
+    "description": "葉をfalse、分岐をtrueと左右の符号列で表す前置形式を、高さより大きい燃料で復号すれば形状と末尾が復元される。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "tree_roundtrip"
+    ],
+    "spec": "specs/JL-259.md",
+    "module": "JonnyLean.Encoding.Trees",
+    "declaration": "JonnyLean.Encoding.tree_roundtrip",
+    "contract": "contracts/JL259.lean",
+    "review": "reviews/JL-259.json",
+    "editable": [
+      "JonnyLean/Encoding/Trees.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-260",
+    "title": "木の前置符号の境界一意性",
+    "domain": "verified-encoding",
+    "description": "二つの木の符号へ任意の末尾を連結して等しくなれば、木自体と末尾の両方が一致する。",
+    "tags": [
+      "verified-encoding",
+      "correctness",
+      "tree_prefix_free"
+    ],
+    "spec": "specs/JL-260.md",
+    "module": "JonnyLean.Encoding.Trees",
+    "declaration": "JonnyLean.Encoding.tree_prefix_free",
+    "contract": "contracts/JL260.lean",
+    "review": "reviews/JL-260.json",
+    "editable": [
+      "JonnyLean/Encoding/Trees.lean"
+    ],
+    "depends_on": []
+  }
+]

@@ -464,6 +464,9 @@ def main() -> int:
     if argv and argv[0] == "library":
         from tools.library import main as library_main
         return library_main(default_root, argv[1:])
+    if argv and argv[0] == "release":
+        from tools.release import main as release_main
+        return release_main(default_root, argv[1:])
     parser = argparse.ArgumentParser(description=__doc__, epilog=
         "Worker: doctor | status | work | resume | adopt | report. GitHub: pr. HTML: dashboard.")
     parser.add_argument("command", choices=("verify", "review", "run", "fingerprint", "dashboard"))

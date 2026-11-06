@@ -1,0 +1,802 @@
+[
+  {
+    "id": "JL-181",
+    "title": "有限添字和の線形結合",
+    "domain": "finite-linear-algebra",
+    "description": "長さを型に持つ自然数列の和が、二つの列の自然数係数による線形結合を保存する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "finitesums"
+    ],
+    "spec": "specs/JL-181.md",
+    "module": "JonnyLean.LinearAlgebra.FiniteSums",
+    "declaration": "JonnyLean.LinearAlgebra.sum_linear",
+    "contract": "contracts/JL181.lean",
+    "review": "reviews/JL-181.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/FiniteSums.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-182",
+    "title": "有限二重和の順序交換",
+    "domain": "finite-linear-algebra",
+    "description": "長方形状の有限添字集合で和を取る順序を交換しても自然数の総和が変わらない。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "finitesums"
+    ],
+    "spec": "specs/JL-182.md",
+    "module": "JonnyLean.LinearAlgebra.FiniteSums",
+    "declaration": "JonnyLean.LinearAlgebra.sum_swap",
+    "contract": "contracts/JL182.lean",
+    "review": "reviews/JL-182.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/FiniteSums.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-183",
+    "title": "Kronecker係数による座標抽出",
+    "domain": "finite-linear-algebra",
+    "description": "一つの座標だけが1になる有限添字関数を掛けて和を取ると指定座標の値が得られる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "finitesums"
+    ],
+    "spec": "specs/JL-183.md",
+    "module": "JonnyLean.LinearAlgebra.FiniteSums",
+    "declaration": "JonnyLean.LinearAlgebra.sum_delta",
+    "contract": "contracts/JL183.lean",
+    "review": "reviews/JL-183.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/FiniteSums.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-184",
+    "title": "自然数有限和の零条件",
+    "domain": "finite-linear-algebra",
+    "description": "自然数値の有限和が0であることと、各座標がすべて0であることの同値を示す。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "finitesums"
+    ],
+    "spec": "specs/JL-184.md",
+    "module": "JonnyLean.LinearAlgebra.FiniteSums",
+    "declaration": "JonnyLean.LinearAlgebra.sum_eq_zero_iff",
+    "contract": "contracts/JL184.lean",
+    "review": "reviews/JL-184.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/FiniteSums.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-185",
+    "title": "有限ベクトル内積の双線形展開",
+    "domain": "finite-linear-algebra",
+    "description": "二つの自然数線形結合の内積を四つの内積の和へ展開する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-185.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.dot_bilinear",
+    "contract": "contracts/JL185.lean",
+    "review": "reviews/JL-185.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-186",
+    "title": "有限ベクトル内積の対称性",
+    "domain": "finite-linear-algebra",
+    "description": "同じ次元の自然数ベクトルの内積で左右を交換できることを示す。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-186.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.dot_symm",
+    "contract": "contracts/JL186.lean",
+    "review": "reviews/JL-186.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-187",
+    "title": "自己内積による零ベクトルの判定",
+    "domain": "finite-linear-algebra",
+    "description": "自然数ベクトルの自己内積が0となるのは零ベクトルの場合に限る。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-187.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.dot_self_zero_iff",
+    "contract": "contracts/JL187.lean",
+    "review": "reviews/JL-187.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-188",
+    "title": "成分順序による内積の単調性",
+    "domain": "finite-linear-algebra",
+    "description": "左右両ベクトルを成分ごとに増やしても内積は減少しない。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-188.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.dot_mono",
+    "contract": "contracts/JL188.lean",
+    "review": "reviews/JL-188.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-189",
+    "title": "一様な座標上界からの内積評価",
+    "domain": "finite-linear-algebra",
+    "description": "各座標がa,b以下の長さnのベクトルの内積をn×a×bで上から評価する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-189.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.dot_bound",
+    "contract": "contracts/JL189.lean",
+    "review": "reviews/JL-189.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-190",
+    "title": "標準座標ベクトルによる再構成",
+    "domain": "finite-linear-algebra",
+    "description": "自然数ベクトルを各座標値と標準座標ベクトルの有限和から再構成する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "vectors"
+    ],
+    "spec": "specs/JL-190.md",
+    "module": "JonnyLean.LinearAlgebra.Vectors",
+    "declaration": "JonnyLean.LinearAlgebra.basis_reconstruction",
+    "contract": "contracts/JL190.lean",
+    "review": "reviews/JL-190.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Vectors.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-191",
+    "title": "自然数行列の半加群法則",
+    "domain": "finite-linear-algebra",
+    "description": "長方形行列の加法と自然数スカラー倍が分配・スカラー合成・単位の法則を満たす。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "matrices"
+    ],
+    "spec": "specs/JL-191.md",
+    "module": "JonnyLean.LinearAlgebra.Matrices",
+    "declaration": "JonnyLean.LinearAlgebra.matrix_semimodule_laws",
+    "contract": "contracts/JL191.lean",
+    "review": "reviews/JL-191.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Matrices.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-192",
+    "title": "長方形行列転置の復元",
+    "domain": "finite-linear-algebra",
+    "description": "任意の長方形行列を二度転置すると元の行列に戻る。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "matrices"
+    ],
+    "spec": "specs/JL-192.md",
+    "module": "JonnyLean.LinearAlgebra.Matrices",
+    "declaration": "JonnyLean.LinearAlgebra.transpose_transpose",
+    "contract": "contracts/JL192.lean",
+    "review": "reviews/JL-192.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Matrices.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-193",
+    "title": "長方形行列積の分配則",
+    "domain": "finite-linear-algebra",
+    "description": "共通次元で有限和を取る行列積が、右辺行列の加法に分配する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-193.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_add_right",
+    "contract": "contracts/JL193.lean",
+    "review": "reviews/JL-193.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-194",
+    "title": "長方形行列積の結合則",
+    "domain": "finite-linear-algebra",
+    "description": "四つの次元が整合する三つの自然数行列の積が結合的である。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-194.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_assoc",
+    "contract": "contracts/JL194.lean",
+    "review": "reviews/JL-194.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-195",
+    "title": "長方形行列の左右単位元",
+    "domain": "finite-linear-algebra",
+    "description": "行数に合う単位行列を左、列数に合う単位行列を右に掛けても元の行列になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-195.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_identities",
+    "contract": "contracts/JL195.lean",
+    "review": "reviews/JL-195.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-196",
+    "title": "行列積の転置と順序反転",
+    "domain": "finite-linear-algebra",
+    "description": "長方形行列の積を転置すると、転置した二行列を逆順に掛けたものになる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-196.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.transpose_mulMat",
+    "contract": "contracts/JL196.lean",
+    "review": "reviews/JL-196.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-197",
+    "title": "行列積と二つのスカラー倍",
+    "domain": "finite-linear-algebra",
+    "description": "二行列をそれぞれa,b倍して掛けることと元の積をa*b倍することが等しい。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-197.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_scaled",
+    "contract": "contracts/JL197.lean",
+    "review": "reviews/JL-197.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-198",
+    "title": "零行列による左右の積",
+    "domain": "finite-linear-algebra",
+    "description": "型の整合する零行列との積は左右いずれも零行列になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-198.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_zeros",
+    "contract": "contracts/JL198.lean",
+    "review": "reviews/JL-198.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-199",
+    "title": "行列積の成分単調性",
+    "domain": "finite-linear-algebra",
+    "description": "左右の行列を成分ごとに増やしても積の各成分は減少しない。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-199.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_mono",
+    "contract": "contracts/JL199.lean",
+    "review": "reviews/JL-199.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-200",
+    "title": "長方形行列積の成分上界",
+    "domain": "finite-linear-algebra",
+    "description": "各行列の成分がa,b以下なら積の各成分は共通次元nにa*bを掛けた値以下になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "multiplication"
+    ],
+    "spec": "specs/JL-200.md",
+    "module": "JonnyLean.LinearAlgebra.Multiplication",
+    "declaration": "JonnyLean.LinearAlgebra.mulMat_bound",
+    "contract": "contracts/JL200.lean",
+    "review": "reviews/JL-200.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Multiplication.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-201",
+    "title": "行列積とベクトル作用の合成",
+    "domain": "finite-linear-algebra",
+    "description": "行列積をベクトルに作用させる結果が、右の行列から順に作用させる結果に一致する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "actions"
+    ],
+    "spec": "specs/JL-201.md",
+    "module": "JonnyLean.LinearAlgebra.Actions",
+    "declaration": "JonnyLean.LinearAlgebra.act_comp",
+    "contract": "contracts/JL201.lean",
+    "review": "reviews/JL-201.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Actions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-202",
+    "title": "行列作用の線形結合保存",
+    "domain": "finite-linear-algebra",
+    "description": "自然数行列の列ベクトル作用が任意の二項線形結合を保存する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "actions"
+    ],
+    "spec": "specs/JL-202.md",
+    "module": "JonnyLean.LinearAlgebra.Actions",
+    "declaration": "JonnyLean.LinearAlgebra.act_linear",
+    "contract": "contracts/JL202.lean",
+    "review": "reviews/JL-202.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Actions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-203",
+    "title": "標準ベクトルへの作用による列抽出",
+    "domain": "finite-linear-algebra",
+    "description": "行列をj番目の標準ベクトルに作用させるとj列が取り出される。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "actions"
+    ],
+    "spec": "specs/JL-203.md",
+    "module": "JonnyLean.LinearAlgebra.Actions",
+    "declaration": "JonnyLean.LinearAlgebra.act_basis",
+    "contract": "contracts/JL203.lean",
+    "review": "reviews/JL-203.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Actions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-204",
+    "title": "標準ベクトル作用による行列の一意性",
+    "domain": "finite-linear-algebra",
+    "description": "すべての標準ベクトルへの作用が一致する二行列は等しい。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "actions"
+    ],
+    "spec": "specs/JL-204.md",
+    "module": "JonnyLean.LinearAlgebra.Actions",
+    "declaration": "JonnyLean.LinearAlgebra.matrix_eq_of_basis_actions",
+    "contract": "contracts/JL204.lean",
+    "review": "reviews/JL-204.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Actions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-205",
+    "title": "対角行列積の成分積表現",
+    "domain": "finite-linear-algebra",
+    "description": "二つの対角行列の積は対角成分の座標ごとの積からなる対角行列である。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "diagonaltrace"
+    ],
+    "spec": "specs/JL-205.md",
+    "module": "JonnyLean.LinearAlgebra.DiagonalTrace",
+    "declaration": "JonnyLean.LinearAlgebra.diagonal_mul",
+    "contract": "contracts/JL205.lean",
+    "review": "reviews/JL-205.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/DiagonalTrace.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-206",
+    "title": "対角行列作用の座標別乗法",
+    "domain": "finite-linear-algebra",
+    "description": "対角行列のベクトル作用は対応する対角成分とベクトル座標の積になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "diagonaltrace"
+    ],
+    "spec": "specs/JL-206.md",
+    "module": "JonnyLean.LinearAlgebra.DiagonalTrace",
+    "declaration": "JonnyLean.LinearAlgebra.diagonal_act",
+    "contract": "contracts/JL206.lean",
+    "review": "reviews/JL-206.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/DiagonalTrace.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-207",
+    "title": "行列トレースの線形結合保存",
+    "domain": "finite-linear-algebra",
+    "description": "対角成分の和として定めたトレースが自然数線形結合を保存する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "diagonaltrace"
+    ],
+    "spec": "specs/JL-207.md",
+    "module": "JonnyLean.LinearAlgebra.DiagonalTrace",
+    "declaration": "JonnyLean.LinearAlgebra.trace_linear",
+    "contract": "contracts/JL207.lean",
+    "review": "reviews/JL-207.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/DiagonalTrace.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-208",
+    "title": "長方形行列積のトレース巡回則",
+    "domain": "finite-linear-algebra",
+    "description": "m×n行列とn×m行列について、両順序の積はサイズが異なってもトレースが等しい。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "diagonaltrace"
+    ],
+    "spec": "specs/JL-208.md",
+    "module": "JonnyLean.LinearAlgebra.DiagonalTrace",
+    "declaration": "JonnyLean.LinearAlgebra.trace_mul_cyclic",
+    "contract": "contracts/JL208.lean",
+    "review": "reviews/JL-208.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/DiagonalTrace.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-209",
+    "title": "四分割行列作用とブロック積の合成",
+    "domain": "finite-linear-algebra",
+    "description": "型付き四象限のブロック行列を掛けた作用が二段階の作用と一致する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "blocks"
+    ],
+    "spec": "specs/JL-209.md",
+    "module": "JonnyLean.LinearAlgebra.Blocks",
+    "declaration": "JonnyLean.LinearAlgebra.blockAct_comp",
+    "contract": "contracts/JL209.lean",
+    "review": "reviews/JL-209.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-210",
+    "title": "ブロック行列作用の線形性",
+    "domain": "finite-linear-algebra",
+    "description": "二本のベクトルの対に対するブロック行列作用が、対ごとの線形結合を保存する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "blocks"
+    ],
+    "spec": "specs/JL-210.md",
+    "module": "JonnyLean.LinearAlgebra.Blocks",
+    "declaration": "JonnyLean.LinearAlgebra.blockAct_linear",
+    "contract": "contracts/JL210.lean",
+    "review": "reviews/JL-210.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-211",
+    "title": "ブロック対角行列積の分離",
+    "domain": "finite-linear-algebra",
+    "description": "非対角ブロックを零にした行列の積は二つの対角ブロックの独立な積からなる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "blocks"
+    ],
+    "spec": "specs/JL-211.md",
+    "module": "JonnyLean.LinearAlgebra.Blocks",
+    "declaration": "JonnyLean.LinearAlgebra.blockDiagonal_mul",
+    "contract": "contracts/JL211.lean",
+    "review": "reviews/JL-211.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-212",
+    "title": "ブロック行列積の転置",
+    "domain": "finite-linear-algebra",
+    "description": "四分割行列の積を転置すると、各ブロックを転置して並び替えた行列の逆順の積になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "blocks"
+    ],
+    "spec": "specs/JL-212.md",
+    "module": "JonnyLean.LinearAlgebra.Blocks",
+    "declaration": "JonnyLean.LinearAlgebra.blockTranspose_mul",
+    "contract": "contracts/JL212.lean",
+    "review": "reviews/JL-212.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Blocks.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-213",
+    "title": "行列累乗の指数加法則",
+    "domain": "finite-linear-algebra",
+    "description": "自然数行列のk+l乗をk乗とl乗の積へ分解する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "powers"
+    ],
+    "spec": "specs/JL-213.md",
+    "module": "JonnyLean.LinearAlgebra.Powers",
+    "declaration": "JonnyLean.LinearAlgebra.matPow_add",
+    "contract": "contracts/JL213.lean",
+    "review": "reviews/JL-213.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Powers.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-214",
+    "title": "同一行列の累乗間の可換性",
+    "domain": "finite-linear-algebra",
+    "description": "一般の行列積が非可換であっても、同じ行列の二つの自然数累乗は可換である。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "powers"
+    ],
+    "spec": "specs/JL-214.md",
+    "module": "JonnyLean.LinearAlgebra.Powers",
+    "declaration": "JonnyLean.LinearAlgebra.matPow_factors_commute",
+    "contract": "contracts/JL214.lean",
+    "review": "reviews/JL-214.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Powers.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-215",
+    "title": "行列累乗と反復作用の一致",
+    "domain": "finite-linear-algebra",
+    "description": "行列のk乗を一度作用させる計算と元の行列をk回作用させる計算が一致する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "powers"
+    ],
+    "spec": "specs/JL-215.md",
+    "module": "JonnyLean.LinearAlgebra.Powers",
+    "declaration": "JonnyLean.LinearAlgebra.matPow_action",
+    "contract": "contracts/JL215.lean",
+    "review": "reviews/JL-215.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Powers.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-216",
+    "title": "対角行列累乗の成分累乗公式",
+    "domain": "finite-linear-algebra",
+    "description": "対角行列の自然数累乗は各対角成分を同じ指数で累乗した対角行列になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "powers"
+    ],
+    "spec": "specs/JL-216.md",
+    "module": "JonnyLean.LinearAlgebra.Powers",
+    "declaration": "JonnyLean.LinearAlgebra.matPow_diagonal",
+    "contract": "contracts/JL216.lean",
+    "review": "reviews/JL-216.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/Powers.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-217",
+    "title": "外積行列作用の内積表示",
+    "domain": "finite-linear-algebra",
+    "description": "二ベクトルから作る外積行列の作用が、内積をスカラーとするベクトル倍に一致する。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "outerproducts"
+    ],
+    "spec": "specs/JL-217.md",
+    "module": "JonnyLean.LinearAlgebra.OuterProducts",
+    "declaration": "JonnyLean.LinearAlgebra.outer_action",
+    "contract": "contracts/JL217.lean",
+    "review": "reviews/JL-217.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/OuterProducts.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-218",
+    "title": "二つの外積行列の積公式",
+    "domain": "finite-linear-algebra",
+    "description": "二外積行列の積が中間ベクトルの内積を係数とする外積行列になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "outerproducts"
+    ],
+    "spec": "specs/JL-218.md",
+    "module": "JonnyLean.LinearAlgebra.OuterProducts",
+    "declaration": "JonnyLean.LinearAlgebra.outer_mul",
+    "contract": "contracts/JL218.lean",
+    "review": "reviews/JL-218.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/OuterProducts.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-219",
+    "title": "外積行列の転置と双線形性",
+    "domain": "finite-linear-algebra",
+    "description": "二つのベクトルの外積を転置すると引数を交換した外積になる。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "outerproducts"
+    ],
+    "spec": "specs/JL-219.md",
+    "module": "JonnyLean.LinearAlgebra.OuterProducts",
+    "declaration": "JonnyLean.LinearAlgebra.transpose_outer",
+    "contract": "contracts/JL219.lean",
+    "review": "reviews/JL-219.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/OuterProducts.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-220",
+    "title": "正規化外積からの冪等行列",
+    "domain": "finite-linear-algebra",
+    "description": "中間内積が1となる二ベクトルの外積行列は、自分自身との積で変わらない。",
+    "tags": [
+      "finite-indices",
+      "natural-semiring",
+      "outerproducts"
+    ],
+    "spec": "specs/JL-220.md",
+    "module": "JonnyLean.LinearAlgebra.OuterProducts",
+    "declaration": "JonnyLean.LinearAlgebra.outer_idempotent_of_dot_one",
+    "contract": "contracts/JL220.lean",
+    "review": "reviews/JL-220.json",
+    "editable": [
+      "JonnyLean/LinearAlgebra/OuterProducts.lean"
+    ],
+    "depends_on": []
+  }
+]

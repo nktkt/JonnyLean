@@ -2522,3 +2522,1683 @@ contract = "contracts/JL180.lean"
 review = "reviews/JL-180.json"
 editable = ["JonnyLean/FiniteProbability/KernelComposition.lean"]
 depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-178", "JL-179"]
+
+[[tasks]]
+id = "JL-181"
+title = "有限添字和の線形結合"
+domain = "finite-linear-algebra"
+description = "長さを型に持つ自然数列の和が、二つの列の自然数係数による線形結合を保存する。"
+tags = ["finite-indices", "natural-semiring", "finitesums"]
+spec = "specs/JL-181.md"
+module = "JonnyLean.LinearAlgebra.FiniteSums"
+declaration = "JonnyLean.LinearAlgebra.sum_linear"
+contract = "contracts/JL181.lean"
+review = "reviews/JL-181.json"
+editable = ["JonnyLean/LinearAlgebra/FiniteSums.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-182"
+title = "有限二重和の順序交換"
+domain = "finite-linear-algebra"
+description = "長方形状の有限添字集合で和を取る順序を交換しても自然数の総和が変わらない。"
+tags = ["finite-indices", "natural-semiring", "finitesums"]
+spec = "specs/JL-182.md"
+module = "JonnyLean.LinearAlgebra.FiniteSums"
+declaration = "JonnyLean.LinearAlgebra.sum_swap"
+contract = "contracts/JL182.lean"
+review = "reviews/JL-182.json"
+editable = ["JonnyLean/LinearAlgebra/FiniteSums.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-183"
+title = "Kronecker係数による座標抽出"
+domain = "finite-linear-algebra"
+description = "一つの座標だけが1になる有限添字関数を掛けて和を取ると指定座標の値が得られる。"
+tags = ["finite-indices", "natural-semiring", "finitesums"]
+spec = "specs/JL-183.md"
+module = "JonnyLean.LinearAlgebra.FiniteSums"
+declaration = "JonnyLean.LinearAlgebra.sum_delta"
+contract = "contracts/JL183.lean"
+review = "reviews/JL-183.json"
+editable = ["JonnyLean/LinearAlgebra/FiniteSums.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-184"
+title = "自然数有限和の零条件"
+domain = "finite-linear-algebra"
+description = "自然数値の有限和が0であることと、各座標がすべて0であることの同値を示す。"
+tags = ["finite-indices", "natural-semiring", "finitesums"]
+spec = "specs/JL-184.md"
+module = "JonnyLean.LinearAlgebra.FiniteSums"
+declaration = "JonnyLean.LinearAlgebra.sum_eq_zero_iff"
+contract = "contracts/JL184.lean"
+review = "reviews/JL-184.json"
+editable = ["JonnyLean/LinearAlgebra/FiniteSums.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-185"
+title = "有限ベクトル内積の双線形展開"
+domain = "finite-linear-algebra"
+description = "二つの自然数線形結合の内積を四つの内積の和へ展開する。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-185.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.dot_bilinear"
+contract = "contracts/JL185.lean"
+review = "reviews/JL-185.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-186"
+title = "有限ベクトル内積の対称性"
+domain = "finite-linear-algebra"
+description = "同じ次元の自然数ベクトルの内積で左右を交換できることを示す。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-186.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.dot_symm"
+contract = "contracts/JL186.lean"
+review = "reviews/JL-186.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-187"
+title = "自己内積による零ベクトルの判定"
+domain = "finite-linear-algebra"
+description = "自然数ベクトルの自己内積が0となるのは零ベクトルの場合に限る。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-187.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.dot_self_zero_iff"
+contract = "contracts/JL187.lean"
+review = "reviews/JL-187.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-188"
+title = "成分順序による内積の単調性"
+domain = "finite-linear-algebra"
+description = "左右両ベクトルを成分ごとに増やしても内積は減少しない。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-188.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.dot_mono"
+contract = "contracts/JL188.lean"
+review = "reviews/JL-188.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-189"
+title = "一様な座標上界からの内積評価"
+domain = "finite-linear-algebra"
+description = "各座標がa,b以下の長さnのベクトルの内積をn×a×bで上から評価する。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-189.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.dot_bound"
+contract = "contracts/JL189.lean"
+review = "reviews/JL-189.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-190"
+title = "標準座標ベクトルによる再構成"
+domain = "finite-linear-algebra"
+description = "自然数ベクトルを各座標値と標準座標ベクトルの有限和から再構成する。"
+tags = ["finite-indices", "natural-semiring", "vectors"]
+spec = "specs/JL-190.md"
+module = "JonnyLean.LinearAlgebra.Vectors"
+declaration = "JonnyLean.LinearAlgebra.basis_reconstruction"
+contract = "contracts/JL190.lean"
+review = "reviews/JL-190.json"
+editable = ["JonnyLean/LinearAlgebra/Vectors.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184"]
+
+[[tasks]]
+id = "JL-191"
+title = "自然数行列の半加群法則"
+domain = "finite-linear-algebra"
+description = "長方形行列の加法と自然数スカラー倍が分配・スカラー合成・単位の法則を満たす。"
+tags = ["finite-indices", "natural-semiring", "matrices"]
+spec = "specs/JL-191.md"
+module = "JonnyLean.LinearAlgebra.Matrices"
+declaration = "JonnyLean.LinearAlgebra.matrix_semimodule_laws"
+contract = "contracts/JL191.lean"
+review = "reviews/JL-191.json"
+editable = ["JonnyLean/LinearAlgebra/Matrices.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190"]
+
+[[tasks]]
+id = "JL-192"
+title = "長方形行列転置の復元"
+domain = "finite-linear-algebra"
+description = "任意の長方形行列を二度転置すると元の行列に戻る。"
+tags = ["finite-indices", "natural-semiring", "matrices"]
+spec = "specs/JL-192.md"
+module = "JonnyLean.LinearAlgebra.Matrices"
+declaration = "JonnyLean.LinearAlgebra.transpose_transpose"
+contract = "contracts/JL192.lean"
+review = "reviews/JL-192.json"
+editable = ["JonnyLean/LinearAlgebra/Matrices.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190"]
+
+[[tasks]]
+id = "JL-193"
+title = "長方形行列積の分配則"
+domain = "finite-linear-algebra"
+description = "共通次元で有限和を取る行列積が、右辺行列の加法に分配する。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-193.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_add_right"
+contract = "contracts/JL193.lean"
+review = "reviews/JL-193.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-194"
+title = "長方形行列積の結合則"
+domain = "finite-linear-algebra"
+description = "四つの次元が整合する三つの自然数行列の積が結合的である。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-194.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_assoc"
+contract = "contracts/JL194.lean"
+review = "reviews/JL-194.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-195"
+title = "長方形行列の左右単位元"
+domain = "finite-linear-algebra"
+description = "行数に合う単位行列を左、列数に合う単位行列を右に掛けても元の行列になる。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-195.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_identities"
+contract = "contracts/JL195.lean"
+review = "reviews/JL-195.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-196"
+title = "行列積の転置と順序反転"
+domain = "finite-linear-algebra"
+description = "長方形行列の積を転置すると、転置した二行列を逆順に掛けたものになる。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-196.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.transpose_mulMat"
+contract = "contracts/JL196.lean"
+review = "reviews/JL-196.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-197"
+title = "行列積と二つのスカラー倍"
+domain = "finite-linear-algebra"
+description = "二行列をそれぞれa,b倍して掛けることと元の積をa*b倍することが等しい。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-197.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_scaled"
+contract = "contracts/JL197.lean"
+review = "reviews/JL-197.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-198"
+title = "零行列による左右の積"
+domain = "finite-linear-algebra"
+description = "型の整合する零行列との積は左右いずれも零行列になる。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-198.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_zeros"
+contract = "contracts/JL198.lean"
+review = "reviews/JL-198.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-199"
+title = "行列積の成分単調性"
+domain = "finite-linear-algebra"
+description = "左右の行列を成分ごとに増やしても積の各成分は減少しない。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-199.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_mono"
+contract = "contracts/JL199.lean"
+review = "reviews/JL-199.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-200"
+title = "長方形行列積の成分上界"
+domain = "finite-linear-algebra"
+description = "各行列の成分がa,b以下なら積の各成分は共通次元nにa*bを掛けた値以下になる。"
+tags = ["finite-indices", "natural-semiring", "multiplication"]
+spec = "specs/JL-200.md"
+module = "JonnyLean.LinearAlgebra.Multiplication"
+declaration = "JonnyLean.LinearAlgebra.mulMat_bound"
+contract = "contracts/JL200.lean"
+review = "reviews/JL-200.json"
+editable = ["JonnyLean/LinearAlgebra/Multiplication.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192"]
+
+[[tasks]]
+id = "JL-201"
+title = "行列積とベクトル作用の合成"
+domain = "finite-linear-algebra"
+description = "行列積をベクトルに作用させる結果が、右の行列から順に作用させる結果に一致する。"
+tags = ["finite-indices", "natural-semiring", "actions"]
+spec = "specs/JL-201.md"
+module = "JonnyLean.LinearAlgebra.Actions"
+declaration = "JonnyLean.LinearAlgebra.act_comp"
+contract = "contracts/JL201.lean"
+review = "reviews/JL-201.json"
+editable = ["JonnyLean/LinearAlgebra/Actions.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200"]
+
+[[tasks]]
+id = "JL-202"
+title = "行列作用の線形結合保存"
+domain = "finite-linear-algebra"
+description = "自然数行列の列ベクトル作用が任意の二項線形結合を保存する。"
+tags = ["finite-indices", "natural-semiring", "actions"]
+spec = "specs/JL-202.md"
+module = "JonnyLean.LinearAlgebra.Actions"
+declaration = "JonnyLean.LinearAlgebra.act_linear"
+contract = "contracts/JL202.lean"
+review = "reviews/JL-202.json"
+editable = ["JonnyLean/LinearAlgebra/Actions.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200"]
+
+[[tasks]]
+id = "JL-203"
+title = "標準ベクトルへの作用による列抽出"
+domain = "finite-linear-algebra"
+description = "行列をj番目の標準ベクトルに作用させるとj列が取り出される。"
+tags = ["finite-indices", "natural-semiring", "actions"]
+spec = "specs/JL-203.md"
+module = "JonnyLean.LinearAlgebra.Actions"
+declaration = "JonnyLean.LinearAlgebra.act_basis"
+contract = "contracts/JL203.lean"
+review = "reviews/JL-203.json"
+editable = ["JonnyLean/LinearAlgebra/Actions.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200"]
+
+[[tasks]]
+id = "JL-204"
+title = "標準ベクトル作用による行列の一意性"
+domain = "finite-linear-algebra"
+description = "すべての標準ベクトルへの作用が一致する二行列は等しい。"
+tags = ["finite-indices", "natural-semiring", "actions"]
+spec = "specs/JL-204.md"
+module = "JonnyLean.LinearAlgebra.Actions"
+declaration = "JonnyLean.LinearAlgebra.matrix_eq_of_basis_actions"
+contract = "contracts/JL204.lean"
+review = "reviews/JL-204.json"
+editable = ["JonnyLean/LinearAlgebra/Actions.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200"]
+
+[[tasks]]
+id = "JL-205"
+title = "対角行列積の成分積表現"
+domain = "finite-linear-algebra"
+description = "二つの対角行列の積は対角成分の座標ごとの積からなる対角行列である。"
+tags = ["finite-indices", "natural-semiring", "diagonaltrace"]
+spec = "specs/JL-205.md"
+module = "JonnyLean.LinearAlgebra.DiagonalTrace"
+declaration = "JonnyLean.LinearAlgebra.diagonal_mul"
+contract = "contracts/JL205.lean"
+review = "reviews/JL-205.json"
+editable = ["JonnyLean/LinearAlgebra/DiagonalTrace.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204"]
+
+[[tasks]]
+id = "JL-206"
+title = "対角行列作用の座標別乗法"
+domain = "finite-linear-algebra"
+description = "対角行列のベクトル作用は対応する対角成分とベクトル座標の積になる。"
+tags = ["finite-indices", "natural-semiring", "diagonaltrace"]
+spec = "specs/JL-206.md"
+module = "JonnyLean.LinearAlgebra.DiagonalTrace"
+declaration = "JonnyLean.LinearAlgebra.diagonal_act"
+contract = "contracts/JL206.lean"
+review = "reviews/JL-206.json"
+editable = ["JonnyLean/LinearAlgebra/DiagonalTrace.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204"]
+
+[[tasks]]
+id = "JL-207"
+title = "行列トレースの線形結合保存"
+domain = "finite-linear-algebra"
+description = "対角成分の和として定めたトレースが自然数線形結合を保存する。"
+tags = ["finite-indices", "natural-semiring", "diagonaltrace"]
+spec = "specs/JL-207.md"
+module = "JonnyLean.LinearAlgebra.DiagonalTrace"
+declaration = "JonnyLean.LinearAlgebra.trace_linear"
+contract = "contracts/JL207.lean"
+review = "reviews/JL-207.json"
+editable = ["JonnyLean/LinearAlgebra/DiagonalTrace.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204"]
+
+[[tasks]]
+id = "JL-208"
+title = "長方形行列積のトレース巡回則"
+domain = "finite-linear-algebra"
+description = "m×n行列とn×m行列について、両順序の積はサイズが異なってもトレースが等しい。"
+tags = ["finite-indices", "natural-semiring", "diagonaltrace"]
+spec = "specs/JL-208.md"
+module = "JonnyLean.LinearAlgebra.DiagonalTrace"
+declaration = "JonnyLean.LinearAlgebra.trace_mul_cyclic"
+contract = "contracts/JL208.lean"
+review = "reviews/JL-208.json"
+editable = ["JonnyLean/LinearAlgebra/DiagonalTrace.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204"]
+
+[[tasks]]
+id = "JL-209"
+title = "四分割行列作用とブロック積の合成"
+domain = "finite-linear-algebra"
+description = "型付き四象限のブロック行列を掛けた作用が二段階の作用と一致する。"
+tags = ["finite-indices", "natural-semiring", "blocks"]
+spec = "specs/JL-209.md"
+module = "JonnyLean.LinearAlgebra.Blocks"
+declaration = "JonnyLean.LinearAlgebra.blockAct_comp"
+contract = "contracts/JL209.lean"
+review = "reviews/JL-209.json"
+editable = ["JonnyLean/LinearAlgebra/Blocks.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-210"
+title = "ブロック行列作用の線形性"
+domain = "finite-linear-algebra"
+description = "二本のベクトルの対に対するブロック行列作用が、対ごとの線形結合を保存する。"
+tags = ["finite-indices", "natural-semiring", "blocks"]
+spec = "specs/JL-210.md"
+module = "JonnyLean.LinearAlgebra.Blocks"
+declaration = "JonnyLean.LinearAlgebra.blockAct_linear"
+contract = "contracts/JL210.lean"
+review = "reviews/JL-210.json"
+editable = ["JonnyLean/LinearAlgebra/Blocks.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-211"
+title = "ブロック対角行列積の分離"
+domain = "finite-linear-algebra"
+description = "非対角ブロックを零にした行列の積は二つの対角ブロックの独立な積からなる。"
+tags = ["finite-indices", "natural-semiring", "blocks"]
+spec = "specs/JL-211.md"
+module = "JonnyLean.LinearAlgebra.Blocks"
+declaration = "JonnyLean.LinearAlgebra.blockDiagonal_mul"
+contract = "contracts/JL211.lean"
+review = "reviews/JL-211.json"
+editable = ["JonnyLean/LinearAlgebra/Blocks.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-212"
+title = "ブロック行列積の転置"
+domain = "finite-linear-algebra"
+description = "四分割行列の積を転置すると、各ブロックを転置して並び替えた行列の逆順の積になる。"
+tags = ["finite-indices", "natural-semiring", "blocks"]
+spec = "specs/JL-212.md"
+module = "JonnyLean.LinearAlgebra.Blocks"
+declaration = "JonnyLean.LinearAlgebra.blockTranspose_mul"
+contract = "contracts/JL212.lean"
+review = "reviews/JL-212.json"
+editable = ["JonnyLean/LinearAlgebra/Blocks.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-213"
+title = "行列累乗の指数加法則"
+domain = "finite-linear-algebra"
+description = "自然数行列のk+l乗をk乗とl乗の積へ分解する。"
+tags = ["finite-indices", "natural-semiring", "powers"]
+spec = "specs/JL-213.md"
+module = "JonnyLean.LinearAlgebra.Powers"
+declaration = "JonnyLean.LinearAlgebra.matPow_add"
+contract = "contracts/JL213.lean"
+review = "reviews/JL-213.json"
+editable = ["JonnyLean/LinearAlgebra/Powers.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-214"
+title = "同一行列の累乗間の可換性"
+domain = "finite-linear-algebra"
+description = "一般の行列積が非可換であっても、同じ行列の二つの自然数累乗は可換である。"
+tags = ["finite-indices", "natural-semiring", "powers"]
+spec = "specs/JL-214.md"
+module = "JonnyLean.LinearAlgebra.Powers"
+declaration = "JonnyLean.LinearAlgebra.matPow_factors_commute"
+contract = "contracts/JL214.lean"
+review = "reviews/JL-214.json"
+editable = ["JonnyLean/LinearAlgebra/Powers.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-215"
+title = "行列累乗と反復作用の一致"
+domain = "finite-linear-algebra"
+description = "行列のk乗を一度作用させる計算と元の行列をk回作用させる計算が一致する。"
+tags = ["finite-indices", "natural-semiring", "powers"]
+spec = "specs/JL-215.md"
+module = "JonnyLean.LinearAlgebra.Powers"
+declaration = "JonnyLean.LinearAlgebra.matPow_action"
+contract = "contracts/JL215.lean"
+review = "reviews/JL-215.json"
+editable = ["JonnyLean/LinearAlgebra/Powers.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-216"
+title = "対角行列累乗の成分累乗公式"
+domain = "finite-linear-algebra"
+description = "対角行列の自然数累乗は各対角成分を同じ指数で累乗した対角行列になる。"
+tags = ["finite-indices", "natural-semiring", "powers"]
+spec = "specs/JL-216.md"
+module = "JonnyLean.LinearAlgebra.Powers"
+declaration = "JonnyLean.LinearAlgebra.matPow_diagonal"
+contract = "contracts/JL216.lean"
+review = "reviews/JL-216.json"
+editable = ["JonnyLean/LinearAlgebra/Powers.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-217"
+title = "外積行列作用の内積表示"
+domain = "finite-linear-algebra"
+description = "二ベクトルから作る外積行列の作用が、内積をスカラーとするベクトル倍に一致する。"
+tags = ["finite-indices", "natural-semiring", "outerproducts"]
+spec = "specs/JL-217.md"
+module = "JonnyLean.LinearAlgebra.OuterProducts"
+declaration = "JonnyLean.LinearAlgebra.outer_action"
+contract = "contracts/JL217.lean"
+review = "reviews/JL-217.json"
+editable = ["JonnyLean/LinearAlgebra/OuterProducts.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-218"
+title = "二つの外積行列の積公式"
+domain = "finite-linear-algebra"
+description = "二外積行列の積が中間ベクトルの内積を係数とする外積行列になる。"
+tags = ["finite-indices", "natural-semiring", "outerproducts"]
+spec = "specs/JL-218.md"
+module = "JonnyLean.LinearAlgebra.OuterProducts"
+declaration = "JonnyLean.LinearAlgebra.outer_mul"
+contract = "contracts/JL218.lean"
+review = "reviews/JL-218.json"
+editable = ["JonnyLean/LinearAlgebra/OuterProducts.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-219"
+title = "外積行列の転置と双線形性"
+domain = "finite-linear-algebra"
+description = "二つのベクトルの外積を転置すると引数を交換した外積になる。"
+tags = ["finite-indices", "natural-semiring", "outerproducts"]
+spec = "specs/JL-219.md"
+module = "JonnyLean.LinearAlgebra.OuterProducts"
+declaration = "JonnyLean.LinearAlgebra.transpose_outer"
+contract = "contracts/JL219.lean"
+review = "reviews/JL-219.json"
+editable = ["JonnyLean/LinearAlgebra/OuterProducts.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-220"
+title = "正規化外積からの冪等行列"
+domain = "finite-linear-algebra"
+description = "中間内積が1となる二ベクトルの外積行列は、自分自身との積で変わらない。"
+tags = ["finite-indices", "natural-semiring", "outerproducts"]
+spec = "specs/JL-220.md"
+module = "JonnyLean.LinearAlgebra.OuterProducts"
+declaration = "JonnyLean.LinearAlgebra.outer_idempotent_of_dot_one"
+contract = "contracts/JL220.lean"
+review = "reviews/JL-220.json"
+editable = ["JonnyLean/LinearAlgebra/OuterProducts.lean"]
+depends_on = ["JL-181", "JL-182", "JL-183", "JL-184", "JL-185", "JL-186", "JL-187", "JL-188", "JL-189", "JL-190", "JL-191", "JL-192", "JL-193", "JL-194", "JL-195", "JL-196", "JL-197", "JL-198", "JL-199", "JL-200", "JL-201", "JL-202", "JL-203", "JL-204", "JL-205", "JL-206", "JL-207", "JL-208"]
+
+[[tasks]]
+id = "JL-221"
+title = "正規表現の空語受理判定"
+domain = "regular-expressions"
+description = "空言語・空語・一文字・選択・連結・Kleene閉包からなる正規表現のnullable計算が、空語の言語意味と同値であることを示す。"
+tags = ["regular-expressions", "correctness", "nullable_correct"]
+spec = "specs/JL-221.md"
+module = "JonnyLean.RegularExpressions.Syntax"
+declaration = "JonnyLean.RegularExpressions.nullable_correct"
+contract = "contracts/JL221.lean"
+review = "reviews/JL-221.json"
+editable = ["JonnyLean/RegularExpressions/Syntax.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149"]
+
+[[tasks]]
+id = "JL-222"
+title = "空言語除去を行う選択の意味保存"
+domain = "regular-expressions"
+description = "選択の左右に現れる空言語を除去するsmartAltについて、変換後の受理条件が元の二言語の論理和と一致する。"
+tags = ["regular-expressions", "correctness", "smartAlt_correct"]
+spec = "specs/JL-222.md"
+module = "JonnyLean.RegularExpressions.Smart"
+declaration = "JonnyLean.RegularExpressions.smartAlt_correct"
+contract = "contracts/JL222.lean"
+review = "reviews/JL-222.json"
+editable = ["JonnyLean/RegularExpressions/Smart.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221"]
+
+[[tasks]]
+id = "JL-223"
+title = "連結の空言語・空語簡約の意味保存"
+domain = "regular-expressions"
+description = "smartSeqは空言語との連結を空言語にし、空語との連結を相手へ簡約する。この処理が全体の連結言語を保存する。"
+tags = ["regular-expressions", "correctness", "smartSeq_correct"]
+spec = "specs/JL-223.md"
+module = "JonnyLean.RegularExpressions.Smart"
+declaration = "JonnyLean.RegularExpressions.smartSeq_correct"
+contract = "contracts/JL223.lean"
+review = "reviews/JL-223.json"
+editable = ["JonnyLean/RegularExpressions/Smart.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221"]
+
+[[tasks]]
+id = "JL-224"
+title = "閉包の簡約と冪等性"
+domain = "regular-expressions"
+description = "空言語・空語の閉包を空語へ、閉包の二重適用を一重へ簡約するsmartStarが言語を保存する。"
+tags = ["regular-expressions", "correctness", "smartStar_correct"]
+spec = "specs/JL-224.md"
+module = "JonnyLean.RegularExpressions.Smart"
+declaration = "JonnyLean.RegularExpressions.smartStar_correct"
+contract = "contracts/JL224.lean"
+review = "reviews/JL-224.json"
+editable = ["JonnyLean/RegularExpressions/Smart.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221"]
+
+[[tasks]]
+id = "JL-225"
+title = "Kleene閉包を含む正規表現微分の正しさ"
+domain = "regular-expressions"
+description = "一文字aに関するBrzozowski微分を計算し、微分後が語wを受理することと元の式がa::wを受理することの同値を示す。"
+tags = ["regular-expressions", "correctness", "derivative_correct"]
+spec = "specs/JL-225.md"
+module = "JonnyLean.RegularExpressions.Derivative"
+declaration = "JonnyLean.RegularExpressions.derivative_correct"
+contract = "contracts/JL225.lean"
+review = "reviews/JL-225.json"
+editable = ["JonnyLean/RegularExpressions/Derivative.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224"]
+
+[[tasks]]
+id = "JL-226"
+title = "語全体による残余正規表現"
+domain = "regular-expressions"
+description = "入力語uの各文字で微分を繰り返すと、残余式がvを受理する条件は元の式がu++vを受理する条件になる。"
+tags = ["regular-expressions", "correctness", "derivatives_correct"]
+spec = "specs/JL-226.md"
+module = "JonnyLean.RegularExpressions.Matcher"
+declaration = "JonnyLean.RegularExpressions.derivatives_correct"
+contract = "contracts/JL226.lean"
+review = "reviews/JL-226.json"
+editable = ["JonnyLean/RegularExpressions/Matcher.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225"]
+
+[[tasks]]
+id = "JL-227"
+title = "実行可能な正規表現照合器の完全性と健全性"
+domain = "regular-expressions"
+description = "全入力の微分後にnullableを呼ぶBoolean照合器が、正規表現の独立した言語意味と必要十分に一致する。"
+tags = ["regular-expressions", "correctness", "accepts_correct"]
+spec = "specs/JL-227.md"
+module = "JonnyLean.RegularExpressions.Matcher"
+declaration = "JonnyLean.RegularExpressions.accepts_correct"
+contract = "contracts/JL227.lean"
+review = "reviews/JL-227.json"
+editable = ["JonnyLean/RegularExpressions/Matcher.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225"]
+
+[[tasks]]
+id = "JL-228"
+title = "分割入力によるストリーミング照合"
+domain = "regular-expressions"
+description = "u++vを一括照合する結果と、uで残余式を計算してvを照合する結果がBoolean値そのものとして一致する。"
+tags = ["regular-expressions", "correctness", "accepts_append"]
+spec = "specs/JL-228.md"
+module = "JonnyLean.RegularExpressions.Matcher"
+declaration = "JonnyLean.RegularExpressions.accepts_append"
+contract = "contracts/JL228.lean"
+review = "reviews/JL-228.json"
+editable = ["JonnyLean/RegularExpressions/Matcher.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225"]
+
+[[tasks]]
+id = "JL-229"
+title = "言語同値な式の残余同値"
+domain = "regular-expressions"
+description = "元の正規表現二つが全語で同じ意味を持つなら、任意の共通入力を読んだ後の残余も全語で同値になる。"
+tags = ["regular-expressions", "correctness", "derivatives_congr"]
+spec = "specs/JL-229.md"
+module = "JonnyLean.RegularExpressions.Matcher"
+declaration = "JonnyLean.RegularExpressions.derivatives_congr"
+contract = "contracts/JL229.lean"
+review = "reviews/JL-229.json"
+editable = ["JonnyLean/RegularExpressions/Matcher.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225"]
+
+[[tasks]]
+id = "JL-230"
+title = "正規表現反転の意味保存"
+domain = "regular-expressions"
+description = "連結順序を逆にし各部分式を再帰的に反転する変換が、入力語の反転と一致する。"
+tags = ["regular-expressions", "correctness", "reversed_correct"]
+spec = "specs/JL-230.md"
+module = "JonnyLean.RegularExpressions.Transformations"
+declaration = "JonnyLean.RegularExpressions.reversed_correct"
+contract = "contracts/JL230.lean"
+review = "reviews/JL-230.json"
+editable = ["JonnyLean/RegularExpressions/Transformations.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-145", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225", "JL-226", "JL-227", "JL-228", "JL-229"]
+
+[[tasks]]
+id = "JL-231"
+title = "固定語からの正規表現構築"
+domain = "regular-expressions"
+description = "語の各文字をatomとし連結するliteral構築器が、ちょうどその語だけを受理する。"
+tags = ["regular-expressions", "correctness", "literal_correct"]
+spec = "specs/JL-231.md"
+module = "JonnyLean.RegularExpressions.Transformations"
+declaration = "JonnyLean.RegularExpressions.literal_correct"
+contract = "contracts/JL231.lean"
+review = "reviews/JL-231.json"
+editable = ["JonnyLean/RegularExpressions/Transformations.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-145", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225", "JL-226", "JL-227", "JL-228", "JL-229"]
+
+[[tasks]]
+id = "JL-232"
+title = "正規表現閉包の一段展開"
+domain = "regular-expressions"
+description = "閉包による受理は空語の場合か、基底言語の一語と閉包の一語を連結する場合のいずれかである。"
+tags = ["regular-expressions", "correctness", "star_unfold"]
+spec = "specs/JL-232.md"
+module = "JonnyLean.RegularExpressions.Transformations"
+declaration = "JonnyLean.RegularExpressions.star_unfold"
+contract = "contracts/JL232.lean"
+review = "reviews/JL-232.json"
+editable = ["JonnyLean/RegularExpressions/Transformations.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-145", "JL-147", "JL-148", "JL-149", "JL-221", "JL-222", "JL-223", "JL-224", "JL-225", "JL-226", "JL-227", "JL-228", "JL-229"]
+
+[[tasks]]
+id = "JL-233"
+title = "パーサー合成の未消費末尾保存"
+domain = "verified-parsers"
+description = "成功時に入力の末尾を返すパーサーと、その値に依存する同性質の後続パーサーをbindで合成しても末尾保存が成立する。"
+tags = ["verified-parsers", "correctness", "bind_safe"]
+spec = "specs/JL-233.md"
+module = "JonnyLean.Parsing.Core"
+declaration = "JonnyLean.Parsing.bind_safe"
+contract = "contracts/JL233.lean"
+review = "reviews/JL-233.json"
+editable = ["JonnyLean/Parsing/Core.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-234"
+title = "依存パーサー合成の結合則"
+domain = "verified-parsers"
+description = "失敗を伝播するbindによる三段階のパーサー合成は括弧付けに依存せず同じ関数になる。"
+tags = ["verified-parsers", "correctness", "bind_assoc"]
+spec = "specs/JL-234.md"
+module = "JonnyLean.Parsing.Core"
+declaration = "JonnyLean.Parsing.bind_assoc"
+contract = "contracts/JL234.lean"
+review = "reviews/JL-234.json"
+editable = ["JonnyLean/Parsing/Core.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-235"
+title = "左優先選択パーサーの結合則"
+domain = "verified-parsers"
+description = "choiceは左が成功すればその結果を使い、失敗時にだけ同じ元入力で右を試す。この選択の結合則を示す。"
+tags = ["verified-parsers", "correctness", "choice_assoc"]
+spec = "specs/JL-235.md"
+module = "JonnyLean.Parsing.Core"
+declaration = "JonnyLean.Parsing.choice_assoc"
+contract = "contracts/JL235.lean"
+review = "reviews/JL-235.json"
+editable = ["JonnyLean/Parsing/Core.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-236"
+title = "一文字検査パーサーの正確な成功条件"
+domain = "verified-parsers"
+description = "Boolean述語を満たす先頭一文字だけを消費するsatisfyの成功を、入力のcons分解と述語成立で完全に特徴付ける。"
+tags = ["verified-parsers", "correctness", "satisfy_iff"]
+spec = "specs/JL-236.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.satisfy_iff"
+contract = "contracts/JL236.lean"
+review = "reviews/JL-236.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-237"
+title = "固定語パーサーの接頭辞仕様"
+domain = "verified-parsers"
+description = "literalパーサーがUnitとrestを返すのは、入力が指定語wordにrestを連結したものの場合に限る。"
+tags = ["verified-parsers", "correctness", "literal_iff"]
+spec = "specs/JL-237.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.literal_iff"
+contract = "contracts/JL237.lean"
+review = "reviews/JL-237.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-238"
+title = "固定語の連結とパーサーの逐次合成"
+domain = "verified-parsers"
+description = "uを解析してからvを解析するUnitパーサーが、u++vを一度に解析するパーサーと一致する。"
+tags = ["verified-parsers", "correctness", "literal_append"]
+spec = "specs/JL-238.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.literal_append"
+contract = "contracts/JL238.lean"
+review = "reviews/JL-238.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-239"
+title = "パーサー結果変換の合成則"
+domain = "verified-parsers"
+description = "入力の消費結果を変えず値だけを写すmapPについて、二つの変換を順に行うことが関数合成一回と一致する。"
+tags = ["verified-parsers", "correctness", "map_comp"]
+spec = "specs/JL-239.md"
+module = "JonnyLean.Parsing.Core"
+declaration = "JonnyLean.Parsing.map_comp"
+contract = "contracts/JL239.lean"
+review = "reviews/JL-239.json"
+editable = ["JonnyLean/Parsing/Core.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-240"
+title = "二段階パーサーの中間末尾仕様"
+domain = "verified-parsers"
+description = "pairPが組(b,c)とrestを返す条件を、中間末尾middleが存在して両パーサーが順に成功することとして記述する。"
+tags = ["verified-parsers", "correctness", "pair_iff"]
+spec = "specs/JL-240.md"
+module = "JonnyLean.Parsing.Core"
+declaration = "JonnyLean.Parsing.pair_iff"
+contract = "contracts/JL240.lean"
+review = "reviews/JL-240.json"
+editable = ["JonnyLean/Parsing/Core.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-241"
+title = "固定回数反復と独立した解析連鎖"
+domain = "verified-parsers"
+description = "n回の逐次解析を行うrepeatPの成功が、n段の帰納的関係Chainと同値である。"
+tags = ["verified-parsers", "correctness", "repeat_iff"]
+spec = "specs/JL-241.md"
+module = "JonnyLean.Parsing.Repetition"
+declaration = "JonnyLean.Parsing.repeat_iff"
+contract = "contracts/JL241.lean"
+review = "reviews/JL-241.json"
+editable = ["JonnyLean/Parsing/Repetition.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-242"
+title = "固定回数パーサーの結果個数保証"
+domain = "verified-parsers"
+description = "n回反復が成功したとき、得られる値リストの長さは必ずnであり、入力消費量とは区別される。"
+tags = ["verified-parsers", "correctness", "repeat_length"]
+spec = "specs/JL-242.md"
+module = "JonnyLean.Parsing.Repetition"
+declaration = "JonnyLean.Parsing.repeat_length"
+contract = "contracts/JL242.lean"
+review = "reviews/JL-242.json"
+editable = ["JonnyLean/Parsing/Repetition.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-243"
+title = "燃料付き貪欲反復の末尾保存"
+domain = "verified-parsers"
+description = "最大n回の成功を集め最初の失敗で停止するmanyは、基底パーサーが末尾保存なら元入力の末尾を返す。"
+tags = ["verified-parsers", "correctness", "many_safe"]
+spec = "specs/JL-243.md"
+module = "JonnyLean.Parsing.Repetition"
+declaration = "JonnyLean.Parsing.many_safe"
+contract = "contracts/JL243.lean"
+review = "reviews/JL-243.json"
+editable = ["JonnyLean/Parsing/Repetition.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-244"
+title = "反復回数上限と早期停止の完全性"
+domain = "verified-parsers"
+description = "manyの結果個数は燃料以下であり、燃料未満で止まったなら返された末尾で基底パーサーは失敗する。"
+tags = ["verified-parsers", "correctness", "many_bounds"]
+spec = "specs/JL-244.md"
+module = "JonnyLean.Parsing.Repetition"
+declaration = "JonnyLean.Parsing.many_bounds"
+contract = "contracts/JL244.lean"
+review = "reviews/JL-244.json"
+editable = ["JonnyLean/Parsing/Repetition.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-245"
+title = "先読みパーサーの入力非消費"
+domain = "verified-parsers"
+description = "lookAheadは元パーサーの値を保ちつつ、成功時の末尾を元入力へ戻す。その正確な成功条件を示す。"
+tags = ["verified-parsers", "correctness", "lookAhead_iff"]
+spec = "specs/JL-245.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.lookAhead_iff"
+contract = "contracts/JL245.lean"
+review = "reviews/JL-245.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-246"
+title = "入力終端パーサーの空入力仕様"
+domain = "verified-parsers"
+description = "eofの成功を入力と残余の双方が空であることによって必要十分に特徴付ける。"
+tags = ["verified-parsers", "correctness", "eof_iff"]
+spec = "specs/JL-246.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.eof_iff"
+contract = "contracts/JL246.lean"
+review = "reviews/JL-246.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-247"
+title = "完全消費を要求する解析の正しさ"
+domain = "verified-parsers"
+description = "completeはパーサーが入力をすべて消費した場合だけ値を返す。残余が空であることを独立した等式で検査する。"
+tags = ["verified-parsers", "correctness", "complete_iff"]
+spec = "specs/JL-247.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.complete_iff"
+contract = "contracts/JL247.lean"
+review = "reviews/JL-247.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-248"
+title = "解析値の追加条件によるフィルター"
+domain = "verified-parsers"
+description = "guardPの成功は元パーサーの同じ値・同じ末尾での成功と、解析値へのBoolean検査成立の両方を要求する。"
+tags = ["verified-parsers", "correctness", "guard_iff"]
+spec = "specs/JL-248.md"
+module = "JonnyLean.Parsing.Primitives"
+declaration = "JonnyLean.Parsing.guard_iff"
+contract = "contracts/JL248.lean"
+review = "reviews/JL-248.json"
+editable = ["JonnyLean/Parsing/Primitives.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-239", "JL-240"]
+
+[[tasks]]
+id = "JL-249"
+title = "区切り付き任意データ列の厳密な復号"
+domain = "verified-encoding"
+description = "各要素をsomeで包みnoneを終端とするブロックについて、復号成功と符号列＋未消費末尾という分解の同値を示す。"
+tags = ["verified-encoding", "correctness", "decodeBlock_exact"]
+spec = "specs/JL-249.md"
+module = "JonnyLean.Encoding.Blocks"
+declaration = "JonnyLean.Encoding.decodeBlock_exact"
+contract = "contracts/JL249.lean"
+review = "reviews/JL-249.json"
+editable = ["JonnyLean/Encoding/Blocks.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-250"
+title = "ブロック符号の接頭辞一意性"
+domain = "verified-encoding"
+description = "任意の末尾を付けたブロック符号同士が等しいなら、ペイロードと末尾の双方が一致する。"
+tags = ["verified-encoding", "correctness", "block_prefix_free"]
+spec = "specs/JL-250.md"
+module = "JonnyLean.Encoding.Blocks"
+declaration = "JonnyLean.Encoding.block_prefix_free"
+contract = "contracts/JL250.lean"
+review = "reviews/JL-250.json"
+editable = ["JonnyLean/Encoding/Blocks.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248"]
+
+[[tasks]]
+id = "JL-251"
+title = "終端付き単進自然数の完全な復号仕様"
+domain = "verified-encoding"
+description = "自然数nをtrueをn個 followed by falseで符号化し、復号成功がその符号語と未消費末尾への分解に一致する。"
+tags = ["verified-encoding", "correctness", "readUnary_exact"]
+spec = "specs/JL-251.md"
+module = "JonnyLean.Encoding.Unary"
+declaration = "JonnyLean.Encoding.readUnary_exact"
+contract = "contracts/JL251.lean"
+review = "reviews/JL-251.json"
+editable = ["JonnyLean/Encoding/Unary.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250"]
+
+[[tasks]]
+id = "JL-252"
+title = "自然数復号による厳密な消費量"
+domain = "verified-encoding"
+description = "単進復号がnを返す場合、入力長はn+1+残余長であり、残余は必ず元入力より短い。"
+tags = ["verified-encoding", "correctness", "readUnary_consumption"]
+spec = "specs/JL-252.md"
+module = "JonnyLean.Encoding.Unary"
+declaration = "JonnyLean.Encoding.readUnary_consumption"
+contract = "contracts/JL252.lean"
+review = "reviews/JL-252.json"
+editable = ["JonnyLean/Encoding/Unary.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250"]
+
+[[tasks]]
+id = "JL-253"
+title = "二つの接頭辞符号器の積構成"
+domain = "verified-encoding"
+description = "任意の正しい二つのCodecを、符号語の連結と逐次復号により直積のCodecへ合成できる。"
+tags = ["verified-encoding", "correctness", "pair_roundtrip"]
+spec = "specs/JL-253.md"
+module = "JonnyLean.Encoding.Combinators"
+declaration = "JonnyLean.Encoding.pair_roundtrip"
+contract = "contracts/JL253.lean"
+review = "reviews/JL-253.json"
+editable = ["JonnyLean/Encoding/Combinators.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252"]
+
+[[tasks]]
+id = "JL-254"
+title = "タグ付き直和符号器の構成"
+domain = "verified-encoding"
+description = "左値をfalse、右値をtrueでタグ付けし、対応するCodecを使う復号が任意の末尾とともに値を復元する。"
+tags = ["verified-encoding", "correctness", "sum_roundtrip"]
+spec = "specs/JL-254.md"
+module = "JonnyLean.Encoding.Combinators"
+declaration = "JonnyLean.Encoding.sum_roundtrip"
+contract = "contracts/JL254.lean"
+review = "reviews/JL-254.json"
+editable = ["JonnyLean/Encoding/Combinators.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252"]
+
+[[tasks]]
+id = "JL-255"
+title = "値型の変換に沿った符号器の輸送"
+domain = "verified-encoding"
+description = "符号化前にgで元の値型へ戻し、復号後にfを適用することで、f∘g=idの値について往復を保つ。"
+tags = ["verified-encoding", "correctness", "transport_roundtrip"]
+spec = "specs/JL-255.md"
+module = "JonnyLean.Encoding.Combinators"
+declaration = "JonnyLean.Encoding.transport_roundtrip"
+contract = "contracts/JL255.lean"
+review = "reviews/JL-255.json"
+editable = ["JonnyLean/Encoding/Combinators.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252"]
+
+[[tasks]]
+id = "JL-256"
+title = "指定個数の連続フィールド復号"
+domain = "verified-encoding"
+description = "任意のCodecで各値を符号化して連結した列は、要素数を指定したrepeatP復号によって元リストと末尾へ戻る。"
+tags = ["verified-encoding", "correctness", "fields_roundtrip"]
+spec = "specs/JL-256.md"
+module = "JonnyLean.Encoding.FramedLists"
+declaration = "JonnyLean.Encoding.fields_roundtrip"
+contract = "contracts/JL256.lean"
+review = "reviews/JL-256.json"
+editable = ["JonnyLean/Encoding/FramedLists.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252", "JL-253", "JL-254", "JL-255"]
+
+[[tasks]]
+id = "JL-257"
+title = "長さヘッダー付きリスト符号の往復"
+domain = "verified-encoding"
+description = "リスト長を単進ヘッダーにし、各フィールド符号を続ける自己区切り形式を構築し、任意の末尾を保持して復号する。"
+tags = ["verified-encoding", "correctness", "list_roundtrip"]
+spec = "specs/JL-257.md"
+module = "JonnyLean.Encoding.FramedLists"
+declaration = "JonnyLean.Encoding.list_roundtrip"
+contract = "contracts/JL257.lean"
+review = "reviews/JL-257.json"
+editable = ["JonnyLean/Encoding/FramedLists.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252", "JL-253", "JL-254", "JL-255"]
+
+[[tasks]]
+id = "JL-258"
+title = "長さ付きリスト復号の厳密性"
+domain = "verified-encoding"
+description = "リスト復号器の成功は、入力がそのリストの正規符号と残余の連結であることに限られる。"
+tags = ["verified-encoding", "correctness", "list_exact"]
+spec = "specs/JL-258.md"
+module = "JonnyLean.Encoding.FramedLists"
+declaration = "JonnyLean.Encoding.list_exact"
+contract = "contracts/JL258.lean"
+review = "reviews/JL-258.json"
+editable = ["JonnyLean/Encoding/FramedLists.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252", "JL-253", "JL-254", "JL-255"]
+
+[[tasks]]
+id = "JL-259"
+title = "二分木形状の燃料付き復号"
+domain = "verified-encoding"
+description = "葉をfalse、分岐をtrueと左右の符号列で表す前置形式を、高さより大きい燃料で復号すれば形状と末尾が復元される。"
+tags = ["verified-encoding", "correctness", "tree_roundtrip"]
+spec = "specs/JL-259.md"
+module = "JonnyLean.Encoding.Trees"
+declaration = "JonnyLean.Encoding.tree_roundtrip"
+contract = "contracts/JL259.lean"
+review = "reviews/JL-259.json"
+editable = ["JonnyLean/Encoding/Trees.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252", "JL-253", "JL-254", "JL-255", "JL-256", "JL-257", "JL-258"]
+
+[[tasks]]
+id = "JL-260"
+title = "木の前置符号の境界一意性"
+domain = "verified-encoding"
+description = "二つの木の符号へ任意の末尾を連結して等しくなれば、木自体と末尾の両方が一致する。"
+tags = ["verified-encoding", "correctness", "tree_prefix_free"]
+spec = "specs/JL-260.md"
+module = "JonnyLean.Encoding.Trees"
+declaration = "JonnyLean.Encoding.tree_prefix_free"
+contract = "contracts/JL260.lean"
+review = "reviews/JL-260.json"
+editable = ["JonnyLean/Encoding/Trees.lean"]
+depends_on = ["JL-233", "JL-234", "JL-235", "JL-236", "JL-237", "JL-238", "JL-239", "JL-240", "JL-241", "JL-242", "JL-243", "JL-244", "JL-245", "JL-246", "JL-247", "JL-248", "JL-249", "JL-250", "JL-251", "JL-252", "JL-253", "JL-254", "JL-255", "JL-256", "JL-257", "JL-258"]
+
+[[tasks]]
+id = "JL-261"
+title = "同一変数への状態更新の上書き"
+domain = "operational-semantics"
+description = "状態は自然数変数名から自然数値への全域関数である。同じ変数に二回代入したとき、後の代入値だけが残ることを、すべての変数における関数の等式として示す。別の変数の値は維持される。"
+tags = ["state", "update"]
+spec = "specs/JL-261.md"
+module = "JonnyLean.Imperative.State"
+declaration = "JonnyLean.Imperative.update_shadow"
+contract = "contracts/JL261.lean"
+review = "reviews/JL-261.json"
+editable = ["JonnyLean/Imperative/State.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-262"
+title = "異なる変数への状態更新の交換"
+domain = "operational-semantics"
+description = "変数名xとyが異なるときだけ、定数値a,bによる二回の状態更新を交換できる。式の評価を伴う命令の交換を無条件に主張するものではない。"
+tags = ["state", "commutation"]
+spec = "specs/JL-262.md"
+module = "JonnyLean.Imperative.State"
+declaration = "JonnyLean.Imperative.update_comm"
+contract = "contracts/JL262.lean"
+review = "reviews/JL-262.json"
+editable = ["JonnyLean/Imperative/State.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-263"
+title = "現在値による状態更新の除去"
+domain = "operational-semantics"
+description = "変数xに現在のs xを再代入しても状態関数全体が変わらない。x=0を含むすべての変数と無限の全域状態について関数外延性で証明する。"
+tags = ["state", "identity"]
+spec = "specs/JL-263.md"
+module = "JonnyLean.Imperative.State"
+declaration = "JonnyLean.Imperative.update_same"
+contract = "contracts/JL263.lean"
+review = "reviews/JL-263.json"
+editable = ["JonnyLean/Imperative/State.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-264"
+title = "観測変数上の一致と状態更新"
+domain = "operational-semantics"
+description = "観測対象リストxsの各変数で一致する二状態は、同じ変数xを同じ値nで更新した後もxs上で一致する。リストの重複や空の場合を排除しない。xがxsに含まれることも仮定しない。"
+tags = ["state", "observational-equivalence"]
+spec = "specs/JL-264.md"
+module = "JonnyLean.Imperative.State"
+declaration = "JonnyLean.Imperative.agrees_update"
+contract = "contracts/JL264.lean"
+review = "reviews/JL-264.json"
+editable = ["JonnyLean/Imperative/State.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-265"
+title = "算術式の単一変数置換と代入意味"
+domain = "operational-semantics"
+description = "算術式は自然数定数、変数、加算、切り捨て減算、乗算からなる。式e中のxをrに構文置換してから元の状態sで評価する結果は、元のsでrを評価した値をxに代入してeを評価する結果に等しい。r中のxを再帰的に置換しない。"
+tags = ["expressions", "substitution"]
+spec = "specs/JL-265.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.AExp.eval_subst"
+contract = "contracts/JL265.lean"
+review = "reviews/JL-265.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-266"
+title = "算術式の参照変数による観測意味"
+domain = "operational-semantics"
+description = "算術式に現れる変数の値さえ一致すれば、他の変数が異なる二状態で式の値は等しい。varsは加減乗算の両側の参照変数リストを連結するため、重複を許す。"
+tags = ["expressions", "support"]
+spec = "specs/JL-266.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.AExp.eval_agrees"
+contract = "contracts/JL266.lean"
+review = "reviews/JL-266.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-267"
+title = "参照されない変数の算術評価への非干渉"
+domain = "operational-semantics"
+description = "式に現れない変数の値を任意に更新しても、その算術式の評価値は変わらない。更新値に上限を置かず、切り捨て減算でも参照情報による同じ帰納証明を用いる。"
+tags = ["expressions", "frame"]
+spec = "specs/JL-267.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.AExp.eval_update_fresh"
+contract = "contracts/JL267.lean"
+review = "reviews/JL-267.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-268"
+title = "ブール式の置換と更新状態での評価"
+domain = "operational-semantics"
+description = "ブール式は真偽定数、自然数式の等値・大小比較、否定、論理積である。内部の算術式への単一変数置換が状態更新による評価と一致する。比較はBoolの決定可能な比較であり古典選択を用いない。"
+tags = ["boolean-expressions", "substitution"]
+spec = "specs/JL-268.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.BExp.eval_subst"
+contract = "contracts/JL268.lean"
+review = "reviews/JL-268.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-269"
+title = "ブール式の参照変数と評価一致"
+domain = "operational-semantics"
+description = "ブール式のすべての参照変数における二状態の一致から、真偽値の一致を導く。両比較辺・否定内部・論理積の両辺を参照変数に含める。"
+tags = ["boolean-expressions", "support"]
+spec = "specs/JL-269.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.BExp.eval_agrees"
+contract = "contracts/JL269.lean"
+review = "reviews/JL-269.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-270"
+title = "参照外の更新による分岐条件の保存"
+domain = "operational-semantics"
+description = "分岐条件の参照変数に含まれない変数を書き換えても条件の真偽は変わらない。whileの条件にも使えるが、この定理単独はループの停止を保証しない。"
+tags = ["boolean-expressions", "noninterference"]
+spec = "specs/JL-270.md"
+module = "JonnyLean.Imperative.Expressions"
+declaration = "JonnyLean.Imperative.BExp.eval_update_fresh"
+contract = "contracts/JL270.lean"
+review = "reviews/JL-270.json"
+editable = ["JonnyLean/Imperative/Expressions.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264"]
+
+[[tasks]]
+id = "JL-271"
+title = "命令の停止実行の決定性"
+domain = "operational-semantics"
+description = "命令はskip、代入、逐次合成、if、whileからなる。Execは有限のbig-step導出であり停止した実行のみを表す。同じ命令・初期状態から二つの停止導出があるとき、最終状態は関数として等しい。停止の存在は仮定されず結論にも含めない。"
+tags = ["big-step", "determinism"]
+spec = "specs/JL-271.md"
+module = "JonnyLean.Imperative.Semantics"
+declaration = "JonnyLean.Imperative.exec_deterministic"
+contract = "contracts/JL271.lean"
+review = "reviews/JL-271.json"
+editable = ["JonnyLean/Imperative/Semantics.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270"]
+
+[[tasks]]
+id = "JL-272"
+title = "逐次命令の結合順序と実行意味"
+domain = "operational-semantics"
+description = "三命令の順序a,b,cを維持したまま逐次合成の括弧だけを変更しても、開始状態と終了状態を結ぶ停止実行関係が等しい。中間状態の存在を組み替えて両方向を構成する。"
+tags = ["big-step", "sequencing"]
+spec = "specs/JL-272.md"
+module = "JonnyLean.Imperative.Semantics"
+declaration = "JonnyLean.Imperative.exec_seq_assoc"
+contract = "contracts/JL272.lean"
+review = "reviews/JL-272.json"
+editable = ["JonnyLean/Imperative/Semantics.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270"]
+
+[[tasks]]
+id = "JL-273"
+title = "whileの一段展開と停止実行の同値"
+domain = "operational-semantics"
+description = "while b cを、bが真ならcの後に同じwhileを行い偽ならskipするifへ一段展開する。この変換は有限停止導出の双方向同値であり、展開しただけで停止するとは主張しない。"
+tags = ["big-step", "loop-unrolling"]
+spec = "specs/JL-273.md"
+module = "JonnyLean.Imperative.Semantics"
+declaration = "JonnyLean.Imperative.exec_while_unroll"
+contract = "contracts/JL273.lean"
+review = "reviews/JL-273.json"
+editable = ["JonnyLean/Imperative/Semantics.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270"]
+
+[[tasks]]
+id = "JL-274"
+title = "命令の書込み集合外の値の保存"
+domain = "operational-semantics"
+description = "writesは構文に現れる代入先をすべて収集する。分岐では両側、whileでは本体の書込みを含む。どの停止実行でも、このリストに含まれない変数の値は保存される。実際に通らなかった分岐の変数も含む保守的な解析である。"
+tags = ["big-step", "frame", "write-analysis"]
+spec = "specs/JL-274.md"
+module = "JonnyLean.Imperative.Semantics"
+declaration = "JonnyLean.Imperative.exec_preserves"
+contract = "contracts/JL274.lean"
+review = "reviews/JL-274.json"
+editable = ["JonnyLean/Imperative/Semantics.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270"]
+
+[[tasks]]
+id = "JL-275"
+title = "常真skipループの非停止"
+domain = "operational-semantics"
+description = "条件が常に真で本体がskipのwhileには、どの初期状態からも有限停止導出が存在しない。すべての有限燃料で実行器がnoneとなることを証明し、実行器の完全性から非停止を導く。none一般は燃料不足を表すが、この例では全燃料のnoneを示す。"
+tags = ["divergence", "fuel", "partial-correctness"]
+spec = "specs/JL-275.md"
+module = "JonnyLean.Imperative.Divergence"
+declaration = "JonnyLean.Imperative.spin_diverges"
+contract = "contracts/JL275.lean"
+review = "reviews/JL-275.json"
+editable = ["JonnyLean/Imperative/Divergence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]
+
+[[tasks]]
+id = "JL-276"
+title = "燃料付き実行器の健全性"
+domain = "operational-semantics"
+description = "runが有限燃料nでsome tを返すならbig-step意味論に実際の停止導出が存在する。fuel0はskipを含めてnoneである。逐次合成の両子命令には同じ減少燃料を渡し、whileの本体と再帰にも同じ減少燃料を渡す。燃料は基本命令数ではなく導出木の高さを制約する。"
+tags = ["interpreter", "soundness"]
+spec = "specs/JL-276.md"
+module = "JonnyLean.Imperative.Interpreter"
+declaration = "JonnyLean.Imperative.run_sound"
+contract = "contracts/JL276.lean"
+review = "reviews/JL-276.json"
+editable = ["JonnyLean/Imperative/Interpreter.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274"]
+
+[[tasks]]
+id = "JL-277"
+title = "停止導出から十分な燃料の存在"
+domain = "operational-semantics"
+description = "有限big-step導出を持つすべての命令について、その最終状態を返す自然数燃料が存在する。逐次合成とwhileでは二つの子導出に必要な燃料の最大値に1を加える。非停止命令の停止や一様な燃料上限を主張しない。"
+tags = ["interpreter", "completeness"]
+spec = "specs/JL-277.md"
+module = "JonnyLean.Imperative.Interpreter"
+declaration = "JonnyLean.Imperative.run_complete"
+contract = "contracts/JL277.lean"
+review = "reviews/JL-277.json"
+editable = ["JonnyLean/Imperative/Interpreter.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274"]
+
+[[tasks]]
+id = "JL-278"
+title = "成功した実行の燃料増加に対する安定性"
+domain = "operational-semantics"
+description = "少ない燃料でsome tとなった実行は、より多い燃料でも同じsome tとなる。noneが多い燃料でもnoneになるとは主張しない。燃料を一段ずつ比較して全命令形式を扱う。"
+tags = ["interpreter", "monotonicity"]
+spec = "specs/JL-278.md"
+module = "JonnyLean.Imperative.Interpreter"
+declaration = "JonnyLean.Imperative.run_mono"
+contract = "contracts/JL278.lean"
+review = "reviews/JL-278.json"
+editable = ["JonnyLean/Imperative/Interpreter.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274"]
+
+[[tasks]]
+id = "JL-279"
+title = "操作的意味論と実行器の一致"
+domain = "operational-semantics"
+description = "関係として与えた停止実行と、ある有限燃料で実行器が成功することは同値である。健全性と完全性を統合する。燃料の存在量化を外さず、固定燃料での失敗を非停止と混同しない。"
+tags = ["interpreter", "adequacy"]
+spec = "specs/JL-279.md"
+module = "JonnyLean.Imperative.Interpreter"
+declaration = "JonnyLean.Imperative.exec_iff_run"
+contract = "contracts/JL279.lean"
+review = "reviews/JL-279.json"
+editable = ["JonnyLean/Imperative/Interpreter.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274"]
+
+[[tasks]]
+id = "JL-280"
+title = "異なる燃料で得られた成功状態の一意性"
+domain = "operational-semantics"
+description = "二つの燃料n,mの大小関係を仮定せず、同じ初期状態・命令の成功結果は同一状態となる。実行器の健全性と意味論の決定性を使って導く。"
+tags = ["interpreter", "determinacy"]
+spec = "specs/JL-280.md"
+module = "JonnyLean.Imperative.Interpreter"
+declaration = "JonnyLean.Imperative.run_fuel_unique"
+contract = "contracts/JL280.lean"
+review = "reviews/JL-280.json"
+editable = ["JonnyLean/Imperative/Interpreter.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274"]
+
+[[tasks]]
+id = "JL-281"
+title = "Hoare論理のskip規則"
+domain = "program-logic"
+description = "Hoare三つ組は前条件Pを満たす初期状態から停止した実行の終了状態が後条件を満たすことを意味する。skipは同じ状態で停止するため、任意の論理的述語Pを保存する。"
+tags = ["hoare", "skip"]
+spec = "specs/JL-281.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_skip"
+contract = "contracts/JL281.lean"
+review = "reviews/JL-281.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-282"
+title = "Hoare論理の代入規則"
+domain = "program-logic"
+description = "後条件Qを更新後の状態で評価した述語を前条件にすれば代入は正しい。式eを更新前の状態で評価することを明記し、同じ変数が式内に現れる自己参照も許す。"
+tags = ["hoare", "assignment"]
+spec = "specs/JL-282.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_assign"
+contract = "contracts/JL282.lean"
+review = "reviews/JL-282.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-283"
+title = "Hoare論理の逐次合成規則"
+domain = "program-logic"
+description = "中間条件Rを共有する二つの部分正当性証明を接続する。命令cが停止して得られた中間状態にRが成り立つため、dの仕様を適用できる。両方の命令の停止をこの規則だけから導かない。"
+tags = ["hoare", "sequencing"]
+spec = "specs/JL-283.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_seq"
+contract = "contracts/JL283.lean"
+review = "reviews/JL-283.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-284"
+title = "Hoare論理の条件分岐規則"
+domain = "program-logic"
+description = "真側と偽側それぞれに分岐条件の真偽を前条件として加えた仕様から、if全体の仕様を得る。条件は初期状態で評価され、どちらか一方の導出だけを使う。"
+tags = ["hoare", "branching"]
+spec = "specs/JL-284.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_if"
+contract = "contracts/JL284.lean"
+review = "reviews/JL-284.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-285"
+title = "Hoare論理のループ不変条件規則"
+domain = "program-logic"
+description = "条件が真の状態で本体が不変条件Iを保存するなら、whileが停止したときIと条件が偽であることが成り立つ。減少変量や停止仮定はないため部分正当性である。終了条件を結論から省かない。"
+tags = ["hoare", "invariant", "partial-correctness"]
+spec = "specs/JL-285.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_while"
+contract = "contracts/JL285.lean"
+review = "reviews/JL-285.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-286"
+title = "Hoare論理の前条件強化と後条件弱化"
+domain = "program-logic"
+description = "既知の仕様に対して前条件を強くし後条件を弱くする規則を証明する。含意の方向を固定し、PからP'を要求する取り違えを防ぐ。任意の状態述語を許す。"
+tags = ["hoare", "consequence"]
+spec = "specs/JL-286.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_consequence"
+contract = "contracts/JL286.lean"
+review = "reviews/JL-286.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-287"
+title = "Hoare論理の後条件の連言"
+domain = "program-logic"
+description = "同じ命令と前条件から得られる二つの保証を、同じ終了状態での連言としてまとめる。この規則に実行の決定性は不要で、各停止導出に二証明を適用する。"
+tags = ["hoare", "conjunction"]
+spec = "specs/JL-287.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_conjunction"
+contract = "contracts/JL287.lean"
+review = "reviews/JL-287.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-288"
+title = "Hoare論理の前条件の選言"
+domain = "program-logic"
+description = "異なる二つの開始条件がそれぞれ同じ後条件を保証するとき、その選言からも保証できる。古典的な場合分けではなく与えられた選言の証拠を分解する。"
+tags = ["hoare", "disjunction"]
+spec = "specs/JL-288.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_disjunction"
+contract = "contracts/JL288.lean"
+review = "reviews/JL-288.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-289"
+title = "書込み解析を用いたHoareフレーム規則"
+domain = "program-logic"
+description = "追加条件Rが観測変数xsの値だけに依存し、命令がxsを書き換えないなら、既知の前後条件へRを付加できる。Rの依存性と書込みの非交差を両方明示し、無条件のフレーム化をしない。"
+tags = ["hoare", "frame", "write-analysis"]
+spec = "specs/JL-289.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_frame"
+contract = "contracts/JL289.lean"
+review = "reviews/JL-289.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-290"
+title = "最弱自由事前条件による部分正当性の特徴付け"
+domain = "program-logic"
+description = "wlp c Qは、cが停止したすべての終了状態にQが成り立つ初期状態の集合である。Hoare P c QとPがwlpを含意することは同値になる。補助定理として逐次合成のwlpの合成法則と後条件に対する単調性も証明する。liberalであるため停止を要求しない。"
+tags = ["hoare", "weakest-liberal-precondition"]
+spec = "specs/JL-290.md"
+module = "JonnyLean.Imperative.Hoare"
+declaration = "JonnyLean.Imperative.hoare_iff_wlp"
+contract = "contracts/JL290.lean"
+review = "reviews/JL-290.json"
+editable = ["JonnyLean/Imperative/Hoare.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280"]
+
+[[tasks]]
+id = "JL-291"
+title = "一変数インクリメントの停止と局所性"
+domain = "verified-imperative-programs"
+description = "xを1増やす命令の具体的な終了状態を構成し、停止導出、xの値、すべての他変数の保存を一度に保証する。部分正当性だけでなく停止の存在も結論に含む。"
+tags = ["examples", "termination", "increment"]
+spec = "specs/JL-291.md"
+module = "JonnyLean.Imperative.Examples"
+declaration = "JonnyLean.Imperative.increment_correct"
+contract = "contracts/JL291.lean"
+review = "reviews/JL-291.json"
+editable = ["JonnyLean/Imperative/Examples.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290", "JL-296", "JL-297", "JL-298", "JL-299", "JL-300"]
+
+[[tasks]]
+id = "JL-292"
+title = "補助変数を使う値交換プログラム"
+domain = "verified-imperative-programs"
+description = "相異なる二変数x,yの値を第三の一時変数tmpで交換する三代入を実装する。三変数の相異条件をすべて要求する。tmp自体は元のxで上書きされるため保存対象から外し、それ以外の全変数は保存される。"
+tags = ["examples", "swap", "termination"]
+spec = "specs/JL-292.md"
+module = "JonnyLean.Imperative.Examples"
+declaration = "JonnyLean.Imperative.swap_correct"
+contract = "contracts/JL292.lean"
+review = "reviews/JL-292.json"
+editable = ["JonnyLean/Imperative/Examples.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290", "JL-296", "JL-297", "JL-298", "JL-299", "JL-300"]
+
+[[tasks]]
+id = "JL-293"
+title = "カウントダウンループの停止と唯一の終了状態"
+domain = "verified-imperative-programs"
+description = "xが1以上の間xを1ずつ減らすループを実装する。初期値への自然数帰納法で停止を示し、終了状態がxだけを0にした状態であることと一意性を保証する。補助定理countdown_fuelは初期値nに対しn+2の燃料で成功する明示的上限を与える。"
+tags = ["examples", "loop", "termination", "fuel-bound"]
+spec = "specs/JL-293.md"
+module = "JonnyLean.Imperative.Examples"
+declaration = "JonnyLean.Imperative.countdown_correct"
+contract = "contracts/JL293.lean"
+review = "reviews/JL-293.json"
+editable = ["JonnyLean/Imperative/Examples.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290", "JL-296", "JL-297", "JL-298", "JL-299", "JL-300"]
+
+[[tasks]]
+id = "JL-294"
+title = "カウンタから累積変数への値移送"
+domain = "verified-imperative-programs"
+description = "xが正の間yを1増やしxを1減らす。異なる変数である仮定の下、初期xへの帰納法で停止、x=0、yの元値とxの元値の和、他変数の保存を証明する。x=yの場合の誤った停止主張をしない。"
+tags = ["examples", "loop", "invariant", "termination"]
+spec = "specs/JL-294.md"
+module = "JonnyLean.Imperative.Examples"
+declaration = "JonnyLean.Imperative.transfer_correct"
+contract = "contracts/JL294.lean"
+review = "reviews/JL-294.json"
+editable = ["JonnyLean/Imperative/Examples.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290", "JL-296", "JL-297", "JL-298", "JL-299", "JL-300"]
+
+[[tasks]]
+id = "JL-295"
+title = "自然数の累積和を計算する停止ループ"
+domain = "verified-imperative-programs"
+description = "xが正の間、yへ現在のxを加えxを1減らす。終了時のyは元のyに1から元のxまでの和を加えた値となる。自然数上の除算を避けるため倍化した三角数公式で仕様化し、実装の停止導出も構成する。"
+tags = ["examples", "summation", "termination"]
+spec = "specs/JL-295.md"
+module = "JonnyLean.Imperative.Examples"
+declaration = "JonnyLean.Imperative.accumulate_correct"
+contract = "contracts/JL295.lean"
+review = "reviews/JL-295.json"
+editable = ["JonnyLean/Imperative/Examples.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290", "JL-296", "JL-297", "JL-298", "JL-299", "JL-300"]
+
+[[tasks]]
+id = "JL-296"
+title = "逐次命令からのskip除去"
+domain = "verified-optimizations"
+description = "命令の前または後のskipを除去しても、初期状態と終了状態を結ぶ停止実行関係は変わらない。左右の単位則を両方証明する。燃料は構文の深さに依存するため固定燃料での結果同値ではない。"
+tags = ["equivalence", "skip-elimination"]
+spec = "specs/JL-296.md"
+module = "JonnyLean.Imperative.Equivalence"
+declaration = "JonnyLean.Imperative.sequence_identities"
+contract = "contracts/JL296.lean"
+review = "reviews/JL-296.json"
+editable = ["JonnyLean/Imperative/Equivalence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]
+
+[[tasks]]
+id = "JL-297"
+title = "定数条件のifの除去"
+domain = "verified-optimizations"
+description = "真偽定数を条件とするifを対応する枝に置き換える変換を両方のBool値について証明する。選択されない枝は非停止でもよく、その枝の実行を要求しない。"
+tags = ["equivalence", "constant-branch"]
+spec = "specs/JL-297.md"
+module = "JonnyLean.Imperative.Equivalence"
+declaration = "JonnyLean.Imperative.constant_branch"
+contract = "contracts/JL297.lean"
+review = "reviews/JL-297.json"
+editable = ["JonnyLean/Imperative/Equivalence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]
+
+[[tasks]]
+id = "JL-298"
+title = "常偽条件のwhileの除去"
+domain = "verified-optimizations"
+description = "常に偽の条件のwhileは本体を一度も実行しないのでskipと同じ停止関係になる。本体cには任意の命令を許し、本体自体が停止するという条件を課さない。"
+tags = ["equivalence", "dead-loop"]
+spec = "specs/JL-298.md"
+module = "JonnyLean.Imperative.Equivalence"
+declaration = "JonnyLean.Imperative.false_loop"
+contract = "contracts/JL298.lean"
+review = "reviews/JL-298.json"
+editable = ["JonnyLean/Imperative/Equivalence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]
+
+[[tasks]]
+id = "JL-299"
+title = "同一変数への二代入の置換による融合"
+domain = "verified-optimizations"
+description = "x:=a; x:=bをx:=b[x:=a]へ融合する。二番目の式bは一番目の更新後に評価されるため、単に最初の代入を削除してはいけない。算術式置換定理と状態更新の上書きを組み合わせる。"
+tags = ["equivalence", "assignment-fusion", "substitution"]
+spec = "specs/JL-299.md"
+module = "JonnyLean.Imperative.Equivalence"
+declaration = "JonnyLean.Imperative.assignment_fusion"
+contract = "contracts/JL299.lean"
+review = "reviews/JL-299.json"
+editable = ["JonnyLean/Imperative/Equivalence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]
+
+[[tasks]]
+id = "JL-300"
+title = "命令木の再帰的最適化の意味保存"
+domain = "verified-optimizations"
+description = "全命令木を再帰走査し、逐次合成のskip、定数if、常偽whileを除去する最適化器を実装する。逐次・分岐・while本体の意味同値合同性を証明し、構文帰納法で停止実行関係の双方向保存を示す。補助定理はHoare仕様の同値も与える。固定燃料や実行時間の等しさは主張しない。"
+tags = ["optimizer", "semantics-preservation"]
+spec = "specs/JL-300.md"
+module = "JonnyLean.Imperative.Equivalence"
+declaration = "JonnyLean.Imperative.optimize_correct"
+contract = "contracts/JL300.lean"
+review = "reviews/JL-300.json"
+editable = ["JonnyLean/Imperative/Equivalence.lean"]
+depends_on = ["JL-261", "JL-262", "JL-263", "JL-264", "JL-265", "JL-266", "JL-267", "JL-268", "JL-269", "JL-270", "JL-271", "JL-272", "JL-273", "JL-274", "JL-276", "JL-277", "JL-278", "JL-279", "JL-280", "JL-281", "JL-282", "JL-283", "JL-284", "JL-285", "JL-286", "JL-287", "JL-288", "JL-289", "JL-290"]

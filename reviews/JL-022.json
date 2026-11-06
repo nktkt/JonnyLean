@@ -3,10 +3,10 @@
   "task": "JL-022",
   "reviewer": {
     "kind": "ai",
-    "name": "Codex independent reviewer /root/v3_verified_programs",
+    "name": "Codex independent reviewer /root/v4_linear (JL-001–060 and JL-261–300; not the author)",
     "authenticated": false,
-    "evidence_kind": "Independent AI self-report",
-    "independent_scope": "Authored JL-101–140 only. Independently read JL-021–040 and JL-141–180 specifications, contracts, all 60 target modules and 11 additional imported mathematics modules; did not author the reviewed implementation."
+    "evidence_kind": "AI self-report",
+    "independent_scope": "Authored JL-181–220 only. Independently read source, Japanese specifications and contracts for JL-001–060 and JL-261–300, reviewed the shared v4 release implementation, and checked final machine evidence and both input fingerprints."
   },
   "decision": "approve",
   "findings": [],
@@ -34,26 +34,26 @@
     {
       "criterion": "proof",
       "result": "pass",
-      "evidence": "二項漸化式を組再帰から導き、nの帰納法で最後のFn+1を追加する。単調性と正値性の補助証明も一般的。"
+      "evidence": "二項漸化式を組再帰から導き、nの帰納法で最後のFn+1を追加する。単調性と正値性の補助証明も一般的。 Re-read independently for v4: Fibonacci starts with pair (0,1); the prefix identity sums F1 through Fn and adds one to obtain F(n+2). Independent recursion and n=0 are checked."
     },
     {
       "criterion": "coverage",
       "result": "pass",
-      "evidence": "対象仕様 specs/JL-022.md・契約 contracts/JL022.lean と対象本体/全import依存の数学 2 モジュールを精読。公開宣言 JonnyLean.fibonacci_prefix_sum の主張と証明を確認。 最終環境監査にはrootを含む 149 モジュール・2599 宣言が含まれ、ソース全体およびコンパイル済import graphと完全一致。対象所有モジュールの 19 宣言（生成/privateを含む）と公開theoremの一意な存在を照合。"
+      "evidence": "Whole-library audit covers all 179 physical modules including JonnyLean root and 3938 declarations; independently compared the complete module set and compiled import graph to source. JonnyLean.fibonacci_prefix_sum is uniquely audited as a theorem in JonnyLean.NumberTheory.Fibonacci. Read the assigned mathematical source, specification and contract; exact read-version hashes remained unchanged."
     },
     {
       "criterion": "audit",
       "result": "pass",
-      "evidence": "artifacts/JL-022/report.json の最終実機械結果でstatus=pass、mechanical=pass、findings=[]を確認。原契約を -DwarningAsError=true で実行した終了値は0。数学全 2599 宣言および契約の全 30 ローカル宣言に独自axiom・sorryAx・Classical.choiceはなく、許容公理propext/Quot.soundのみ。対象定理の公理依存は [\"Quot.sound\", \"propext\"]。capture_inputs と capture_verification_inputs を現在のファイルから再計算し報告の双方に完全一致することを確認。精読時の全数学/仕様/契約hashも再照合した。"
+      "evidence": "Final artifacts/JL-022/report.json has status/mechanical=pass, findings=[], and successful original contract compilation with -DwarningAsError=true. Checked all 3938 library and 30 local contract declarations (including generated/private declarations): no custom axioms or dependencies outside propext/Quot.sound. Target axioms: ['Quot.sound', 'propext']. Recomputed both capture_inputs and capture_verification_inputs and matched the recorded maps. Independently reviewed v4 release infrastructure and its corrected descriptor race; focused 12+2 tests passed."
     }
   ],
   "inputs": {
-    ".github/workflows/ci.yml": "6d2e20d970d80eecb6266d87800440e1a5d13f0ab7b255948e106315f877afbe",
+    ".github/workflows/ci.yml": "e249d42dff37964e2a894ac37f318ed427eac478d4e827b1c3642f808481f502",
     "JonnyLean/Algebra/FiniteSum.lean": "9314c2f98d27b19b97a5a3d8ca3e53a59074d3f571f6af39d5f668930e628d1d",
     "JonnyLean/NumberTheory/Fibonacci.lean": "5b50efbc237acfb21d3e00b5fbceed13729e1d3850a78cd17ac0872894673498",
     "contracts/JL022.lean": "5eb070095fb8ca833c1aa73429eb07a8ba5396746d1179581ebc8244f8c3c60d",
     "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
-    "lakefile.toml": "c84968d52ce7bc3cd55eaec859d435a4e6608620a20eecf359dfa65e405e2d39",
+    "lakefile.toml": "cc9dbe62bf6a6426b4e79f85a3584e010f28c285c234fc842d069c6b2aef393c",
     "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
     "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
     "specs/JL-015.md": "44421f4b4ed86acdc4438d413984daa4edfe84af71f3e94a9abfde32ef27c436",
@@ -64,16 +64,18 @@
     "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
     "tests/test_platform_v3.py": "dcc9fd38c0ceb99b1f97ee0a2839191a1b4596833fb9f5c64213d50f0a8bb2c6",
     "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_release_v4.py": "51b58cfa0ea6f6a37733e443d976599050899d5cd4d64c4ed2954ddaa57a157a",
     "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
     "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
     "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
     "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
     "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
     "tools/catalog.py": "8a7cbe66c90ca7d372e43f0e7b63ee252121de4f92a3213642829e89a059caaf",
-    "tools/jonnylean.py": "68852e62cd00e8d7e8e7ae28565bddfaf3f5ba003537bf6dc28d518addd045a4",
+    "tools/jonnylean.py": "1652157d128deda874091a8f79aa7059c23b5c08e19fafa231628c4a87e30735",
     "tools/library.py": "1789e5705078300b011055df8da51fa4cdd1029e47cf5f6d38ab533839cb6494",
     "tools/planning.py": "c014517fdcc36e48ce4688fd4c7203bbda1aba3a0a7e823a28818a3ab283ea2b",
     "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/release.py": "16d34185a7c6cd24574aa46b32f00b8afd16a2a5db87a220df10db66465f5e32",
     "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
     "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
     "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
@@ -86,5 +88,6 @@
     "@task-context": "90cb4d377eb350f80eb083afec6f55ee1b1e8935b866ef0c6629717329a8f15d"
   },
   "human_approval": "not_recorded",
-  "reviewed_at": "2026-11-06T14:58:02.310556+00:00"
+  "reviewed_at": "2026-11-06T15:32:55.000951+00:00",
+  "source_review_note": "Fibonacci starts with pair (0,1); the prefix identity sums F1 through Fn and adds one to obtain F(n+2). Independent recursion and n=0 are checked."
 }

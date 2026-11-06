@@ -13,6 +13,7 @@
 - `tools/catalog.py`: 分野・タグ・検索・依存グラフ、原本からレジストリと集約importを決定的に生成。
 - `tools/planning.py`: 依存の追加・層分け・決定的なCI分割を実行せずに表示。
 - `tools/library.py`: 現在の機械監査から宣言の名前・型・公理依存を検索・書き出し。
+- `tools/release.py`: 現在の全課題の証跡を確認し、再現可能なソースZIPと重複を除いた監査記録を生成。読み取り専用の整合性確認も提供。
 - `tools/scopes.py`: ソースのimport閉包を計算し、Leanのコンパイル済みimportグラフと照合。
 - `tools/reporting.py`: 現在性を確認した保存結果を外部通信なしのHTMLに出力。
 - `tools/publish.py`: ローカルPR文面と、明示的な公開操作。

@@ -1,0 +1,774 @@
+[
+  {
+    "id": "JL-261",
+    "title": "同一変数への状態更新の上書き",
+    "domain": "operational-semantics",
+    "description": "状態は自然数変数名から自然数値への全域関数である。同じ変数に二回代入したとき、後の代入値だけが残ることを、すべての変数における関数の等式として示す。別の変数の値は維持される。",
+    "tags": [
+      "state",
+      "update"
+    ],
+    "spec": "specs/JL-261.md",
+    "module": "JonnyLean.Imperative.State",
+    "declaration": "JonnyLean.Imperative.update_shadow",
+    "contract": "contracts/JL261.lean",
+    "review": "reviews/JL-261.json",
+    "editable": [
+      "JonnyLean/Imperative/State.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-262",
+    "title": "異なる変数への状態更新の交換",
+    "domain": "operational-semantics",
+    "description": "変数名xとyが異なるときだけ、定数値a,bによる二回の状態更新を交換できる。式の評価を伴う命令の交換を無条件に主張するものではない。",
+    "tags": [
+      "state",
+      "commutation"
+    ],
+    "spec": "specs/JL-262.md",
+    "module": "JonnyLean.Imperative.State",
+    "declaration": "JonnyLean.Imperative.update_comm",
+    "contract": "contracts/JL262.lean",
+    "review": "reviews/JL-262.json",
+    "editable": [
+      "JonnyLean/Imperative/State.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-263",
+    "title": "現在値による状態更新の除去",
+    "domain": "operational-semantics",
+    "description": "変数xに現在のs xを再代入しても状態関数全体が変わらない。x=0を含むすべての変数と無限の全域状態について関数外延性で証明する。",
+    "tags": [
+      "state",
+      "identity"
+    ],
+    "spec": "specs/JL-263.md",
+    "module": "JonnyLean.Imperative.State",
+    "declaration": "JonnyLean.Imperative.update_same",
+    "contract": "contracts/JL263.lean",
+    "review": "reviews/JL-263.json",
+    "editable": [
+      "JonnyLean/Imperative/State.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-264",
+    "title": "観測変数上の一致と状態更新",
+    "domain": "operational-semantics",
+    "description": "観測対象リストxsの各変数で一致する二状態は、同じ変数xを同じ値nで更新した後もxs上で一致する。リストの重複や空の場合を排除しない。xがxsに含まれることも仮定しない。",
+    "tags": [
+      "state",
+      "observational-equivalence"
+    ],
+    "spec": "specs/JL-264.md",
+    "module": "JonnyLean.Imperative.State",
+    "declaration": "JonnyLean.Imperative.agrees_update",
+    "contract": "contracts/JL264.lean",
+    "review": "reviews/JL-264.json",
+    "editable": [
+      "JonnyLean/Imperative/State.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-265",
+    "title": "算術式の単一変数置換と代入意味",
+    "domain": "operational-semantics",
+    "description": "算術式は自然数定数、変数、加算、切り捨て減算、乗算からなる。式e中のxをrに構文置換してから元の状態sで評価する結果は、元のsでrを評価した値をxに代入してeを評価する結果に等しい。r中のxを再帰的に置換しない。",
+    "tags": [
+      "expressions",
+      "substitution"
+    ],
+    "spec": "specs/JL-265.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.AExp.eval_subst",
+    "contract": "contracts/JL265.lean",
+    "review": "reviews/JL-265.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-266",
+    "title": "算術式の参照変数による観測意味",
+    "domain": "operational-semantics",
+    "description": "算術式に現れる変数の値さえ一致すれば、他の変数が異なる二状態で式の値は等しい。varsは加減乗算の両側の参照変数リストを連結するため、重複を許す。",
+    "tags": [
+      "expressions",
+      "support"
+    ],
+    "spec": "specs/JL-266.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.AExp.eval_agrees",
+    "contract": "contracts/JL266.lean",
+    "review": "reviews/JL-266.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-267",
+    "title": "参照されない変数の算術評価への非干渉",
+    "domain": "operational-semantics",
+    "description": "式に現れない変数の値を任意に更新しても、その算術式の評価値は変わらない。更新値に上限を置かず、切り捨て減算でも参照情報による同じ帰納証明を用いる。",
+    "tags": [
+      "expressions",
+      "frame"
+    ],
+    "spec": "specs/JL-267.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.AExp.eval_update_fresh",
+    "contract": "contracts/JL267.lean",
+    "review": "reviews/JL-267.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-268",
+    "title": "ブール式の置換と更新状態での評価",
+    "domain": "operational-semantics",
+    "description": "ブール式は真偽定数、自然数式の等値・大小比較、否定、論理積である。内部の算術式への単一変数置換が状態更新による評価と一致する。比較はBoolの決定可能な比較であり古典選択を用いない。",
+    "tags": [
+      "boolean-expressions",
+      "substitution"
+    ],
+    "spec": "specs/JL-268.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.BExp.eval_subst",
+    "contract": "contracts/JL268.lean",
+    "review": "reviews/JL-268.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-269",
+    "title": "ブール式の参照変数と評価一致",
+    "domain": "operational-semantics",
+    "description": "ブール式のすべての参照変数における二状態の一致から、真偽値の一致を導く。両比較辺・否定内部・論理積の両辺を参照変数に含める。",
+    "tags": [
+      "boolean-expressions",
+      "support"
+    ],
+    "spec": "specs/JL-269.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.BExp.eval_agrees",
+    "contract": "contracts/JL269.lean",
+    "review": "reviews/JL-269.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-270",
+    "title": "参照外の更新による分岐条件の保存",
+    "domain": "operational-semantics",
+    "description": "分岐条件の参照変数に含まれない変数を書き換えても条件の真偽は変わらない。whileの条件にも使えるが、この定理単独はループの停止を保証しない。",
+    "tags": [
+      "boolean-expressions",
+      "noninterference"
+    ],
+    "spec": "specs/JL-270.md",
+    "module": "JonnyLean.Imperative.Expressions",
+    "declaration": "JonnyLean.Imperative.BExp.eval_update_fresh",
+    "contract": "contracts/JL270.lean",
+    "review": "reviews/JL-270.json",
+    "editable": [
+      "JonnyLean/Imperative/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-271",
+    "title": "命令の停止実行の決定性",
+    "domain": "operational-semantics",
+    "description": "命令はskip、代入、逐次合成、if、whileからなる。Execは有限のbig-step導出であり停止した実行のみを表す。同じ命令・初期状態から二つの停止導出があるとき、最終状態は関数として等しい。停止の存在は仮定されず結論にも含めない。",
+    "tags": [
+      "big-step",
+      "determinism"
+    ],
+    "spec": "specs/JL-271.md",
+    "module": "JonnyLean.Imperative.Semantics",
+    "declaration": "JonnyLean.Imperative.exec_deterministic",
+    "contract": "contracts/JL271.lean",
+    "review": "reviews/JL-271.json",
+    "editable": [
+      "JonnyLean/Imperative/Semantics.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-272",
+    "title": "逐次命令の結合順序と実行意味",
+    "domain": "operational-semantics",
+    "description": "三命令の順序a,b,cを維持したまま逐次合成の括弧だけを変更しても、開始状態と終了状態を結ぶ停止実行関係が等しい。中間状態の存在を組み替えて両方向を構成する。",
+    "tags": [
+      "big-step",
+      "sequencing"
+    ],
+    "spec": "specs/JL-272.md",
+    "module": "JonnyLean.Imperative.Semantics",
+    "declaration": "JonnyLean.Imperative.exec_seq_assoc",
+    "contract": "contracts/JL272.lean",
+    "review": "reviews/JL-272.json",
+    "editable": [
+      "JonnyLean/Imperative/Semantics.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-273",
+    "title": "whileの一段展開と停止実行の同値",
+    "domain": "operational-semantics",
+    "description": "while b cを、bが真ならcの後に同じwhileを行い偽ならskipするifへ一段展開する。この変換は有限停止導出の双方向同値であり、展開しただけで停止するとは主張しない。",
+    "tags": [
+      "big-step",
+      "loop-unrolling"
+    ],
+    "spec": "specs/JL-273.md",
+    "module": "JonnyLean.Imperative.Semantics",
+    "declaration": "JonnyLean.Imperative.exec_while_unroll",
+    "contract": "contracts/JL273.lean",
+    "review": "reviews/JL-273.json",
+    "editable": [
+      "JonnyLean/Imperative/Semantics.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-274",
+    "title": "命令の書込み集合外の値の保存",
+    "domain": "operational-semantics",
+    "description": "writesは構文に現れる代入先をすべて収集する。分岐では両側、whileでは本体の書込みを含む。どの停止実行でも、このリストに含まれない変数の値は保存される。実際に通らなかった分岐の変数も含む保守的な解析である。",
+    "tags": [
+      "big-step",
+      "frame",
+      "write-analysis"
+    ],
+    "spec": "specs/JL-274.md",
+    "module": "JonnyLean.Imperative.Semantics",
+    "declaration": "JonnyLean.Imperative.exec_preserves",
+    "contract": "contracts/JL274.lean",
+    "review": "reviews/JL-274.json",
+    "editable": [
+      "JonnyLean/Imperative/Semantics.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-275",
+    "title": "常真skipループの非停止",
+    "domain": "operational-semantics",
+    "description": "条件が常に真で本体がskipのwhileには、どの初期状態からも有限停止導出が存在しない。すべての有限燃料で実行器がnoneとなることを証明し、実行器の完全性から非停止を導く。none一般は燃料不足を表すが、この例では全燃料のnoneを示す。",
+    "tags": [
+      "divergence",
+      "fuel",
+      "partial-correctness"
+    ],
+    "spec": "specs/JL-275.md",
+    "module": "JonnyLean.Imperative.Divergence",
+    "declaration": "JonnyLean.Imperative.spin_diverges",
+    "contract": "contracts/JL275.lean",
+    "review": "reviews/JL-275.json",
+    "editable": [
+      "JonnyLean/Imperative/Divergence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-276",
+    "title": "燃料付き実行器の健全性",
+    "domain": "operational-semantics",
+    "description": "runが有限燃料nでsome tを返すならbig-step意味論に実際の停止導出が存在する。fuel0はskipを含めてnoneである。逐次合成の両子命令には同じ減少燃料を渡し、whileの本体と再帰にも同じ減少燃料を渡す。燃料は基本命令数ではなく導出木の高さを制約する。",
+    "tags": [
+      "interpreter",
+      "soundness"
+    ],
+    "spec": "specs/JL-276.md",
+    "module": "JonnyLean.Imperative.Interpreter",
+    "declaration": "JonnyLean.Imperative.run_sound",
+    "contract": "contracts/JL276.lean",
+    "review": "reviews/JL-276.json",
+    "editable": [
+      "JonnyLean/Imperative/Interpreter.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-277",
+    "title": "停止導出から十分な燃料の存在",
+    "domain": "operational-semantics",
+    "description": "有限big-step導出を持つすべての命令について、その最終状態を返す自然数燃料が存在する。逐次合成とwhileでは二つの子導出に必要な燃料の最大値に1を加える。非停止命令の停止や一様な燃料上限を主張しない。",
+    "tags": [
+      "interpreter",
+      "completeness"
+    ],
+    "spec": "specs/JL-277.md",
+    "module": "JonnyLean.Imperative.Interpreter",
+    "declaration": "JonnyLean.Imperative.run_complete",
+    "contract": "contracts/JL277.lean",
+    "review": "reviews/JL-277.json",
+    "editable": [
+      "JonnyLean/Imperative/Interpreter.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-278",
+    "title": "成功した実行の燃料増加に対する安定性",
+    "domain": "operational-semantics",
+    "description": "少ない燃料でsome tとなった実行は、より多い燃料でも同じsome tとなる。noneが多い燃料でもnoneになるとは主張しない。燃料を一段ずつ比較して全命令形式を扱う。",
+    "tags": [
+      "interpreter",
+      "monotonicity"
+    ],
+    "spec": "specs/JL-278.md",
+    "module": "JonnyLean.Imperative.Interpreter",
+    "declaration": "JonnyLean.Imperative.run_mono",
+    "contract": "contracts/JL278.lean",
+    "review": "reviews/JL-278.json",
+    "editable": [
+      "JonnyLean/Imperative/Interpreter.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-279",
+    "title": "操作的意味論と実行器の一致",
+    "domain": "operational-semantics",
+    "description": "関係として与えた停止実行と、ある有限燃料で実行器が成功することは同値である。健全性と完全性を統合する。燃料の存在量化を外さず、固定燃料での失敗を非停止と混同しない。",
+    "tags": [
+      "interpreter",
+      "adequacy"
+    ],
+    "spec": "specs/JL-279.md",
+    "module": "JonnyLean.Imperative.Interpreter",
+    "declaration": "JonnyLean.Imperative.exec_iff_run",
+    "contract": "contracts/JL279.lean",
+    "review": "reviews/JL-279.json",
+    "editable": [
+      "JonnyLean/Imperative/Interpreter.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-280",
+    "title": "異なる燃料で得られた成功状態の一意性",
+    "domain": "operational-semantics",
+    "description": "二つの燃料n,mの大小関係を仮定せず、同じ初期状態・命令の成功結果は同一状態となる。実行器の健全性と意味論の決定性を使って導く。",
+    "tags": [
+      "interpreter",
+      "determinacy"
+    ],
+    "spec": "specs/JL-280.md",
+    "module": "JonnyLean.Imperative.Interpreter",
+    "declaration": "JonnyLean.Imperative.run_fuel_unique",
+    "contract": "contracts/JL280.lean",
+    "review": "reviews/JL-280.json",
+    "editable": [
+      "JonnyLean/Imperative/Interpreter.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-281",
+    "title": "Hoare論理のskip規則",
+    "domain": "program-logic",
+    "description": "Hoare三つ組は前条件Pを満たす初期状態から停止した実行の終了状態が後条件を満たすことを意味する。skipは同じ状態で停止するため、任意の論理的述語Pを保存する。",
+    "tags": [
+      "hoare",
+      "skip"
+    ],
+    "spec": "specs/JL-281.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_skip",
+    "contract": "contracts/JL281.lean",
+    "review": "reviews/JL-281.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-282",
+    "title": "Hoare論理の代入規則",
+    "domain": "program-logic",
+    "description": "後条件Qを更新後の状態で評価した述語を前条件にすれば代入は正しい。式eを更新前の状態で評価することを明記し、同じ変数が式内に現れる自己参照も許す。",
+    "tags": [
+      "hoare",
+      "assignment"
+    ],
+    "spec": "specs/JL-282.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_assign",
+    "contract": "contracts/JL282.lean",
+    "review": "reviews/JL-282.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-283",
+    "title": "Hoare論理の逐次合成規則",
+    "domain": "program-logic",
+    "description": "中間条件Rを共有する二つの部分正当性証明を接続する。命令cが停止して得られた中間状態にRが成り立つため、dの仕様を適用できる。両方の命令の停止をこの規則だけから導かない。",
+    "tags": [
+      "hoare",
+      "sequencing"
+    ],
+    "spec": "specs/JL-283.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_seq",
+    "contract": "contracts/JL283.lean",
+    "review": "reviews/JL-283.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-284",
+    "title": "Hoare論理の条件分岐規則",
+    "domain": "program-logic",
+    "description": "真側と偽側それぞれに分岐条件の真偽を前条件として加えた仕様から、if全体の仕様を得る。条件は初期状態で評価され、どちらか一方の導出だけを使う。",
+    "tags": [
+      "hoare",
+      "branching"
+    ],
+    "spec": "specs/JL-284.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_if",
+    "contract": "contracts/JL284.lean",
+    "review": "reviews/JL-284.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-285",
+    "title": "Hoare論理のループ不変条件規則",
+    "domain": "program-logic",
+    "description": "条件が真の状態で本体が不変条件Iを保存するなら、whileが停止したときIと条件が偽であることが成り立つ。減少変量や停止仮定はないため部分正当性である。終了条件を結論から省かない。",
+    "tags": [
+      "hoare",
+      "invariant",
+      "partial-correctness"
+    ],
+    "spec": "specs/JL-285.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_while",
+    "contract": "contracts/JL285.lean",
+    "review": "reviews/JL-285.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-286",
+    "title": "Hoare論理の前条件強化と後条件弱化",
+    "domain": "program-logic",
+    "description": "既知の仕様に対して前条件を強くし後条件を弱くする規則を証明する。含意の方向を固定し、PからP'を要求する取り違えを防ぐ。任意の状態述語を許す。",
+    "tags": [
+      "hoare",
+      "consequence"
+    ],
+    "spec": "specs/JL-286.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_consequence",
+    "contract": "contracts/JL286.lean",
+    "review": "reviews/JL-286.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-287",
+    "title": "Hoare論理の後条件の連言",
+    "domain": "program-logic",
+    "description": "同じ命令と前条件から得られる二つの保証を、同じ終了状態での連言としてまとめる。この規則に実行の決定性は不要で、各停止導出に二証明を適用する。",
+    "tags": [
+      "hoare",
+      "conjunction"
+    ],
+    "spec": "specs/JL-287.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_conjunction",
+    "contract": "contracts/JL287.lean",
+    "review": "reviews/JL-287.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-288",
+    "title": "Hoare論理の前条件の選言",
+    "domain": "program-logic",
+    "description": "異なる二つの開始条件がそれぞれ同じ後条件を保証するとき、その選言からも保証できる。古典的な場合分けではなく与えられた選言の証拠を分解する。",
+    "tags": [
+      "hoare",
+      "disjunction"
+    ],
+    "spec": "specs/JL-288.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_disjunction",
+    "contract": "contracts/JL288.lean",
+    "review": "reviews/JL-288.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-289",
+    "title": "書込み解析を用いたHoareフレーム規則",
+    "domain": "program-logic",
+    "description": "追加条件Rが観測変数xsの値だけに依存し、命令がxsを書き換えないなら、既知の前後条件へRを付加できる。Rの依存性と書込みの非交差を両方明示し、無条件のフレーム化をしない。",
+    "tags": [
+      "hoare",
+      "frame",
+      "write-analysis"
+    ],
+    "spec": "specs/JL-289.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_frame",
+    "contract": "contracts/JL289.lean",
+    "review": "reviews/JL-289.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-290",
+    "title": "最弱自由事前条件による部分正当性の特徴付け",
+    "domain": "program-logic",
+    "description": "wlp c Qは、cが停止したすべての終了状態にQが成り立つ初期状態の集合である。Hoare P c QとPがwlpを含意することは同値になる。補助定理として逐次合成のwlpの合成法則と後条件に対する単調性も証明する。liberalであるため停止を要求しない。",
+    "tags": [
+      "hoare",
+      "weakest-liberal-precondition"
+    ],
+    "spec": "specs/JL-290.md",
+    "module": "JonnyLean.Imperative.Hoare",
+    "declaration": "JonnyLean.Imperative.hoare_iff_wlp",
+    "contract": "contracts/JL290.lean",
+    "review": "reviews/JL-290.json",
+    "editable": [
+      "JonnyLean/Imperative/Hoare.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-291",
+    "title": "一変数インクリメントの停止と局所性",
+    "domain": "verified-imperative-programs",
+    "description": "xを1増やす命令の具体的な終了状態を構成し、停止導出、xの値、すべての他変数の保存を一度に保証する。部分正当性だけでなく停止の存在も結論に含む。",
+    "tags": [
+      "examples",
+      "termination",
+      "increment"
+    ],
+    "spec": "specs/JL-291.md",
+    "module": "JonnyLean.Imperative.Examples",
+    "declaration": "JonnyLean.Imperative.increment_correct",
+    "contract": "contracts/JL291.lean",
+    "review": "reviews/JL-291.json",
+    "editable": [
+      "JonnyLean/Imperative/Examples.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-292",
+    "title": "補助変数を使う値交換プログラム",
+    "domain": "verified-imperative-programs",
+    "description": "相異なる二変数x,yの値を第三の一時変数tmpで交換する三代入を実装する。三変数の相異条件をすべて要求する。tmp自体は元のxで上書きされるため保存対象から外し、それ以外の全変数は保存される。",
+    "tags": [
+      "examples",
+      "swap",
+      "termination"
+    ],
+    "spec": "specs/JL-292.md",
+    "module": "JonnyLean.Imperative.Examples",
+    "declaration": "JonnyLean.Imperative.swap_correct",
+    "contract": "contracts/JL292.lean",
+    "review": "reviews/JL-292.json",
+    "editable": [
+      "JonnyLean/Imperative/Examples.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-293",
+    "title": "カウントダウンループの停止と唯一の終了状態",
+    "domain": "verified-imperative-programs",
+    "description": "xが1以上の間xを1ずつ減らすループを実装する。初期値への自然数帰納法で停止を示し、終了状態がxだけを0にした状態であることと一意性を保証する。補助定理countdown_fuelは初期値nに対しn+2の燃料で成功する明示的上限を与える。",
+    "tags": [
+      "examples",
+      "loop",
+      "termination",
+      "fuel-bound"
+    ],
+    "spec": "specs/JL-293.md",
+    "module": "JonnyLean.Imperative.Examples",
+    "declaration": "JonnyLean.Imperative.countdown_correct",
+    "contract": "contracts/JL293.lean",
+    "review": "reviews/JL-293.json",
+    "editable": [
+      "JonnyLean/Imperative/Examples.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-294",
+    "title": "カウンタから累積変数への値移送",
+    "domain": "verified-imperative-programs",
+    "description": "xが正の間yを1増やしxを1減らす。異なる変数である仮定の下、初期xへの帰納法で停止、x=0、yの元値とxの元値の和、他変数の保存を証明する。x=yの場合の誤った停止主張をしない。",
+    "tags": [
+      "examples",
+      "loop",
+      "invariant",
+      "termination"
+    ],
+    "spec": "specs/JL-294.md",
+    "module": "JonnyLean.Imperative.Examples",
+    "declaration": "JonnyLean.Imperative.transfer_correct",
+    "contract": "contracts/JL294.lean",
+    "review": "reviews/JL-294.json",
+    "editable": [
+      "JonnyLean/Imperative/Examples.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-295",
+    "title": "自然数の累積和を計算する停止ループ",
+    "domain": "verified-imperative-programs",
+    "description": "xが正の間、yへ現在のxを加えxを1減らす。終了時のyは元のyに1から元のxまでの和を加えた値となる。自然数上の除算を避けるため倍化した三角数公式で仕様化し、実装の停止導出も構成する。",
+    "tags": [
+      "examples",
+      "summation",
+      "termination"
+    ],
+    "spec": "specs/JL-295.md",
+    "module": "JonnyLean.Imperative.Examples",
+    "declaration": "JonnyLean.Imperative.accumulate_correct",
+    "contract": "contracts/JL295.lean",
+    "review": "reviews/JL-295.json",
+    "editable": [
+      "JonnyLean/Imperative/Examples.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-296",
+    "title": "逐次命令からのskip除去",
+    "domain": "verified-optimizations",
+    "description": "命令の前または後のskipを除去しても、初期状態と終了状態を結ぶ停止実行関係は変わらない。左右の単位則を両方証明する。燃料は構文の深さに依存するため固定燃料での結果同値ではない。",
+    "tags": [
+      "equivalence",
+      "skip-elimination"
+    ],
+    "spec": "specs/JL-296.md",
+    "module": "JonnyLean.Imperative.Equivalence",
+    "declaration": "JonnyLean.Imperative.sequence_identities",
+    "contract": "contracts/JL296.lean",
+    "review": "reviews/JL-296.json",
+    "editable": [
+      "JonnyLean/Imperative/Equivalence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-297",
+    "title": "定数条件のifの除去",
+    "domain": "verified-optimizations",
+    "description": "真偽定数を条件とするifを対応する枝に置き換える変換を両方のBool値について証明する。選択されない枝は非停止でもよく、その枝の実行を要求しない。",
+    "tags": [
+      "equivalence",
+      "constant-branch"
+    ],
+    "spec": "specs/JL-297.md",
+    "module": "JonnyLean.Imperative.Equivalence",
+    "declaration": "JonnyLean.Imperative.constant_branch",
+    "contract": "contracts/JL297.lean",
+    "review": "reviews/JL-297.json",
+    "editable": [
+      "JonnyLean/Imperative/Equivalence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-298",
+    "title": "常偽条件のwhileの除去",
+    "domain": "verified-optimizations",
+    "description": "常に偽の条件のwhileは本体を一度も実行しないのでskipと同じ停止関係になる。本体cには任意の命令を許し、本体自体が停止するという条件を課さない。",
+    "tags": [
+      "equivalence",
+      "dead-loop"
+    ],
+    "spec": "specs/JL-298.md",
+    "module": "JonnyLean.Imperative.Equivalence",
+    "declaration": "JonnyLean.Imperative.false_loop",
+    "contract": "contracts/JL298.lean",
+    "review": "reviews/JL-298.json",
+    "editable": [
+      "JonnyLean/Imperative/Equivalence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-299",
+    "title": "同一変数への二代入の置換による融合",
+    "domain": "verified-optimizations",
+    "description": "x:=a; x:=bをx:=b[x:=a]へ融合する。二番目の式bは一番目の更新後に評価されるため、単に最初の代入を削除してはいけない。算術式置換定理と状態更新の上書きを組み合わせる。",
+    "tags": [
+      "equivalence",
+      "assignment-fusion",
+      "substitution"
+    ],
+    "spec": "specs/JL-299.md",
+    "module": "JonnyLean.Imperative.Equivalence",
+    "declaration": "JonnyLean.Imperative.assignment_fusion",
+    "contract": "contracts/JL299.lean",
+    "review": "reviews/JL-299.json",
+    "editable": [
+      "JonnyLean/Imperative/Equivalence.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-300",
+    "title": "命令木の再帰的最適化の意味保存",
+    "domain": "verified-optimizations",
+    "description": "全命令木を再帰走査し、逐次合成のskip、定数if、常偽whileを除去する最適化器を実装する。逐次・分岐・while本体の意味同値合同性を証明し、構文帰納法で停止実行関係の双方向保存を示す。補助定理はHoare仕様の同値も与える。固定燃料や実行時間の等しさは主張しない。",
+    "tags": [
+      "optimizer",
+      "semantics-preservation"
+    ],
+    "spec": "specs/JL-300.md",
+    "module": "JonnyLean.Imperative.Equivalence",
+    "declaration": "JonnyLean.Imperative.optimize_correct",
+    "contract": "contracts/JL300.lean",
+    "review": "reviews/JL-300.json",
+    "editable": [
+      "JonnyLean/Imperative/Equivalence.lean"
+    ],
+    "depends_on": []
+  }
+]
