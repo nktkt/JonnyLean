@@ -1,6 +1,6 @@
-# JonnyLean v2 数学ライブラリ
+# JonnyLean v3 数学ライブラリ
 
-60課題を実装。各課題に日本語仕様、Leanの名前付き定理、独立した契約を備える。機械検証とAIレビューの実結果は生成レポートを参照。
+180課題を実装。各課題に日本語仕様、Leanの名前付き定理、独立した契約を備える。共通モジュールを共有する課題もある。機械検証と独立AIレビューの実結果は生成レポートを参照。
 
 | ID | 内容 | Lean実装 | 契約 |
 | --- | --- | --- | --- |
@@ -64,8 +64,129 @@
 | [JL-058](../specs/JL-058.md) | 二項係数と位置選択の個数 | [証明](../JonnyLean/Combinatorics/Binomial.lean) | [契約](../contracts/JL058.lean) |
 | [JL-059](../specs/JL-059.md) | 自然数重み付き有限質量と事象の加法性 | [証明](../JonnyLean/DiscreteProbability/Mass.lean) | [契約](../contracts/JL059.lean) |
 | [JL-060](../specs/JL-060.md) | 有限計数分布の正規化と補事象 | [証明](../JonnyLean/DiscreteProbability/Distribution.lean) | [契約](../contracts/JL060.lean) |
+| [JL-061](../specs/JL-061.md) | 三数の最大公約数の普遍性 | [証明](../JonnyLean/Arithmetic/GcdTriple.lean) | [契約](../contracts/JL061.lean) |
+| [JL-062](../specs/JL-062.md) | 有限列の最大公約数 | [証明](../JonnyLean/Arithmetic/GcdList.lean) | [契約](../contracts/JL062.lean) |
+| [JL-063](../specs/JL-063.md) | Euclidせん断列による共通約数の保存 | [証明](../JonnyLean/Arithmetic/Shear.lean) | [契約](../contracts/JL063.lean) |
+| [JL-064](../specs/JL-064.md) | 有限燃料付きEuclid法の停止と正しさ | [証明](../JonnyLean/Arithmetic/EuclidTrace.lean) | [契約](../contracts/JL064.lean) |
+| [JL-065](../specs/JL-065.md) | 三数の最小公倍数の普遍性 | [証明](../JonnyLean/Arithmetic/LcmTriple.lean) | [契約](../contracts/JL065.lean) |
+| [JL-066](../specs/JL-066.md) | 有限列の最小公倍数 | [証明](../JonnyLean/Arithmetic/LcmList.lean) | [契約](../contracts/JL066.lean) |
+| [JL-067](../specs/JL-067.md) | 有限積のゼロ条件と整除 | [証明](../JonnyLean/Arithmetic/Product.lean) | [契約](../contracts/JL067.lean) |
+| [JL-068](../specs/JL-068.md) | 有限積との互いに素性の特徴付け | [証明](../JonnyLean/Arithmetic/CoprimeProduct.lean) | [契約](../contracts/JL068.lean) |
+| [JL-069](../specs/JL-069.md) | 互いに素な因子の取消しと同時整除 | [証明](../JonnyLean/Arithmetic/CoprimeCancel.lean) | [契約](../contracts/JL069.lean) |
+| [JL-070](../specs/JL-070.md) | 最大公約数による自然数対の既約化 | [証明](../JonnyLean/Arithmetic/ReducedPair.lean) | [契約](../contracts/JL070.lean) |
+| [JL-071](../specs/JL-071.md) | 原始対の拡大率の一意性 | [証明](../JonnyLean/Arithmetic/PrimitiveScale.lean) | [契約](../contracts/JL071.lean) |
+| [JL-072](../specs/JL-072.md) | 剰余を保ちながら計算する累乗 | [証明](../JonnyLean/Arithmetic/ModularPower.lean) | [契約](../contracts/JL072.lean) |
+| [JL-073](../specs/JL-073.md) | 桁列の剰余評価と連結公式 | [証明](../JonnyLean/Arithmetic/RadixResidue.lean) | [契約](../contracts/JL073.lean) |
+| [JL-074](../specs/JL-074.md) | 重み付き有限和による合同と整除の保存 | [証明](../JonnyLean/Arithmetic/WeightedResidue.lean) | [契約](../contracts/JL074.lean) |
+| [JL-075](../specs/JL-075.md) | 有限積と点ごとの乗算・累乗の交換 | [証明](../JonnyLean/Arithmetic/ProductMap.lean) | [契約](../contracts/JL075.lean) |
+| [JL-076](../specs/JL-076.md) | 各因子の商から有限積の商を構成する | [証明](../JonnyLean/Arithmetic/ProductDivisibility.lean) | [契約](../contracts/JL076.lean) |
+| [JL-077](../specs/JL-077.md) | 有限積の上下界と列の分割 | [証明](../JonnyLean/Arithmetic/ProductOrder.lean) | [契約](../contracts/JL077.lean) |
+| [JL-078](../specs/JL-078.md) | 添字範囲の積の区間分割 | [証明](../JonnyLean/Arithmetic/RangeProduct.lean) | [契約](../contracts/JL078.lean) |
+| [JL-079](../specs/JL-079.md) | 有限因子列の倍数に1を足すEuclid構成 | [証明](../JonnyLean/Arithmetic/EuclidAvoidance.lean) | [契約](../contracts/JL079.lean) |
+| [JL-080](../specs/JL-080.md) | 有限列の最大公約数・最小公倍数・積の関係 | [証明](../JonnyLean/Arithmetic/CommonDivisors.lean) | [契約](../contracts/JL080.lean) |
+| [JL-081](../specs/JL-081.md) | 有限係数多項式のHorner評価と連結 | [証明](../JonnyLean/Polynomials/Evaluation.lean) | [契約](../contracts/JL081.lean) |
+| [JL-082](../specs/JL-082.md) | 係数列の長さが異なる多項式の加法 | [証明](../JonnyLean/Polynomials/Addition.lean) | [契約](../contracts/JL082.lean) |
+| [JL-083](../specs/JL-083.md) | 多項式のスカラー倍と線形性 | [証明](../JonnyLean/Polynomials/Scalar.lean) | [契約](../contracts/JL083.lean) |
+| [JL-084](../specs/JL-084.md) | 単項式Xの累乗による係数列シフト | [証明](../JonnyLean/Polynomials/Shift.lean) | [契約](../contracts/JL084.lean) |
+| [JL-085](../specs/JL-085.md) | 係数列の畳み込み積の正しさ | [証明](../JonnyLean/Polynomials/Multiplication.lean) | [契約](../contracts/JL085.lean) |
+| [JL-086](../specs/JL-086.md) | Horner構造による多項式合成 | [証明](../JonnyLean/Polynomials/Composition.lean) | [契約](../contracts/JL086.lean) |
+| [JL-087](../specs/JL-087.md) | 多項式の自然数累乗 | [証明](../JonnyLean/Polynomials/Power.lean) | [契約](../contracts/JL087.lean) |
+| [JL-088](../specs/JL-088.md) | 多項式の評価同値と演算の適合性 | [証明](../JonnyLean/Polynomials/Equivalence.lean) | [契約](../contracts/JL088.lean) |
+| [JL-089](../specs/JL-089.md) | 係数剰余化と合同入力による多項式評価の正規化 | [証明](../JonnyLean/Polynomials/Congruence.lean) | [契約](../contracts/JL089.lean) |
+| [JL-090](../specs/JL-090.md) | 単項式の積・和・合成の指数法則 | [証明](../JonnyLean/Polynomials/Monomial.lean) | [契約](../contracts/JL090.lean) |
+| [JL-091](../specs/JL-091.md) | 多項式列の有限和と評価 | [証明](../JonnyLean/Polynomials/FiniteSum.lean) | [契約](../contracts/JL091.lean) |
+| [JL-092](../specs/JL-092.md) | 多項式列の有限積と零点の存在 | [証明](../JonnyLean/Polynomials/FiniteProduct.lean) | [契約](../contracts/JL092.lean) |
+| [JL-093](../specs/JL-093.md) | 多項式の入力平行移動 | [証明](../JonnyLean/Polynomials/Translation.lean) | [契約](../contracts/JL093.lean) |
+| [JL-094](../specs/JL-094.md) | 係数の再帰的拡大による入力の倍率変更 | [証明](../JonnyLean/Polynomials/Dilation.lean) | [契約](../contracts/JL094.lean) |
+| [JL-095](../specs/JL-095.md) | 減算を避けた合成除法と剰余公式 | [証明](../JonnyLean/Polynomials/SyntheticDivision.lean) | [契約](../contracts/JL095.lean) |
+| [JL-096](../specs/JL-096.md) | 非負係数多項式の単調性と下界 | [証明](../JonnyLean/Polynomials/Monotonicity.lean) | [契約](../contracts/JL096.lean) |
+| [JL-097](../specs/JL-097.md) | 係数打ち切りと高次項の整除 | [証明](../JonnyLean/Polynomials/Truncation.lean) | [契約](../contracts/JL097.lean) |
+| [JL-098](../specs/JL-098.md) | 形式微分の構成と線形性 | [証明](../JonnyLean/Polynomials/Derivative.lean) | [契約](../contracts/JL098.lean) |
+| [JL-099](../specs/JL-099.md) | 形式微分の積則と連鎖律 | [証明](../JonnyLean/Polynomials/DerivativeRules.lean) | [契約](../contracts/JL099.lean) |
+| [JL-100](../specs/JL-100.md) | 値と形式導関数を同時計算するHorner法 | [証明](../JonnyLean/Polynomials/DualEvaluation.lean) | [契約](../contracts/JL100.lean) |
+| [JL-101](../specs/JL-101.md) | 二分木の中順走査と節点数 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL101.lean) |
+| [JL-102](../specs/JL-102.md) | 木の鏡映と走査順序の反転 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL102.lean) |
+| [JL-103](../specs/JL-103.md) | 木への写像と中順走査の可換性 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL103.lean) |
+| [JL-104](../specs/JL-104.md) | 木の高さを節点数で上から抑える | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL104.lean) |
+| [JL-105](../specs/JL-105.md) | 二分木foldの融合定理 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL105.lean) |
+| [JL-106](../specs/JL-106.md) | 空の葉への木の接ぎ込みと大きさ | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL106.lean) |
+| [JL-107](../specs/JL-107.md) | 深さによる木の刈込み | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL107.lean) |
+| [JL-108](../specs/JL-108.md) | 木の全節点述語と走査列の一致 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL108.lean) |
+| [JL-109](../specs/JL-109.md) | 蓄積列を使う二分木走査 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL109.lean) |
+| [JL-110](../specs/JL-110.md) | 二分木の外部葉数公式 | [証明](../JonnyLean/Trees/Binary.lean) | [契約](../contracts/JL110.lean) |
+| [JL-111](../specs/JL-111.md) | スタックへの一括pushとpopの相殺 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL111.lean) |
+| [JL-112](../specs/JL-112.md) | 複数popの成功条件と分解証明書 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL112.lean) |
+| [JL-113](../specs/JL-113.md) | 二リストキューの正規化不変条件 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL113.lean) |
+| [JL-114](../specs/JL-114.md) | キューenqueueのFIFO意味 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL114.lean) |
+| [JL-115](../specs/JL-115.md) | キューdequeueの正確な先頭除去 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL115.lean) |
+| [JL-116](../specs/JL-116.md) | キューへのバッチ追加と連結則 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL116.lean) |
+| [JL-117](../specs/JL-117.md) | 連想リストの更新とシャドーイング | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL117.lean) |
+| [JL-118](../specs/JL-118.md) | 連想リストの全重複キー削除 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL118.lean) |
+| [JL-119](../specs/JL-119.md) | 連想リストの左優先結合 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL119.lean) |
+| [JL-120](../specs/JL-120.md) | 連想リストの値写像と検索 | [証明](../JonnyLean/DataStructures/Persistent.lean) | [契約](../contracts/JL120.lean) |
+| [JL-121](../specs/JL-121.md) | 自然数式の変数改名と環境の合成 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL121.lean) |
+| [JL-122](../specs/JL-122.md) | 式の一斉代入と評価 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL122.lean) |
+| [JL-123](../specs/JL-123.md) | 使用変数だけによる評価の決定 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL123.lean) |
+| [JL-124](../specs/JL-124.md) | 定数畳込みの意味保存 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL124.lean) |
+| [JL-125](../specs/JL-125.md) | 定数畳込みの固定点性 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL125.lean) |
+| [JL-126](../specs/JL-126.md) | 定数畳込みによる構文サイズの非増加 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL126.lean) |
+| [JL-127](../specs/JL-127.md) | 零と単位元を除く代数的最適化 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL127.lean) |
+| [JL-128](../specs/JL-128.md) | 代数的最適化は新しい変数を導入しない | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL128.lean) |
+| [JL-129](../specs/JL-129.md) | 改名による変数出現列の輸送 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL129.lean) |
+| [JL-130](../specs/JL-130.md) | 一斉代入の合成則 | [証明](../JonnyLean/VerifiedPrograms/Expressions.lean) | [契約](../contracts/JL130.lean) |
+| [JL-131](../specs/JL-131.md) | 命令列の合成と失敗伝播 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL131.lean) |
+| [JL-132](../specs/JL-132.md) | 後置スタック機械コンパイラの意味保存 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL132.lean) |
+| [JL-133](../specs/JL-133.md) | コンパイル後コード長の正確な計数 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL133.lean) |
+| [JL-134](../specs/JL-134.md) | 静的スタック深さ検査の健全性 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL134.lean) |
+| [JL-135](../specs/JL-135.md) | 生成コードの静的検査と深さ差分 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL135.lean) |
+| [JL-136](../specs/JL-136.md) | 最適化とコンパイルの意味的整合 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL136.lean) |
+| [JL-137](../specs/JL-137.md) | 後続命令を蓄積するコード生成 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL137.lean) |
+| [JL-138](../specs/JL-138.md) | 成功する命令列のスタックフレーム保存 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL138.lean) |
+| [JL-139](../specs/JL-139.md) | コンパイルと構文再構成の往復 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL139.lean) |
+| [JL-140](../specs/JL-140.md) | 任意バイトコードの構文再構成証明書 | [証明](../JonnyLean/VerifiedPrograms/StackMachine.lean) | [契約](../contracts/JL140.lean) |
+| [JL-141](../specs/JL-141.md) | 語の言語と包含順序 | [証明](../JonnyLean/Languages/Basic.lean) | [契約](../contracts/JL141.lean) |
+| [JL-142](../specs/JL-142.md) | 許可アルファベットの語と言語連結 | [証明](../JonnyLean/Languages/Lattice.lean) | [契約](../contracts/JL142.lean) |
+| [JL-143](../specs/JL-143.md) | 存在証人による言語連結と分配 | [証明](../JonnyLean/Languages/Concatenation.lean) | [契約](../contracts/JL143.lean) |
+| [JL-144](../specs/JL-144.md) | 言語連結の結合則と空語単位元 | [証明](../JonnyLean/Languages/Monoid.lean) | [契約](../contracts/JL144.lean) |
+| [JL-145](../specs/JL-145.md) | 語の反転と言語連結の順序反転 | [証明](../JonnyLean/Languages/Reversal.lean) | [契約](../contracts/JL145.lean) |
+| [JL-146](../specs/JL-146.md) | 前置語による左商と残余言語 | [証明](../JonnyLean/Languages/Quotient.lean) | [契約](../contracts/JL146.lean) |
+| [JL-147](../specs/JL-147.md) | 言語の有限冪と指数加法 | [証明](../JonnyLean/Languages/Power.lean) | [契約](../contracts/JL147.lean) |
+| [JL-148](../specs/JL-148.md) | Kleene閉包の構成と最小性 | [証明](../JonnyLean/Languages/Star.lean) | [契約](../contracts/JL148.lean) |
+| [JL-149](../specs/JL-149.md) | Kleene閉包の冪表示と冪等性 | [証明](../JonnyLean/Languages/StarClosure.lean) | [契約](../contracts/JL149.lean) |
+| [JL-150](../specs/JL-150.md) | 文字写像による言語像とKleene閉包 | [証明](../JonnyLean/Languages/Image.lean) | [契約](../contracts/JL150.lean) |
+| [JL-151](../specs/JL-151.md) | 決定性遷移の反復と語の分割 | [証明](../JonnyLean/Automata/Run.lean) | [契約](../contracts/JL151.lean) |
+| [JL-152](../specs/JL-152.md) | 受理言語と再出発による残余 | [証明](../JonnyLean/Automata/Language.lean) | [契約](../contracts/JL152.lean) |
+| [JL-153](../specs/JL-153.md) | 積機械と受理言語の共通部分 | [証明](../JonnyLean/Automata/Product.lean) | [契約](../contracts/JL153.lean) |
+| [JL-154](../specs/JL-154.md) | Boolean受理判定による補機械 | [証明](../JonnyLean/Automata/Complement.lean) | [契約](../contracts/JL154.lean) |
+| [JL-155](../specs/JL-155.md) | 状態準同型による走行と受理の輸送 | [証明](../JonnyLean/Automata/Homomorphism.lean) | [契約](../contracts/JL155.lean) |
+| [JL-156](../specs/JL-156.md) | 入力アルファベット写像の引き戻し | [証明](../JonnyLean/Automata/InputMap.lean) | [契約](../contracts/JL156.lean) |
+| [JL-157](../specs/JL-157.md) | 遷移不変量と全語に対する拒否 | [証明](../JonnyLean/Automata/Invariants.lean) | [契約](../contracts/JL157.lean) |
+| [JL-158](../specs/JL-158.md) | 到達状態集合の閉性と最小性 | [証明](../JonnyLean/Automata/Reachability.lean) | [契約](../contracts/JL158.lean) |
+| [JL-159](../specs/JL-159.md) | 状態の観測同値と接尾語安定性 | [証明](../JonnyLean/Automata/Equivalence.lean) | [契約](../contracts/JL159.lean) |
+| [JL-160](../specs/JL-160.md) | 不変状態型への制限と有限carrier | [証明](../JonnyLean/Automata/Restriction.lean) | [契約](../contracts/JL160.lean) |
+| [JL-161](../specs/JL-161.md) | 出現を数える直積列挙 | [証明](../JonnyLean/Counting/Product.lean) | [契約](../contracts/JL161.lean) |
+| [JL-162](../specs/JL-162.md) | 要素ごとに変わる選択肢と和の法則 | [証明](../JonnyLean/Counting/Dependent.lean) | [契約](../contracts/JL162.lean) |
+| [JL-163](../specs/JL-163.md) | 座標別選択列と積公式 | [証明](../JonnyLean/Counting/Choices.lean) | [契約](../contracts/JL163.lean) |
+| [JL-164](../specs/JL-164.md) | 全位置部分列の列挙と二の冪 | [証明](../JonnyLean/Counting/Subsequences.lean) | [契約](../contracts/JL164.lean) |
+| [JL-165](../specs/JL-165.md) | 語を二つへ分割する全境界 | [証明](../JonnyLean/Counting/Splits.lean) | [契約](../contracts/JL165.lean) |
+| [JL-166](../specs/JL-166.md) | 全位置への一文字挿入 | [証明](../JonnyLean/Counting/Insertions.lean) | [契約](../contracts/JL166.lean) |
+| [JL-167](../specs/JL-167.md) | 挿入による順列列挙と階乗 | [証明](../JonnyLean/Counting/Permutations.lean) | [契約](../contracts/JL167.lean) |
+| [JL-168](../specs/JL-168.md) | 重み付き部分列和の積展開 | [証明](../JonnyLean/Counting/WeightedSubsequences.lean) | [契約](../contracts/JL168.lean) |
+| [JL-169](../specs/JL-169.md) | 順序を保つ二語の混合と二項係数 | [証明](../JonnyLean/Counting/Shuffle.lean) | [契約](../contracts/JL169.lean) |
+| [JL-170](../specs/JL-170.md) | 直積事象の抽出と計数の分離 | [証明](../JonnyLean/Counting/FilteredProduct.lean) | [契約](../contracts/JL170.lean) |
+| [JL-171](../specs/JL-171.md) | 自然数重みを持つ有限出現測度 | [証明](../JonnyLean/FiniteProbability/Measure.lean) | [契約](../contracts/JL171.lean) |
+| [JL-172](../specs/JL-172.md) | 有限測度の押し出しと質量保存 | [証明](../JonnyLean/FiniteProbability/Pushforward.lean) | [契約](../contracts/JL172.lean) |
+| [JL-173](../specs/JL-173.md) | 自然数観測量の期待値分子と線形性 | [証明](../JonnyLean/FiniteProbability/Expectation.lean) | [契約](../contracts/JL173.lean) |
+| [JL-174](../specs/JL-174.md) | 積測度と分離観測量の期待値 | [証明](../JonnyLean/FiniteProbability/Product.lean) | [契約](../contracts/JL174.lean) |
+| [JL-175](../specs/JL-175.md) | Boolean事象の質量と積事象の分離 | [証明](../JonnyLean/FiniteProbability/Events.lean) | [契約](../contracts/JL175.lean) |
+| [JL-176](../specs/JL-176.md) | 事象への測度制限と条件質量 | [証明](../JonnyLean/FiniteProbability/Restriction.lean) | [契約](../contracts/JL176.lean) |
+| [JL-177](../specs/JL-177.md) | 正の有限測度の確率表示と押し出し | [証明](../JonnyLean/FiniteProbability/Distribution.lean) | [契約](../contracts/JL177.lean) |
+| [JL-178](../specs/JL-178.md) | 自然数係数の混合と期待値分子 | [証明](../JonnyLean/FiniteProbability/Mixture.lean) | [契約](../contracts/JL178.lean) |
+| [JL-179](../specs/JL-179.md) | 有限遷移核と全期待値分子公式 | [証明](../JonnyLean/FiniteProbability/Kernel.lean) | [契約](../contracts/JL179.lean) |
+| [JL-180](../specs/JL-180.md) | 有限遷移核の合成と結合則 | [証明](../JonnyLean/FiniteProbability/KernelComposition.lean) | [契約](../contracts/JL180.lean) |
 
 全課題はLean 4.29.1同梱ライブラリのみを利用する。許可する公理依存は propext と Quot.sound。
-グラフは型一般の有向グラフで、閉歩道と単純サイクルを区別する。有限確率は自然数重みの有限分布である。
+多項式は自然数係数リスト、微分は形式微分、機械の実行は純粋関数の意味論、有限確率は自然数重みの有限分布と期待値分子を扱う。
+オートマトンの一般状態型の法則と有限carrierへの制限、閉歩道と単純サイクルは区別する。
 
-今後の追加候補: 素数と最大公約数、二項定理、多重集合、有限グラフの木・彩色、期待値の有限和。これらは未実装であり、上記60課題の完成状態と区別する。
+次の発展候補: 整数係数の多項式と商環、一般的な有限グラフ探索の完全性、資源を伴う実行コストの証明、実数上の期待値。これらの一般理論は今後の範囲であり、上記の実装済み課題とは区別する。

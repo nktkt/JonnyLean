@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import os
@@ -194,13 +195,21 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
     report["verification_inputs"] = global_before
     lake = lake_executable()
     timeout = config["timeout_seconds"]
+    failure = shared.get('library_failure') if shared is not None else None
+    if failure is not None and failure['inputs'] == global_before:
+        report.update(copy.deepcopy(failure['evidence']))
+        report['library_reused'] = True
+        raise (Rejected if failure['rejected'] else OperationError)(failure['error'])
     reusable = shared is not None and shared.get("inputs") == global_before
+    report['library_reused'] = reusable
+    report['phase'] = 'library'
     if reusable:
         report["lean_version"] = shared["lean_version"]
         report["steps"] = copy.deepcopy(shared["steps"])
     else:
         report["lean_version"] = command_step(root, [lake, "env", "lean", "--version"], timeout, report).strip()
         command_step(root, [lake, "build"], timeout, report)
+    report['phase'] = 'contract'
     command_step(root, [lake, "env", "lean", "-DwarningAsError=true", task["contract"]], timeout, report)
     # Check original elaboration first, then inspect the local checked constants
     # in a temporary instrumentation wrapper. Strict compilation alone does not
@@ -232,6 +241,7 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
             report['findings'].append({'declaration': row['name'], 'forbidden_axioms': sorted(forbidden)})
     if report['findings']:
         raise Rejected('Forbidden axioms found in contract declarations')
+    report['phase'] = 'library'
     if reusable:
         audit = copy.deepcopy(shared["audit"])
     else:
@@ -271,22 +281,37 @@ def verify(root: Path, config: dict, task: dict, report: dict, shared: dict | No
         if forbidden:
             report["findings"].append({"declaration": declaration["name"],
                                         "forbidden_axioms": sorted(forbidden)})
+    report['phase'] = 'target'
     targets = [d for d in declarations if d["name"] == task["declaration"]]
     if len(targets) != 1 or targets[0]["kind"] != "theorem" or targets[0]["module"] != task["module"]:
         raise Rejected("Configured target must be a named theorem in the specified module")
     report["target"] = targets[0]
+    report['phase'] = 'library'
     if report["findings"]:
         raise Rejected("Forbidden axioms found in compiled declarations")
     # Anonymous examples need not survive as named environment declarations.
     # Check every covered source with warnings-as-errors as well, including on
     # warm builds, so an unfinished anonymous proof cannot escape the audit.
     if not reusable:
-        for module in sorted(expected):
+        def check_source(module):
             source = module.replace(".", "/") + ".lean"
-            command_step(root, [lake, "env", "lean", "-DwarningAsError=true", source], timeout, report)
+            local_report = {'steps': []}
+            try:
+                command_step(root, [lake, "env", "lean", "-DwarningAsError=true", source], timeout, local_report)
+                return local_report['steps'], None
+            except (OperationError, OSError) as error:
+                return local_report['steps'], error
+        source_jobs = shared.get('source_jobs', 1) if shared is not None else 1
+        with ThreadPoolExecutor(max_workers=source_jobs) as pool:
+            for steps, error in pool.map(check_source, sorted(expected)):
+                report['steps'].extend(steps)
+                if error is not None:
+                    raise error
+    report['phase'] = 'inputs'
     if capture_inputs(root, task) != before or capture_verification_inputs(root) != global_before:
         raise OperationError("Inputs changed during verification; retry with stable files")
     report["mechanical"] = "pass"
+    report['phase'] = 'complete'
     if shared is not None and not reusable:
         shared.update(inputs=global_before, lean_version=report["lean_version"], audit=copy.deepcopy(audit),
                       steps=copy.deepcopy(report["steps"]))
@@ -342,13 +367,16 @@ def save_report(root: Path, task_id: str, report: dict) -> None:
     (destination / "report.md").write_text("\n".join(lines))
 
 
-def run_one(root: Path, task_id: str, command: str, shared: dict | None = None) -> int:
+def run_one(root: Path, task_id: str, command: str, shared: dict | None = None,
+            expected_inputs: dict | None = None) -> int:
     report = {"schema": 1, "task": task_id, "status": "error", "mechanical": "not_completed",
               "review": {"status": "not_checked"}, "human_approval": "not_recorded",
               "steps": [], "findings": []}
     exit_code = 2
     try:
         config, task = load_task(root, task_id)
+        if expected_inputs is not None and capture_verification_inputs(root) != expected_inputs:
+            raise OperationError('Batch inputs changed; restart the batch with stable files')
         verify(root, config, task, report, shared)
         if command in ("review", "run"):
             check_review(root, task, report)
@@ -361,6 +389,12 @@ def run_one(root: Path, task_id: str, command: str, shared: dict | None = None) 
         exit_code = 1
     except (OperationError, OSError, ValueError, TypeError, KeyError) as error:
         report["error"] = str(error)
+    if (shared is not None and report.get('phase') == 'library' and 'error' in report
+        and report.get('verification_inputs') == capture_verification_inputs(root)):
+        shared['library_failure'] = {
+            'inputs': report['verification_inputs'], 'rejected': exit_code == 1,
+            'error': report['error'],
+            'evidence': {k: copy.deepcopy(report[k]) for k in ('phase', 'steps', 'findings', 'audit', 'lean_version') if k in report}}
     try:
         save_report(root, task_id, report)
     except OSError as error:
@@ -369,6 +403,43 @@ def run_one(root: Path, task_id: str, command: str, shared: dict | None = None) 
     print(f"{task_id}: {report['status'].upper()} | Lean={report['mechanical']} | AI review={report['review']['status']}")
     if "error" in report:
         print(report["error"], file=sys.stderr)
+    return exit_code
+
+
+def run_batch(root: Path, ids: list[str], command: str, jobs: int = 1) -> int:
+    """Share only fresh evidence from this invocation, never cached approvals.
+
+    Seed a successful whole-library check before parallel contracts. Each worker
+    receives a private shared-state container; no thread can publish new evidence
+    to another thread. A frozen global fingerprint binds the entire batch.
+    """
+    if not 1 <= jobs <= 16:
+        raise OperationError('--jobs must be between 1 and 16')
+    started = time.monotonic()
+    frozen = capture_verification_inputs(root)
+    shared: dict = {'source_jobs': jobs}
+    results = {}
+    pending = list(ids)
+    while pending and shared.get('inputs') != frozen and not shared.get('library_failure'):
+        task_id = pending.pop(0)
+        results[task_id] = run_one(root, task_id, command, shared, frozen)
+        if capture_verification_inputs(root) != frozen:
+            break
+    if pending:
+        def run(task_id):
+            return task_id, run_one(root, task_id, command, dict(shared), frozen)
+        with ThreadPoolExecutor(max_workers=jobs) as pool:
+            results.update(pool.map(run, pending))
+    stable = capture_verification_inputs(root) == frozen
+    exit_code = max(results.values(), default=0) if stable else 2
+    summary = {'schema': 1, 'command': command, 'jobs': jobs, 'tasks': ids,
+               'results': results, 'inputs_stable': stable, 'verification_inputs': frozen,
+               'seconds': round(time.monotonic() - started, 3), 'exit_code': exit_code}
+    destination = root / 'artifacts' / 'batch.json'
+    destination.parent.mkdir(exist_ok=True)
+    destination.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n')
+    if not stable:
+        print('Batch inputs changed; saved task results do not form a current complete batch.', file=sys.stderr)
     return exit_code
 
 
@@ -387,6 +458,12 @@ def main() -> int:
     if argv and argv[0] == "catalog":
         from tools.catalog import main as catalog_main
         return catalog_main(default_root, argv[1:])
+    if argv and argv[0] == "plan":
+        from tools.planning import main as plan_main
+        return plan_main(default_root, argv[1:])
+    if argv and argv[0] == "library":
+        from tools.library import main as library_main
+        return library_main(default_root, argv[1:])
     parser = argparse.ArgumentParser(description=__doc__, epilog=
         "Worker: doctor | status | work | resume | adopt | report. GitHub: pr. HTML: dashboard.")
     parser.add_argument("command", choices=("verify", "review", "run", "fingerprint", "dashboard"))
@@ -395,6 +472,9 @@ def main() -> int:
     parser.add_argument("--domain", help="select one mathematical domain")
     parser.add_argument("--tag", help="select tasks carrying this tag")
     parser.add_argument("--changed", metavar="GIT_REF", help="select tasks affected since this commit")
+    parser.add_argument("--jobs", type=int, default=1, help="parallel contract checks after a fresh library audit (1..16)")
+    parser.add_argument("--include-dependencies", action='store_true')
+    parser.add_argument("--shard", metavar='I/N', help='one deterministic shard, numbered from 1')
     args = parser.parse_args()
     if args.task != "all" and not re.fullmatch(r"JL-\d{3}", args.task):
         parser.error("Task must be all or have the form JL-001")
@@ -412,9 +492,16 @@ def main() -> int:
         if args.task != 'all':
             load_task(root, args.task)
             chosen = [t for t in chosen if t['id'] == args.task]
+        from tools.planning import expand_dependencies, shard
+        if args.include_dependencies:
+            chosen = expand_dependencies(data['tasks'], [t['id'] for t in chosen])
+        if args.shard:
+            chosen = shard(chosen, args.shard)
+        if not 1 <= args.jobs <= 16:
+            raise OperationError('--jobs must be between 1 and 16')
         ids = [t['id'] for t in chosen]
         if not ids:
-            if args.domain or args.tag or args.changed:
+            if args.domain or args.tag or args.changed or args.shard:
                 print('No matching tasks; no verification was performed.')
                 return 0
             raise OperationError("No tasks configured")
@@ -435,9 +522,7 @@ def main() -> int:
             raise OperationError("Another run holds .jonnylean.lock; wait for it to finish")
         exit_code = 0
         if args.command != "dashboard":
-            shared: dict = {}
-            for task_id in ids:
-                exit_code = max(exit_code, run_one(root, task_id, args.command, shared))
+            exit_code = run_batch(root, ids, args.command, args.jobs)
         from tools.reporting import render_dashboard
         path = render_dashboard(root)
         print(f"Report: {path}")

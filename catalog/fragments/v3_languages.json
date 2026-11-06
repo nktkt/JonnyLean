@@ -1,0 +1,885 @@
+[
+  {
+    "id": "JL-141",
+    "title": "語の言語と包含順序",
+    "domain": "formal-languages",
+    "description": "任意のアルファベット型 α 上の言語を `List α → Prop` とする。包含 `Included L K` は全ての語について L の所属から K の所属を導く命題である。空言語、空語だけの言語、和、共通部分を定義する。",
+    "tags": [
+      "language",
+      "inclusion",
+      "constructive-logic"
+    ],
+    "spec": "specs/JL-141.md",
+    "module": "JonnyLean.Languages.Basic",
+    "declaration": "JonnyLean.Languages.included_antisymm",
+    "contract": "contracts/JL141.lean",
+    "review": "reviews/JL-141.json",
+    "editable": [
+      "JonnyLean/Languages/Basic.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-142",
+    "title": "許可アルファベットの語と言語連結",
+    "domain": "formal-languages",
+    "description": "文字述語 A : α → Prop から、全ての文字が A を満たす語の言語 alphabetLanguage A を定義する。文字の出現順や重複をそのまま保持した List α を対象とする。",
+    "tags": [
+      "alphabet-language",
+      "word-concatenation",
+      "mixed-alphabet"
+    ],
+    "spec": "specs/JL-142.md",
+    "module": "JonnyLean.Languages.Lattice",
+    "declaration": "JonnyLean.Languages.alphabetLanguage_append",
+    "contract": "contracts/JL142.lean",
+    "review": "reviews/JL-142.json",
+    "editable": [
+      "JonnyLean/Languages/Lattice.lean"
+    ],
+    "depends_on": [
+      "JL-141"
+    ]
+  },
+  {
+    "id": "JL-143",
+    "title": "存在証人による言語連結と分配",
+    "domain": "formal-languages",
+    "description": "連結 `concat L K w` は、語 w を u ++ v に分割し L u と K v の証拠を持つことと定義する。分割は空語も許す。",
+    "tags": [
+      "concatenation",
+      "distributivity",
+      "monotonicity"
+    ],
+    "spec": "specs/JL-143.md",
+    "module": "JonnyLean.Languages.Concatenation",
+    "declaration": "JonnyLean.Languages.concat_union",
+    "contract": "contracts/JL143.lean",
+    "review": "reviews/JL-143.json",
+    "editable": [
+      "JonnyLean/Languages/Concatenation.lean"
+    ],
+    "depends_on": [
+      "JL-142"
+    ]
+  },
+  {
+    "id": "JL-144",
+    "title": "言語連結の結合則と空語単位元",
+    "domain": "formal-languages",
+    "description": "連結を三つの言語へ反復し、語の分割の括弧を移動する。`epsilon` は空語だけを含む言語である。",
+    "tags": [
+      "concatenation",
+      "associativity",
+      "identity"
+    ],
+    "spec": "specs/JL-144.md",
+    "module": "JonnyLean.Languages.Monoid",
+    "declaration": "JonnyLean.Languages.concat_assoc",
+    "contract": "contracts/JL144.lean",
+    "review": "reviews/JL-144.json",
+    "editable": [
+      "JonnyLean/Languages/Monoid.lean"
+    ],
+    "depends_on": [
+      "JL-143"
+    ]
+  },
+  {
+    "id": "JL-145",
+    "title": "語の反転と言語連結の順序反転",
+    "domain": "formal-languages",
+    "description": "反転言語 `reverse L` は、語を反転した結果が L に属することで定義する。語の順序の反転を言語演算へ持ち上げる。",
+    "tags": [
+      "reversal",
+      "anti-homomorphism",
+      "words"
+    ],
+    "spec": "specs/JL-145.md",
+    "module": "JonnyLean.Languages.Reversal",
+    "declaration": "JonnyLean.Languages.reverse_concat",
+    "contract": "contracts/JL145.lean",
+    "review": "reviews/JL-145.json",
+    "editable": [
+      "JonnyLean/Languages/Reversal.lean"
+    ],
+    "depends_on": [
+      "JL-144"
+    ]
+  },
+  {
+    "id": "JL-146",
+    "title": "前置語による左商と残余言語",
+    "domain": "formal-languages",
+    "description": "語 u による左商は `leftQuotient u L w := L (u ++ w)` と定義する。指定された接頭語を読んだ後に必要な接尾語の言語である。",
+    "tags": [
+      "left-quotient",
+      "residual-language",
+      "prefix"
+    ],
+    "spec": "specs/JL-146.md",
+    "module": "JonnyLean.Languages.Quotient",
+    "declaration": "JonnyLean.Languages.quotient_append",
+    "contract": "contracts/JL146.lean",
+    "review": "reviews/JL-146.json",
+    "editable": [
+      "JonnyLean/Languages/Quotient.lean"
+    ],
+    "depends_on": [
+      "JL-144"
+    ]
+  },
+  {
+    "id": "JL-147",
+    "title": "言語の有限冪と指数加法",
+    "domain": "formal-languages",
+    "description": "零乗を空語言語、後続の冪を L と直前の冪の連結として定義する。冪の指数は自然数である。",
+    "tags": [
+      "language-power",
+      "exponent-addition",
+      "induction"
+    ],
+    "spec": "specs/JL-147.md",
+    "module": "JonnyLean.Languages.Power",
+    "declaration": "JonnyLean.Languages.power_add",
+    "contract": "contracts/JL147.lean",
+    "review": "reviews/JL-147.json",
+    "editable": [
+      "JonnyLean/Languages/Power.lean"
+    ],
+    "depends_on": [
+      "JL-144"
+    ]
+  },
+  {
+    "id": "JL-148",
+    "title": "Kleene閉包の構成と最小性",
+    "domain": "formal-languages",
+    "description": "`Star L` は空語を含み、L の語を左から連結して生成する帰納的言語である。有限回の生成だけを許す。",
+    "tags": [
+      "kleene-star",
+      "inductive-closure",
+      "minimality"
+    ],
+    "spec": "specs/JL-148.md",
+    "module": "JonnyLean.Languages.Star",
+    "declaration": "JonnyLean.Languages.star_minimal",
+    "contract": "contracts/JL148.lean",
+    "review": "reviews/JL-148.json",
+    "editable": [
+      "JonnyLean/Languages/Star.lean"
+    ],
+    "depends_on": [
+      "JL-147"
+    ]
+  },
+  {
+    "id": "JL-149",
+    "title": "Kleene閉包の冪表示と冪等性",
+    "domain": "formal-languages",
+    "description": "帰納的に生成した Star を、自然数回の言語冪の存在として特徴づける。閉包をさらに閉包にする操作も扱う。",
+    "tags": [
+      "kleene-star",
+      "powers",
+      "idempotence"
+    ],
+    "spec": "specs/JL-149.md",
+    "module": "JonnyLean.Languages.StarClosure",
+    "declaration": "JonnyLean.Languages.star_iff_power",
+    "contract": "contracts/JL149.lean",
+    "review": "reviews/JL-149.json",
+    "editable": [
+      "JonnyLean/Languages/StarClosure.lean"
+    ],
+    "depends_on": [
+      "JL-148"
+    ]
+  },
+  {
+    "id": "JL-150",
+    "title": "文字写像による言語像とKleene閉包",
+    "domain": "formal-languages",
+    "description": "文字写像 f を List.map により語へ延長し、像言語を元の語の存在で定義する。写像は単射・全射でなくてもよい。",
+    "tags": [
+      "language-image",
+      "alphabet-map",
+      "kleene-star"
+    ],
+    "spec": "specs/JL-150.md",
+    "module": "JonnyLean.Languages.Image",
+    "declaration": "JonnyLean.Languages.image_star",
+    "contract": "contracts/JL150.lean",
+    "review": "reviews/JL-150.json",
+    "editable": [
+      "JonnyLean/Languages/Image.lean"
+    ],
+    "depends_on": [
+      "JL-149",
+      "JL-145"
+    ]
+  },
+  {
+    "id": "JL-151",
+    "title": "決定性遷移の反復と語の分割",
+    "domain": "automata-theory",
+    "description": "`Machine α Q` は遷移 Q → α → Q、初期状態、Boolean受理判定を持つ。run は空語で現在状態を返し、先頭文字を遷移に渡して残りを処理する。",
+    "tags": [
+      "deterministic-machine",
+      "transition-iteration",
+      "word-concatenation"
+    ],
+    "spec": "specs/JL-151.md",
+    "module": "JonnyLean.Automata.Run",
+    "declaration": "JonnyLean.Automata.Machine.run_append",
+    "contract": "contracts/JL151.lean",
+    "review": "reviews/JL-151.json",
+    "editable": [
+      "JonnyLean/Automata/Run.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-152",
+    "title": "受理言語と再出発による残余",
+    "domain": "automata-theory",
+    "description": "状態 q からの受理は `accept (run q w) = true`、機械の言語は初期状態からの受理とする。restart は初期状態だけを変更する。",
+    "tags": [
+      "acceptance",
+      "residual-language",
+      "restart"
+    ],
+    "spec": "specs/JL-152.md",
+    "module": "JonnyLean.Automata.Language",
+    "declaration": "JonnyLean.Automata.Machine.language_residual",
+    "contract": "contracts/JL152.lean",
+    "review": "reviews/JL-152.json",
+    "editable": [
+      "JonnyLean/Automata/Language.lean"
+    ],
+    "depends_on": [
+      "JL-151",
+      "JL-146"
+    ]
+  },
+  {
+    "id": "JL-153",
+    "title": "積機械と受理言語の共通部分",
+    "domain": "automata-theory",
+    "description": "積機械は状態対を保持し、同じ入力文字で両成分を同時に遷移させる。受理判定は二つのBoolean判定の論理積とする。",
+    "tags": [
+      "product-automaton",
+      "intersection",
+      "synchronous-transition"
+    ],
+    "spec": "specs/JL-153.md",
+    "module": "JonnyLean.Automata.Product",
+    "declaration": "JonnyLean.Automata.Machine.language_product",
+    "contract": "contracts/JL153.lean",
+    "review": "reviews/JL-153.json",
+    "editable": [
+      "JonnyLean/Automata/Product.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-154",
+    "title": "Boolean受理判定による補機械",
+    "domain": "automata-theory",
+    "description": "補機械は遷移・初期状態を保ち、受理Booleanだけを否定する。全域的な遷移関数を前提とする。",
+    "tags": [
+      "complement",
+      "boolean-acceptance",
+      "decidability"
+    ],
+    "spec": "specs/JL-154.md",
+    "module": "JonnyLean.Automata.Complement",
+    "declaration": "JonnyLean.Automata.Machine.language_complement",
+    "contract": "contracts/JL154.lean",
+    "review": "reviews/JL-154.json",
+    "editable": [
+      "JonnyLean/Automata/Complement.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-155",
+    "title": "状態準同型による走行と受理の輸送",
+    "domain": "automata-theory",
+    "description": "機械準同型 Hom M N は状態写像、初期状態の保存、遷移との可換性、受理Booleanの一致を持つ。",
+    "tags": [
+      "automaton-homomorphism",
+      "simulation",
+      "language-equivalence"
+    ],
+    "spec": "specs/JL-155.md",
+    "module": "JonnyLean.Automata.Homomorphism",
+    "declaration": "JonnyLean.Automata.Hom.language_eq",
+    "contract": "contracts/JL155.lean",
+    "review": "reviews/JL-155.json",
+    "editable": [
+      "JonnyLean/Automata/Homomorphism.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-156",
+    "title": "入力アルファベット写像の引き戻し",
+    "domain": "automata-theory",
+    "description": "β文字を読む機械 M と写像 f : α → β から、α文字 a を f a として読む機械 M.comap f を作る。状態と受理判定は保持する。",
+    "tags": [
+      "alphabet-map",
+      "inverse-image",
+      "transition"
+    ],
+    "spec": "specs/JL-156.md",
+    "module": "JonnyLean.Automata.InputMap",
+    "declaration": "JonnyLean.Automata.Machine.run_comap",
+    "contract": "contracts/JL156.lean",
+    "review": "reviews/JL-156.json",
+    "editable": [
+      "JonnyLean/Automata/InputMap.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-157",
+    "title": "遷移不変量と全語に対する拒否",
+    "domain": "automata-theory",
+    "description": "状態述語 P が各一文字遷移で保存されることを Stable とする。開始状態または任意の現在状態が P を満たすと仮定する。",
+    "tags": [
+      "state-invariant",
+      "induction",
+      "rejection"
+    ],
+    "spec": "specs/JL-157.md",
+    "module": "JonnyLean.Automata.Invariants",
+    "declaration": "JonnyLean.Automata.Machine.run_invariant",
+    "contract": "contracts/JL157.lean",
+    "review": "reviews/JL-157.json",
+    "editable": [
+      "JonnyLean/Automata/Invariants.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-158",
+    "title": "到達状態集合の閉性と最小性",
+    "domain": "automata-theory",
+    "description": "状態 q の到達可能性は、初期状態からある有限語を読んだ結果が q であることと定義する。語の存在を命題として保持する。",
+    "tags": [
+      "reachability",
+      "least-invariant",
+      "accepted-state"
+    ],
+    "spec": "specs/JL-158.md",
+    "module": "JonnyLean.Automata.Reachability",
+    "declaration": "JonnyLean.Automata.Machine.reachable_minimal",
+    "contract": "contracts/JL158.lean",
+    "review": "reviews/JL-158.json",
+    "editable": [
+      "JonnyLean/Automata/Reachability.lean"
+    ],
+    "depends_on": [
+      "JL-157"
+    ]
+  },
+  {
+    "id": "JL-159",
+    "title": "状態の観測同値と接尾語安定性",
+    "domain": "automata-theory",
+    "description": "二状態の観測同値は、全ての有限接尾語を読んだ後の受理Booleanが一致することで定義する。",
+    "tags": [
+      "state-equivalence",
+      "right-congruence",
+      "suffix"
+    ],
+    "spec": "specs/JL-159.md",
+    "module": "JonnyLean.Automata.Equivalence",
+    "declaration": "JonnyLean.Automata.Machine.equivalent_run",
+    "contract": "contracts/JL159.lean",
+    "review": "reviews/JL-159.json",
+    "editable": [
+      "JonnyLean/Automata/Equivalence.lean"
+    ],
+    "depends_on": [
+      "JL-152"
+    ]
+  },
+  {
+    "id": "JL-160",
+    "title": "不変状態型への制限と有限carrier",
+    "domain": "automata-theory",
+    "description": "開始状態を含む遷移不変述語 P から、状態型を `{q // P q}` に制限した機械を構成する。有限リストstatesの場合は開始状態の所属と遷移閉性を仮定する。",
+    "tags": [
+      "invariant-subtype",
+      "finite-carrier",
+      "restriction"
+    ],
+    "spec": "specs/JL-160.md",
+    "module": "JonnyLean.Automata.Restriction",
+    "declaration": "JonnyLean.Automata.Machine.language_restrict",
+    "contract": "contracts/JL160.lean",
+    "review": "reviews/JL-160.json",
+    "editable": [
+      "JonnyLean/Automata/Restriction.lean"
+    ],
+    "depends_on": [
+      "JL-155",
+      "JL-158"
+    ]
+  },
+  {
+    "id": "JL-161",
+    "title": "出現を数える直積列挙",
+    "domain": "enumerative-combinatorics",
+    "description": "二つのリストの直積を、左の各出現に対して右の全出現を対にするflatMap/mapで列挙する。リスト長を個数とする。",
+    "tags": [
+      "cartesian-product",
+      "occurrence-count",
+      "multiplication-principle"
+    ],
+    "spec": "specs/JL-161.md",
+    "module": "JonnyLean.Counting.Product",
+    "declaration": "JonnyLean.Counting.length_product",
+    "contract": "contracts/JL161.lean",
+    "review": "reviews/JL-161.json",
+    "editable": [
+      "JonnyLean/Counting/Product.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-162",
+    "title": "要素ごとに変わる選択肢と和の法則",
+    "domain": "enumerative-combinatorics",
+    "description": "fibers xs choices は左の出現 x ごとに異なるリスト choices x の要素を対にして列挙する。各fiberの大きさの和を自然数massで表す。",
+    "tags": [
+      "dependent-enumeration",
+      "sum-rule",
+      "weighted-sum"
+    ],
+    "spec": "specs/JL-162.md",
+    "module": "JonnyLean.Counting.Dependent",
+    "declaration": "JonnyLean.Counting.length_fibers",
+    "contract": "contracts/JL162.lean",
+    "review": "reviews/JL-162.json",
+    "editable": [
+      "JonnyLean/Counting/Dependent.lean"
+    ],
+    "depends_on": [
+      "JL-161",
+      "JL-059"
+    ]
+  },
+  {
+    "id": "JL-163",
+    "title": "座標別選択列と積公式",
+    "domain": "enumerative-combinatorics",
+    "description": "リストのリストxssを各座標の候補とし、各座標から一つずつ選んだ語をchoices xssで列挙する。Compatibleは語と候補列の長さおよび座標ごとの所属を再帰的に検査する命題である。",
+    "tags": [
+      "coordinate-choices",
+      "product-rule",
+      "list-enumeration"
+    ],
+    "spec": "specs/JL-163.md",
+    "module": "JonnyLean.Counting.Choices",
+    "declaration": "JonnyLean.Counting.length_choices",
+    "contract": "contracts/JL163.lean",
+    "review": "reviews/JL-163.json",
+    "editable": [
+      "JonnyLean/Counting/Choices.lean"
+    ],
+    "depends_on": [
+      "JL-162"
+    ]
+  },
+  {
+    "id": "JL-164",
+    "title": "全位置部分列の列挙と二の冪",
+    "domain": "enumerative-combinatorics",
+    "description": "各位置を残すか捨てるかで全ての順序保存部分列を列挙する。先頭位置を捨てる列挙と残す列挙を連結する再帰定義を使う。",
+    "tags": [
+      "subsequences",
+      "power-of-two",
+      "positions"
+    ],
+    "spec": "specs/JL-164.md",
+    "module": "JonnyLean.Counting.Subsequences",
+    "declaration": "JonnyLean.Counting.length_subsequences",
+    "contract": "contracts/JL164.lean",
+    "review": "reviews/JL-164.json",
+    "editable": [
+      "JonnyLean/Counting/Subsequences.lean"
+    ],
+    "depends_on": [
+      "JL-162"
+    ]
+  },
+  {
+    "id": "JL-165",
+    "title": "語を二つへ分割する全境界",
+    "domain": "enumerative-combinatorics",
+    "description": "splits xs は語を接頭語uと接尾語vに分ける全境界を列挙する。空の接頭語と空の接尾語の両端を含める。",
+    "tags": [
+      "word-splits",
+      "prefix-suffix",
+      "boundary-count"
+    ],
+    "spec": "specs/JL-165.md",
+    "module": "JonnyLean.Counting.Splits",
+    "declaration": "JonnyLean.Counting.mem_splits",
+    "contract": "contracts/JL165.lean",
+    "review": "reviews/JL-165.json",
+    "editable": [
+      "JonnyLean/Counting/Splits.lean"
+    ],
+    "depends_on": [
+      "JL-162"
+    ]
+  },
+  {
+    "id": "JL-166",
+    "title": "全位置への一文字挿入",
+    "domain": "enumerative-combinatorics",
+    "description": "insertions a xs は先頭から末尾まで全ての境界へ文字aを挿入した語を列挙する。先頭挿入と、先頭文字を保持した残りへの挿入を再帰的にまとめる。",
+    "tags": [
+      "insertion",
+      "positions",
+      "length-invariant"
+    ],
+    "spec": "specs/JL-166.md",
+    "module": "JonnyLean.Counting.Insertions",
+    "declaration": "JonnyLean.Counting.insertion_length",
+    "contract": "contracts/JL166.lean",
+    "review": "reviews/JL-166.json",
+    "editable": [
+      "JonnyLean/Counting/Insertions.lean"
+    ],
+    "depends_on": [
+      "JL-162"
+    ]
+  },
+  {
+    "id": "JL-167",
+    "title": "挿入による順列列挙と階乗",
+    "domain": "enumerative-combinatorics",
+    "description": "空語の順列は空語一個とし、先頭文字を残りの各順列の全位置へ挿入して列挙する。位置の並べ替えを数える。",
+    "tags": [
+      "permutation-enumeration",
+      "factorial",
+      "repeated-values"
+    ],
+    "spec": "specs/JL-167.md",
+    "module": "JonnyLean.Counting.Permutations",
+    "declaration": "JonnyLean.Counting.length_permutations",
+    "contract": "contracts/JL167.lean",
+    "review": "reviews/JL-167.json",
+    "editable": [
+      "JonnyLean/Counting/Permutations.lean"
+    ],
+    "depends_on": [
+      "JL-166",
+      "JL-020"
+    ]
+  },
+  {
+    "id": "JL-168",
+    "title": "重み付き部分列和の積展開",
+    "domain": "enumerative-combinatorics",
+    "description": "語の重みwordWeightを文字の自然数重みの積とし、全位置部分列の重みを足す。空語の重みは空積として1とする。",
+    "tags": [
+      "weighted-subsets",
+      "product-expansion",
+      "finite-sum"
+    ],
+    "spec": "specs/JL-168.md",
+    "module": "JonnyLean.Counting.WeightedSubsequences",
+    "declaration": "JonnyLean.Counting.weighted_subsequences",
+    "contract": "contracts/JL168.lean",
+    "review": "reviews/JL-168.json",
+    "editable": [
+      "JonnyLean/Counting/WeightedSubsequences.lean"
+    ],
+    "depends_on": [
+      "JL-164",
+      "JL-163"
+    ]
+  },
+  {
+    "id": "JL-169",
+    "title": "順序を保つ二語の混合と二項係数",
+    "domain": "enumerative-combinatorics",
+    "description": "shuffles xs ys は各語内の順序を保って二語を混合する全選択を列挙する。両語が非空なら先頭をどちらから取るかで分岐する。",
+    "tags": [
+      "shuffle",
+      "binomial-coefficient",
+      "order-preservation"
+    ],
+    "spec": "specs/JL-169.md",
+    "module": "JonnyLean.Counting.Shuffle",
+    "declaration": "JonnyLean.Counting.length_shuffles",
+    "contract": "contracts/JL169.lean",
+    "review": "reviews/JL-169.json",
+    "editable": [
+      "JonnyLean/Counting/Shuffle.lean"
+    ],
+    "depends_on": [
+      "JL-162",
+      "JL-058"
+    ]
+  },
+  {
+    "id": "JL-170",
+    "title": "直積事象の抽出と計数の分離",
+    "domain": "enumerative-combinatorics",
+    "description": "左成分のBoolean条件pと右成分の条件qの両方を満たす直積の出現をfilterする。",
+    "tags": [
+      "filtered-product",
+      "event-count",
+      "factorization"
+    ],
+    "spec": "specs/JL-170.md",
+    "module": "JonnyLean.Counting.FilteredProduct",
+    "declaration": "JonnyLean.Counting.length_filter_product",
+    "contract": "contracts/JL170.lean",
+    "review": "reviews/JL-170.json",
+    "editable": [
+      "JonnyLean/Counting/FilteredProduct.lean"
+    ],
+    "depends_on": [
+      "JL-161"
+    ]
+  },
+  {
+    "id": "JL-171",
+    "title": "自然数重みを持つ有限出現測度",
+    "domain": "finite-probability",
+    "description": "`Measure α := List (α × Nat)` とし、各出現に値と自然数重みを持たせる。totalは全出現の重み和、point a nは単一出現、dirac aは重み1の点測度である。",
+    "tags": [
+      "finite-measure",
+      "natural-weights",
+      "total-mass"
+    ],
+    "spec": "specs/JL-171.md",
+    "module": "JonnyLean.FiniteProbability.Measure",
+    "declaration": "JonnyLean.FiniteProbability.total_append",
+    "contract": "contracts/JL171.lean",
+    "review": "reviews/JL-171.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Measure.lean"
+    ],
+    "depends_on": [
+      "JL-162"
+    ]
+  },
+  {
+    "id": "JL-172",
+    "title": "有限測度の押し出しと質量保存",
+    "domain": "finite-probability",
+    "description": "押し出しpush fは各出現の値にfを適用し、同じ出現の重みを保持する。像が衝突しても出現の統合や再重み付けを行わない。",
+    "tags": [
+      "pushforward",
+      "mass-preservation",
+      "noninjective-map"
+    ],
+    "spec": "specs/JL-172.md",
+    "module": "JonnyLean.FiniteProbability.Pushforward",
+    "declaration": "JonnyLean.FiniteProbability.total_push",
+    "contract": "contracts/JL172.lean",
+    "review": "reviews/JL-172.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Pushforward.lean"
+    ],
+    "depends_on": [
+      "JL-171"
+    ]
+  },
+  {
+    "id": "JL-173",
+    "title": "自然数観測量の期待値分子と線形性",
+    "domain": "finite-probability",
+    "description": "expect μ fを各出現の重みと自然数観測量fの積の有限和とする。正規化前の期待値分子であり、総質量で割る操作はしない。",
+    "tags": [
+      "expectation-numerator",
+      "linearity",
+      "change-of-variables"
+    ],
+    "spec": "specs/JL-173.md",
+    "module": "JonnyLean.FiniteProbability.Expectation",
+    "declaration": "JonnyLean.FiniteProbability.expect_add",
+    "contract": "contracts/JL173.lean",
+    "review": "reviews/JL-173.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Expectation.lean"
+    ],
+    "depends_on": [
+      "JL-172",
+      "JL-168"
+    ]
+  },
+  {
+    "id": "JL-174",
+    "title": "積測度と分離観測量の期待値",
+    "domain": "finite-probability",
+    "description": "積測度は全ての出現対を列挙し、その重みを元の二つの重みの積とする。対の観測量 f(a)g(b) を扱う。",
+    "tags": [
+      "product-measure",
+      "separable-observable",
+      "independence"
+    ],
+    "spec": "specs/JL-174.md",
+    "module": "JonnyLean.FiniteProbability.Product",
+    "declaration": "JonnyLean.FiniteProbability.expect_product",
+    "contract": "contracts/JL174.lean",
+    "review": "reviews/JL-174.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Product.lean"
+    ],
+    "depends_on": [
+      "JL-173"
+    ]
+  },
+  {
+    "id": "JL-175",
+    "title": "Boolean事象の質量と積事象の分離",
+    "domain": "finite-probability",
+    "description": "Boolean事象の指示関数を0または1とし、event μ pをその期待値分子と定義する。積事象は各成分のBoolean条件の論理積である。",
+    "tags": [
+      "event-mass",
+      "complement",
+      "product-event"
+    ],
+    "spec": "specs/JL-175.md",
+    "module": "JonnyLean.FiniteProbability.Events",
+    "declaration": "JonnyLean.FiniteProbability.event_product",
+    "contract": "contracts/JL175.lean",
+    "review": "reviews/JL-175.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Events.lean"
+    ],
+    "depends_on": [
+      "JL-174"
+    ]
+  },
+  {
+    "id": "JL-176",
+    "title": "事象への測度制限と条件質量",
+    "domain": "finite-probability",
+    "description": "restrict μ pはBoolean事象pを満たす出現だけを残し、その重みを保持する。正規化前の条件測度として扱う。",
+    "tags": [
+      "restriction",
+      "conditioning",
+      "indicator"
+    ],
+    "spec": "specs/JL-176.md",
+    "module": "JonnyLean.FiniteProbability.Restriction",
+    "declaration": "JonnyLean.FiniteProbability.expect_restrict",
+    "contract": "contracts/JL176.lean",
+    "review": "reviews/JL-176.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Restriction.lean"
+    ],
+    "depends_on": [
+      "JL-175"
+    ]
+  },
+  {
+    "id": "JL-177",
+    "title": "正の有限測度の確率表示と押し出し",
+    "domain": "finite-probability",
+    "description": "Distributionは出現測度と総質量が正である証明を持つ。確率は事象質量を分子、総質量を分母とする既存の未約分Probability構造体で表す。",
+    "tags": [
+      "normalization",
+      "positive-mass",
+      "probability-pushforward"
+    ],
+    "spec": "specs/JL-177.md",
+    "module": "JonnyLean.FiniteProbability.Distribution",
+    "declaration": "JonnyLean.FiniteProbability.Distribution.probability_map",
+    "contract": "contracts/JL177.lean",
+    "review": "reviews/JL-177.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Distribution.lean"
+    ],
+    "depends_on": [
+      "JL-175",
+      "JL-060"
+    ]
+  },
+  {
+    "id": "JL-178",
+    "title": "自然数係数の混合と期待値分子",
+    "domain": "finite-probability",
+    "description": "scale n μは各出現重みをn倍し、mix m μ n νは二つのスケール測度を連結する。任意の自然数係数を許す未正規化混合である。",
+    "tags": [
+      "mixture",
+      "scaling",
+      "weighted-expectation"
+    ],
+    "spec": "specs/JL-178.md",
+    "module": "JonnyLean.FiniteProbability.Mixture",
+    "declaration": "JonnyLean.FiniteProbability.expect_mix",
+    "contract": "contracts/JL178.lean",
+    "review": "reviews/JL-178.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Mixture.lean"
+    ],
+    "depends_on": [
+      "JL-173"
+    ]
+  },
+  {
+    "id": "JL-179",
+    "title": "有限遷移核と全期待値分子公式",
+    "domain": "finite-probability",
+    "description": "核k : α → Measure βは各値に有限重み付き出力列を割り当てる。bind μ kは入力出現の重みで各核の重みをスケールして連結する。",
+    "tags": [
+      "transition-kernel",
+      "total-expectation",
+      "bind"
+    ],
+    "spec": "specs/JL-179.md",
+    "module": "JonnyLean.FiniteProbability.Kernel",
+    "declaration": "JonnyLean.FiniteProbability.expect_bind",
+    "contract": "contracts/JL179.lean",
+    "review": "reviews/JL-179.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/Kernel.lean"
+    ],
+    "depends_on": [
+      "JL-178"
+    ]
+  },
+  {
+    "id": "JL-180",
+    "title": "有限遷移核の合成と結合則",
+    "domain": "finite-probability",
+    "description": "二段階の核kとlを、各入力aについてbind (k a) lと合成する。出現の並びと積重みを含めたリスト表現そのものの等式を扱う。",
+    "tags": [
+      "kernel-composition",
+      "associativity",
+      "dirac-identity"
+    ],
+    "spec": "specs/JL-180.md",
+    "module": "JonnyLean.FiniteProbability.KernelComposition",
+    "declaration": "JonnyLean.FiniteProbability.bind_assoc",
+    "contract": "contracts/JL180.lean",
+    "review": "reviews/JL-180.json",
+    "editable": [
+      "JonnyLean/FiniteProbability/KernelComposition.lean"
+    ],
+    "depends_on": [
+      "JL-179"
+    ]
+  }
+]

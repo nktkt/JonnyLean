@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "task": "JL-118",
+  "reviewer": {
+    "kind": "ai",
+    "name": "Codex independent reviewer /root/v3_arithmetic (JL-001–020 and JL-101–140; not the author)",
+    "authenticated": false,
+    "evidence_kind": "AI self-report",
+    "independent_scope": "Authored JL-061–100 only. Independently read the specifications, contracts, all related mathematical implementations and independent semantic models for JL-001–020 and JL-101–140; checked final machine audits and both input fingerprints."
+  },
+  "decision": "approve",
+  "findings": [],
+  "checks": [
+    {
+      "criterion": "definition",
+      "result": "pass",
+      "evidence": "eraseは先頭一致だけで止まらず全tailへ再帰して全対象キーを削除する。独立lookupを使用。"
+    },
+    {
+      "criterion": "quantifiers",
+      "result": "pass",
+      "evidence": "任意query,keyと任意重複許容リスト。欠損と二重出現を境界に含む。"
+    },
+    {
+      "criterion": "assumptions",
+      "result": "pass",
+      "evidence": "キーの存在や一意性の仮定なし。"
+    },
+    {
+      "criterion": "conclusion",
+      "result": "pass",
+      "evidence": "対象キーの検索はnone、異キーは元lookupと一致。erase_idempotentは構造等式。"
+    },
+    {
+      "criterion": "proof",
+      "result": "pass",
+      "evidence": "リスト帰納法と現在キー/問い合わせキーの等号場合分けで、削除した要素と保持した要素を区別。"
+    },
+    {
+      "criterion": "coverage",
+      "result": "pass",
+      "evidence": "仕様・契約と実装/独立モデルを含む数学依存を精読した。最終監査はrootを含む149モジュール・2599宣言を記録し、実ファイル集合とcompiled import graphが一致する。JonnyLean.DataStructures.Assoc.lookup_eraseは指定JonnyLean.DataStructures.Persistentのtheoremとして一意に存在し、全149ソースのwarnings-as-errors検査ログを確認した。"
+    },
+    {
+      "criterion": "audit",
+      "result": "pass",
+      "evidence": "artifacts/JL-118/report.jsonのstatus/mechanical=pass、findings=[]、原契約の-DwarningAsError=true成功を確認。全数学2599宣言と当該契約内3ローカル宣言（生成/privateを含む）の公理はpropext/Quot.soundの範囲内で、独自axiomはない。主定理の公理依存はpropext。現在のcapture_inputsおよびcapture_verification_inputsを両方再計算して機械記録と完全一致を確認した。"
+    }
+  ],
+  "inputs": {
+    ".github/workflows/ci.yml": "6d2e20d970d80eecb6266d87800440e1a5d13f0ab7b255948e106315f877afbe",
+    "JonnyLean/DataStructures/Persistent.lean": "e8ac556a1951e9351bec5f324fc5efe7afee53f790c5cf34a5fd82f3221d0420",
+    "JonnyLean/DataStructures/SpecificationModels.lean": "1cce49539b78e941901db293e50e1dd8c46c719c9cf36497d14bf4ac0698a34b",
+    "contracts/JL118.lean": "4ccaa2a2980bf4191645ed1688389eb692309e8e0731e2044b0d8c6d70ba7b41",
+    "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
+    "lakefile.toml": "c84968d52ce7bc3cd55eaec859d435a4e6608620a20eecf359dfa65e405e2d39",
+    "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+    "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
+    "specs/JL-111.md": "fc200c4fd87b9598f617c3fb0a7e553982fa1933d57e3fc988b600a9b1a06a85",
+    "specs/JL-112.md": "2cc9ed377df9a701eedf69ef49ccb1601ebc5acee2f904db0cbfddc4e04aab78",
+    "specs/JL-113.md": "596d2ce291b05e280bfc9c5e32c03db45cdfbc60e52be2a026450866fdd41a8d",
+    "specs/JL-114.md": "7116ca3f9adb1d355e388f798229c94ed40de18400a666944d17725719d47ab1",
+    "specs/JL-115.md": "d1c4824033f0e3ac8e6a854dd2d4e38ee624e5d9acb1812e77c1dde7bf1d0d33",
+    "specs/JL-116.md": "d215a173e2c08192e6dc19fa7b608799b541dadbabf1ca5917f0f5c2fd2be61d",
+    "specs/JL-117.md": "ecd5d7ac131427e8a4e2424ad17481deeae421961284eaf76e78350109702344",
+    "specs/JL-118.md": "3cede39332a2c93fdfd2f4645e77dcbdc3ecfe0b6b7aedafd33c2e01d3973f24",
+    "specs/JL-119.md": "710debe883f8ad32394b929a056fd03a2976a3812560486669845b11b8c880fd",
+    "specs/JL-120.md": "bc6794b2639ff761f356d59ada3b673b0ed21bfbe582ea093ac545bcc9b860ee",
+    "tests/__init__.py": "0de4bc12a3f83b2ad1089fdc469aa03124e37a4deae5c4e783c8ae11b28f9536",
+    "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
+    "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
+    "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_platform_v3.py": "dcc9fd38c0ceb99b1f97ee0a2839191a1b4596833fb9f5c64213d50f0a8bb2c6",
+    "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
+    "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
+    "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
+    "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
+    "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
+    "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
+    "tools/catalog.py": "8a7cbe66c90ca7d372e43f0e7b63ee252121de4f92a3213642829e89a059caaf",
+    "tools/jonnylean.py": "68852e62cd00e8d7e8e7ae28565bddfaf3f5ba003537bf6dc28d518addd045a4",
+    "tools/library.py": "1789e5705078300b011055df8da51fa4cdd1029e47cf5f6d38ab533839cb6494",
+    "tools/planning.py": "c014517fdcc36e48ce4688fd4c7203bbda1aba3a0a7e823a28818a3ab283ea2b",
+    "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
+    "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
+    "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
+    "worker.toml": "a4afd6d36b271251a5a70cd01d5041f9df426694de17cf888d2f839397391044",
+    "worker/__init__.py": "642524b340239ff719e12cc3ee34df89b812930c403e2876878bf973d51098e3",
+    "worker/cli.py": "0205a4943c7f854970a2b8f82a728f6a1f82bb3dd81edfa9f62b106f4fe3ce07",
+    "worker/engine.py": "4c1cea218a6fb7825eb11b5cf8e980640e3a08421545c4c14ade70069f72c3e9",
+    "worker/processes.py": "21b53aba747f83cb8e5fd43267c81f0fa08d86ec8ea3607bb847846cd9f31840",
+    "worker/provider.py": "dba21f9900d407b4119be3294b09ff377420daff45df6ae7ad92a81b85512340",
+    "worker/state.py": "f35e55d488818dc3af3c441a5620744edb369a2d6d15ee2644179eead5e254b6",
+    "@task-context": "5f358722a56708b148d675545f008b88747afc24d64f4fcf7822f18f7adb93a0"
+  },
+  "human_approval": "not_recorded",
+  "reviewed_at": "2026-11-06T14:58:16.091437+00:00"
+}

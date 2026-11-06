@@ -1,4 +1,66 @@
-# v2.0 検証記録
+# v3.0 検証記録
+
+検証日: 2026-11-07（Asia/Tokyo）。macOS、Python 3.14.4、Lean 4.29.1。
+
+## 実装範囲
+
+- **180課題、148数学モジュール、ソースに明示した名前付き定理838個**。集約rootを含む監査対象は149モジュール。
+- Lean生成の補助宣言も含む監査では2,600宣言、うち定理1,697個・定義837個。ソースの定理数とは集計対象が異なる。
+- 日本語仕様180件、名前付き独立契約180件、作成担当とは別の担当によるAIレビュー180件。
+- 初等整数論・組合せ論に加え、多項式、二分木、永続データ構造、式変換、検証付きコンパイラ、形式言語、オートマトン、自然数重みの有限確率モデルを実装。
+- カタログは21分類、538依存辺、依存計画は10層。複数課題が一つの実装モジュールを共有する場合もあり、課題数とモジュール数は一致しない。
+- 多項式は自然数係数の有限リスト、微分は形式微分。確率モデルは自然数重みの有限リストと期待値の分子を扱う。オートマトンの一般状態型と有限担体による制限を区別している。
+
+## 機械検証と独立レビュー
+
+最終コマンド `python3 -u tools/jonnylean.py run all --jobs 4` は **180件すべてPASS**、終了コード0、94.773秒。
+全件が `mechanical=pass`、`review.status=approved_current`。バッチ開始から終了まで全体入力が不変であることも確認した。
+
+全数学ソースのstrict検査、コンパイル済みimport照合、全所有宣言の公理監査を毎回のバッチで実行し、同じ実行内で成功した全体検証を各契約に共有する。
+180件の原契約strict検査と契約内ローカル宣言監査は個別に行う。過去の成果物を機械検証の省略に使用していない。
+許可する公理依存は `propext` と `Quot.sound` のみ。`sorryAx`、独自公理、`Classical.choice`、未解決の指摘はない。
+
+独立レビューでは旧60件も現在の依存範囲で読み直した。重複題材への指摘を受け、JL-142は許容文字からなる言語の連結・交差・混合語反例へ、
+JL-089は係数剰余化と合同入力を同時に扱う多項式評価定理へ拡充し、仕様・契約・証明を再レビューした。
+機械検証は全体入力、意味レビューは課題と依存範囲の入力に結び付く。AIレビュー記録は自己申告であり、人間の承認は未記録。
+
+## テストと操作確認
+
+互いに重複しない次の2スイートで **合計79件合格**。
+
+```sh
+python3 -W error::ResourceWarning -m unittest tests.test_platform_v3 -v
+# 10件合格、36.635秒
+python3 -W error::ResourceWarning -m unittest tests.test_pipeline tests.test_worker tests.test_reporting_v2 tests.test_catalog tests.test_publish -v
+# 69件合格、160.659秒
+```
+
+新規テストは実Leanを使い、並列契約の検査、共通の全体検証の共有、失敗した契約の分離、共通build失敗の扱い、実行途中の入力変更拒否、
+古い宣言索引の拒否、依存DAG、シャード分割、読み取り専用の計画処理を検査した。別担当もプラットフォームの変更をレビューし、新規10件を独立に再実行して合格した。
+テストは隔離した小規模fixtureを使用し、実プロジェクト180課題の検査は上記の全体実行で別途行った。
+
+HTMLの実ブラウザ確認では、初期表示180件、`evaluate_normalized_congruent` 検索1件、`polynomials` 絞り込み20件、`JL-180` 検索1件、解除後180件を確認した。
+`catalog check`、宣言型JSON・Markdown出力、依存計画JSON出力も確認した。
+
+v3では外部Codex CLIプロバイダーの追加呼出は行っていない。ワーカーは回帰テストで検査し、実サービスを使った採用の証跡は下記v2記録に保持している。
+LinuxのGitHub Actions実行・GitHubへのpush・PR公開はこの検証に含まない。
+
+## 成果物
+
+- `artifacts/index.html`: 180課題の検索・分野別表示・検証とレビューの状態。
+- `artifacts/declarations.json`, `polynomials-api.md`: 監査済み宣言の実際の型。検索・出力自体は再検証ではない。
+- `artifacts/catalog.json`, `catalog-stats.json`, `dependencies.mmd`, `plan.json`: カタログ統計と依存計画。
+- `artifacts/verification-output.txt`, `batch.json`: 最終180課題の実行ログとバッチ結果。
+- `artifacts/test-platform-v3.txt`, `test-regressions-v3.txt`, `test-output.txt`: 79件のテストログ。
+- `artifacts/platform-review-v3.md`: プラットフォーム変更への独立レビュー。
+- `reviews/JL-001.json`〜`JL-180.json`: 各仕様の7基準を検査した現在のAIレビュー。
+
+成果物はローカル生成物としてGit管理対象外。再現方法は [運用ガイド](platform.md) を参照。
+以下は過去の検証時点の記録であり、旧版の件数・成果物名は当時の状態を示す。
+
+---
+
+# v2.0 検証記録（保存）
 
 検証日: 2026-11-06（Asia/Tokyo）。macOS、Python 3.14.4、Lean 4.29.1、Codex CLI 0.166.0。
 

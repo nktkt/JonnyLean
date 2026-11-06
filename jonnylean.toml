@@ -842,3 +842,1683 @@ contract = "contracts/JL060.lean"
 review = "reviews/JL-060.json"
 editable = ["JonnyLean/DiscreteProbability/Distribution.lean"]
 depends_on = ["JL-059"]
+
+[[tasks]]
+id = "JL-061"
+title = "三数の最大公約数の普遍性"
+domain = "arithmetic"
+description = "三つの自然数をまとめる最大公約数を構成し、共通約数との同値、巡回置換、スカラー倍、一意性を示す。"
+tags = ["gcd", "universal-property", "scaling"]
+spec = "specs/JL-061.md"
+module = "JonnyLean.Arithmetic.GcdTriple"
+declaration = "JonnyLean.Arithmetic.dvd_gcdTriple"
+contract = "contracts/JL061.lean"
+review = "reviews/JL-061.json"
+editable = ["JonnyLean/Arithmetic/GcdTriple.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-062"
+title = "有限列の最大公約数"
+domain = "arithmetic"
+description = "空列を0とする最大公約数の畳み込みを構成し、全要素の共通約数による仕様、連結、スカラー倍、ゼロ条件を証明する。"
+tags = ["gcd", "lists", "fold"]
+spec = "specs/JL-062.md"
+module = "JonnyLean.Arithmetic.GcdList"
+declaration = "JonnyLean.Arithmetic.dvd_listGcd"
+contract = "contracts/JL062.lean"
+review = "reviews/JL-062.json"
+editable = ["JonnyLean/Arithmetic/GcdList.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-063"
+title = "Euclidせん断列による共通約数の保存"
+domain = "arithmetic"
+description = "対(a,b)を(b,a+kb)へ送る計算と任意長の係数列による反復を構成し、最大公約数と共通約数全体の保存を示す。"
+tags = ["euclid", "invariant", "iteration"]
+spec = "specs/JL-063.md"
+module = "JonnyLean.Arithmetic.Shear"
+declaration = "JonnyLean.Arithmetic.shearTrace_common"
+contract = "contracts/JL063.lean"
+review = "reviews/JL-063.json"
+editable = ["JonnyLean/Arithmetic/Shear.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-064"
+title = "有限燃料付きEuclid法の停止と正しさ"
+domain = "arithmetic"
+description = "剰余によるEuclidステップを実装し、第一成分aに対してa+1回以内に停止状態(0,gcd(a,b))へ到達することを示す。"
+tags = ["euclid", "termination", "algorithm"]
+spec = "specs/JL-064.md"
+module = "JonnyLean.Arithmetic.EuclidTrace"
+declaration = "JonnyLean.Arithmetic.euclidRun_computes"
+contract = "contracts/JL064.lean"
+review = "reviews/JL-064.json"
+editable = ["JonnyLean/Arithmetic/EuclidTrace.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-065"
+title = "三数の最小公倍数の普遍性"
+domain = "arithmetic"
+description = "三数の最小公倍数を構成し、共通倍数との同値、スカラー倍、単位元、一意性を証明する。"
+tags = ["lcm", "universal-property", "scaling"]
+spec = "specs/JL-065.md"
+module = "JonnyLean.Arithmetic.LcmTriple"
+declaration = "JonnyLean.Arithmetic.lcmTriple_dvd"
+contract = "contracts/JL065.lean"
+review = "reviews/JL-065.json"
+editable = ["JonnyLean/Arithmetic/LcmTriple.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-066"
+title = "有限列の最小公倍数"
+domain = "arithmetic"
+description = "空列を1とする最小公倍数の畳み込みを実装し、全要素の共通倍数による仕様、連結、要素の整除、ゼロ条件を証明する。"
+tags = ["lcm", "lists", "fold"]
+spec = "specs/JL-066.md"
+module = "JonnyLean.Arithmetic.LcmList"
+declaration = "JonnyLean.Arithmetic.listLcm_dvd"
+contract = "contracts/JL066.lean"
+review = "reviews/JL-066.json"
+editable = ["JonnyLean/Arithmetic/LcmList.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-067"
+title = "有限積のゼロ条件と整除"
+domain = "arithmetic"
+description = "自然数列の有限積を再帰構成し、ゼロ因子の存在、正値性、連結公式、各要素による整除を示す。"
+tags = ["finite-product", "zero", "divisibility"]
+spec = "specs/JL-067.md"
+module = "JonnyLean.Arithmetic.Product"
+declaration = "JonnyLean.Arithmetic.product_eq_zero"
+contract = "contracts/JL067.lean"
+review = "reviews/JL-067.json"
+editable = ["JonnyLean/Arithmetic/Product.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-068"
+title = "有限積との互いに素性の特徴付け"
+domain = "arithmetic"
+description = "ある自然数が有限積と互いに素であることと、すべての因子と互いに素であることを同値にする。連結と積の累乗への保存も得る。"
+tags = ["coprime", "finite-product", "powers"]
+spec = "specs/JL-068.md"
+module = "JonnyLean.Arithmetic.CoprimeProduct"
+declaration = "JonnyLean.Arithmetic.gcd_product_eq_one_iff"
+contract = "contracts/JL068.lean"
+review = "reviews/JL-068.json"
+editable = ["JonnyLean/Arithmetic/CoprimeProduct.lean"]
+depends_on = ["JL-067"]
+
+[[tasks]]
+id = "JL-069"
+title = "互いに素な因子の取消しと同時整除"
+domain = "arithmetic"
+description = "gcd(a,b)=1のもとで積bcの整除からbを取り消し、aとbの共通倍数がabの倍数となることを構成的な証人で示す。"
+tags = ["coprime", "cancellation", "divisibility"]
+spec = "specs/JL-069.md"
+module = "JonnyLean.Arithmetic.CoprimeCancel"
+declaration = "JonnyLean.Arithmetic.coprime_product_dvd_iff"
+contract = "contracts/JL069.lean"
+review = "reviews/JL-069.json"
+editable = ["JonnyLean/Arithmetic/CoprimeCancel.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-070"
+title = "最大公約数による自然数対の既約化"
+domain = "arithmetic"
+description = "最大公約数で各成分を割る既約化を実装し、元の対の再構成と、少なくとも一成分が正なら既約対が互いに素になることを示す。"
+tags = ["gcd", "normalization", "quotient"]
+spec = "specs/JL-070.md"
+module = "JonnyLean.Arithmetic.ReducedPair"
+declaration = "JonnyLean.Arithmetic.reducedPair_coprime"
+contract = "contracts/JL070.lean"
+review = "reviews/JL-070.json"
+editable = ["JonnyLean/Arithmetic/ReducedPair.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-071"
+title = "原始対の拡大率の一意性"
+domain = "arithmetic"
+description = "互いに素な自然数対を同じ比率で拡大したとき、最大公約数が拡大率となることから、同じ拡大結果の倍率が一意であることを示す。"
+tags = ["primitive-pair", "uniqueness", "scaling"]
+spec = "specs/JL-071.md"
+module = "JonnyLean.Arithmetic.PrimitiveScale"
+declaration = "JonnyLean.Arithmetic.primitive_scale_unique"
+contract = "contracts/JL071.lean"
+review = "reviews/JL-071.json"
+editable = ["JonnyLean/Arithmetic/PrimitiveScale.lean"]
+depends_on = ["JL-070"]
+
+[[tasks]]
+id = "JL-072"
+title = "剰余を保ちながら計算する累乗"
+domain = "arithmetic"
+description = "各乗算後に剰余を取る累乗アルゴリズムを実装し、通常の累乗の剰余と一致すること、範囲、指数加法、入力の正規化を証明する。"
+tags = ["modular-arithmetic", "power", "algorithm"]
+spec = "specs/JL-072.md"
+module = "JonnyLean.Arithmetic.ModularPower"
+declaration = "JonnyLean.Arithmetic.modularPower_correct"
+contract = "contracts/JL072.lean"
+review = "reviews/JL-072.json"
+editable = ["JonnyLean/Arithmetic/ModularPower.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-073"
+title = "桁列の剰余評価と連結公式"
+domain = "arithmetic"
+description = "低位桁から並ぶ自然数列の基数評価と逐次剰余計算を構成し、連結した桁列の剰余を長さによる基数累乗から求める。"
+tags = ["digits", "remainder", "concatenation"]
+spec = "specs/JL-073.md"
+module = "JonnyLean.Arithmetic.RadixResidue"
+declaration = "JonnyLean.Arithmetic.radixResidue_append"
+contract = "contracts/JL073.lean"
+review = "reviews/JL-073.json"
+editable = ["JonnyLean/Arithmetic/RadixResidue.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-074"
+title = "重み付き有限和による合同と整除の保存"
+domain = "arithmetic"
+description = "任意型の有限列上で重み付き和を定義し、各位置での合同から和の合同を導く。線形結合、共通約数、連結も扱う。"
+tags = ["finite-sum", "congruence", "linearity"]
+spec = "specs/JL-074.md"
+module = "JonnyLean.Arithmetic.WeightedResidue"
+declaration = "JonnyLean.Arithmetic.weightedSum_residue"
+contract = "contracts/JL074.lean"
+review = "reviews/JL-074.json"
+editable = ["JonnyLean/Arithmetic/WeightedResidue.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-075"
+title = "有限積と点ごとの乗算・累乗の交換"
+domain = "arithmetic"
+description = "有限列に沿う二関数の点ごとの積を、各関数の有限積の積へ分解する。定数列、累乗列、共通スカラーの因数分解も示す。"
+tags = ["finite-product", "map", "factorization"]
+spec = "specs/JL-075.md"
+module = "JonnyLean.Arithmetic.ProductMap"
+declaration = "JonnyLean.Arithmetic.product_map_mul"
+contract = "contracts/JL075.lean"
+review = "reviews/JL-075.json"
+editable = ["JonnyLean/Arithmetic/ProductMap.lean"]
+depends_on = ["JL-067"]
+
+[[tasks]]
+id = "JL-076"
+title = "各因子の商から有限積の商を構成する"
+domain = "arithmetic"
+description = "全要素がdの倍数なら、積がdの長さ乗と各要素の商の積に分解されることを示す。点ごとの整除と共通因子の累乗整除も導く。"
+tags = ["quotient", "finite-product", "divisibility"]
+spec = "specs/JL-076.md"
+module = "JonnyLean.Arithmetic.ProductDivisibility"
+declaration = "JonnyLean.Arithmetic.product_map_quotient"
+contract = "contracts/JL076.lean"
+review = "reviews/JL-076.json"
+editable = ["JonnyLean/Arithmetic/ProductDivisibility.lean"]
+depends_on = ["JL-067", "JL-075"]
+
+[[tasks]]
+id = "JL-077"
+title = "有限積の上下界と列の分割"
+domain = "arithmetic"
+description = "各因子がc以下なら有限積がcの長さ乗以下となることを示す。下界、点ごとの単調性、反転不変性、take/drop分割も証明する。"
+tags = ["finite-product", "bounds", "list-decomposition"]
+spec = "specs/JL-077.md"
+module = "JonnyLean.Arithmetic.ProductOrder"
+declaration = "JonnyLean.Arithmetic.product_bound"
+contract = "contracts/JL077.lean"
+review = "reviews/JL-077.json"
+editable = ["JonnyLean/Arithmetic/ProductOrder.lean"]
+depends_on = ["JL-067", "JL-075"]
+
+[[tasks]]
+id = "JL-078"
+title = "添字範囲の積の区間分割"
+domain = "arithmetic"
+description = "最初のn項の有限積を定義し、m+n項の積を前半m項と添字をずらした後半n項へ分解する。点ごとの積と整除も保存する。"
+tags = ["range-product", "interval", "index-shift"]
+spec = "specs/JL-078.md"
+module = "JonnyLean.Arithmetic.RangeProduct"
+declaration = "JonnyLean.Arithmetic.rangeProduct_split"
+contract = "contracts/JL078.lean"
+review = "reviews/JL-078.json"
+editable = ["JonnyLean/Arithmetic/RangeProduct.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-079"
+title = "有限因子列の倍数に1を足すEuclid構成"
+domain = "arithmetic"
+description = "有限積に自然数kを掛けて1を加えた数が、元の積および各因子と互いに素であることを示し、1より大きい元の因子では割れないと結論する。"
+tags = ["euclid", "coprime", "construction"]
+spec = "specs/JL-079.md"
+module = "JonnyLean.Arithmetic.EuclidAvoidance"
+declaration = "JonnyLean.Arithmetic.avoidance_not_dvd"
+contract = "contracts/JL079.lean"
+review = "reviews/JL-079.json"
+editable = ["JonnyLean/Arithmetic/EuclidAvoidance.lean"]
+depends_on = ["JL-067"]
+
+[[tasks]]
+id = "JL-080"
+title = "有限列の最大公約数・最小公倍数・積の関係"
+domain = "arithmetic"
+description = "非空列の最大公約数が最小公倍数を割ること、最小公倍数が有限積を割ることを合成し、整除順序の吸収則を証明する。"
+tags = ["gcd", "lcm", "finite-product"]
+spec = "specs/JL-080.md"
+module = "JonnyLean.Arithmetic.CommonDivisors"
+declaration = "JonnyLean.Arithmetic.listGcd_listLcm_absorb"
+contract = "contracts/JL080.lean"
+review = "reviews/JL-080.json"
+editable = ["JonnyLean/Arithmetic/CommonDivisors.lean"]
+depends_on = ["JL-062", "JL-066", "JL-067"]
+
+[[tasks]]
+id = "JL-081"
+title = "有限係数多項式のHorner評価と連結"
+domain = "polynomials"
+description = "自然数係数を低次から並べた有限リストで多項式を表現し、Horner評価と係数列連結の評価公式を証明する。"
+tags = ["polynomial", "horner", "coefficients"]
+spec = "specs/JL-081.md"
+module = "JonnyLean.Polynomials.Evaluation"
+declaration = "JonnyLean.Polynomials.evaluate_append"
+contract = "contracts/JL081.lean"
+review = "reviews/JL-081.json"
+editable = ["JonnyLean/Polynomials/Evaluation.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-082"
+title = "係数列の長さが異なる多項式の加法"
+domain = "polynomials"
+description = "短い係数列の不足分を0と解釈する加法を実装し、評価の加法性、リストとしての交換則・結合則、長さの最大値を示す。"
+tags = ["polynomial", "addition", "unequal-length"]
+spec = "specs/JL-082.md"
+module = "JonnyLean.Polynomials.Addition"
+declaration = "JonnyLean.Polynomials.evaluate_add"
+contract = "contracts/JL082.lean"
+review = "reviews/JL-082.json"
+editable = ["JonnyLean/Polynomials/Addition.lean"]
+depends_on = ["JL-081"]
+
+[[tasks]]
+id = "JL-083"
+title = "多項式のスカラー倍と線形性"
+domain = "polynomials"
+description = "全係数を自然数c倍する演算を実装し、評価・加法との交換、倍率の合成、長さの保存を証明する。"
+tags = ["polynomial", "scalar", "linearity"]
+spec = "specs/JL-083.md"
+module = "JonnyLean.Polynomials.Scalar"
+declaration = "JonnyLean.Polynomials.evaluate_scale"
+contract = "contracts/JL083.lean"
+review = "reviews/JL-083.json"
+editable = ["JonnyLean/Polynomials/Scalar.lean"]
+depends_on = ["JL-081", "JL-082"]
+
+[[tasks]]
+id = "JL-084"
+title = "単項式Xの累乗による係数列シフト"
+domain = "polynomials"
+description = "先頭へn個の0を挿入する演算を実装し、評価がXのn乗倍になること、シフトの合成、長さ、スカラー倍との交換を示す。"
+tags = ["polynomial", "shift", "monomial"]
+spec = "specs/JL-084.md"
+module = "JonnyLean.Polynomials.Shift"
+declaration = "JonnyLean.Polynomials.evaluate_shift"
+contract = "contracts/JL084.lean"
+review = "reviews/JL-084.json"
+editable = ["JonnyLean/Polynomials/Shift.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083"]
+
+[[tasks]]
+id = "JL-085"
+title = "係数列の畳み込み積の正しさ"
+domain = "polynomials"
+description = "先頭係数によるスカラー倍と再帰的な積のシフトを加える畳み込み積を実装し、評価が数の積になることを示す。分配・結合・交換則を評価の意味で導く。"
+tags = ["polynomial", "convolution", "multiplication"]
+spec = "specs/JL-085.md"
+module = "JonnyLean.Polynomials.Multiplication"
+declaration = "JonnyLean.Polynomials.evaluate_multiply"
+contract = "contracts/JL085.lean"
+review = "reviews/JL-085.json"
+editable = ["JonnyLean/Polynomials/Multiplication.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084"]
+
+[[tasks]]
+id = "JL-086"
+title = "Horner構造による多項式合成"
+domain = "polynomials"
+description = "外側の多項式をHorner形式で走査し、内側の多項式との積と定数加算から合成を構成する。評価と代入の一致、結合、恒等代入、定数代入を示す。"
+tags = ["polynomial", "composition", "substitution"]
+spec = "specs/JL-086.md"
+module = "JonnyLean.Polynomials.Composition"
+declaration = "JonnyLean.Polynomials.evaluate_compose"
+contract = "contracts/JL086.lean"
+review = "reviews/JL-086.json"
+editable = ["JonnyLean/Polynomials/Composition.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085"]
+
+[[tasks]]
+id = "JL-087"
+title = "多項式の自然数累乗"
+domain = "polynomials"
+description = "畳み込み積による反復累乗を実装し、評価との交換、指数の加法と乗法、合成との交換を証明する。"
+tags = ["polynomial", "power", "exponents"]
+spec = "specs/JL-087.md"
+module = "JonnyLean.Polynomials.Power"
+declaration = "JonnyLean.Polynomials.evaluate_power"
+contract = "contracts/JL087.lean"
+review = "reviews/JL-087.json"
+editable = ["JonnyLean/Polynomials/Power.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086"]
+
+[[tasks]]
+id = "JL-088"
+title = "多項式の評価同値と演算の適合性"
+domain = "polynomials"
+description = "すべての自然数入力で評価が一致する関係を定義し、反射・対称・推移および加法・積・合成の両引数への適合性を証明する。"
+tags = ["polynomial", "equivalence", "congruence-relation"]
+spec = "specs/JL-088.md"
+module = "JonnyLean.Polynomials.Equivalence"
+declaration = "JonnyLean.Polynomials.equivalent_compose"
+contract = "contracts/JL088.lean"
+review = "reviews/JL-088.json"
+editable = ["JonnyLean/Polynomials/Equivalence.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086"]
+
+[[tasks]]
+id = "JL-089"
+title = "係数剰余化と合同入力による多項式評価の正規化"
+domain = "polynomials"
+description = "有限多項式の全係数を法mの剰余へ置き換え、同時に入力を合同な値へ変更しても、評価の剰余が一致することを証明する。法付きHorner評価の正しさと範囲も保持する。"
+tags = ["polynomial", "coefficient-reduction", "congruence", "normalization"]
+spec = "specs/JL-089.md"
+module = "JonnyLean.Polynomials.Congruence"
+declaration = "JonnyLean.Polynomials.evaluate_normalized_congruent"
+contract = "contracts/JL089.lean"
+review = "reviews/JL-089.json"
+editable = ["JonnyLean/Polynomials/Congruence.lean"]
+depends_on = ["JL-081"]
+
+[[tasks]]
+id = "JL-090"
+title = "単項式の積・和・合成の指数法則"
+domain = "polynomials"
+description = "単項式aX^nを係数列として構成し、積での指数加法、同次数の和、合成での指数乗法と係数の累乗を示す。"
+tags = ["polynomial", "monomial", "exponent-laws"]
+spec = "specs/JL-090.md"
+module = "JonnyLean.Polynomials.Monomial"
+declaration = "JonnyLean.Polynomials.monomial_compose"
+contract = "contracts/JL090.lean"
+review = "reviews/JL-090.json"
+editable = ["JonnyLean/Polynomials/Monomial.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-088"]
+
+[[tasks]]
+id = "JL-091"
+title = "多項式列の有限和と評価"
+domain = "polynomials"
+description = "多項式列の有限和を係数加法で構成し、評価が各多項式評価の有限和になることを示す。連結、スカラー倍、共通約数を保存する。"
+tags = ["polynomial", "finite-sum", "linearity"]
+spec = "specs/JL-091.md"
+module = "JonnyLean.Polynomials.FiniteSum"
+declaration = "JonnyLean.Polynomials.evaluate_sumPolynomials"
+contract = "contracts/JL091.lean"
+review = "reviews/JL-091.json"
+editable = ["JonnyLean/Polynomials/FiniteSum.lean"]
+depends_on = ["JL-074", "JL-081", "JL-082", "JL-083"]
+
+[[tasks]]
+id = "JL-092"
+title = "多項式列の有限積と零点の存在"
+domain = "polynomials"
+description = "多項式列の有限積を構成し、自然数入力において積の評価が0であることと、ある因子の評価が0であることの同値を証明する。連結と反復因子も扱う。"
+tags = ["polynomial", "finite-product", "zero"]
+spec = "specs/JL-092.md"
+module = "JonnyLean.Polynomials.FiniteProduct"
+declaration = "JonnyLean.Polynomials.productPolynomials_zero"
+contract = "contracts/JL092.lean"
+review = "reviews/JL-092.json"
+editable = ["JonnyLean/Polynomials/FiniteProduct.lean"]
+depends_on = ["JL-067", "JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-087", "JL-088"]
+
+[[tasks]]
+id = "JL-093"
+title = "多項式の入力平行移動"
+domain = "polynomials"
+description = "p(X+c)を係数列として合成で構成し、平行移動の合成が移動量の和となることと、加法・積の保存を評価同値として示す。"
+tags = ["polynomial", "translation", "composition"]
+spec = "specs/JL-093.md"
+module = "JonnyLean.Polynomials.Translation"
+declaration = "JonnyLean.Polynomials.translate_translate"
+contract = "contracts/JL093.lean"
+review = "reviews/JL-093.json"
+editable = ["JonnyLean/Polynomials/Translation.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-088"]
+
+[[tasks]]
+id = "JL-094"
+title = "係数の再帰的拡大による入力の倍率変更"
+domain = "polynomials"
+description = "p(cX)を係数ごとの再帰的な倍率変更として構成し、評価との一致、倍率合成、係数長、単位倍率とスカラー倍の保存を証明する。"
+tags = ["polynomial", "dilation", "coefficients"]
+spec = "specs/JL-094.md"
+module = "JonnyLean.Polynomials.Dilation"
+declaration = "JonnyLean.Polynomials.evaluate_dilate"
+contract = "contracts/JL094.lean"
+review = "reviews/JL-094.json"
+editable = ["JonnyLean/Polynomials/Dilation.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-088"]
+
+[[tasks]]
+id = "JL-095"
+title = "減算を避けた合成除法と剰余公式"
+domain = "polynomials"
+description = "p(X)-p(a)をX-aで割った商を自然数係数で再帰構成し、減算なしの対称恒等式から、a≤xにおける剰余公式を導く。"
+tags = ["polynomial", "synthetic-division", "remainder-theorem"]
+spec = "specs/JL-095.md"
+module = "JonnyLean.Polynomials.SyntheticDivision"
+declaration = "JonnyLean.Polynomials.dividedDifference_remainder"
+contract = "contracts/JL095.lean"
+review = "reviews/JL-095.json"
+editable = ["JonnyLean/Polynomials/SyntheticDivision.lean"]
+depends_on = ["JL-081", "JL-082"]
+
+[[tasks]]
+id = "JL-096"
+title = "非負係数多項式の単調性と下界"
+domain = "polynomials"
+description = "入力値および係数を大きくすると評価が小さくならないことを示す。係数の比較は短い左側を許す再帰関係として構成し、定数項と接頭係数列からの下界を導く。"
+tags = ["polynomial", "monotonicity", "bounds"]
+spec = "specs/JL-096.md"
+module = "JonnyLean.Polynomials.Monotonicity"
+declaration = "JonnyLean.Polynomials.evaluate_coefficients_mono"
+contract = "contracts/JL096.lean"
+review = "reviews/JL-096.json"
+editable = ["JonnyLean/Polynomials/Monotonicity.lean"]
+depends_on = ["JL-081"]
+
+[[tasks]]
+id = "JL-097"
+title = "係数打ち切りと高次項の整除"
+domain = "polynomials"
+description = "最初のn係数と残りの係数へ分割し、評価を低次部分とXのn乗倍へ分解する。打ち切り評価の下界、差の整除、Xのn乗を法とする剰余一致を証明する。"
+tags = ["polynomial", "truncation", "divisibility"]
+spec = "specs/JL-097.md"
+module = "JonnyLean.Polynomials.Truncation"
+declaration = "JonnyLean.Polynomials.evaluate_truncate"
+contract = "contracts/JL097.lean"
+review = "reviews/JL-097.json"
+editable = ["JonnyLean/Polynomials/Truncation.lean"]
+depends_on = ["JL-081"]
+
+[[tasks]]
+id = "JL-098"
+title = "形式微分の構成と線形性"
+domain = "polynomials"
+description = "D(a+Xp)=p+XDpという再帰式で自然数係数の形式微分を構成し、加法とスカラー倍への線形性、定数と一次式の微分を証明する。"
+tags = ["polynomial", "formal-derivative", "linearity"]
+spec = "specs/JL-098.md"
+module = "JonnyLean.Polynomials.Derivative"
+declaration = "JonnyLean.Polynomials.evaluate_derivative_add"
+contract = "contracts/JL098.lean"
+review = "reviews/JL-098.json"
+editable = ["JonnyLean/Polynomials/Derivative.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083"]
+
+[[tasks]]
+id = "JL-099"
+title = "形式微分の積則と連鎖律"
+domain = "polynomials"
+description = "有限係数の再帰構成から、積の形式微分と多項式合成の連鎖律を証明する。平方と入力平行移動の微分公式も導く。"
+tags = ["polynomial", "product-rule", "chain-rule"]
+spec = "specs/JL-099.md"
+module = "JonnyLean.Polynomials.DerivativeRules"
+declaration = "JonnyLean.Polynomials.evaluate_derivative_compose"
+contract = "contracts/JL099.lean"
+review = "reviews/JL-099.json"
+editable = ["JonnyLean/Polynomials/DerivativeRules.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-088", "JL-093", "JL-098"]
+
+[[tasks]]
+id = "JL-100"
+title = "値と形式導関数を同時計算するHorner法"
+domain = "polynomials"
+description = "一回の係数列走査で多項式値と形式導関数値を同時に計算する評価器を実装し、二つの独立した評価との一致、積および合成への対応を証明する。"
+tags = ["polynomial", "automatic-differentiation", "horner"]
+spec = "specs/JL-100.md"
+module = "JonnyLean.Polynomials.DualEvaluation"
+declaration = "JonnyLean.Polynomials.evaluateDual_correct"
+contract = "contracts/JL100.lean"
+review = "reviews/JL-100.json"
+editable = ["JonnyLean/Polynomials/DualEvaluation.lean"]
+depends_on = ["JL-081", "JL-082", "JL-083", "JL-084", "JL-085", "JL-086", "JL-088", "JL-093", "JL-098", "JL-099"]
+
+[[tasks]]
+id = "JL-101"
+title = "二分木の中順走査と節点数"
+domain = "binary-trees"
+description = "空木と値付き二分節点からなる任意の木で、中順走査がすべての節点を一度ずつ出力することを長さと節点数の一致として証明する。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-101.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.inorder_length"
+contract = "contracts/JL101.lean"
+review = "reviews/JL-101.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-102"
+title = "木の鏡映と走査順序の反転"
+domain = "binary-trees"
+description = "左右の部分木を再帰的に交換すると中順走査が反転する。鏡映の対合性と節点数保存も一般木について示す。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-102.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.inorder_mirror"
+contract = "contracts/JL102.lean"
+review = "reviews/JL-102.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-103"
+title = "木への写像と中順走査の可換性"
+domain = "binary-trees"
+description = "値だけを写す木のmapを実行してから走査した結果は、先に走査して列をmapした結果と一致する。写像合成と節点数保存を伴う。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-103.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.inorder_map"
+contract = "contracts/JL103.lean"
+review = "reviews/JL-103.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-104"
+title = "木の高さを節点数で上から抑える"
+domain = "binary-trees"
+description = "空木の高さを0とし、節点の高さを左右の最大値に1を加えた値とすると、高さは節点数を超えない。枝分かれと退化した鎖の両方を含む。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-104.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.height_le_size"
+contract = "contracts/JL104.lean"
+review = "reviews/JL-104.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-105"
+title = "二分木foldの融合定理"
+domain = "binary-trees"
+description = "節点結合と写像が可換なら、木全体のfoldの後に写像をかける処理を、写像先のfold一回へ融合できる。値型や集約先を自然数に限定しない。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-105.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.fold_fusion"
+contract = "contracts/JL105.lean"
+review = "reviews/JL-105.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-106"
+title = "空の葉への木の接ぎ込みと大きさ"
+domain = "binary-trees"
+description = "各空の葉を同じ木で置き換えるgraftについて、元の節点数と置換木の節点数から結果の節点数を正確に計算する。接ぎ込みの結合則と空木の単位則を含む。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-106.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.graft_size"
+contract = "contracts/JL106.lean"
+review = "reviews/JL-106.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-107"
+title = "深さによる木の刈込み"
+domain = "binary-trees"
+description = "指定深さで木を打ち切るpruneは高さ上限を満たす。既に上限内の木を変えず、同じ深さの刈込みを反復しても結果を変えない。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-107.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.prune_height"
+contract = "contracts/JL107.lean"
+review = "reviews/JL-107.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-104"]
+
+[[tasks]]
+id = "JL-108"
+title = "木の全節点述語と走査列の一致"
+domain = "binary-trees"
+description = "再帰的に全節点へ課す述語と、中順走査の全出力へ課す述語が同値であることを示す。木の写像による述語の引き戻しにも接続する。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-108.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.all_iff_inorder"
+contract = "contracts/JL108.lean"
+review = "reviews/JL-108.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-109"
+title = "蓄積列を使う二分木走査"
+domain = "binary-trees"
+description = "後続列を引数に取る中順走査が、通常の中順走査列と任意の後続列の連結に一致する。空の後続列だけに限定しない一般化が帰納証明を支える。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-109.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.inorderInto_spec"
+contract = "contracts/JL109.lean"
+review = "reviews/JL-109.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-110"
+title = "二分木の外部葉数公式"
+domain = "binary-trees"
+description = "空木を一つの外部葉として数えると、任意の有限二分木の外部葉数は値付き節点数よりちょうど一つ多い。完全木や平衡木の仮定は不要。"
+tags = ["binary-trees", "structural-induction", "semantic-contract"]
+spec = "specs/JL-110.md"
+module = "JonnyLean.Trees.Binary"
+declaration = "JonnyLean.Trees.Tree.externalLeaves_eq"
+contract = "contracts/JL110.lean"
+review = "reviews/JL-110.json"
+editable = ["JonnyLean/Trees/Binary.lean"]
+depends_on = ["JL-101"]
+
+[[tasks]]
+id = "JL-111"
+title = "スタックへの一括pushとpopの相殺"
+domain = "persistent-data-structures"
+description = "列を左から順にpushした後、同数の要素をpopすると、逆順の入力列と元のスタックが正確に回復する。既存スタックの内容や入力長に制約はない。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-111.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Stack.popMany_pushMany"
+contract = "contracts/JL111.lean"
+review = "reviews/JL-111.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-112"
+title = "複数popの成功条件と分解証明書"
+domain = "persistent-data-structures"
+description = "popManyが成功するための必要十分条件は要求数がスタック長以下であること。成功時には取り出した列と残りを連結すると元のスタックになり、取り出した長さが要求数と一致する。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-112.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Stack.popMany_success_iff"
+contract = "contracts/JL112.lean"
+review = "reviews/JL-112.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-111"]
+
+[[tasks]]
+id = "JL-113"
+title = "二リストキューの正規化不変条件"
+domain = "persistent-data-structures"
+description = "frontと反転したbackの連結をFIFO列とする。frontが空の場合だけbackを反転する正規化は内容を保存し、空frontなら空backという不変条件と冪等性を満たす。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-113.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Queue.normalize_contents"
+contract = "contracts/JL113.lean"
+review = "reviews/JL-113.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-114"
+title = "キューenqueueのFIFO意味"
+domain = "persistent-data-structures"
+description = "キューへのenqueueは抽象的FIFO列の末尾へ要素を一つ追加する。内部表現のfrontが空でも非空でも同じ仕様を満たし、結果は正規化される。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-114.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Queue.enqueue_contents"
+contract = "contracts/JL114.lean"
+review = "reviews/JL-114.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-113"]
+
+[[tasks]]
+id = "JL-115"
+title = "キューdequeueの正確な先頭除去"
+domain = "persistent-data-structures"
+description = "dequeueが空を返す場合は抽象列も空であり、成功した場合は元の抽象列が返却値と残りの列のconsに一致する。残りのキューは正規化不変条件を満たす。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-115.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Queue.dequeue_spec"
+contract = "contracts/JL115.lean"
+review = "reviews/JL-115.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-113"]
+
+[[tasks]]
+id = "JL-116"
+title = "キューへのバッチ追加と連結則"
+domain = "persistent-data-structures"
+description = "列の順で繰り返すenqueueManyはFIFO列へ入力列をそのまま追加する。入力を二分して処理しても一括処理と表現まで一致する。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-116.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Queue.enqueueMany_contents"
+contract = "contracts/JL116.lean"
+review = "reviews/JL-116.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-114"]
+
+[[tasks]]
+id = "JL-117"
+title = "連想リストの更新とシャドーイング"
+domain = "persistent-data-structures"
+description = "最初の一致を採用する自然数キーの連想リストで、putは指定キーだけを更新する。重複キーを許し、上書きと異なるキーの更新交換をlookupの意味で証明する。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-117.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Assoc.lookup_put"
+contract = "contracts/JL117.lean"
+review = "reviews/JL-117.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-118"
+title = "連想リストの全重複キー削除"
+domain = "persistent-data-structures"
+description = "eraseは対象キーの全出現を削除する。対象キーの検索は必ず失敗し、他キーの検索結果を保つ。削除の冪等性も表現そのものについて示す。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-118.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Assoc.lookup_erase"
+contract = "contracts/JL118.lean"
+review = "reviews/JL-118.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-117"]
+
+[[tasks]]
+id = "JL-119"
+title = "連想リストの左優先結合"
+domain = "persistent-data-structures"
+description = "二つの連想リストの連結は、左側に値があればそれを選び、左で未定義の場合だけ右を探索する左優先結合となる。結合演算の結合則を伴う。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-119.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Assoc.lookup_union"
+contract = "contracts/JL119.lean"
+review = "reviews/JL-119.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-117"]
+
+[[tasks]]
+id = "JL-120"
+title = "連想リストの値写像と検索"
+domain = "persistent-data-structures"
+description = "キーと出現順を保ったまま値だけを写すmapValuesについて、検索後のOption.mapと検索前の値写像が一致する。欠損キーと重複キーを含む。"
+tags = ["persistent-data-structures", "structural-induction", "semantic-contract"]
+spec = "specs/JL-120.md"
+module = "JonnyLean.DataStructures.Persistent"
+declaration = "JonnyLean.DataStructures.Assoc.lookup_mapValues"
+contract = "contracts/JL120.lean"
+review = "reviews/JL-120.json"
+editable = ["JonnyLean/DataStructures/Persistent.lean"]
+depends_on = ["JL-117"]
+
+[[tasks]]
+id = "JL-121"
+title = "自然数式の変数改名と環境の合成"
+domain = "verified-expressions"
+description = "自然数定数・変数・加算・乗算からなる式を改名して評価することは、環境を改名写像で前合成して元の式を評価することと同じ。改名は単射である必要がない。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-121.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.eval_rename"
+contract = "contracts/JL121.lean"
+review = "reviews/JL-121.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-122"
+title = "式の一斉代入と評価"
+domain = "verified-expressions"
+description = "各変数を式で一斉に置き換えた結果の評価は、置換式を元の環境で評価して作った環境による元の式の評価に一致する。束縛のない構文なので捕獲回避仮定は不要。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-122.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.eval_subst"
+contract = "contracts/JL122.lean"
+review = "reviews/JL-122.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-121"]
+
+[[tasks]]
+id = "JL-123"
+title = "使用変数だけによる評価の決定"
+domain = "verified-expressions"
+description = "式に出現する変数で二つの環境が一致すれば、式の評価結果も一致する。変数列は重複を許す出現列であり、出現しない変数の値には仮定しない。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-123.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.eval_congr_on_variables"
+contract = "contracts/JL123.lean"
+review = "reviews/JL-123.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-121"]
+
+[[tasks]]
+id = "JL-124"
+title = "定数畳込みの意味保存"
+domain = "verified-expressions"
+description = "両子が定数になった加算・乗算を定数一つへ置き換える再帰的定数畳込みは、すべての環境で評価を保存する。実装とは独立に記述した畳込みと評価モデルを契約に用いる。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-124.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.eval_foldConstants"
+contract = "contracts/JL124.lean"
+review = "reviews/JL-124.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-125"
+title = "定数畳込みの固定点性"
+domain = "verified-expressions"
+description = "一度定数畳込みを適用した式は同じ処理の固定点になる。子が固定点であることから定数結合が固定点を作る補題を用い、無制限の反復が不要であることを証明する。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-125.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.foldConstants_idempotent"
+contract = "contracts/JL125.lean"
+review = "reviews/JL-125.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-124"]
+
+[[tasks]]
+id = "JL-126"
+title = "定数畳込みによる構文サイズの非増加"
+domain = "verified-expressions"
+description = "葉と演算節点を各一つと数える構文サイズについて、定数畳込みがサイズを増やさないことを証明する。開いた式で等号になる場合と、閉じた部分式で減少する場合を含む。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-126.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.foldConstants_size"
+contract = "contracts/JL126.lean"
+review = "reviews/JL-126.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-124"]
+
+[[tasks]]
+id = "JL-127"
+title = "零と単位元を除く代数的最適化"
+domain = "verified-expressions"
+description = "定数畳込みに加え、加法の0、乗法の0と1を簡約する最適化が評価を保存する。乗法の0では未評価の変数を含む部分式も削除できる。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-127.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.eval_optimize"
+contract = "contracts/JL127.lean"
+review = "reviews/JL-127.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-124"]
+
+[[tasks]]
+id = "JL-128"
+title = "代数的最適化は新しい変数を導入しない"
+domain = "verified-expressions"
+description = "最適化後に出現する各変数は最適化前にも出現する。0による乗算の除去で変数が消える場合を許し、集合の等号ではなく正しい包含方向を契約にする。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-128.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.optimize_variables"
+contract = "contracts/JL128.lean"
+review = "reviews/JL-128.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-127"]
+
+[[tasks]]
+id = "JL-129"
+title = "改名による変数出現列の輸送"
+domain = "verified-expressions"
+description = "式の改名による変数出現列は、元の出現列へ改名写像をmapした列と等しい。順序と重複を保存し、異なる変数を同じ名前へ写す場合も対象とする。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-129.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.rename_variables"
+contract = "contracts/JL129.lean"
+review = "reviews/JL-129.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-121"]
+
+[[tasks]]
+id = "JL-130"
+title = "一斉代入の合成則"
+domain = "verified-expressions"
+description = "二回の一斉代入を、最初の置換式へ二番目の代入を適用した一回の代入へまとめる。評価の一致だけでなく構文そのものの一致を示す。"
+tags = ["verified-expressions", "structural-induction", "semantic-contract"]
+spec = "specs/JL-130.md"
+module = "JonnyLean.VerifiedPrograms.Expressions"
+declaration = "JonnyLean.VerifiedPrograms.Expr.subst_comp"
+contract = "contracts/JL130.lean"
+review = "reviews/JL-130.json"
+editable = ["JonnyLean/VerifiedPrograms/Expressions.lean"]
+depends_on = ["JL-122"]
+
+[[tasks]]
+id = "JL-131"
+title = "命令列の合成と失敗伝播"
+domain = "verified-compilers"
+description = "命令列連結の実行は、前半の実行結果へ後半をOption.bindすることと一致する。スタック不足による失敗は後半へ進まず伝播する。独立した一命令意味から全体の実行を定義する。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-131.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.execute_append"
+contract = "contracts/JL131.lean"
+review = "reviews/JL-131.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130"]
+
+[[tasks]]
+id = "JL-132"
+title = "後置スタック機械コンパイラの意味保存"
+domain = "verified-compilers"
+description = "式を左部分式・右部分式・演算の順にコンパイルすると、任意の初期スタックの上に式の値を一つ積む。後続コードを持つ継続形の意味保存も含む。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-132.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.execute_compile"
+contract = "contracts/JL132.lean"
+review = "reviews/JL-132.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-131"]
+
+[[tasks]]
+id = "JL-133"
+title = "コンパイル後コード長の正確な計数"
+domain = "verified-compilers"
+description = "定数・変数・演算の各構文節点がちょうど一命令に対応し、コード長が構文サイズと等しい。評価値の大きさとは独立した構文的な費用モデルを与える。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-133.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.compile_length"
+contract = "contracts/JL133.lean"
+review = "reviews/JL-133.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-132"]
+
+[[tasks]]
+id = "JL-134"
+title = "静的スタック深さ検査の健全性"
+domain = "verified-compilers"
+description = "命令だけから計算した深さ検査が成功すれば、同じ長さの任意の値スタック上の実行も成功し、出力長は検査値に一致する。値や環境に依存しない安全性証明。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-134.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.check_sound"
+contract = "contracts/JL134.lean"
+review = "reviews/JL-134.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-131"]
+
+[[tasks]]
+id = "JL-135"
+title = "生成コードの静的検査と深さ差分"
+domain = "verified-compilers"
+description = "任意の式から生成されたコードはすべての初期深さで静的検査に合格し、深さを正確に一つ増やす。空スタック開始も含めコンパイラ出力のスタック不足が起きない。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-135.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.check_compile"
+contract = "contracts/JL135.lean"
+review = "reviews/JL-135.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-132", "JL-134"]
+
+[[tasks]]
+id = "JL-136"
+title = "最適化とコンパイルの意味的整合"
+domain = "verified-compilers"
+description = "式を代数的最適化してからコンパイルする経路と、そのままコンパイルする経路は、任意の環境と初期スタックで同一の実行結果になる。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-136.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.execute_optimized_compile"
+contract = "contracts/JL136.lean"
+review = "reviews/JL-136.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-132"]
+
+[[tasks]]
+id = "JL-137"
+title = "後続命令を蓄積するコード生成"
+domain = "verified-compilers"
+description = "リスト連結の代わりに後続命令列を引数で受け取るcompileIntoは、独立モデルの後置コードへその後続列を連結した結果に正確に一致する。継続付き実行意味にも接続する。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-137.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.compileInto_spec"
+contract = "contracts/JL137.lean"
+review = "reviews/JL-137.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-132"]
+
+[[tasks]]
+id = "JL-138"
+title = "成功する命令列のスタックフレーム保存"
+domain = "verified-compilers"
+description = "あるスタック上で成功する命令列は、その底に任意の追加列を置いても成功し、結果の底にその追加列をそのまま残す。コンパイラ出力に限らず任意の成功コードが対象。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-138.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.execute_frame"
+contract = "contracts/JL138.lean"
+review = "reviews/JL-138.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-131"]
+
+[[tasks]]
+id = "JL-139"
+title = "コンパイルと構文再構成の往復"
+domain = "verified-compilers"
+description = "数値の代わりに式を積む構文スタック機械で生成コードを実行すると、元の式を構文まで正確に再構成する。任意の既存構文スタックを保存する。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-139.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.decompile_compile"
+contract = "contracts/JL139.lean"
+review = "reviews/JL-139.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-132"]
+
+[[tasks]]
+id = "JL-140"
+title = "任意バイトコードの構文再構成証明書"
+domain = "verified-compilers"
+description = "構文スタック上の逆コンパイルが成功すれば、その入力式を任意の環境で評価した数値スタック上でも実行が成功し、再構成した式を評価した結果に一致する。コンパイラ由来でない命令列も扱う。"
+tags = ["verified-compilers", "structural-induction", "semantic-contract"]
+spec = "specs/JL-140.md"
+module = "JonnyLean.VerifiedPrograms.StackMachine"
+declaration = "JonnyLean.VerifiedPrograms.Machine.decompile_sound"
+contract = "contracts/JL140.lean"
+review = "reviews/JL-140.json"
+editable = ["JonnyLean/VerifiedPrograms/StackMachine.lean"]
+depends_on = ["JL-121", "JL-122", "JL-123", "JL-124", "JL-125", "JL-126", "JL-127", "JL-128", "JL-129", "JL-130", "JL-131", "JL-139"]
+
+[[tasks]]
+id = "JL-141"
+title = "語の言語と包含順序"
+domain = "formal-languages"
+description = "任意のアルファベット型 α 上の言語を `List α → Prop` とする。包含 `Included L K` は全ての語について L の所属から K の所属を導く命題である。空言語、空語だけの言語、和、共通部分を定義する。"
+tags = ["language", "inclusion", "constructive-logic"]
+spec = "specs/JL-141.md"
+module = "JonnyLean.Languages.Basic"
+declaration = "JonnyLean.Languages.included_antisymm"
+contract = "contracts/JL141.lean"
+review = "reviews/JL-141.json"
+editable = ["JonnyLean/Languages/Basic.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-142"
+title = "許可アルファベットの語と言語連結"
+domain = "formal-languages"
+description = "文字述語 A : α → Prop から、全ての文字が A を満たす語の言語 alphabetLanguage A を定義する。文字の出現順や重複をそのまま保持した List α を対象とする。"
+tags = ["alphabet-language", "word-concatenation", "mixed-alphabet"]
+spec = "specs/JL-142.md"
+module = "JonnyLean.Languages.Lattice"
+declaration = "JonnyLean.Languages.alphabetLanguage_append"
+contract = "contracts/JL142.lean"
+review = "reviews/JL-142.json"
+editable = ["JonnyLean/Languages/Lattice.lean"]
+depends_on = ["JL-141"]
+
+[[tasks]]
+id = "JL-143"
+title = "存在証人による言語連結と分配"
+domain = "formal-languages"
+description = "連結 `concat L K w` は、語 w を u ++ v に分割し L u と K v の証拠を持つことと定義する。分割は空語も許す。"
+tags = ["concatenation", "distributivity", "monotonicity"]
+spec = "specs/JL-143.md"
+module = "JonnyLean.Languages.Concatenation"
+declaration = "JonnyLean.Languages.concat_union"
+contract = "contracts/JL143.lean"
+review = "reviews/JL-143.json"
+editable = ["JonnyLean/Languages/Concatenation.lean"]
+depends_on = ["JL-141", "JL-142"]
+
+[[tasks]]
+id = "JL-144"
+title = "言語連結の結合則と空語単位元"
+domain = "formal-languages"
+description = "連結を三つの言語へ反復し、語の分割の括弧を移動する。`epsilon` は空語だけを含む言語である。"
+tags = ["concatenation", "associativity", "identity"]
+spec = "specs/JL-144.md"
+module = "JonnyLean.Languages.Monoid"
+declaration = "JonnyLean.Languages.concat_assoc"
+contract = "contracts/JL144.lean"
+review = "reviews/JL-144.json"
+editable = ["JonnyLean/Languages/Monoid.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143"]
+
+[[tasks]]
+id = "JL-145"
+title = "語の反転と言語連結の順序反転"
+domain = "formal-languages"
+description = "反転言語 `reverse L` は、語を反転した結果が L に属することで定義する。語の順序の反転を言語演算へ持ち上げる。"
+tags = ["reversal", "anti-homomorphism", "words"]
+spec = "specs/JL-145.md"
+module = "JonnyLean.Languages.Reversal"
+declaration = "JonnyLean.Languages.reverse_concat"
+contract = "contracts/JL145.lean"
+review = "reviews/JL-145.json"
+editable = ["JonnyLean/Languages/Reversal.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144"]
+
+[[tasks]]
+id = "JL-146"
+title = "前置語による左商と残余言語"
+domain = "formal-languages"
+description = "語 u による左商は `leftQuotient u L w := L (u ++ w)` と定義する。指定された接頭語を読んだ後に必要な接尾語の言語である。"
+tags = ["left-quotient", "residual-language", "prefix"]
+spec = "specs/JL-146.md"
+module = "JonnyLean.Languages.Quotient"
+declaration = "JonnyLean.Languages.quotient_append"
+contract = "contracts/JL146.lean"
+review = "reviews/JL-146.json"
+editable = ["JonnyLean/Languages/Quotient.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144"]
+
+[[tasks]]
+id = "JL-147"
+title = "言語の有限冪と指数加法"
+domain = "formal-languages"
+description = "零乗を空語言語、後続の冪を L と直前の冪の連結として定義する。冪の指数は自然数である。"
+tags = ["language-power", "exponent-addition", "induction"]
+spec = "specs/JL-147.md"
+module = "JonnyLean.Languages.Power"
+declaration = "JonnyLean.Languages.power_add"
+contract = "contracts/JL147.lean"
+review = "reviews/JL-147.json"
+editable = ["JonnyLean/Languages/Power.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144"]
+
+[[tasks]]
+id = "JL-148"
+title = "Kleene閉包の構成と最小性"
+domain = "formal-languages"
+description = "`Star L` は空語を含み、L の語を左から連結して生成する帰納的言語である。有限回の生成だけを許す。"
+tags = ["kleene-star", "inductive-closure", "minimality"]
+spec = "specs/JL-148.md"
+module = "JonnyLean.Languages.Star"
+declaration = "JonnyLean.Languages.star_minimal"
+contract = "contracts/JL148.lean"
+review = "reviews/JL-148.json"
+editable = ["JonnyLean/Languages/Star.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147"]
+
+[[tasks]]
+id = "JL-149"
+title = "Kleene閉包の冪表示と冪等性"
+domain = "formal-languages"
+description = "帰納的に生成した Star を、自然数回の言語冪の存在として特徴づける。閉包をさらに閉包にする操作も扱う。"
+tags = ["kleene-star", "powers", "idempotence"]
+spec = "specs/JL-149.md"
+module = "JonnyLean.Languages.StarClosure"
+declaration = "JonnyLean.Languages.star_iff_power"
+contract = "contracts/JL149.lean"
+review = "reviews/JL-149.json"
+editable = ["JonnyLean/Languages/StarClosure.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-147", "JL-148"]
+
+[[tasks]]
+id = "JL-150"
+title = "文字写像による言語像とKleene閉包"
+domain = "formal-languages"
+description = "文字写像 f を List.map により語へ延長し、像言語を元の語の存在で定義する。写像は単射・全射でなくてもよい。"
+tags = ["language-image", "alphabet-map", "kleene-star"]
+spec = "specs/JL-150.md"
+module = "JonnyLean.Languages.Image"
+declaration = "JonnyLean.Languages.image_star"
+contract = "contracts/JL150.lean"
+review = "reviews/JL-150.json"
+editable = ["JonnyLean/Languages/Image.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-145", "JL-147", "JL-148", "JL-149"]
+
+[[tasks]]
+id = "JL-151"
+title = "決定性遷移の反復と語の分割"
+domain = "automata-theory"
+description = "`Machine α Q` は遷移 Q → α → Q、初期状態、Boolean受理判定を持つ。run は空語で現在状態を返し、先頭文字を遷移に渡して残りを処理する。"
+tags = ["deterministic-machine", "transition-iteration", "word-concatenation"]
+spec = "specs/JL-151.md"
+module = "JonnyLean.Automata.Run"
+declaration = "JonnyLean.Automata.Machine.run_append"
+contract = "contracts/JL151.lean"
+review = "reviews/JL-151.json"
+editable = ["JonnyLean/Automata/Run.lean"]
+depends_on = ["JL-141"]
+
+[[tasks]]
+id = "JL-152"
+title = "受理言語と再出発による残余"
+domain = "automata-theory"
+description = "状態 q からの受理は `accept (run q w) = true`、機械の言語は初期状態からの受理とする。restart は初期状態だけを変更する。"
+tags = ["acceptance", "residual-language", "restart"]
+spec = "specs/JL-152.md"
+module = "JonnyLean.Automata.Language"
+declaration = "JonnyLean.Automata.Machine.language_residual"
+contract = "contracts/JL152.lean"
+review = "reviews/JL-152.json"
+editable = ["JonnyLean/Automata/Language.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151"]
+
+[[tasks]]
+id = "JL-153"
+title = "積機械と受理言語の共通部分"
+domain = "automata-theory"
+description = "積機械は状態対を保持し、同じ入力文字で両成分を同時に遷移させる。受理判定は二つのBoolean判定の論理積とする。"
+tags = ["product-automaton", "intersection", "synchronous-transition"]
+spec = "specs/JL-153.md"
+module = "JonnyLean.Automata.Product"
+declaration = "JonnyLean.Automata.Machine.language_product"
+contract = "contracts/JL153.lean"
+review = "reviews/JL-153.json"
+editable = ["JonnyLean/Automata/Product.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-154"
+title = "Boolean受理判定による補機械"
+domain = "automata-theory"
+description = "補機械は遷移・初期状態を保ち、受理Booleanだけを否定する。全域的な遷移関数を前提とする。"
+tags = ["complement", "boolean-acceptance", "decidability"]
+spec = "specs/JL-154.md"
+module = "JonnyLean.Automata.Complement"
+declaration = "JonnyLean.Automata.Machine.language_complement"
+contract = "contracts/JL154.lean"
+review = "reviews/JL-154.json"
+editable = ["JonnyLean/Automata/Complement.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-155"
+title = "状態準同型による走行と受理の輸送"
+domain = "automata-theory"
+description = "機械準同型 Hom M N は状態写像、初期状態の保存、遷移との可換性、受理Booleanの一致を持つ。"
+tags = ["automaton-homomorphism", "simulation", "language-equivalence"]
+spec = "specs/JL-155.md"
+module = "JonnyLean.Automata.Homomorphism"
+declaration = "JonnyLean.Automata.Hom.language_eq"
+contract = "contracts/JL155.lean"
+review = "reviews/JL-155.json"
+editable = ["JonnyLean/Automata/Homomorphism.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-156"
+title = "入力アルファベット写像の引き戻し"
+domain = "automata-theory"
+description = "β文字を読む機械 M と写像 f : α → β から、α文字 a を f a として読む機械 M.comap f を作る。状態と受理判定は保持する。"
+tags = ["alphabet-map", "inverse-image", "transition"]
+spec = "specs/JL-156.md"
+module = "JonnyLean.Automata.InputMap"
+declaration = "JonnyLean.Automata.Machine.run_comap"
+contract = "contracts/JL156.lean"
+review = "reviews/JL-156.json"
+editable = ["JonnyLean/Automata/InputMap.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-157"
+title = "遷移不変量と全語に対する拒否"
+domain = "automata-theory"
+description = "状態述語 P が各一文字遷移で保存されることを Stable とする。開始状態または任意の現在状態が P を満たすと仮定する。"
+tags = ["state-invariant", "induction", "rejection"]
+spec = "specs/JL-157.md"
+module = "JonnyLean.Automata.Invariants"
+declaration = "JonnyLean.Automata.Machine.run_invariant"
+contract = "contracts/JL157.lean"
+review = "reviews/JL-157.json"
+editable = ["JonnyLean/Automata/Invariants.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-158"
+title = "到達状態集合の閉性と最小性"
+domain = "automata-theory"
+description = "状態 q の到達可能性は、初期状態からある有限語を読んだ結果が q であることと定義する。語の存在を命題として保持する。"
+tags = ["reachability", "least-invariant", "accepted-state"]
+spec = "specs/JL-158.md"
+module = "JonnyLean.Automata.Reachability"
+declaration = "JonnyLean.Automata.Machine.reachable_minimal"
+contract = "contracts/JL158.lean"
+review = "reviews/JL-158.json"
+editable = ["JonnyLean/Automata/Reachability.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152", "JL-157"]
+
+[[tasks]]
+id = "JL-159"
+title = "状態の観測同値と接尾語安定性"
+domain = "automata-theory"
+description = "二状態の観測同値は、全ての有限接尾語を読んだ後の受理Booleanが一致することで定義する。"
+tags = ["state-equivalence", "right-congruence", "suffix"]
+spec = "specs/JL-159.md"
+module = "JonnyLean.Automata.Equivalence"
+declaration = "JonnyLean.Automata.Machine.equivalent_run"
+contract = "contracts/JL159.lean"
+review = "reviews/JL-159.json"
+editable = ["JonnyLean/Automata/Equivalence.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152"]
+
+[[tasks]]
+id = "JL-160"
+title = "不変状態型への制限と有限carrier"
+domain = "automata-theory"
+description = "開始状態を含む遷移不変述語 P から、状態型を `{q // P q}` に制限した機械を構成する。有限リストstatesの場合は開始状態の所属と遷移閉性を仮定する。"
+tags = ["invariant-subtype", "finite-carrier", "restriction"]
+spec = "specs/JL-160.md"
+module = "JonnyLean.Automata.Restriction"
+declaration = "JonnyLean.Automata.Machine.language_restrict"
+contract = "contracts/JL160.lean"
+review = "reviews/JL-160.json"
+editable = ["JonnyLean/Automata/Restriction.lean"]
+depends_on = ["JL-141", "JL-142", "JL-143", "JL-144", "JL-146", "JL-151", "JL-152", "JL-155", "JL-157", "JL-158"]
+
+[[tasks]]
+id = "JL-161"
+title = "出現を数える直積列挙"
+domain = "enumerative-combinatorics"
+description = "二つのリストの直積を、左の各出現に対して右の全出現を対にするflatMap/mapで列挙する。リスト長を個数とする。"
+tags = ["cartesian-product", "occurrence-count", "multiplication-principle"]
+spec = "specs/JL-161.md"
+module = "JonnyLean.Counting.Product"
+declaration = "JonnyLean.Counting.length_product"
+contract = "contracts/JL161.lean"
+review = "reviews/JL-161.json"
+editable = ["JonnyLean/Counting/Product.lean"]
+depends_on = []
+
+[[tasks]]
+id = "JL-162"
+title = "要素ごとに変わる選択肢と和の法則"
+domain = "enumerative-combinatorics"
+description = "fibers xs choices は左の出現 x ごとに異なるリスト choices x の要素を対にして列挙する。各fiberの大きさの和を自然数massで表す。"
+tags = ["dependent-enumeration", "sum-rule", "weighted-sum"]
+spec = "specs/JL-162.md"
+module = "JonnyLean.Counting.Dependent"
+declaration = "JonnyLean.Counting.length_fibers"
+contract = "contracts/JL162.lean"
+review = "reviews/JL-162.json"
+editable = ["JonnyLean/Counting/Dependent.lean"]
+depends_on = ["JL-059", "JL-161"]
+
+[[tasks]]
+id = "JL-163"
+title = "座標別選択列と積公式"
+domain = "enumerative-combinatorics"
+description = "リストのリストxssを各座標の候補とし、各座標から一つずつ選んだ語をchoices xssで列挙する。Compatibleは語と候補列の長さおよび座標ごとの所属を再帰的に検査する命題である。"
+tags = ["coordinate-choices", "product-rule", "list-enumeration"]
+spec = "specs/JL-163.md"
+module = "JonnyLean.Counting.Choices"
+declaration = "JonnyLean.Counting.length_choices"
+contract = "contracts/JL163.lean"
+review = "reviews/JL-163.json"
+editable = ["JonnyLean/Counting/Choices.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-164"
+title = "全位置部分列の列挙と二の冪"
+domain = "enumerative-combinatorics"
+description = "各位置を残すか捨てるかで全ての順序保存部分列を列挙する。先頭位置を捨てる列挙と残す列挙を連結する再帰定義を使う。"
+tags = ["subsequences", "power-of-two", "positions"]
+spec = "specs/JL-164.md"
+module = "JonnyLean.Counting.Subsequences"
+declaration = "JonnyLean.Counting.length_subsequences"
+contract = "contracts/JL164.lean"
+review = "reviews/JL-164.json"
+editable = ["JonnyLean/Counting/Subsequences.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-165"
+title = "語を二つへ分割する全境界"
+domain = "enumerative-combinatorics"
+description = "splits xs は語を接頭語uと接尾語vに分ける全境界を列挙する。空の接頭語と空の接尾語の両端を含める。"
+tags = ["word-splits", "prefix-suffix", "boundary-count"]
+spec = "specs/JL-165.md"
+module = "JonnyLean.Counting.Splits"
+declaration = "JonnyLean.Counting.mem_splits"
+contract = "contracts/JL165.lean"
+review = "reviews/JL-165.json"
+editable = ["JonnyLean/Counting/Splits.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-166"
+title = "全位置への一文字挿入"
+domain = "enumerative-combinatorics"
+description = "insertions a xs は先頭から末尾まで全ての境界へ文字aを挿入した語を列挙する。先頭挿入と、先頭文字を保持した残りへの挿入を再帰的にまとめる。"
+tags = ["insertion", "positions", "length-invariant"]
+spec = "specs/JL-166.md"
+module = "JonnyLean.Counting.Insertions"
+declaration = "JonnyLean.Counting.insertion_length"
+contract = "contracts/JL166.lean"
+review = "reviews/JL-166.json"
+editable = ["JonnyLean/Counting/Insertions.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-167"
+title = "挿入による順列列挙と階乗"
+domain = "enumerative-combinatorics"
+description = "空語の順列は空語一個とし、先頭文字を残りの各順列の全位置へ挿入して列挙する。位置の並べ替えを数える。"
+tags = ["permutation-enumeration", "factorial", "repeated-values"]
+spec = "specs/JL-167.md"
+module = "JonnyLean.Counting.Permutations"
+declaration = "JonnyLean.Counting.length_permutations"
+contract = "contracts/JL167.lean"
+review = "reviews/JL-167.json"
+editable = ["JonnyLean/Counting/Permutations.lean"]
+depends_on = ["JL-020", "JL-059", "JL-161", "JL-162", "JL-166"]
+
+[[tasks]]
+id = "JL-168"
+title = "重み付き部分列和の積展開"
+domain = "enumerative-combinatorics"
+description = "語の重みwordWeightを文字の自然数重みの積とし、全位置部分列の重みを足す。空語の重みは空積として1とする。"
+tags = ["weighted-subsets", "product-expansion", "finite-sum"]
+spec = "specs/JL-168.md"
+module = "JonnyLean.Counting.WeightedSubsequences"
+declaration = "JonnyLean.Counting.weighted_subsequences"
+contract = "contracts/JL168.lean"
+review = "reviews/JL-168.json"
+editable = ["JonnyLean/Counting/WeightedSubsequences.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164"]
+
+[[tasks]]
+id = "JL-169"
+title = "順序を保つ二語の混合と二項係数"
+domain = "enumerative-combinatorics"
+description = "shuffles xs ys は各語内の順序を保って二語を混合する全選択を列挙する。両語が非空なら先頭をどちらから取るかで分岐する。"
+tags = ["shuffle", "binomial-coefficient", "order-preservation"]
+spec = "specs/JL-169.md"
+module = "JonnyLean.Counting.Shuffle"
+declaration = "JonnyLean.Counting.length_shuffles"
+contract = "contracts/JL169.lean"
+review = "reviews/JL-169.json"
+editable = ["JonnyLean/Counting/Shuffle.lean"]
+depends_on = ["JL-057", "JL-058", "JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-170"
+title = "直積事象の抽出と計数の分離"
+domain = "enumerative-combinatorics"
+description = "左成分のBoolean条件pと右成分の条件qの両方を満たす直積の出現をfilterする。"
+tags = ["filtered-product", "event-count", "factorization"]
+spec = "specs/JL-170.md"
+module = "JonnyLean.Counting.FilteredProduct"
+declaration = "JonnyLean.Counting.length_filter_product"
+contract = "contracts/JL170.lean"
+review = "reviews/JL-170.json"
+editable = ["JonnyLean/Counting/FilteredProduct.lean"]
+depends_on = ["JL-161"]
+
+[[tasks]]
+id = "JL-171"
+title = "自然数重みを持つ有限出現測度"
+domain = "finite-probability"
+description = "`Measure α := List (α × Nat)` とし、各出現に値と自然数重みを持たせる。totalは全出現の重み和、point a nは単一出現、dirac aは重み1の点測度である。"
+tags = ["finite-measure", "natural-weights", "total-mass"]
+spec = "specs/JL-171.md"
+module = "JonnyLean.FiniteProbability.Measure"
+declaration = "JonnyLean.FiniteProbability.total_append"
+contract = "contracts/JL171.lean"
+review = "reviews/JL-171.json"
+editable = ["JonnyLean/FiniteProbability/Measure.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162"]
+
+[[tasks]]
+id = "JL-172"
+title = "有限測度の押し出しと質量保存"
+domain = "finite-probability"
+description = "押し出しpush fは各出現の値にfを適用し、同じ出現の重みを保持する。像が衝突しても出現の統合や再重み付けを行わない。"
+tags = ["pushforward", "mass-preservation", "noninjective-map"]
+spec = "specs/JL-172.md"
+module = "JonnyLean.FiniteProbability.Pushforward"
+declaration = "JonnyLean.FiniteProbability.total_push"
+contract = "contracts/JL172.lean"
+review = "reviews/JL-172.json"
+editable = ["JonnyLean/FiniteProbability/Pushforward.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-171"]
+
+[[tasks]]
+id = "JL-173"
+title = "自然数観測量の期待値分子と線形性"
+domain = "finite-probability"
+description = "expect μ fを各出現の重みと自然数観測量fの積の有限和とする。正規化前の期待値分子であり、総質量で割る操作はしない。"
+tags = ["expectation-numerator", "linearity", "change-of-variables"]
+spec = "specs/JL-173.md"
+module = "JonnyLean.FiniteProbability.Expectation"
+declaration = "JonnyLean.FiniteProbability.expect_add"
+contract = "contracts/JL173.lean"
+review = "reviews/JL-173.json"
+editable = ["JonnyLean/FiniteProbability/Expectation.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172"]
+
+[[tasks]]
+id = "JL-174"
+title = "積測度と分離観測量の期待値"
+domain = "finite-probability"
+description = "積測度は全ての出現対を列挙し、その重みを元の二つの重みの積とする。対の観測量 f(a)g(b) を扱う。"
+tags = ["product-measure", "separable-observable", "independence"]
+spec = "specs/JL-174.md"
+module = "JonnyLean.FiniteProbability.Product"
+declaration = "JonnyLean.FiniteProbability.expect_product"
+contract = "contracts/JL174.lean"
+review = "reviews/JL-174.json"
+editable = ["JonnyLean/FiniteProbability/Product.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173"]
+
+[[tasks]]
+id = "JL-175"
+title = "Boolean事象の質量と積事象の分離"
+domain = "finite-probability"
+description = "Boolean事象の指示関数を0または1とし、event μ pをその期待値分子と定義する。積事象は各成分のBoolean条件の論理積である。"
+tags = ["event-mass", "complement", "product-event"]
+spec = "specs/JL-175.md"
+module = "JonnyLean.FiniteProbability.Events"
+declaration = "JonnyLean.FiniteProbability.event_product"
+contract = "contracts/JL175.lean"
+review = "reviews/JL-175.json"
+editable = ["JonnyLean/FiniteProbability/Events.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-174"]
+
+[[tasks]]
+id = "JL-176"
+title = "事象への測度制限と条件質量"
+domain = "finite-probability"
+description = "restrict μ pはBoolean事象pを満たす出現だけを残し、その重みを保持する。正規化前の条件測度として扱う。"
+tags = ["restriction", "conditioning", "indicator"]
+spec = "specs/JL-176.md"
+module = "JonnyLean.FiniteProbability.Restriction"
+declaration = "JonnyLean.FiniteProbability.expect_restrict"
+contract = "contracts/JL176.lean"
+review = "reviews/JL-176.json"
+editable = ["JonnyLean/FiniteProbability/Restriction.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-174", "JL-175"]
+
+[[tasks]]
+id = "JL-177"
+title = "正の有限測度の確率表示と押し出し"
+domain = "finite-probability"
+description = "Distributionは出現測度と総質量が正である証明を持つ。確率は事象質量を分子、総質量を分母とする既存の未約分Probability構造体で表す。"
+tags = ["normalization", "positive-mass", "probability-pushforward"]
+spec = "specs/JL-177.md"
+module = "JonnyLean.FiniteProbability.Distribution"
+declaration = "JonnyLean.FiniteProbability.Distribution.probability_map"
+contract = "contracts/JL177.lean"
+review = "reviews/JL-177.json"
+editable = ["JonnyLean/FiniteProbability/Distribution.lean"]
+depends_on = ["JL-059", "JL-060", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-174", "JL-175"]
+
+[[tasks]]
+id = "JL-178"
+title = "自然数係数の混合と期待値分子"
+domain = "finite-probability"
+description = "scale n μは各出現重みをn倍し、mix m μ n νは二つのスケール測度を連結する。任意の自然数係数を許す未正規化混合である。"
+tags = ["mixture", "scaling", "weighted-expectation"]
+spec = "specs/JL-178.md"
+module = "JonnyLean.FiniteProbability.Mixture"
+declaration = "JonnyLean.FiniteProbability.expect_mix"
+contract = "contracts/JL178.lean"
+review = "reviews/JL-178.json"
+editable = ["JonnyLean/FiniteProbability/Mixture.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173"]
+
+[[tasks]]
+id = "JL-179"
+title = "有限遷移核と全期待値分子公式"
+domain = "finite-probability"
+description = "核k : α → Measure βは各値に有限重み付き出力列を割り当てる。bind μ kは入力出現の重みで各核の重みをスケールして連結する。"
+tags = ["transition-kernel", "total-expectation", "bind"]
+spec = "specs/JL-179.md"
+module = "JonnyLean.FiniteProbability.Kernel"
+declaration = "JonnyLean.FiniteProbability.expect_bind"
+contract = "contracts/JL179.lean"
+review = "reviews/JL-179.json"
+editable = ["JonnyLean/FiniteProbability/Kernel.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-178"]
+
+[[tasks]]
+id = "JL-180"
+title = "有限遷移核の合成と結合則"
+domain = "finite-probability"
+description = "二段階の核kとlを、各入力aについてbind (k a) lと合成する。出現の並びと積重みを含めたリスト表現そのものの等式を扱う。"
+tags = ["kernel-composition", "associativity", "dirac-identity"]
+spec = "specs/JL-180.md"
+module = "JonnyLean.FiniteProbability.KernelComposition"
+declaration = "JonnyLean.FiniteProbability.bind_assoc"
+contract = "contracts/JL180.lean"
+review = "reviews/JL-180.json"
+editable = ["JonnyLean/FiniteProbability/KernelComposition.lean"]
+depends_on = ["JL-059", "JL-161", "JL-162", "JL-163", "JL-164", "JL-168", "JL-171", "JL-172", "JL-173", "JL-178", "JL-179"]

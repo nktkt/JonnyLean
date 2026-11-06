@@ -3,10 +3,10 @@
   "task": "JL-016",
   "reviewer": {
     "kind": "ai",
-    "name": "Codex independent reviewer /root/v2_graphs (JL-001–025; not the author)",
+    "name": "Codex independent reviewer /root/v3_arithmetic (JL-001–020 and JL-101–140; not the author)",
     "authenticated": false,
     "evidence_kind": "AI self-report",
-    "independent_scope": "Authored JL-046–060 only; independently read JL-001–025 specifications, contracts, mathematics, and verifier changes."
+    "independent_scope": "Authored JL-061–100 only. Independently read the specifications, contracts, all related mathematical implementations and independent semantic models for JL-001–020 and JL-101–140; checked final machine audits and both input fingerprints."
   },
   "decision": "approve",
   "findings": [],
@@ -14,46 +14,46 @@
     {
       "criterion": "definition",
       "result": "pass",
-      "evidence": "有限和の独立 sumSpec は0からn-1の和。自然数係数による a*f i+b*g i を各項として扱う。"
+      "evidence": "有限和は独立sumSpecの0と後続再帰で固定。係数a,bは自然数。"
     },
     {
       "criterion": "quantifiers",
       "result": "pass",
-      "evidence": "f,g:Nat→Nat と a,b,n:Nat は任意で、0係数と空和を含む。"
+      "evidence": "任意f,g:Nat→Natとa,b,n、空和と係数0を含む。"
     },
     {
       "criterion": "assumptions",
       "result": "pass",
-      "evidence": "主定理には順序仮定がない。補助の差の和だけ範囲内 g i≤f i を要求し、Nat減算の切り捨て問題を避ける。"
+      "evidence": "線形結合定理に大小条件なし。差の和の補題にのみ範囲内g i≤f iを要求。"
     },
     {
       "criterion": "conclusion",
       "result": "pass",
-      "evidence": "項ごとの線形結合の和が a*Σf+b*Σg に一致し、契約の独立和定義でも検証される。"
+      "evidence": "和と自然数係数線形結合が交換する等式を、独立和で契約に記述。"
     },
     {
       "criterion": "proof",
       "result": "pass",
-      "evidence": "加法と定数倍を項数帰納法で別々に示して合成する。差の和は各項の差とgの和をfへ戻せる仮定を使う。"
+      "evidence": "加法と左定数倍の保存をそれぞれ帰納法で証明し、主定理で二つを連結する。"
     },
     {
       "criterion": "coverage",
       "result": "pass",
-      "evidence": "現在の Lean 環境監査は root を含む 61 モジュールと 932 宣言を記録し、source module集合および compiled import graph と一致する。JonnyLean.range_sum_linear_combination は指定モジュール JonnyLean.Algebra.SumLinearity の theorem として一意に存在する。仕様・契約と対象数学ソースの内容を独立に精読した。"
+      "evidence": "仕様・契約と実装/独立モデルを含む数学依存を精読した。最終監査はrootを含む149モジュール・2599宣言を記録し、実ファイル集合とcompiled import graphが一致する。JonnyLean.range_sum_linear_combinationは指定JonnyLean.Algebra.SumLinearityのtheoremとして一意に存在し、全149ソースのwarnings-as-errors検査ログを確認した。"
     },
     {
       "criterion": "audit",
       "result": "pass",
-      "evidence": "artifacts/JL-016/report.json の実機械結果を読み、mechanical=pass、findings=[]、原契約の warningAsError=true 成功を確認した。数学全宣言と契約内 14 個のローカル宣言の公理依存は propext / Quot.sound の許可範囲内で、新規axiomはない。主要定理の依存は [\"Quot.sound\", \"propext\"]。現在の capture_inputs と capture_verification_inputs の双方が記録と完全一致することを再照合した。"
+      "evidence": "artifacts/JL-016/report.jsonのstatus/mechanical=pass、findings=[]、原契約の-DwarningAsError=true成功を確認。全数学2599宣言と当該契約内14ローカル宣言（生成/privateを含む）の公理はpropext/Quot.soundの範囲内で、独自axiomはない。主定理の公理依存はQuot.sound, propext。現在のcapture_inputsおよびcapture_verification_inputsを両方再計算して機械記録と完全一致を確認した。"
     }
   ],
   "inputs": {
-    ".github/workflows/ci.yml": "09f950ebfa583b254cc3064bcb764cf48f844a5e9a737fe5a1b99816543afae5",
+    ".github/workflows/ci.yml": "6d2e20d970d80eecb6266d87800440e1a5d13f0ab7b255948e106315f877afbe",
     "JonnyLean/Algebra/FiniteSum.lean": "9314c2f98d27b19b97a5a3d8ca3e53a59074d3f571f6af39d5f668930e628d1d",
     "JonnyLean/Algebra/SumLinearity.lean": "3232e245105e046380fd7417504d1e4b7873b9269656a6a262999ce125b93b69",
     "contracts/JL016.lean": "a3988398876f018ec07797d158ba9de2206b01bd712b8a630367fe9556210874",
     "lake-manifest.json": "ea58858e79186d770dd2cce32be835f8c5a71dc77735591aff944a8258598ca3",
-    "lakefile.toml": "7a6078c6d00c9d12f06199fb53ebffd9d41c1cb361467010fbfc1d7f3d9306d9",
+    "lakefile.toml": "c84968d52ce7bc3cd55eaec859d435a4e6608620a20eecf359dfa65e405e2d39",
     "lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
     "reviews/rubric.md": "23a68b92cd4ad443cefe8240146e6e70e7d7503daee4189c76efab5114d8fa19",
     "specs/JL-015.md": "44421f4b4ed86acdc4438d413984daa4edfe84af71f3e94a9abfde32ef27c436",
@@ -62,14 +62,17 @@
     "tests/fixtures.py": "83c90be28591ba66782b59c30fce726fed211e3272162b391166ca66b4e4dab5",
     "tests/test_catalog.py": "4ad5aed7a754a04af10187e169549d77336b70a59555068f864113b8eae0a1b3",
     "tests/test_pipeline.py": "c523dd5b271154dd3c6166bf04ad41c3c4541289fe1248a63abd519457a73cf6",
+    "tests/test_platform_v3.py": "dcc9fd38c0ceb99b1f97ee0a2839191a1b4596833fb9f5c64213d50f0a8bb2c6",
     "tests/test_publish.py": "64c59dd962d10503d8067e33f7df8034918cbfe76543fd23b2e9bd37bd08fb95",
     "tests/test_reporting_v2.py": "c5b6225e05c438747113641b9b6bb774bcf845407aaff1e0ed0fe64fbf93fd82",
     "tests/test_worker.py": "adab0000b690d263b8d761a697b99587142461c558ed74805b28e2883f2a4b21",
     "tools/Audit.lean": "e2addbf7971efa14546892cee516302fbcf8439e08815bad3af33a8b43a37d12",
     "tools/ContractAudit.lean": "01fe573627e01a21a7d4e2a92f7a6add98fcde8fd9e737ffb6ffa5fb59b11b35",
     "tools/__init__.py": "9e5e08a701dd3e00cdf86b63ab0e8cfc3f0715de88d73fe4a31da731b5f07d56",
-    "tools/catalog.py": "6eba2d30c2226a167d3ec394a4e91d3ac65217b90da4ab61be619134e5e676e1",
-    "tools/jonnylean.py": "027db003dfaf59405b14d564fd16a268920932e7864506df3960b640a68a8350",
+    "tools/catalog.py": "8a7cbe66c90ca7d372e43f0e7b63ee252121de4f92a3213642829e89a059caaf",
+    "tools/jonnylean.py": "68852e62cd00e8d7e8e7ae28565bddfaf3f5ba003537bf6dc28d518addd045a4",
+    "tools/library.py": "1789e5705078300b011055df8da51fa4cdd1029e47cf5f6d38ab533839cb6494",
+    "tools/planning.py": "c014517fdcc36e48ce4688fd4c7203bbda1aba3a0a7e823a28818a3ab283ea2b",
     "tools/publish.py": "6be070f68003a852a53a7ab47d04ae80bed8aa8560d01d07370afa700da0cb7c",
     "tools/reporting.py": "195afb81da0ed93dd990b482f97780f88ae829d23e75a4d29743ade33dbc8957",
     "tools/scopes.py": "e2b7763c0e097e3e9c245085da1406ebefe478a83b633bff47716abaa3a0bcca",
@@ -83,5 +86,5 @@
     "@task-context": "3959c62c548be47af1bd42d6d5eea0fa8a4b15bfc3ee8c7f2b28793dab1fba99"
   },
   "human_approval": "not_recorded",
-  "reviewed_at": "2026-11-06T14:14:21.508849+00:00"
+  "reviewed_at": "2026-11-06T14:57:47.398926+00:00"
 }

@@ -1,0 +1,870 @@
+[
+  {
+    "id": "JL-101",
+    "title": "二分木の中順走査と節点数",
+    "domain": "binary-trees",
+    "description": "空木と値付き二分節点からなる任意の木で、中順走査がすべての節点を一度ずつ出力することを長さと節点数の一致として証明する。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-101.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.inorder_length",
+    "contract": "contracts/JL101.lean",
+    "review": "reviews/JL-101.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-102",
+    "title": "木の鏡映と走査順序の反転",
+    "domain": "binary-trees",
+    "description": "左右の部分木を再帰的に交換すると中順走査が反転する。鏡映の対合性と節点数保存も一般木について示す。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-102.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.inorder_mirror",
+    "contract": "contracts/JL102.lean",
+    "review": "reviews/JL-102.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-103",
+    "title": "木への写像と中順走査の可換性",
+    "domain": "binary-trees",
+    "description": "値だけを写す木のmapを実行してから走査した結果は、先に走査して列をmapした結果と一致する。写像合成と節点数保存を伴う。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-103.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.inorder_map",
+    "contract": "contracts/JL103.lean",
+    "review": "reviews/JL-103.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-104",
+    "title": "木の高さを節点数で上から抑える",
+    "domain": "binary-trees",
+    "description": "空木の高さを0とし、節点の高さを左右の最大値に1を加えた値とすると、高さは節点数を超えない。枝分かれと退化した鎖の両方を含む。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-104.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.height_le_size",
+    "contract": "contracts/JL104.lean",
+    "review": "reviews/JL-104.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-105",
+    "title": "二分木foldの融合定理",
+    "domain": "binary-trees",
+    "description": "節点結合と写像が可換なら、木全体のfoldの後に写像をかける処理を、写像先のfold一回へ融合できる。値型や集約先を自然数に限定しない。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-105.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.fold_fusion",
+    "contract": "contracts/JL105.lean",
+    "review": "reviews/JL-105.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-106",
+    "title": "空の葉への木の接ぎ込みと大きさ",
+    "domain": "binary-trees",
+    "description": "各空の葉を同じ木で置き換えるgraftについて、元の節点数と置換木の節点数から結果の節点数を正確に計算する。接ぎ込みの結合則と空木の単位則を含む。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-106.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.graft_size",
+    "contract": "contracts/JL106.lean",
+    "review": "reviews/JL-106.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-107",
+    "title": "深さによる木の刈込み",
+    "domain": "binary-trees",
+    "description": "指定深さで木を打ち切るpruneは高さ上限を満たす。既に上限内の木を変えず、同じ深さの刈込みを反復しても結果を変えない。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-107.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.prune_height",
+    "contract": "contracts/JL107.lean",
+    "review": "reviews/JL-107.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-104"
+    ]
+  },
+  {
+    "id": "JL-108",
+    "title": "木の全節点述語と走査列の一致",
+    "domain": "binary-trees",
+    "description": "再帰的に全節点へ課す述語と、中順走査の全出力へ課す述語が同値であることを示す。木の写像による述語の引き戻しにも接続する。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-108.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.all_iff_inorder",
+    "contract": "contracts/JL108.lean",
+    "review": "reviews/JL-108.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-109",
+    "title": "蓄積列を使う二分木走査",
+    "domain": "binary-trees",
+    "description": "後続列を引数に取る中順走査が、通常の中順走査列と任意の後続列の連結に一致する。空の後続列だけに限定しない一般化が帰納証明を支える。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-109.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.inorderInto_spec",
+    "contract": "contracts/JL109.lean",
+    "review": "reviews/JL-109.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-110",
+    "title": "二分木の外部葉数公式",
+    "domain": "binary-trees",
+    "description": "空木を一つの外部葉として数えると、任意の有限二分木の外部葉数は値付き節点数よりちょうど一つ多い。完全木や平衡木の仮定は不要。",
+    "tags": [
+      "binary-trees",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-110.md",
+    "module": "JonnyLean.Trees.Binary",
+    "declaration": "JonnyLean.Trees.Tree.externalLeaves_eq",
+    "contract": "contracts/JL110.lean",
+    "review": "reviews/JL-110.json",
+    "editable": [
+      "JonnyLean/Trees/Binary.lean"
+    ],
+    "depends_on": [
+      "JL-101"
+    ]
+  },
+  {
+    "id": "JL-111",
+    "title": "スタックへの一括pushとpopの相殺",
+    "domain": "persistent-data-structures",
+    "description": "列を左から順にpushした後、同数の要素をpopすると、逆順の入力列と元のスタックが正確に回復する。既存スタックの内容や入力長に制約はない。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-111.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Stack.popMany_pushMany",
+    "contract": "contracts/JL111.lean",
+    "review": "reviews/JL-111.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-112",
+    "title": "複数popの成功条件と分解証明書",
+    "domain": "persistent-data-structures",
+    "description": "popManyが成功するための必要十分条件は要求数がスタック長以下であること。成功時には取り出した列と残りを連結すると元のスタックになり、取り出した長さが要求数と一致する。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-112.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Stack.popMany_success_iff",
+    "contract": "contracts/JL112.lean",
+    "review": "reviews/JL-112.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-111"
+    ]
+  },
+  {
+    "id": "JL-113",
+    "title": "二リストキューの正規化不変条件",
+    "domain": "persistent-data-structures",
+    "description": "frontと反転したbackの連結をFIFO列とする。frontが空の場合だけbackを反転する正規化は内容を保存し、空frontなら空backという不変条件と冪等性を満たす。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-113.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Queue.normalize_contents",
+    "contract": "contracts/JL113.lean",
+    "review": "reviews/JL-113.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-114",
+    "title": "キューenqueueのFIFO意味",
+    "domain": "persistent-data-structures",
+    "description": "キューへのenqueueは抽象的FIFO列の末尾へ要素を一つ追加する。内部表現のfrontが空でも非空でも同じ仕様を満たし、結果は正規化される。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-114.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Queue.enqueue_contents",
+    "contract": "contracts/JL114.lean",
+    "review": "reviews/JL-114.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-113"
+    ]
+  },
+  {
+    "id": "JL-115",
+    "title": "キューdequeueの正確な先頭除去",
+    "domain": "persistent-data-structures",
+    "description": "dequeueが空を返す場合は抽象列も空であり、成功した場合は元の抽象列が返却値と残りの列のconsに一致する。残りのキューは正規化不変条件を満たす。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-115.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Queue.dequeue_spec",
+    "contract": "contracts/JL115.lean",
+    "review": "reviews/JL-115.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-113"
+    ]
+  },
+  {
+    "id": "JL-116",
+    "title": "キューへのバッチ追加と連結則",
+    "domain": "persistent-data-structures",
+    "description": "列の順で繰り返すenqueueManyはFIFO列へ入力列をそのまま追加する。入力を二分して処理しても一括処理と表現まで一致する。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-116.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Queue.enqueueMany_contents",
+    "contract": "contracts/JL116.lean",
+    "review": "reviews/JL-116.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-114"
+    ]
+  },
+  {
+    "id": "JL-117",
+    "title": "連想リストの更新とシャドーイング",
+    "domain": "persistent-data-structures",
+    "description": "最初の一致を採用する自然数キーの連想リストで、putは指定キーだけを更新する。重複キーを許し、上書きと異なるキーの更新交換をlookupの意味で証明する。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-117.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Assoc.lookup_put",
+    "contract": "contracts/JL117.lean",
+    "review": "reviews/JL-117.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-118",
+    "title": "連想リストの全重複キー削除",
+    "domain": "persistent-data-structures",
+    "description": "eraseは対象キーの全出現を削除する。対象キーの検索は必ず失敗し、他キーの検索結果を保つ。削除の冪等性も表現そのものについて示す。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-118.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Assoc.lookup_erase",
+    "contract": "contracts/JL118.lean",
+    "review": "reviews/JL-118.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-117"
+    ]
+  },
+  {
+    "id": "JL-119",
+    "title": "連想リストの左優先結合",
+    "domain": "persistent-data-structures",
+    "description": "二つの連想リストの連結は、左側に値があればそれを選び、左で未定義の場合だけ右を探索する左優先結合となる。結合演算の結合則を伴う。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-119.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Assoc.lookup_union",
+    "contract": "contracts/JL119.lean",
+    "review": "reviews/JL-119.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-117"
+    ]
+  },
+  {
+    "id": "JL-120",
+    "title": "連想リストの値写像と検索",
+    "domain": "persistent-data-structures",
+    "description": "キーと出現順を保ったまま値だけを写すmapValuesについて、検索後のOption.mapと検索前の値写像が一致する。欠損キーと重複キーを含む。",
+    "tags": [
+      "persistent-data-structures",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-120.md",
+    "module": "JonnyLean.DataStructures.Persistent",
+    "declaration": "JonnyLean.DataStructures.Assoc.lookup_mapValues",
+    "contract": "contracts/JL120.lean",
+    "review": "reviews/JL-120.json",
+    "editable": [
+      "JonnyLean/DataStructures/Persistent.lean"
+    ],
+    "depends_on": [
+      "JL-117"
+    ]
+  },
+  {
+    "id": "JL-121",
+    "title": "自然数式の変数改名と環境の合成",
+    "domain": "verified-expressions",
+    "description": "自然数定数・変数・加算・乗算からなる式を改名して評価することは、環境を改名写像で前合成して元の式を評価することと同じ。改名は単射である必要がない。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-121.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.eval_rename",
+    "contract": "contracts/JL121.lean",
+    "review": "reviews/JL-121.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-122",
+    "title": "式の一斉代入と評価",
+    "domain": "verified-expressions",
+    "description": "各変数を式で一斉に置き換えた結果の評価は、置換式を元の環境で評価して作った環境による元の式の評価に一致する。束縛のない構文なので捕獲回避仮定は不要。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-122.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.eval_subst",
+    "contract": "contracts/JL122.lean",
+    "review": "reviews/JL-122.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-121"
+    ]
+  },
+  {
+    "id": "JL-123",
+    "title": "使用変数だけによる評価の決定",
+    "domain": "verified-expressions",
+    "description": "式に出現する変数で二つの環境が一致すれば、式の評価結果も一致する。変数列は重複を許す出現列であり、出現しない変数の値には仮定しない。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-123.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.eval_congr_on_variables",
+    "contract": "contracts/JL123.lean",
+    "review": "reviews/JL-123.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-121"
+    ]
+  },
+  {
+    "id": "JL-124",
+    "title": "定数畳込みの意味保存",
+    "domain": "verified-expressions",
+    "description": "両子が定数になった加算・乗算を定数一つへ置き換える再帰的定数畳込みは、すべての環境で評価を保存する。実装とは独立に記述した畳込みと評価モデルを契約に用いる。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-124.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.eval_foldConstants",
+    "contract": "contracts/JL124.lean",
+    "review": "reviews/JL-124.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-125",
+    "title": "定数畳込みの固定点性",
+    "domain": "verified-expressions",
+    "description": "一度定数畳込みを適用した式は同じ処理の固定点になる。子が固定点であることから定数結合が固定点を作る補題を用い、無制限の反復が不要であることを証明する。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-125.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.foldConstants_idempotent",
+    "contract": "contracts/JL125.lean",
+    "review": "reviews/JL-125.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-124"
+    ]
+  },
+  {
+    "id": "JL-126",
+    "title": "定数畳込みによる構文サイズの非増加",
+    "domain": "verified-expressions",
+    "description": "葉と演算節点を各一つと数える構文サイズについて、定数畳込みがサイズを増やさないことを証明する。開いた式で等号になる場合と、閉じた部分式で減少する場合を含む。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-126.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.foldConstants_size",
+    "contract": "contracts/JL126.lean",
+    "review": "reviews/JL-126.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-124"
+    ]
+  },
+  {
+    "id": "JL-127",
+    "title": "零と単位元を除く代数的最適化",
+    "domain": "verified-expressions",
+    "description": "定数畳込みに加え、加法の0、乗法の0と1を簡約する最適化が評価を保存する。乗法の0では未評価の変数を含む部分式も削除できる。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-127.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.eval_optimize",
+    "contract": "contracts/JL127.lean",
+    "review": "reviews/JL-127.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-124"
+    ]
+  },
+  {
+    "id": "JL-128",
+    "title": "代数的最適化は新しい変数を導入しない",
+    "domain": "verified-expressions",
+    "description": "最適化後に出現する各変数は最適化前にも出現する。0による乗算の除去で変数が消える場合を許し、集合の等号ではなく正しい包含方向を契約にする。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-128.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.optimize_variables",
+    "contract": "contracts/JL128.lean",
+    "review": "reviews/JL-128.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-127"
+    ]
+  },
+  {
+    "id": "JL-129",
+    "title": "改名による変数出現列の輸送",
+    "domain": "verified-expressions",
+    "description": "式の改名による変数出現列は、元の出現列へ改名写像をmapした列と等しい。順序と重複を保存し、異なる変数を同じ名前へ写す場合も対象とする。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-129.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.rename_variables",
+    "contract": "contracts/JL129.lean",
+    "review": "reviews/JL-129.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-121"
+    ]
+  },
+  {
+    "id": "JL-130",
+    "title": "一斉代入の合成則",
+    "domain": "verified-expressions",
+    "description": "二回の一斉代入を、最初の置換式へ二番目の代入を適用した一回の代入へまとめる。評価の一致だけでなく構文そのものの一致を示す。",
+    "tags": [
+      "verified-expressions",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-130.md",
+    "module": "JonnyLean.VerifiedPrograms.Expressions",
+    "declaration": "JonnyLean.VerifiedPrograms.Expr.subst_comp",
+    "contract": "contracts/JL130.lean",
+    "review": "reviews/JL-130.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/Expressions.lean"
+    ],
+    "depends_on": [
+      "JL-122"
+    ]
+  },
+  {
+    "id": "JL-131",
+    "title": "命令列の合成と失敗伝播",
+    "domain": "verified-compilers",
+    "description": "命令列連結の実行は、前半の実行結果へ後半をOption.bindすることと一致する。スタック不足による失敗は後半へ進まず伝播する。独立した一命令意味から全体の実行を定義する。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-131.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.execute_append",
+    "contract": "contracts/JL131.lean",
+    "review": "reviews/JL-131.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-132",
+    "title": "後置スタック機械コンパイラの意味保存",
+    "domain": "verified-compilers",
+    "description": "式を左部分式・右部分式・演算の順にコンパイルすると、任意の初期スタックの上に式の値を一つ積む。後続コードを持つ継続形の意味保存も含む。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-132.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.execute_compile",
+    "contract": "contracts/JL132.lean",
+    "review": "reviews/JL-132.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-121",
+      "JL-131"
+    ]
+  },
+  {
+    "id": "JL-133",
+    "title": "コンパイル後コード長の正確な計数",
+    "domain": "verified-compilers",
+    "description": "定数・変数・演算の各構文節点がちょうど一命令に対応し、コード長が構文サイズと等しい。評価値の大きさとは独立した構文的な費用モデルを与える。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-133.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.compile_length",
+    "contract": "contracts/JL133.lean",
+    "review": "reviews/JL-133.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-132"
+    ]
+  },
+  {
+    "id": "JL-134",
+    "title": "静的スタック深さ検査の健全性",
+    "domain": "verified-compilers",
+    "description": "命令だけから計算した深さ検査が成功すれば、同じ長さの任意の値スタック上の実行も成功し、出力長は検査値に一致する。値や環境に依存しない安全性証明。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-134.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.check_sound",
+    "contract": "contracts/JL134.lean",
+    "review": "reviews/JL-134.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-131"
+    ]
+  },
+  {
+    "id": "JL-135",
+    "title": "生成コードの静的検査と深さ差分",
+    "domain": "verified-compilers",
+    "description": "任意の式から生成されたコードはすべての初期深さで静的検査に合格し、深さを正確に一つ増やす。空スタック開始も含めコンパイラ出力のスタック不足が起きない。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-135.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.check_compile",
+    "contract": "contracts/JL135.lean",
+    "review": "reviews/JL-135.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-132",
+      "JL-134"
+    ]
+  },
+  {
+    "id": "JL-136",
+    "title": "最適化とコンパイルの意味的整合",
+    "domain": "verified-compilers",
+    "description": "式を代数的最適化してからコンパイルする経路と、そのままコンパイルする経路は、任意の環境と初期スタックで同一の実行結果になる。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-136.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.execute_optimized_compile",
+    "contract": "contracts/JL136.lean",
+    "review": "reviews/JL-136.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-127",
+      "JL-132"
+    ]
+  },
+  {
+    "id": "JL-137",
+    "title": "後続命令を蓄積するコード生成",
+    "domain": "verified-compilers",
+    "description": "リスト連結の代わりに後続命令列を引数で受け取るcompileIntoは、独立モデルの後置コードへその後続列を連結した結果に正確に一致する。継続付き実行意味にも接続する。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-137.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.compileInto_spec",
+    "contract": "contracts/JL137.lean",
+    "review": "reviews/JL-137.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-132"
+    ]
+  },
+  {
+    "id": "JL-138",
+    "title": "成功する命令列のスタックフレーム保存",
+    "domain": "verified-compilers",
+    "description": "あるスタック上で成功する命令列は、その底に任意の追加列を置いても成功し、結果の底にその追加列をそのまま残す。コンパイラ出力に限らず任意の成功コードが対象。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-138.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.execute_frame",
+    "contract": "contracts/JL138.lean",
+    "review": "reviews/JL-138.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-131"
+    ]
+  },
+  {
+    "id": "JL-139",
+    "title": "コンパイルと構文再構成の往復",
+    "domain": "verified-compilers",
+    "description": "数値の代わりに式を積む構文スタック機械で生成コードを実行すると、元の式を構文まで正確に再構成する。任意の既存構文スタックを保存する。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-139.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.decompile_compile",
+    "contract": "contracts/JL139.lean",
+    "review": "reviews/JL-139.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-132"
+    ]
+  },
+  {
+    "id": "JL-140",
+    "title": "任意バイトコードの構文再構成証明書",
+    "domain": "verified-compilers",
+    "description": "構文スタック上の逆コンパイルが成功すれば、その入力式を任意の環境で評価した数値スタック上でも実行が成功し、再構成した式を評価した結果に一致する。コンパイラ由来でない命令列も扱う。",
+    "tags": [
+      "verified-compilers",
+      "structural-induction",
+      "semantic-contract"
+    ],
+    "spec": "specs/JL-140.md",
+    "module": "JonnyLean.VerifiedPrograms.StackMachine",
+    "declaration": "JonnyLean.VerifiedPrograms.Machine.decompile_sound",
+    "contract": "contracts/JL140.lean",
+    "review": "reviews/JL-140.json",
+    "editable": [
+      "JonnyLean/VerifiedPrograms/StackMachine.lean"
+    ],
+    "depends_on": [
+      "JL-131",
+      "JL-139"
+    ]
+  }
+]

@@ -11,7 +11,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,7 +25,7 @@ jobs:
       - name: Check generated catalog and imports
         run: python3 tools/jonnylean.py catalog check
       - name: Verify all tasks and their independent reviews
-        run: python3 tools/jonnylean.py run all
+        run: python3 tools/jonnylean.py run all --jobs 2
       - name: Exercise successful and rejected changes
         run: python3 -m unittest discover -s tests -v
       - uses: actions/upload-artifact@v4

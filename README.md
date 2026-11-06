@@ -1,8 +1,9 @@
 # JonnyLean
 
 人間が数学の目標を決め、AIが証明を作成し、Leanと別のAIで検証する数学ライブラリです。
-初等整数論・組合せ論を起点とする **60課題・60数学モジュール・357個の明示的な名前付き定理** と、継続作業のためのローカルワーカーを備えています。
+初等整数論・組合せ論を起点とする **180課題・148数学モジュール・838個の明示的な名前付き定理** と、継続作業のためのローカルワーカーを備えています。
 数論、代数、論理、写像、関係、集合、アルゴリズム、グラフ、数え上げ、有限確率を扱います。
+v3では多項式の形式微分、二分木と永続データ構造、式の最適化とスタック機械コンパイラ、形式言語・オートマトン・有限測度まで拡張しました。
 以前の別プロジェクトやTau Cetiのコード・監査ツールは流用していません。
 
 ## すぐに検証する
@@ -13,7 +14,7 @@ MathlibやPython追加パッケージは不要です。AIを呼び出さず、�
 
 ```sh
 cd /Users/naoki/dev/JonnyLean
-python3 tools/jonnylean.py run all
+python3 tools/jonnylean.py run all --jobs 4
 python3 -m unittest discover -s tests -v
 ```
 
@@ -34,6 +35,12 @@ HTMLはブラウザでそのまま開ける、外部通信のないレポート�
 | JL-036〜045 | 分割、反転、有限集合演算、挿入ソート、状態走査、重複除去、探索 |
 | JL-046〜054 | 有向グラフ、歩道、到達可能性、準同型、反転、連結成分、閉歩道、部分グラフ |
 | JL-055〜060 | 語の列挙と濃度、部分列選択と二項係数、有限質量・離散分布 |
+| JL-061〜080 | gcd・lcm、Euclid法の停止と正当性、既約対、剰余計算、有限積 |
+| JL-081〜100 | 係数列多項式、畳み込み積、合成、差分商、形式微分・積則・連鎖律、Horner同時計算 |
+| JL-101〜120 | 二分木の走査・鏡映・fold、永続stack・queue・連想map |
+| JL-121〜140 | 式の評価・置換・最適化、スタック機械、コンパイル意味保存、静的深さ検査、逆コンパイル |
+| JL-141〜160 | 構成的な言語代数、Kleene閉包、機械の走行・積・状態写像・不変量・有限carrier |
+| JL-161〜180 | 積・部分列・順列・shuffleの計数、有限測度の押し出し・期待値分子・核の合成 |
 
 ```sh
 python3 tools/jonnylean.py catalog list
@@ -41,6 +48,9 @@ python3 tools/jonnylean.py catalog search fibonacci
 python3 tools/jonnylean.py catalog show JL-042
 python3 tools/jonnylean.py catalog graph --format mermaid
 python3 tools/jonnylean.py catalog stats
+python3 tools/jonnylean.py plan JL-100 --include-dependencies
+python3 tools/jonnylean.py library search "derivative evaluate" --kind theorem
+python3 tools/jonnylean.py library export --format json > artifacts/declarations.json
 python3 tools/jonnylean.py run all --domain graph-theory
 python3 tools/jonnylean.py verify all --tag cardinality
 python3 tools/jonnylean.py run all --changed HEAD
@@ -48,7 +58,7 @@ python3 tools/jonnylean.py run all --changed HEAD
 
 [全課題一覧](roadmaps/elementary.md)から仕様・Lean証明・契約に移動できます。
 `catalog/fragments/` を原本として、`catalog sync` がレジストリと集約importを再生成します。
-`catalog check` は登録との不一致を検出します。課題の追加は [CONTRIBUTING](CONTRIBUTING.md) を参照。
+`catalog check` は登録との不一致を検出します。並列検証・CI分割・実際の定理型の検索は [大規模運用ガイド](docs/platform.md) を参照してください。課題の追加は [CONTRIBUTING](CONTRIBUTING.md) を参照。
 `--changed` はGit参照からの変更と未追跡ファイルを含み、影響する課題を選びます。
 選択にかかわらず、機械監査はライブラリ全体を対象にします。
 
@@ -59,7 +69,9 @@ JL-001〜003の主定理は公理依存なし。JL-004〜005はLean標準公理�
 `sorryAx`、独自公理、`Classical.choice` は許可しません。
 
 閉歩道は頂点が重複しない単純サイクルとは区別します。有限確率は自然数の重みと正の総質量による
-未約分の分数表現です。実数の確率論・測度論は実装範囲に含めません。
+未約分の分数表現です。v3の有限測度も自然数重みの有限リストを使い、期待値は分子を扱います。
+多項式の導関数は形式微分です。オートマトンは一般状態機械の法則と有限carrierに制限する定理を区別します。
+実数の解析や一般の測度論は実装範囲に含めません。
 
 `contracts/` は仕様を独立した型で述べ、実際の定理をその型に代入して確認します。
 全数学モジュールを列挙して検査漏れを拒否し、私有・未使用の宣言も公理監査します。
@@ -132,8 +144,8 @@ Codex CLIの1呼出にサーバー側のトークン上限を設定する機能�
 ## 検証・レビュー・レポート
 
 ```sh
-python3 tools/jonnylean.py verify all       # 機械検査のみ
-python3 tools/jonnylean.py run all          # 機械検査＋保存されたAIレビュー
+python3 tools/jonnylean.py verify all --jobs 4 # 機械検査のみ
+python3 tools/jonnylean.py run all --jobs 4    # 機械検査＋保存されたAIレビュー
 python3 tools/jonnylean.py review JL-003    # 1課題の再検証
 python3 tools/jonnylean.py fingerprint all # レビュー対象の入力ハッシュ
 python3 tools/jonnylean.py dashboard       # 保存結果からHTMLを更新
@@ -177,7 +189,7 @@ GitHub CLIの認証と、利用者が設定したリモートリポジトリが�
 python3 -m unittest discover -s tests -v
 ```
 
-Leanの正常系、意図的な証明の破損、公理・仮定・定義の変更、検査漏れ、古いレビュー、
+並列契約検査、入力の同時変更、依存の展開、CI分割、監査済みの型検索、Leanの正常系、意図的な証明の破損、公理・仮定・定義の変更、検査漏れ、古いレビュー、
 ワーカーの再試行・並列claim・予算・再開・取り込み競合・タイムアウトを検査します。
 テスト用の合成AI応答は一時コピーの中だけで使い、実際のレビュー記録とは明確に区別します。
 

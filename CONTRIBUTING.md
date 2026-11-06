@@ -9,6 +9,11 @@
 5. 仕様と契約の内容を確認してから `work --task JL-NNN` を実行する。依存課題は先に取り込む。
 6. 合格した候補を `adopt JOB_ID` で取り込み、`run all` で他課題への影響も確認する。
 
+関連する複数課題が同じモジュールを共有してもよい。公開対象の定理名は一意にし、
+課題ごとの独立した意味・仕様・契約を持たせる。定理数やモジュール数を増やすためだけのラッパーは追加しない。
+共通の仕様モデルを作る場合は数学実装とは別ファイルに置き、契約からimportし、editableから除外する。
+登録後は `plan JL-NNN --include-dependencies` で依存範囲を確認する。
+
 ワーカーは既存のeditableファイルだけを置換する。新規モジュールとそのimportの追加は準備段階で行う。
 編集中の `sorry` は不合格となり、成果や承認済み証明として扱わない。
 
@@ -20,7 +25,7 @@
 
 ```sh
 python3 tools/jonnylean.py catalog check
-python3 tools/jonnylean.py verify all
+python3 tools/jonnylean.py verify all --jobs 4
 python3 -m unittest discover -s tests -v
 ```
 

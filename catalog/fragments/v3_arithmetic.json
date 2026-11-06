@@ -1,0 +1,861 @@
+[
+  {
+    "id": "JL-061",
+    "title": "三数の最大公約数の普遍性",
+    "domain": "arithmetic",
+    "description": "三つの自然数をまとめる最大公約数を構成し、共通約数との同値、巡回置換、スカラー倍、一意性を示す。",
+    "tags": [
+      "gcd",
+      "universal-property",
+      "scaling"
+    ],
+    "spec": "specs/JL-061.md",
+    "module": "JonnyLean.Arithmetic.GcdTriple",
+    "declaration": "JonnyLean.Arithmetic.dvd_gcdTriple",
+    "contract": "contracts/JL061.lean",
+    "review": "reviews/JL-061.json",
+    "editable": [
+      "JonnyLean/Arithmetic/GcdTriple.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-062",
+    "title": "有限列の最大公約数",
+    "domain": "arithmetic",
+    "description": "空列を0とする最大公約数の畳み込みを構成し、全要素の共通約数による仕様、連結、スカラー倍、ゼロ条件を証明する。",
+    "tags": [
+      "gcd",
+      "lists",
+      "fold"
+    ],
+    "spec": "specs/JL-062.md",
+    "module": "JonnyLean.Arithmetic.GcdList",
+    "declaration": "JonnyLean.Arithmetic.dvd_listGcd",
+    "contract": "contracts/JL062.lean",
+    "review": "reviews/JL-062.json",
+    "editable": [
+      "JonnyLean/Arithmetic/GcdList.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-063",
+    "title": "Euclidせん断列による共通約数の保存",
+    "domain": "arithmetic",
+    "description": "対(a,b)を(b,a+kb)へ送る計算と任意長の係数列による反復を構成し、最大公約数と共通約数全体の保存を示す。",
+    "tags": [
+      "euclid",
+      "invariant",
+      "iteration"
+    ],
+    "spec": "specs/JL-063.md",
+    "module": "JonnyLean.Arithmetic.Shear",
+    "declaration": "JonnyLean.Arithmetic.shearTrace_common",
+    "contract": "contracts/JL063.lean",
+    "review": "reviews/JL-063.json",
+    "editable": [
+      "JonnyLean/Arithmetic/Shear.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-064",
+    "title": "有限燃料付きEuclid法の停止と正しさ",
+    "domain": "arithmetic",
+    "description": "剰余によるEuclidステップを実装し、第一成分aに対してa+1回以内に停止状態(0,gcd(a,b))へ到達することを示す。",
+    "tags": [
+      "euclid",
+      "termination",
+      "algorithm"
+    ],
+    "spec": "specs/JL-064.md",
+    "module": "JonnyLean.Arithmetic.EuclidTrace",
+    "declaration": "JonnyLean.Arithmetic.euclidRun_computes",
+    "contract": "contracts/JL064.lean",
+    "review": "reviews/JL-064.json",
+    "editable": [
+      "JonnyLean/Arithmetic/EuclidTrace.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-065",
+    "title": "三数の最小公倍数の普遍性",
+    "domain": "arithmetic",
+    "description": "三数の最小公倍数を構成し、共通倍数との同値、スカラー倍、単位元、一意性を証明する。",
+    "tags": [
+      "lcm",
+      "universal-property",
+      "scaling"
+    ],
+    "spec": "specs/JL-065.md",
+    "module": "JonnyLean.Arithmetic.LcmTriple",
+    "declaration": "JonnyLean.Arithmetic.lcmTriple_dvd",
+    "contract": "contracts/JL065.lean",
+    "review": "reviews/JL-065.json",
+    "editable": [
+      "JonnyLean/Arithmetic/LcmTriple.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-066",
+    "title": "有限列の最小公倍数",
+    "domain": "arithmetic",
+    "description": "空列を1とする最小公倍数の畳み込みを実装し、全要素の共通倍数による仕様、連結、要素の整除、ゼロ条件を証明する。",
+    "tags": [
+      "lcm",
+      "lists",
+      "fold"
+    ],
+    "spec": "specs/JL-066.md",
+    "module": "JonnyLean.Arithmetic.LcmList",
+    "declaration": "JonnyLean.Arithmetic.listLcm_dvd",
+    "contract": "contracts/JL066.lean",
+    "review": "reviews/JL-066.json",
+    "editable": [
+      "JonnyLean/Arithmetic/LcmList.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-067",
+    "title": "有限積のゼロ条件と整除",
+    "domain": "arithmetic",
+    "description": "自然数列の有限積を再帰構成し、ゼロ因子の存在、正値性、連結公式、各要素による整除を示す。",
+    "tags": [
+      "finite-product",
+      "zero",
+      "divisibility"
+    ],
+    "spec": "specs/JL-067.md",
+    "module": "JonnyLean.Arithmetic.Product",
+    "declaration": "JonnyLean.Arithmetic.product_eq_zero",
+    "contract": "contracts/JL067.lean",
+    "review": "reviews/JL-067.json",
+    "editable": [
+      "JonnyLean/Arithmetic/Product.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-068",
+    "title": "有限積との互いに素性の特徴付け",
+    "domain": "arithmetic",
+    "description": "ある自然数が有限積と互いに素であることと、すべての因子と互いに素であることを同値にする。連結と積の累乗への保存も得る。",
+    "tags": [
+      "coprime",
+      "finite-product",
+      "powers"
+    ],
+    "spec": "specs/JL-068.md",
+    "module": "JonnyLean.Arithmetic.CoprimeProduct",
+    "declaration": "JonnyLean.Arithmetic.gcd_product_eq_one_iff",
+    "contract": "contracts/JL068.lean",
+    "review": "reviews/JL-068.json",
+    "editable": [
+      "JonnyLean/Arithmetic/CoprimeProduct.lean"
+    ],
+    "depends_on": [
+      "JL-067"
+    ]
+  },
+  {
+    "id": "JL-069",
+    "title": "互いに素な因子の取消しと同時整除",
+    "domain": "arithmetic",
+    "description": "gcd(a,b)=1のもとで積bcの整除からbを取り消し、aとbの共通倍数がabの倍数となることを構成的な証人で示す。",
+    "tags": [
+      "coprime",
+      "cancellation",
+      "divisibility"
+    ],
+    "spec": "specs/JL-069.md",
+    "module": "JonnyLean.Arithmetic.CoprimeCancel",
+    "declaration": "JonnyLean.Arithmetic.coprime_product_dvd_iff",
+    "contract": "contracts/JL069.lean",
+    "review": "reviews/JL-069.json",
+    "editable": [
+      "JonnyLean/Arithmetic/CoprimeCancel.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-070",
+    "title": "最大公約数による自然数対の既約化",
+    "domain": "arithmetic",
+    "description": "最大公約数で各成分を割る既約化を実装し、元の対の再構成と、少なくとも一成分が正なら既約対が互いに素になることを示す。",
+    "tags": [
+      "gcd",
+      "normalization",
+      "quotient"
+    ],
+    "spec": "specs/JL-070.md",
+    "module": "JonnyLean.Arithmetic.ReducedPair",
+    "declaration": "JonnyLean.Arithmetic.reducedPair_coprime",
+    "contract": "contracts/JL070.lean",
+    "review": "reviews/JL-070.json",
+    "editable": [
+      "JonnyLean/Arithmetic/ReducedPair.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-071",
+    "title": "原始対の拡大率の一意性",
+    "domain": "arithmetic",
+    "description": "互いに素な自然数対を同じ比率で拡大したとき、最大公約数が拡大率となることから、同じ拡大結果の倍率が一意であることを示す。",
+    "tags": [
+      "primitive-pair",
+      "uniqueness",
+      "scaling"
+    ],
+    "spec": "specs/JL-071.md",
+    "module": "JonnyLean.Arithmetic.PrimitiveScale",
+    "declaration": "JonnyLean.Arithmetic.primitive_scale_unique",
+    "contract": "contracts/JL071.lean",
+    "review": "reviews/JL-071.json",
+    "editable": [
+      "JonnyLean/Arithmetic/PrimitiveScale.lean"
+    ],
+    "depends_on": [
+      "JL-070"
+    ]
+  },
+  {
+    "id": "JL-072",
+    "title": "剰余を保ちながら計算する累乗",
+    "domain": "arithmetic",
+    "description": "各乗算後に剰余を取る累乗アルゴリズムを実装し、通常の累乗の剰余と一致すること、範囲、指数加法、入力の正規化を証明する。",
+    "tags": [
+      "modular-arithmetic",
+      "power",
+      "algorithm"
+    ],
+    "spec": "specs/JL-072.md",
+    "module": "JonnyLean.Arithmetic.ModularPower",
+    "declaration": "JonnyLean.Arithmetic.modularPower_correct",
+    "contract": "contracts/JL072.lean",
+    "review": "reviews/JL-072.json",
+    "editable": [
+      "JonnyLean/Arithmetic/ModularPower.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-073",
+    "title": "桁列の剰余評価と連結公式",
+    "domain": "arithmetic",
+    "description": "低位桁から並ぶ自然数列の基数評価と逐次剰余計算を構成し、連結した桁列の剰余を長さによる基数累乗から求める。",
+    "tags": [
+      "digits",
+      "remainder",
+      "concatenation"
+    ],
+    "spec": "specs/JL-073.md",
+    "module": "JonnyLean.Arithmetic.RadixResidue",
+    "declaration": "JonnyLean.Arithmetic.radixResidue_append",
+    "contract": "contracts/JL073.lean",
+    "review": "reviews/JL-073.json",
+    "editable": [
+      "JonnyLean/Arithmetic/RadixResidue.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-074",
+    "title": "重み付き有限和による合同と整除の保存",
+    "domain": "arithmetic",
+    "description": "任意型の有限列上で重み付き和を定義し、各位置での合同から和の合同を導く。線形結合、共通約数、連結も扱う。",
+    "tags": [
+      "finite-sum",
+      "congruence",
+      "linearity"
+    ],
+    "spec": "specs/JL-074.md",
+    "module": "JonnyLean.Arithmetic.WeightedResidue",
+    "declaration": "JonnyLean.Arithmetic.weightedSum_residue",
+    "contract": "contracts/JL074.lean",
+    "review": "reviews/JL-074.json",
+    "editable": [
+      "JonnyLean/Arithmetic/WeightedResidue.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-075",
+    "title": "有限積と点ごとの乗算・累乗の交換",
+    "domain": "arithmetic",
+    "description": "有限列に沿う二関数の点ごとの積を、各関数の有限積の積へ分解する。定数列、累乗列、共通スカラーの因数分解も示す。",
+    "tags": [
+      "finite-product",
+      "map",
+      "factorization"
+    ],
+    "spec": "specs/JL-075.md",
+    "module": "JonnyLean.Arithmetic.ProductMap",
+    "declaration": "JonnyLean.Arithmetic.product_map_mul",
+    "contract": "contracts/JL075.lean",
+    "review": "reviews/JL-075.json",
+    "editable": [
+      "JonnyLean/Arithmetic/ProductMap.lean"
+    ],
+    "depends_on": [
+      "JL-067"
+    ]
+  },
+  {
+    "id": "JL-076",
+    "title": "各因子の商から有限積の商を構成する",
+    "domain": "arithmetic",
+    "description": "全要素がdの倍数なら、積がdの長さ乗と各要素の商の積に分解されることを示す。点ごとの整除と共通因子の累乗整除も導く。",
+    "tags": [
+      "quotient",
+      "finite-product",
+      "divisibility"
+    ],
+    "spec": "specs/JL-076.md",
+    "module": "JonnyLean.Arithmetic.ProductDivisibility",
+    "declaration": "JonnyLean.Arithmetic.product_map_quotient",
+    "contract": "contracts/JL076.lean",
+    "review": "reviews/JL-076.json",
+    "editable": [
+      "JonnyLean/Arithmetic/ProductDivisibility.lean"
+    ],
+    "depends_on": [
+      "JL-075"
+    ]
+  },
+  {
+    "id": "JL-077",
+    "title": "有限積の上下界と列の分割",
+    "domain": "arithmetic",
+    "description": "各因子がc以下なら有限積がcの長さ乗以下となることを示す。下界、点ごとの単調性、反転不変性、take/drop分割も証明する。",
+    "tags": [
+      "finite-product",
+      "bounds",
+      "list-decomposition"
+    ],
+    "spec": "specs/JL-077.md",
+    "module": "JonnyLean.Arithmetic.ProductOrder",
+    "declaration": "JonnyLean.Arithmetic.product_bound",
+    "contract": "contracts/JL077.lean",
+    "review": "reviews/JL-077.json",
+    "editable": [
+      "JonnyLean/Arithmetic/ProductOrder.lean"
+    ],
+    "depends_on": [
+      "JL-075"
+    ]
+  },
+  {
+    "id": "JL-078",
+    "title": "添字範囲の積の区間分割",
+    "domain": "arithmetic",
+    "description": "最初のn項の有限積を定義し、m+n項の積を前半m項と添字をずらした後半n項へ分解する。点ごとの積と整除も保存する。",
+    "tags": [
+      "range-product",
+      "interval",
+      "index-shift"
+    ],
+    "spec": "specs/JL-078.md",
+    "module": "JonnyLean.Arithmetic.RangeProduct",
+    "declaration": "JonnyLean.Arithmetic.rangeProduct_split",
+    "contract": "contracts/JL078.lean",
+    "review": "reviews/JL-078.json",
+    "editable": [
+      "JonnyLean/Arithmetic/RangeProduct.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-079",
+    "title": "有限因子列の倍数に1を足すEuclid構成",
+    "domain": "arithmetic",
+    "description": "有限積に自然数kを掛けて1を加えた数が、元の積および各因子と互いに素であることを示し、1より大きい元の因子では割れないと結論する。",
+    "tags": [
+      "euclid",
+      "coprime",
+      "construction"
+    ],
+    "spec": "specs/JL-079.md",
+    "module": "JonnyLean.Arithmetic.EuclidAvoidance",
+    "declaration": "JonnyLean.Arithmetic.avoidance_not_dvd",
+    "contract": "contracts/JL079.lean",
+    "review": "reviews/JL-079.json",
+    "editable": [
+      "JonnyLean/Arithmetic/EuclidAvoidance.lean"
+    ],
+    "depends_on": [
+      "JL-067"
+    ]
+  },
+  {
+    "id": "JL-080",
+    "title": "有限列の最大公約数・最小公倍数・積の関係",
+    "domain": "arithmetic",
+    "description": "非空列の最大公約数が最小公倍数を割ること、最小公倍数が有限積を割ることを合成し、整除順序の吸収則を証明する。",
+    "tags": [
+      "gcd",
+      "lcm",
+      "finite-product"
+    ],
+    "spec": "specs/JL-080.md",
+    "module": "JonnyLean.Arithmetic.CommonDivisors",
+    "declaration": "JonnyLean.Arithmetic.listGcd_listLcm_absorb",
+    "contract": "contracts/JL080.lean",
+    "review": "reviews/JL-080.json",
+    "editable": [
+      "JonnyLean/Arithmetic/CommonDivisors.lean"
+    ],
+    "depends_on": [
+      "JL-062",
+      "JL-066",
+      "JL-067"
+    ]
+  },
+  {
+    "id": "JL-081",
+    "title": "有限係数多項式のHorner評価と連結",
+    "domain": "polynomials",
+    "description": "自然数係数を低次から並べた有限リストで多項式を表現し、Horner評価と係数列連結の評価公式を証明する。",
+    "tags": [
+      "polynomial",
+      "horner",
+      "coefficients"
+    ],
+    "spec": "specs/JL-081.md",
+    "module": "JonnyLean.Polynomials.Evaluation",
+    "declaration": "JonnyLean.Polynomials.evaluate_append",
+    "contract": "contracts/JL081.lean",
+    "review": "reviews/JL-081.json",
+    "editable": [
+      "JonnyLean/Polynomials/Evaluation.lean"
+    ],
+    "depends_on": []
+  },
+  {
+    "id": "JL-082",
+    "title": "係数列の長さが異なる多項式の加法",
+    "domain": "polynomials",
+    "description": "短い係数列の不足分を0と解釈する加法を実装し、評価の加法性、リストとしての交換則・結合則、長さの最大値を示す。",
+    "tags": [
+      "polynomial",
+      "addition",
+      "unequal-length"
+    ],
+    "spec": "specs/JL-082.md",
+    "module": "JonnyLean.Polynomials.Addition",
+    "declaration": "JonnyLean.Polynomials.evaluate_add",
+    "contract": "contracts/JL082.lean",
+    "review": "reviews/JL-082.json",
+    "editable": [
+      "JonnyLean/Polynomials/Addition.lean"
+    ],
+    "depends_on": [
+      "JL-081"
+    ]
+  },
+  {
+    "id": "JL-083",
+    "title": "多項式のスカラー倍と線形性",
+    "domain": "polynomials",
+    "description": "全係数を自然数c倍する演算を実装し、評価・加法との交換、倍率の合成、長さの保存を証明する。",
+    "tags": [
+      "polynomial",
+      "scalar",
+      "linearity"
+    ],
+    "spec": "specs/JL-083.md",
+    "module": "JonnyLean.Polynomials.Scalar",
+    "declaration": "JonnyLean.Polynomials.evaluate_scale",
+    "contract": "contracts/JL083.lean",
+    "review": "reviews/JL-083.json",
+    "editable": [
+      "JonnyLean/Polynomials/Scalar.lean"
+    ],
+    "depends_on": [
+      "JL-082"
+    ]
+  },
+  {
+    "id": "JL-084",
+    "title": "単項式Xの累乗による係数列シフト",
+    "domain": "polynomials",
+    "description": "先頭へn個の0を挿入する演算を実装し、評価がXのn乗倍になること、シフトの合成、長さ、スカラー倍との交換を示す。",
+    "tags": [
+      "polynomial",
+      "shift",
+      "monomial"
+    ],
+    "spec": "specs/JL-084.md",
+    "module": "JonnyLean.Polynomials.Shift",
+    "declaration": "JonnyLean.Polynomials.evaluate_shift",
+    "contract": "contracts/JL084.lean",
+    "review": "reviews/JL-084.json",
+    "editable": [
+      "JonnyLean/Polynomials/Shift.lean"
+    ],
+    "depends_on": [
+      "JL-083"
+    ]
+  },
+  {
+    "id": "JL-085",
+    "title": "係数列の畳み込み積の正しさ",
+    "domain": "polynomials",
+    "description": "先頭係数によるスカラー倍と再帰的な積のシフトを加える畳み込み積を実装し、評価が数の積になることを示す。分配・結合・交換則を評価の意味で導く。",
+    "tags": [
+      "polynomial",
+      "convolution",
+      "multiplication"
+    ],
+    "spec": "specs/JL-085.md",
+    "module": "JonnyLean.Polynomials.Multiplication",
+    "declaration": "JonnyLean.Polynomials.evaluate_multiply",
+    "contract": "contracts/JL085.lean",
+    "review": "reviews/JL-085.json",
+    "editable": [
+      "JonnyLean/Polynomials/Multiplication.lean"
+    ],
+    "depends_on": [
+      "JL-084"
+    ]
+  },
+  {
+    "id": "JL-086",
+    "title": "Horner構造による多項式合成",
+    "domain": "polynomials",
+    "description": "外側の多項式をHorner形式で走査し、内側の多項式との積と定数加算から合成を構成する。評価と代入の一致、結合、恒等代入、定数代入を示す。",
+    "tags": [
+      "polynomial",
+      "composition",
+      "substitution"
+    ],
+    "spec": "specs/JL-086.md",
+    "module": "JonnyLean.Polynomials.Composition",
+    "declaration": "JonnyLean.Polynomials.evaluate_compose",
+    "contract": "contracts/JL086.lean",
+    "review": "reviews/JL-086.json",
+    "editable": [
+      "JonnyLean/Polynomials/Composition.lean"
+    ],
+    "depends_on": [
+      "JL-085"
+    ]
+  },
+  {
+    "id": "JL-087",
+    "title": "多項式の自然数累乗",
+    "domain": "polynomials",
+    "description": "畳み込み積による反復累乗を実装し、評価との交換、指数の加法と乗法、合成との交換を証明する。",
+    "tags": [
+      "polynomial",
+      "power",
+      "exponents"
+    ],
+    "spec": "specs/JL-087.md",
+    "module": "JonnyLean.Polynomials.Power",
+    "declaration": "JonnyLean.Polynomials.evaluate_power",
+    "contract": "contracts/JL087.lean",
+    "review": "reviews/JL-087.json",
+    "editable": [
+      "JonnyLean/Polynomials/Power.lean"
+    ],
+    "depends_on": [
+      "JL-086"
+    ]
+  },
+  {
+    "id": "JL-088",
+    "title": "多項式の評価同値と演算の適合性",
+    "domain": "polynomials",
+    "description": "すべての自然数入力で評価が一致する関係を定義し、反射・対称・推移および加法・積・合成の両引数への適合性を証明する。",
+    "tags": [
+      "polynomial",
+      "equivalence",
+      "congruence-relation"
+    ],
+    "spec": "specs/JL-088.md",
+    "module": "JonnyLean.Polynomials.Equivalence",
+    "declaration": "JonnyLean.Polynomials.equivalent_compose",
+    "contract": "contracts/JL088.lean",
+    "review": "reviews/JL-088.json",
+    "editable": [
+      "JonnyLean/Polynomials/Equivalence.lean"
+    ],
+    "depends_on": [
+      "JL-086"
+    ]
+  },
+  {
+    "id": "JL-089",
+    "title": "係数剰余化と合同入力による多項式評価の正規化",
+    "domain": "polynomials",
+    "description": "有限多項式の全係数を法mの剰余へ置き換え、同時に入力を合同な値へ変更しても、評価の剰余が一致することを証明する。法付きHorner評価の正しさと範囲も保持する。",
+    "tags": [
+      "polynomial",
+      "coefficient-reduction",
+      "congruence",
+      "normalization"
+    ],
+    "spec": "specs/JL-089.md",
+    "module": "JonnyLean.Polynomials.Congruence",
+    "declaration": "JonnyLean.Polynomials.evaluate_normalized_congruent",
+    "contract": "contracts/JL089.lean",
+    "review": "reviews/JL-089.json",
+    "editable": [
+      "JonnyLean/Polynomials/Congruence.lean"
+    ],
+    "depends_on": [
+      "JL-081"
+    ]
+  },
+  {
+    "id": "JL-090",
+    "title": "単項式の積・和・合成の指数法則",
+    "domain": "polynomials",
+    "description": "単項式aX^nを係数列として構成し、積での指数加法、同次数の和、合成での指数乗法と係数の累乗を示す。",
+    "tags": [
+      "polynomial",
+      "monomial",
+      "exponent-laws"
+    ],
+    "spec": "specs/JL-090.md",
+    "module": "JonnyLean.Polynomials.Monomial",
+    "declaration": "JonnyLean.Polynomials.monomial_compose",
+    "contract": "contracts/JL090.lean",
+    "review": "reviews/JL-090.json",
+    "editable": [
+      "JonnyLean/Polynomials/Monomial.lean"
+    ],
+    "depends_on": [
+      "JL-088"
+    ]
+  },
+  {
+    "id": "JL-091",
+    "title": "多項式列の有限和と評価",
+    "domain": "polynomials",
+    "description": "多項式列の有限和を係数加法で構成し、評価が各多項式評価の有限和になることを示す。連結、スカラー倍、共通約数を保存する。",
+    "tags": [
+      "polynomial",
+      "finite-sum",
+      "linearity"
+    ],
+    "spec": "specs/JL-091.md",
+    "module": "JonnyLean.Polynomials.FiniteSum",
+    "declaration": "JonnyLean.Polynomials.evaluate_sumPolynomials",
+    "contract": "contracts/JL091.lean",
+    "review": "reviews/JL-091.json",
+    "editable": [
+      "JonnyLean/Polynomials/FiniteSum.lean"
+    ],
+    "depends_on": [
+      "JL-083",
+      "JL-074"
+    ]
+  },
+  {
+    "id": "JL-092",
+    "title": "多項式列の有限積と零点の存在",
+    "domain": "polynomials",
+    "description": "多項式列の有限積を構成し、自然数入力において積の評価が0であることと、ある因子の評価が0であることの同値を証明する。連結と反復因子も扱う。",
+    "tags": [
+      "polynomial",
+      "finite-product",
+      "zero"
+    ],
+    "spec": "specs/JL-092.md",
+    "module": "JonnyLean.Polynomials.FiniteProduct",
+    "declaration": "JonnyLean.Polynomials.productPolynomials_zero",
+    "contract": "contracts/JL092.lean",
+    "review": "reviews/JL-092.json",
+    "editable": [
+      "JonnyLean/Polynomials/FiniteProduct.lean"
+    ],
+    "depends_on": [
+      "JL-087",
+      "JL-088",
+      "JL-067"
+    ]
+  },
+  {
+    "id": "JL-093",
+    "title": "多項式の入力平行移動",
+    "domain": "polynomials",
+    "description": "p(X+c)を係数列として合成で構成し、平行移動の合成が移動量の和となることと、加法・積の保存を評価同値として示す。",
+    "tags": [
+      "polynomial",
+      "translation",
+      "composition"
+    ],
+    "spec": "specs/JL-093.md",
+    "module": "JonnyLean.Polynomials.Translation",
+    "declaration": "JonnyLean.Polynomials.translate_translate",
+    "contract": "contracts/JL093.lean",
+    "review": "reviews/JL-093.json",
+    "editable": [
+      "JonnyLean/Polynomials/Translation.lean"
+    ],
+    "depends_on": [
+      "JL-088"
+    ]
+  },
+  {
+    "id": "JL-094",
+    "title": "係数の再帰的拡大による入力の倍率変更",
+    "domain": "polynomials",
+    "description": "p(cX)を係数ごとの再帰的な倍率変更として構成し、評価との一致、倍率合成、係数長、単位倍率とスカラー倍の保存を証明する。",
+    "tags": [
+      "polynomial",
+      "dilation",
+      "coefficients"
+    ],
+    "spec": "specs/JL-094.md",
+    "module": "JonnyLean.Polynomials.Dilation",
+    "declaration": "JonnyLean.Polynomials.evaluate_dilate",
+    "contract": "contracts/JL094.lean",
+    "review": "reviews/JL-094.json",
+    "editable": [
+      "JonnyLean/Polynomials/Dilation.lean"
+    ],
+    "depends_on": [
+      "JL-088"
+    ]
+  },
+  {
+    "id": "JL-095",
+    "title": "減算を避けた合成除法と剰余公式",
+    "domain": "polynomials",
+    "description": "p(X)-p(a)をX-aで割った商を自然数係数で再帰構成し、減算なしの対称恒等式から、a≤xにおける剰余公式を導く。",
+    "tags": [
+      "polynomial",
+      "synthetic-division",
+      "remainder-theorem"
+    ],
+    "spec": "specs/JL-095.md",
+    "module": "JonnyLean.Polynomials.SyntheticDivision",
+    "declaration": "JonnyLean.Polynomials.dividedDifference_remainder",
+    "contract": "contracts/JL095.lean",
+    "review": "reviews/JL-095.json",
+    "editable": [
+      "JonnyLean/Polynomials/SyntheticDivision.lean"
+    ],
+    "depends_on": [
+      "JL-082"
+    ]
+  },
+  {
+    "id": "JL-096",
+    "title": "非負係数多項式の単調性と下界",
+    "domain": "polynomials",
+    "description": "入力値および係数を大きくすると評価が小さくならないことを示す。係数の比較は短い左側を許す再帰関係として構成し、定数項と接頭係数列からの下界を導く。",
+    "tags": [
+      "polynomial",
+      "monotonicity",
+      "bounds"
+    ],
+    "spec": "specs/JL-096.md",
+    "module": "JonnyLean.Polynomials.Monotonicity",
+    "declaration": "JonnyLean.Polynomials.evaluate_coefficients_mono",
+    "contract": "contracts/JL096.lean",
+    "review": "reviews/JL-096.json",
+    "editable": [
+      "JonnyLean/Polynomials/Monotonicity.lean"
+    ],
+    "depends_on": [
+      "JL-081"
+    ]
+  },
+  {
+    "id": "JL-097",
+    "title": "係数打ち切りと高次項の整除",
+    "domain": "polynomials",
+    "description": "最初のn係数と残りの係数へ分割し、評価を低次部分とXのn乗倍へ分解する。打ち切り評価の下界、差の整除、Xのn乗を法とする剰余一致を証明する。",
+    "tags": [
+      "polynomial",
+      "truncation",
+      "divisibility"
+    ],
+    "spec": "specs/JL-097.md",
+    "module": "JonnyLean.Polynomials.Truncation",
+    "declaration": "JonnyLean.Polynomials.evaluate_truncate",
+    "contract": "contracts/JL097.lean",
+    "review": "reviews/JL-097.json",
+    "editable": [
+      "JonnyLean/Polynomials/Truncation.lean"
+    ],
+    "depends_on": [
+      "JL-081"
+    ]
+  },
+  {
+    "id": "JL-098",
+    "title": "形式微分の構成と線形性",
+    "domain": "polynomials",
+    "description": "D(a+Xp)=p+XDpという再帰式で自然数係数の形式微分を構成し、加法とスカラー倍への線形性、定数と一次式の微分を証明する。",
+    "tags": [
+      "polynomial",
+      "formal-derivative",
+      "linearity"
+    ],
+    "spec": "specs/JL-098.md",
+    "module": "JonnyLean.Polynomials.Derivative",
+    "declaration": "JonnyLean.Polynomials.evaluate_derivative_add",
+    "contract": "contracts/JL098.lean",
+    "review": "reviews/JL-098.json",
+    "editable": [
+      "JonnyLean/Polynomials/Derivative.lean"
+    ],
+    "depends_on": [
+      "JL-083"
+    ]
+  },
+  {
+    "id": "JL-099",
+    "title": "形式微分の積則と連鎖律",
+    "domain": "polynomials",
+    "description": "有限係数の再帰構成から、積の形式微分と多項式合成の連鎖律を証明する。平方と入力平行移動の微分公式も導く。",
+    "tags": [
+      "polynomial",
+      "product-rule",
+      "chain-rule"
+    ],
+    "spec": "specs/JL-099.md",
+    "module": "JonnyLean.Polynomials.DerivativeRules",
+    "declaration": "JonnyLean.Polynomials.evaluate_derivative_compose",
+    "contract": "contracts/JL099.lean",
+    "review": "reviews/JL-099.json",
+    "editable": [
+      "JonnyLean/Polynomials/DerivativeRules.lean"
+    ],
+    "depends_on": [
+      "JL-098",
+      "JL-093"
+    ]
+  },
+  {
+    "id": "JL-100",
+    "title": "値と形式導関数を同時計算するHorner法",
+    "domain": "polynomials",
+    "description": "一回の係数列走査で多項式値と形式導関数値を同時に計算する評価器を実装し、二つの独立した評価との一致、積および合成への対応を証明する。",
+    "tags": [
+      "polynomial",
+      "automatic-differentiation",
+      "horner"
+    ],
+    "spec": "specs/JL-100.md",
+    "module": "JonnyLean.Polynomials.DualEvaluation",
+    "declaration": "JonnyLean.Polynomials.evaluateDual_correct",
+    "contract": "contracts/JL100.lean",
+    "review": "reviews/JL-100.json",
+    "editable": [
+      "JonnyLean/Polynomials/DualEvaluation.lean"
+    ],
+    "depends_on": [
+      "JL-099"
+    ]
+  }
+]

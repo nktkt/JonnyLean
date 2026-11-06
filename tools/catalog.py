@@ -105,7 +105,7 @@ def generated(root: Path) -> tuple[str, str, list[dict]]:
         task["depends_on"] = sorted(set(task["depends_on"] + inferred))
         if any(dep not in seen_ids or dep == task["id"] for dep in task["depends_on"]):
             raise ValueError(f"Invalid dependencies for {task['id']}")
-    # Topological elimination is linear and works for large diamonds in the DAG.
+    # Topological elimination avoids repeatedly traversing every path in a diamond.
     remaining = {t["id"]: set(t["depends_on"]) for t in tasks}
     while remaining:
         ready = {name for name, deps in remaining.items() if not deps}
