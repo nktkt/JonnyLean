@@ -1,0 +1,8 @@
+.lake/
+artifacts/
+__pycache__/
+*.pyc
+.jonnylean.lock
+.jonnylean/
+.DS_Store
+

@@ -1,0 +1,22 @@
+schema = 1
+provider = "codex"
+# Uses the existing `codex login` session; no separate API key is required.
+max_attempts = 3
+lease_seconds = 60
+call_timeout_seconds = 240
+job_timeout_seconds = 1200
+max_job_calls = 6
+max_call_tokens = 500000
+max_job_tokens = 1000000
+# Daily reservations use this local calendar day.
+budget_timezone = "Asia/Tokyo"
+max_daily_calls = 24
+max_daily_tokens = 2400000
+# Conservative configurable estimates, not provider invoices or current pricing.
+# Each call reserves max_call_tokens at the larger of these rates before launch.
+input_usd_per_million = 20.0
+output_usd_per_million = 100.0
+max_job_cost_usd = 60.0
+max_daily_cost_usd = 240.0
+# Local integration only. CLI --adopt explicitly enables it for a work/resume run.
+auto_adopt = false
